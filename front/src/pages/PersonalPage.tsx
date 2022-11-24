@@ -1,10 +1,16 @@
 import React from "react";
+import PersonalBottomCard from "../components/personal/PersonalBottomCard";
+import { PersonalTopCard } from "../components/personal/PersonalTopCard";
+import { PersonalPageBack } from "../styles/personal/PersonalPage";
 
 const PersonalPage = (): JSX.Element => {
   return (
-    <div className="PersonalPage">
-      <p> 개인(마이)페이지 렌딩 페이지</p>
-    </div>
+    <>
+      <PersonalPageBack>
+        <PersonalTopCard />
+        <PersonalBottomCard />
+      </PersonalPageBack>
+    </>
   );
 };
 
