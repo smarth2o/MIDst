@@ -18,10 +18,17 @@ class DiaryService {
     return result;
   }
   async findDiaries(userId: string) {
-    const result = await this.prisma.diary.findMany({
+    const diaryDatas = await this.prisma.diary.findMany({
       where: { userId },
     });
+    const count = await this.prisma.user.findMany({
+      where: { userId },
+      select: {
+        _count: { select: { diary: true } },
+      },
+    });
     await this.prisma.$disconnect();
+    const result = { ...diaryDatas, count: count[0]._count.diary };
     return result;
   }
   async findDiaryById(id: string) {
