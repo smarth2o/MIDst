@@ -1,6 +1,11 @@
-import PBCardItemType from "./PersonalBottomCard";
+export type PBCardDataType = {
+  user_id: number;
+  expressions: string[];
+  words: string[];
+  grammar: string[];
+}[];
 
-const PBCardData: PBCardItemType = [
+const PBCardData: PBCardDataType = [
   {
     user_id: 1,
     expressions: [

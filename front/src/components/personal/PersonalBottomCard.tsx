@@ -5,7 +5,7 @@ import {
   PBCardItemStyled,
   PBCardTab,
 } from "../../styles/personal/PersonalBottomCardStyled";
-import PBCardData from "./personalData";
+import PBCardData, { PBCardDataType } from "./personalData";
 
 export interface PBCardItemType {
   user_id: number;
@@ -24,11 +24,12 @@ const PBCardItem = ({ expressions }: PBCardItemType): JSX.Element => {
 
 const PersonalBottomCard = (): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [expressions, setExpressions] = useState<string>(PBCardData);
+  const [expressions, setExpressions] = useState<PBCardDataType>(PBCardData);
 
   const tabClickHandler = (index: any) => {
     setActiveIndex(index);
   };
+
   useEffect(() => {
     fetch("./personalData.tsx").then((res) => console.log(res));
   }, []);
