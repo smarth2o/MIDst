@@ -20,13 +20,14 @@ model community {
 }
 
 model diary {
+  id          Int      @id @unique @default(autoincrement())
   userId      String   @db.VarChar(45)
+  date        String
   emotion     String   @db.VarChar(30)
   title       String   @db.VarChar(10)
   description String   @db.VarChar(100)
   createdAt   DateTime @default(now())
   updatedAt DateTime @updatedAt
-  id          Int      @id @unique @default(autoincrement())
   user        user     @relation(fields: [userId], references: [userId])
 
   @@index([userId], map: "diary_userId_fkey")
