@@ -5,8 +5,6 @@ import { userController } from "../controllers/userController";
 import jwt from "jsonwebtoken";
 import dotenv, { config } from "dotenv";
 dotenv.config();
-//npm install @types/bcrypt --save로 설치했는데도 bcrypy 에러뜸
-//npm install -D @types/bcrypt 으로도 설치해봤는데 에러,,,
 
 class userService {
   static async register(email: string, password: string, confirmpassword:string, name: string) {
