@@ -20,23 +20,21 @@ model community {
 }
 
 model diary {
-  id          Int      @id @unique @default(autoincrement())
-  userId      String   @db.VarChar(45)
+  diaryId     Int    @id @unique @default(autoincrement())
+  userId      String @db.VarChar(45)
   date        String
-  emotion     String   @db.VarChar(30)
-  title       String   @db.VarChar(10)
-  description String   @db.VarChar(100)
-  createdAt   DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user        user     @relation(fields: [userId], references: [userId])
+  emotion     String @db.VarChar(30)
+  title       String @db.VarChar(10)
+  description String @db.VarChar(100)
+  user        user   @relation(fields: [userId], references: [userId])
 
   @@index([userId], map: "diary_userId_fkey")
 }
 
-model refreshToken {
+model refreshtoken {
   userId       String @unique(map: "userId_UNIQUE")
   refreshToken String @db.VarChar(500)
-  user         user   @relation(fields: [userId], references: [userId])
+  user         user   @relation(fields: [userId], references: [userId], map: "refreshToken_userId_fkey")
 }
 
 model reply {
@@ -56,22 +54,22 @@ model user {
   userId       String         @id @db.VarChar(45)
   name         String?        @db.VarChar(20)
   email        String?        @db.VarChar(45)
-  password     String?        @db.VarChar(30)
-  withrawal    Int?           @db.TinyInt
+  password     String?        @db.VarChar(100)
+  withdrawal   Int?           @db.TinyInt
   community    community[]
   diary        diary[]
-  refreshToken refreshToken?
+  refreshtoken refreshtoken?
   reply        reply[]
-  userToSearch userToSearch[]
+  usertosearch usertosearch[]
 }
 
-model userToSearch {
-  searchId    Int    @id @unique @default(autoincrement())
+model usertosearch {
+  searchId    Int    @id @unique(map: "userToSearch_searchId_key") @default(autoincrement())
   userId      String @db.VarChar(45)
-  searchWord  String @db.VarChar(10)
-  description String @db.VarChar(100)
-  translation String @db.VarChar(100)
-  user        user   @relation(fields: [userId], references: [userId])
+  searchWord  String @db.VarChar(100)
+  description String @db.VarChar(1000)
+  translation String @db.VarChar(1000)
+  user        user   @relation(fields: [userId], references: [userId], map: "userToSearch_userId_fkey")
 
   @@index([userId], map: "userToSearch_userId_fkey")
 }
