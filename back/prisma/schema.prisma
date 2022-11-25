@@ -78,6 +78,7 @@ model user {
   refreshtoken refreshtoken?
   reply        reply[]
   usertosearch usertosearch[]
+  like  like[]
 }
 
 model usertosearch {
