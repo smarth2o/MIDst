@@ -9,7 +9,8 @@ const PBCardData: PBCardDataType = [
   {
     user_id: 1,
     expressions: [
-      "test1",
+      "test",
+
       "누워서 쉬니간 너무 좋아요",
       "It feels so good to lie down and rest.",
       "It feels so good to lie down and rest.",

@@ -1,5 +1,6 @@
 import { ArrowRightOutlined } from "@ant-design/icons";
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 import {
   PBCardAlign,
   PBCardItemStyled,
@@ -14,25 +15,41 @@ export interface PBCardItemType {
   grammar: string[];
 }
 
-const PBCardItem = ({ expressions }: PBCardItemType): JSX.Element => {
-  return (
-    <>
-      <PBCardItemStyled>{expressions}</PBCardItemStyled>
-    </>
-  );
+// interface PBCardProps {
+//   PBCardList: PBCardItemType[];
+// }
+
+const PBCExpressionItem = ({ expressions, user_id }: PBCardItemType) => {
+  return <>{expressions}</>;
 };
 
 const PersonalBottomCard = (): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [expressions, setExpressions] = useState<PBCardDataType>(PBCardData);
-
   const tabClickHandler = (index: any) => {
     setActiveIndex(index);
   };
 
-  useEffect(() => {
-    fetch("./personalData.tsx").then((res) => console.log(res));
-  }, []);
+  const onClick = () => {
+    axios.get("./personData.tsx").then((res: any) => {
+      setExpressions(res.data);
+    });
+  };
+  const expressionItem = () => {
+    const expressionList = expressions.map((res: any) => (
+      <PBCExpressionItem
+        expressions={res.expressions}
+        user_id={res.user_id}
+        words={res.words}
+        grammar={res.grammar}
+      />
+    ));
+    return (
+      <ul>
+        <PBCardItemStyled>{expressionList}</PBCardItemStyled>
+      </ul>
+    );
+  };
 
   const tabContArr = [
     {
@@ -44,7 +61,7 @@ const PersonalBottomCard = (): JSX.Element => {
           Expressions
         </li>
       ),
-      tabCont: <div>{/* <PBCardItem key={1} expressions={"test"} /> */}</div>,
+      tabCont: <div>{expressionItem()}</div>,
     },
     {
       tabTitle: (

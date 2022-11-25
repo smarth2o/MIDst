@@ -1,7 +1,12 @@
 import React from "react";
+import DiaryBottom from "../components/diary/DiaryBottom";
 import DiaryCreate from "../components/diary/DiaryCreate";
 import { DiarySide } from "../components/diary/DiarySide";
-import { AllBackGround, DiaryAlign } from "../styles/diary/DiaryCreatePage";
+import {
+  AllBackGround,
+  DiaryAlign,
+  DiaryMain,
+} from "../styles/diary/DiaryCreatePage";
 
 const DiaryCreatePage = (): JSX.Element => {
   return (
@@ -9,7 +14,10 @@ const DiaryCreatePage = (): JSX.Element => {
       <AllBackGround>
         <DiaryAlign>
           <DiarySide />
-          <DiaryCreate />
+          <DiaryMain>
+            <DiaryCreate />
+            <DiaryBottom />
+          </DiaryMain>
         </DiaryAlign>
       </AllBackGround>
     </>
