@@ -15,17 +15,22 @@ export interface PBCardItemType {
   grammar: string[];
 }
 
-// interface PBCardProps {
-//   PBCardList: PBCardItemType[];
-// }
 
 const PBCExpressionItem = ({ expressions, user_id }: PBCardItemType) => {
+
   return <>{expressions}</>;
 };
+
+const PBCWordItem = ({words}:PBCardItemType)=>{
+  return <>{words}</>
+}
 
 const PersonalBottomCard = (): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [expressions, setExpressions] = useState<PBCardDataType>(PBCardData);
+  const [words, setWords] = useState<PBCardDataType>(PBCardData);
+  const [grammar, setGrammar] = useState<PBCardDataType>(PBCardData);
+
   const tabClickHandler = (index: any) => {
     setActiveIndex(index);
   };
@@ -36,20 +41,38 @@ const PersonalBottomCard = (): JSX.Element => {
     });
   };
   const expressionItem = () => {
-    const expressionList = expressions.map((res: any) => (
+    const expressionsList = expressions.map((res: any) => (
       <PBCExpressionItem
         expressions={res.expressions}
         user_id={res.user_id}
         words={res.words}
         grammar={res.grammar}
+        key={res.user_id}
       />
     ));
+
     return (
       <ul>
-        <PBCardItemStyled>{expressionList}</PBCardItemStyled>
+        <PBCardItemStyled>{expressionsList}</PBCardItemStyled>
       </ul>
     );
   };
+  const wordsItem = ()=>{
+    const wordsList = words.map((res:any)=>(
+      <PBCWordItem
+      expressions={res.expressions}
+      user_id={res.user_id}
+      words={res.words}
+      grammar={res.grammar}
+      />
+    ))
+    return (
+      <ul>
+        <PBCardItemStyled>{wordsList}</PBCardItemStyled>
+      </ul>
+    );
+  }
+
 
   const tabContArr = [
     {
@@ -72,7 +95,7 @@ const PersonalBottomCard = (): JSX.Element => {
           Words
         </li>
       ),
-      tabCont: <div> 탭2 내용 </div>,
+      tabCont: <div>{wordsItem()} </div>,
     },
     {
       tabTitle: (

@@ -64,7 +64,7 @@ export const PTCardContainer = styled.div`
   /* 가로 스크롤 */
   overflow: auto;
   white-space: nowrap;
-  .wrap-vertical::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     display: none;
   }
 `;
