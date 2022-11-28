@@ -1,9 +1,25 @@
 import React from "react";
+import DiaryBottom from "../components/diary/DiaryBottom";
+import DiaryCreate from "../components/diary/DiaryCreate";
+import { DiarySide } from "../components/diary/DiarySide";
+import {
+  AllBackGround,
+  DiaryAlign,
+  DiaryMain,
+} from "../styles/diary/DiaryCreatePage";
 
 const DiaryDetailPage = (): JSX.Element => {
   return (
     <div className="DiaryDetailPage">
-      <p> 로그인 렌딩 페이지</p>
+      <AllBackGround>
+        <DiaryAlign>
+          <DiarySide />
+          <DiaryMain>
+            <DiaryCreate />
+            <DiaryBottom />
+          </DiaryMain>
+        </DiaryAlign>
+      </AllBackGround>
     </div>
   );
 };

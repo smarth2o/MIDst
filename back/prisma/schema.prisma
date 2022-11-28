@@ -8,25 +8,41 @@ datasource db {
 }
 
 model community {
-  boardId Int     @id @unique @default(autoincrement())
-  userId  String  @db.VarChar(45)
-  title   String  @db.VarChar(30)
-  content String  @db.VarChar(200)
-  redate  String
+  id          Int       @id @unique @default(autoincrement())
+  userId      String    @db.VarChar(45)
+  title       String    @db.VarChar(30)
+  description String    @db.VarChar(200)
+  likes       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   user    user    @relation(fields: [userId], references: [userId])
   reply   reply[]
+  like like[]
 
   @@index([userId], map: "community_userId_fkey")
 }
 
+model like {
+  id Int @id @unique @default(autoincrement())
+  boardId Int
+  userId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user user @relation(fields: [userId],references: [userId])
+  community community @relation(fields: [boardId],references: [id])
+
+}
+
 model diary {
-  diaryId     Int    @id @unique @default(autoincrement())
-  userId      String @db.VarChar(45)
+  id          Int      @id @unique @default(autoincrement())
+  userId      String   @db.VarChar(45)
   date        String
-  emotion     String @db.VarChar(30)
-  title       String @db.VarChar(10)
-  description String @db.VarChar(100)
-  user        user   @relation(fields: [userId], references: [userId])
+  emotion     String   @db.VarChar(30)
+  title       String   @db.VarChar(10)
+  description String   @db.VarChar(100)
+  createdAt   DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user        user     @relation(fields: [userId], references: [userId])
 
   @@index([userId], map: "diary_userId_fkey")
 }
@@ -38,12 +54,13 @@ model refreshtoken {
 }
 
 model reply {
-  replyId   Int       @id @unique @default(autoincrement())
-  userId    String    @db.VarChar(45)
-  boardId   Int
-  content   String    @db.VarChar(200)
-  redate    String
-  community community @relation(fields: [boardId], references: [boardId])
+  id          Int       @id @unique @default(autoincrement())
+  userId      String    @db.VarChar(45)
+  boardId     Int
+  description String    @db.VarChar(200)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  community community @relation(fields: [boardId], references: [id])
   user      user      @relation(fields: [userId], references: [userId])
 
   @@index([boardId], map: "reply_boardId_fkey")
@@ -61,14 +78,15 @@ model user {
   refreshtoken refreshtoken?
   reply        reply[]
   usertosearch usertosearch[]
+  like  like[]
 }
 
 model usertosearch {
   searchId    Int    @id @unique(map: "userToSearch_searchId_key") @default(autoincrement())
   userId      String @db.VarChar(45)
-  searchWord  String @db.VarChar(10)
-  description String @db.VarChar(100)
-  translation String @db.VarChar(100)
+  searchWord  String @db.VarChar(100)
+  description String @db.VarChar(1000)
+  translation String @db.VarChar(1000)
   user        user   @relation(fields: [userId], references: [userId], map: "userToSearch_userId_fkey")
 
   @@index([userId], map: "userToSearch_userId_fkey")
