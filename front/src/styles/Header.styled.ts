@@ -78,21 +78,7 @@ export const NavLink = styled(Link)`
   color: #6e7cd7;
 `;
 
-export const Login = styled(Link)`
-  text-decoration: none;
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
-
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-
+export const Login = styled(NavLink)`
   box-sizing: border-box;
   border: 1.5px solid #9564d3;
   border-radius: 30px;
