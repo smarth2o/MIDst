@@ -1,5 +1,7 @@
 export const ROUTES = {
   MAIN: "/",
+  SEARCH: "/search",
+  SHARE: "/share",
   DIARY: {
     ROOT: "/diary",
     DIARY_CREATE: "/diary/diaryCreate",
