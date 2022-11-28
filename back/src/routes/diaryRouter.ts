@@ -1,5 +1,5 @@
 import { Router } from "express";
-import DiaryController from "controllers/diaryController";
+import DiaryController from "repositories/diaryController";
 
 const diaryRouter: Router = Router();
 

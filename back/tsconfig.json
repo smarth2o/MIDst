@@ -8,6 +8,7 @@
     "outDir": "./build",
     "experimentalDecorators": true,
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "importHelpers": true // tslib
   },
   "include": ["src/**/*", "@types/**/*"],

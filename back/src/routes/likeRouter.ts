@@ -1,4 +1,4 @@
-import LikeController from "controllers/likeController";
+import LikeController from "repositories/likeController";
 import { Router } from "express";
 
 const likeRouter: Router = Router();

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import communityController from "controllers/communityController";
+import communityController from "repositories/communityController";
 
 const communityRouter: Router = Router();
 

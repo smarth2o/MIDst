@@ -1,5 +1,5 @@
 import { Router } from "express";
-import ReplyController from "controllers/replyControllers";
+import ReplyController from "repositories/replyControllers";
 
 const replyRouter: Router = Router();
 
