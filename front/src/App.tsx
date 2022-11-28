@@ -3,6 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ROUTES } from "./enum/routes";
 import { GlobalStyle } from "./styles/GlobalStyle.styled";
 import Header from "./components/Header";
+import CommunityCreatePage from "./pages/CommunityCreatePage";
+import CommunityDetailPage from "./pages/CommunityDetailPage";
+import CommunityEditPage from "./pages/CommunityEditPage";
+import CommunityPage from "./pages/CommunityPage";
 import DiaryCreatePage from "./pages/DiaryCreatePage";
 import DiaryDetailPage from "./pages/DiaryDetailPage";
 import DiaryPage from "./pages/DiaryPage";
@@ -34,6 +38,19 @@ const App = (): JSX.Element => {
           <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
           <Route path={ROUTES.PERSONAL} element={<PersonalPage />} />
+          <Route path={ROUTES.COMMUNITY.ROOT} element={<CommunityPage />} />
+          <Route
+            path={ROUTES.COMMUNITY.COMMUNITY_CREATE}
+            element={<CommunityCreatePage />}
+          />
+          <Route
+            path={ROUTES.COMMUNITY.COMMUNITY_DETAIL}
+            element={<CommunityDetailPage />}
+          />
+          <Route
+            path={ROUTES.COMMUNITY.COMMUNITY_EDIT}
+            element={<CommunityEditPage />}
+          />
           <Route path="/">Not Found</Route>
         </Routes>
       </Router>
