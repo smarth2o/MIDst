@@ -23,35 +23,36 @@ const App = (): JSX.Element => {
     <>
       <Router>
         <GlobalStyle />
-        <Header />
         <Routes>
           <Route path={ROUTES.MAIN} element={<MainPage />} />
-          <Route path={ROUTES.DIARY.ROOT} element={<DiaryPage />} />
-          <Route
-            path={ROUTES.DIARY.DIARY_CREATE}
-            element={<DiaryCreatePage />}
-          />
-          <Route
-            path={ROUTES.DIARY.DIARY_DETAIL}
-            element={<DiaryDetailPage />}
-          />
-          <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
-          <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
-          <Route path={ROUTES.PERSONAL} element={<PersonalPage />} />
-          <Route path={ROUTES.COMMUNITY.ROOT} element={<CommunityPage />} />
-          <Route
-            path={ROUTES.COMMUNITY.COMMUNITY_CREATE}
-            element={<CommunityCreatePage />}
-          />
-          <Route
-            path={ROUTES.COMMUNITY.COMMUNITY_DETAIL}
-            element={<CommunityDetailPage />}
-          />
-          <Route
-            path={ROUTES.COMMUNITY.COMMUNITY_EDIT}
-            element={<CommunityEditPage />}
-          />
-          <Route path="/">Not Found</Route>
+          <Route element={<Header />}>
+            <Route path={ROUTES.DIARY.ROOT} element={<DiaryPage />} />
+            <Route
+              path={ROUTES.DIARY.DIARY_CREATE}
+              element={<DiaryCreatePage />}
+            />
+            <Route
+              path={ROUTES.DIARY.DIARY_DETAIL}
+              element={<DiaryDetailPage />}
+            />
+            <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
+            <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
+            <Route path={ROUTES.PERSONAL} element={<PersonalPage />} />
+            <Route path={ROUTES.COMMUNITY.ROOT} element={<CommunityPage />} />
+            <Route
+              path={ROUTES.COMMUNITY.COMMUNITY_CREATE}
+              element={<CommunityCreatePage />}
+            />
+            <Route
+              path={ROUTES.COMMUNITY.COMMUNITY_DETAIL}
+              element={<CommunityDetailPage />}
+            />
+            <Route
+              path={ROUTES.COMMUNITY.COMMUNITY_EDIT}
+              element={<CommunityEditPage />}
+            />
+            <Route path="/*">Not Found</Route>
+          </Route>
         </Routes>
       </Router>
     </>

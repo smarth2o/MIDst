@@ -9,7 +9,7 @@ const RegisterPage = (): JSX.Element => {
           <Input type="email" placeholder="Email"></Input>
           <Input type="email" placeholder="ID"></Input>
           <Input type="password" placeholder="Password"></Input>
-          <Input type="password" placeholder="Password again"></Input>
+          <Input type="password" placeholder="Password Confirm"></Input>
           <Button>Sign Up</Button>
         </Form>
       </Box>
