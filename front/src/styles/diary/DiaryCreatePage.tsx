@@ -11,7 +11,7 @@ export const AllBackGroundStyled = styled.div`
 `;
 export const DiaryAlignStyled = styled.div`
   display: flex;
-  padding: 2% 5%;
+  padding: 2% 2% 2% 4%;
 `;
 export const DiaryMainStyled = styled.div`
   display: flex;

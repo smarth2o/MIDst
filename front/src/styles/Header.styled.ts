@@ -2,36 +2,33 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Wrapper = styled.header`
+  top: 0;
+  padding: 0 3%;
+  max-height: 70px;
+  height: 100%;
   width: 100%;
-  height: 67px;
-
   display: flex;
-  align-items: center;
-
+  justify-content: space-between;
   position: fixed;
-  left: 0px;
-  top: 0px;
-
   background: rgba(255, 255, 255, 0.7);
 `;
 
 export const Logo = styled(Link)`
   text-decoration: none;
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
-
-  width: 140px;
-  position: absolute;
-  left: 80px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-
+  padding: 0;
+  margin: 0;
+  .topnav-first-ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+  .topnav-first-ul li {
+    padding-right: 20px;
+    margin: 0;
+  }
   img {
     width: 40px;
     height: 40px;
@@ -41,7 +38,6 @@ export const Logo = styled(Link)`
     font-family: "Copperplate";
     font-weight: 400;
     font-size: 32px;
-
     background: linear-gradient(270deg, #9d5ed1 37.07%, #3c99db 100%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -50,32 +46,22 @@ export const Logo = styled(Link)`
 `;
 
 export const Navbar = styled.nav`
-  margin: 0 auto;
-  width: 350px;
-
-  position: absolute;
-  right: 80px;
+  margin: 0 9vw;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 `;
 
 export const NavLink = styled(Link)`
   text-decoration: none;
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
-
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
-
+  padding-right: 3vmin;
   color: #6e7cd7;
+  &:hover {
+    font-weight: 800;
+  }
 `;
 
 export const Login = styled(NavLink)`
@@ -85,4 +71,8 @@ export const Login = styled(NavLink)`
   padding: 5px 15px;
 
   color: #9564d3;
+  &:hover {
+    font-weight: 800;
+    background-color: #9564d320;
+  }
 `;

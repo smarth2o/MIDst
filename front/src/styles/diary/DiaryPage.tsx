@@ -5,7 +5,7 @@ export const CreateDiaryBtn = styled.button`
   width: 80px;
   max-height: 180px;
   height: 100%;
-  border: solid 3px #6e48eb7e;
+  border: solid 1.5px #6e48eb7e;
   border-radius: 20px;
   color: #6f48eb;
   a {
@@ -14,6 +14,6 @@ export const CreateDiaryBtn = styled.button`
     color: #6e48eb7e;
   }
   :hover {
-    background-color: #6f48eb30;
+    background-color: #6f48eb20;
   }
 `;

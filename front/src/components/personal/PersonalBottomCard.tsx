@@ -15,14 +15,9 @@ export interface PBCardItemType {
   grammar: string[];
 }
 
-const PBCWordItem = ({ words }: PBCardItemType) => {
-  return <>{words}</>;
-};
-
 const PersonalBottomCard = (): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [items, setItems] = useState<PBCardDataType>(PBCardData);
-  const [words, setWords] = useState<PBCardDataType>(PBCardData);
   const tabList = ["Expressions", "Words", "Grammar"];
 
   const tabClickHandler = (index: any) => {
