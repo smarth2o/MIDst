@@ -1,23 +1,33 @@
 import { ArrowRightOutlined } from "@ant-design/icons";
+import { Action } from "@remix-run/router";
 import axios from "axios";
 import { useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { cloudIconState } from "../../stores/PersonalAtom";
 import {
   PBCardAlignStyled,
   PBCardItemStyled,
   PBCardTabStyled,
+  PBCardWordAlignStyled,
+  PBCWordItemStyled,
 } from "../../styles/personal/PersonalBottomCardStyled";
 import PBCardData, { PBCardDataType } from "./personalData";
 
 export interface PBCardItemType {
   user_id: number;
-  expressions: string[];
+  expressions: { expression: string[]; res: boolean };
   words: string[];
   grammar: string[];
 }
 
+const cloudFull = require("../../assets/cloudFull.png");
+
 const PersonalBottomCard = (): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [items, setItems] = useState<PBCardDataType>(PBCardData);
+  const [cloudIcon, setCloudIcon] = useState(false);
+  const cloudEmpty = useRecoilValue(cloudIconState);
+
   const tabList = ["Expressions", "Words", "Grammar"];
 
   const tabClickHandler = (index: any) => {
@@ -29,10 +39,29 @@ const PersonalBottomCard = (): JSX.Element => {
       setItems(res.data);
     });
   };
+
+  const cloudChange = (
+    res: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    setCloudIcon(!cloudIcon);
+  };
+
   const expressionItem = () => {
     const expressionsList = items.map((res) =>
       res.expressions.map((expression) => (
-        <PBCardItemStyled>{expression}</PBCardItemStyled>
+        <PBCardItemStyled>
+          {expression}
+          <button
+            onClick={(res) => {
+              cloudChange(res);
+            }}
+          >
+            <img
+              className="cloudIcon"
+              src={cloudIcon ? cloudEmpty : cloudFull}
+            />
+          </button>
+        </PBCardItemStyled>
       ))
     );
 
@@ -41,17 +70,41 @@ const PersonalBottomCard = (): JSX.Element => {
   const wordsItem = () => {
     const wordsList = items.map((res) =>
       res.words.map((expression) => (
-        <PBCardItemStyled>{expression}</PBCardItemStyled>
+        <PBCWordItemStyled>
+          {expression}
+          <button
+            onClick={(res) => {
+              cloudChange(res);
+            }}
+          >
+            <img
+              className="cloudIcon"
+              src={cloudIcon ? cloudEmpty : cloudFull}
+            />
+          </button>
+        </PBCWordItemStyled>
       ))
     );
 
-    return <ul>{wordsList}</ul>;
+    return <PBCardWordAlignStyled>{wordsList}</PBCardWordAlignStyled>;
   };
 
   const grammarItem = () => {
     const grammarList = items.map((res) =>
       res.grammar.map((grammar) => (
-        <PBCardItemStyled>{grammar}</PBCardItemStyled>
+        <PBCardItemStyled>
+          {grammar}
+          <button
+            onClick={(res) => {
+              cloudChange(res);
+            }}
+          >
+            <img
+              className="cloudIcon"
+              src={cloudIcon ? cloudEmpty : cloudFull}
+            />
+          </button>
+        </PBCardItemStyled>
       ))
     );
 
