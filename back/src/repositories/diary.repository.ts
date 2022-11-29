@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-class DiaryService {
+class DiaryRepository {
   prisma = new PrismaClient();
 
   async createDiary(userId: string, diaryData) {
@@ -57,4 +57,4 @@ class DiaryService {
   }
 }
 
-export default new DiaryService();
+export default new DiaryRepository();

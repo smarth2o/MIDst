@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "tsc-watch --onSuccess \"ts-node -r tsconfig-paths/register src/server.ts\"",
     "build": "rm -rf ./build && tsc -p tsconfig.json",
+    "prestart": "node src/swagger.js",
     "start": "tsc-watch --onSuccess \"node -r ts-node/register/transpile-only -r tsconfig-paths/register src/server.ts\""
   },
   "dependencies": {

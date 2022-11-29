@@ -1,10 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 
-class ReplyService {
+class ReplyRepository {
   prisma = new PrismaClient();
 
-  async createReply(boardId: string, replyData) {
-    const { userId, description } = replyData;
+  async createReply(userId: string, boardId: string, replyData) {
     const result = await this.prisma.reply.create({
       data: {
         user: {
@@ -13,7 +12,7 @@ class ReplyService {
         community: {
           connect: { id: Number(boardId) },
         },
-        description,
+        ...replyData,
       },
     });
     return result;
@@ -49,4 +48,4 @@ class ReplyService {
   }
 }
 
-export default new ReplyService();
+export default new ReplyRepository();

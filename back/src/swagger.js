@@ -1,9 +1,27 @@
 const swaggerAutogen = require("swagger-autogen")();
 
-const outputFile = "./swagger_output.json";
-const endpointsFiles = [
-  "./routes/userRouter.ts",
-  "./routes/communityRouter.ts",
-];
+const options = {
+  info: {
+    title: "6dan",
+    description: "6dan api명세",
+  },
+  servers: [
+    {
+      url: "http://localhost:8080",
+    },
+  ],
+  schemes: ["http"],
+  securityDefinitions: {
+    bearerAuth: {
+      type: "http",
+      scheme: "bearer",
+      in: "header",
+      bearerFormat: "JWT",
+    },
+  },
+};
 
-swaggerAutogen(outputFile, endpointsFiles);
+const outputFile = "./swagger_output.json";
+const endpointsFiles = ["./app.ts"];
+
+swaggerAutogen(outputFile, endpointsFiles, options);

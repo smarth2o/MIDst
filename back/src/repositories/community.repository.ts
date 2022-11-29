@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-class CommunityService {
+class CommunityRepository {
   prisma = new PrismaClient();
 
   async createPost(userId: string, postData) {
@@ -51,4 +51,4 @@ class CommunityService {
   }
 }
 
-export default new CommunityService();
+export default new CommunityRepository();

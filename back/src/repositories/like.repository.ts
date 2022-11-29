@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-class LikeService {
+class LikeRepository {
   prisma = new PrismaClient();
 
   async findLikes(boardId: string) {
@@ -45,4 +45,4 @@ class LikeService {
   }
 }
 
-export default new LikeService();
+export default new LikeRepository();
