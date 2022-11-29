@@ -1,7 +1,7 @@
 //로그인, 회원가입 관련
 //로그인, 회원가입 관련
 import { Router, Response, Request, NextFunction } from "express";
-import { userService } from "../services/userService";
+import  userService  from "../services/userService";
 import { loginRequired } from "../middlewares/authMiddleware";
 const userRouter = Router();
 //회원가입
@@ -75,7 +75,7 @@ userRouter.put(
     try {
       const userId: any = req.headers["currentUserId"];
       const name = req.body.name;
-      const updateUser = await userService.updateUser(userId, name);
+      const updateUser = await userService.updateUsername(userId, name);
       res.status(200).json(updateUser);
     } catch (error) {
       next(error);
@@ -106,4 +106,4 @@ userRouter.put(
   }
 );
 
-export { userRouter };
+export default userRouter ;

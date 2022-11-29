@@ -1,13 +1,13 @@
 //userService
 const { v1: uuidv4 } = require("uuid");
 import bcrypt from "bcrypt";
-import { userController } from "../repositories/userController";
+import userController from "../repositories/user.repository";
 import jwt from "jsonwebtoken";
 import dotenv, { config } from "dotenv";
 dotenv.config();
 
 class userService {
-  static async register(
+  async register(
     email: string,
     password: string,
     confirmpassword: string,
@@ -41,7 +41,7 @@ class userService {
   }
 
   //로그인
-  static async userLogin(email: string, password: string) {
+  async userLogin(email: string, password: string) {
     const data = await userController.findByEmail(email);
     const user = data[0];
 
@@ -75,7 +75,7 @@ class userService {
       const name = user.name;
       //await userController.tokenUpdate(userId, refreshToken);
 
-      const loginUser = {
+      const findeUser = {
         userId,
         email,
         name,
@@ -83,22 +83,22 @@ class userService {
         //refreshToken,
         errorMessage: null,
       };
-      return loginUser;
+      return findeUser;
     }
   }
-  static async findCurrentUser(userId: string) {
+  async findCurrentUser(userId: string) {
     const userData = await userController.findByUserId(userId);
 
     return userData;
   }
 
-  static async updateUser(userId: string, name: string) {
+  async updateUsername(userId: string, name: string) {
     const updateData = await userController.updateUser(userId, name);
     return updateData;
   }
 
   //회원탈퇴
-  static async userWithdrawal(userId: string, id: string, withdrawal: number) {
+  async userWithdrawal(userId: string, id: string, withdrawal: number) {
     if (userId !== id) {
       const errorMessage: String = "UserId가 틀립니다.";
       return errorMessage;
@@ -112,5 +112,5 @@ class userService {
     }
   }
 }
+export default new userService();
 
-export { userService };

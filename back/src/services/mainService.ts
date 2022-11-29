@@ -1,12 +1,12 @@
-import { mainController } from "../repositories/mainController";
+import mainController from "../repositories/search.repository";
 class mainService {
-  static async saveSearch(
+  async saveSearch(
     userId: string,
     searchword: string,
     description: string,
     translation: string
   ) {
-    const saveSearch = await mainController.saveSearch(
+    const saveSearch = await mainController.create(
       userId,
       searchword,
       description,
@@ -15,19 +15,19 @@ class mainService {
     return saveSearch;
   }
 
-  static async findSearch(userId: string) {
-    const findSearch = await mainController.findSearch(userId);
+  async findSearch(userId: string) {
+    const findSearch = await mainController.find(userId);
     return findSearch;
   }
 
-  static async countSearch(userId: string) {
-    const countSearch = await mainController.countSearch(userId);
+  async countSearch(userId: string) {
+    const countSearch = await mainController.count(userId);
     const count = countSearch[0]._count.usertosearch;
     return count;
   }
 
-  static async deleteSearch(searchId: number) {
-    const deleteSearch = await mainController.deleteSearch(searchId);
+  async deleteSearch(searchId: number) {
+    const deleteSearch = await mainController.delete(searchId);
   }
 }
-export { mainService };
+export default new mainService();
