@@ -2,9 +2,9 @@ import { ArrowRightOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useState } from "react";
 import {
-  PBCardAlign,
+  PBCardAlignStyled,
   PBCardItemStyled,
-  PBCardTab,
+  PBCardTabStyled,
 } from "../../styles/personal/PersonalBottomCardStyled";
 import PBCardData, { PBCardDataType } from "./personalData";
 
@@ -15,64 +15,53 @@ export interface PBCardItemType {
   grammar: string[];
 }
 
-
-const PBCExpressionItem = ({ expressions, user_id }: PBCardItemType) => {
-
-  return <>{expressions}</>;
+const PBCWordItem = ({ words }: PBCardItemType) => {
+  return <>{words}</>;
 };
-
-const PBCWordItem = ({words}:PBCardItemType)=>{
-  return <>{words}</>
-}
 
 const PersonalBottomCard = (): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [expressions, setExpressions] = useState<PBCardDataType>(PBCardData);
+  const [items, setItems] = useState<PBCardDataType>(PBCardData);
   const [words, setWords] = useState<PBCardDataType>(PBCardData);
-  const [grammar, setGrammar] = useState<PBCardDataType>(PBCardData);
+  const tabList = ["Expressions", "Words", "Grammar"];
 
   const tabClickHandler = (index: any) => {
     setActiveIndex(index);
   };
 
   const onClick = () => {
-    axios.get("./personData.tsx").then((res: any) => {
-      setExpressions(res.data);
+    axios.get("./personData.tsx").then((res) => {
+      setItems(res.data);
     });
   };
   const expressionItem = () => {
-    const expressionsList = expressions.map((res: any) => (
-      <PBCExpressionItem
-        expressions={res.expressions}
-        user_id={res.user_id}
-        words={res.words}
-        grammar={res.grammar}
-        key={res.user_id}
-      />
-    ));
-
-    return (
-      <ul>
-        <PBCardItemStyled>{expressionsList}</PBCardItemStyled>
-      </ul>
+    const expressionsList = items.map((res) =>
+      res.expressions.map((expression) => (
+        <PBCardItemStyled>{expression}</PBCardItemStyled>
+      ))
     );
+
+    return <ul>{expressionsList}</ul>;
   };
-  const wordsItem = ()=>{
-    const wordsList = words.map((res:any)=>(
-      <PBCWordItem
-      expressions={res.expressions}
-      user_id={res.user_id}
-      words={res.words}
-      grammar={res.grammar}
-      />
-    ))
-    return (
-      <ul>
-        <PBCardItemStyled>{wordsList}</PBCardItemStyled>
-      </ul>
+  const wordsItem = () => {
+    const wordsList = items.map((res) =>
+      res.words.map((expression) => (
+        <PBCardItemStyled>{expression}</PBCardItemStyled>
+      ))
     );
-  }
 
+    return <ul>{wordsList}</ul>;
+  };
+
+  const grammarItem = () => {
+    const grammarList = items.map((res) =>
+      res.grammar.map((grammar) => (
+        <PBCardItemStyled>{grammar}</PBCardItemStyled>
+      ))
+    );
+
+    return <ul>{grammarList}</ul>;
+  };
 
   const tabContArr = [
     {
@@ -106,19 +95,24 @@ const PersonalBottomCard = (): JSX.Element => {
           Grammar
         </li>
       ),
-      tabCont: <div> 탭3 내용 </div>,
+      tabCont: <div> {grammarItem()}</div>,
     },
   ];
 
   return (
     <>
-      <PBCardAlign>
+      <PBCardAlignStyled>
         <div>
-          <PBCardTab>
+          <PBCardTabStyled>
             <ul className="tabs is-boxed">
-              {tabContArr.map((section, index) => {
-                return section.tabTitle;
-              })}
+              {tabList.map((tab, index) => (
+                <li
+                  className={activeIndex === index ? "is-active" : ""}
+                  onClick={() => tabClickHandler(index)}
+                >
+                  {tab}
+                </li>
+              ))}
             </ul>
             <ul>
               <button className="btn-go-search">
@@ -127,11 +121,11 @@ const PersonalBottomCard = (): JSX.Element => {
                 </a>
               </button>
             </ul>
-          </PBCardTab>
+          </PBCardTabStyled>
 
           <div>{tabContArr[activeIndex].tabCont}</div>
         </div>
-      </PBCardAlign>
+      </PBCardAlignStyled>
     </>
   );
 };
