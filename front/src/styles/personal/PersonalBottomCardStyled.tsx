@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-export const PBCardAlign = styled.div`
+export const PBCardAlignStyled = styled.div`
   border-radius: 20px;
   height: 100%;
   margin-top: 10vmin;
@@ -11,6 +10,9 @@ export const PBCardAlign = styled.div`
   background-color: white;
   padding: 20px;
   width: 80%;
+  ul {
+    padding: 0;
+  }
   .btn-go-search a {
     text-decoration: none;
     color: black;
@@ -23,7 +25,7 @@ export const PBCardAlign = styled.div`
   }
 `;
 
-export const PBCardTab = styled.div`
+export const PBCardTabStyled = styled.div`
   color: rgba(128, 128, 128, 0.604);
   display: flex;
   justify-content: space-between;
@@ -55,6 +57,7 @@ export const PBCardTab = styled.div`
 
 export const PBCardItemStyled = styled.div`
   border: solid 0.5px rgba(128, 128, 128, 0.652);
+  margin: 2%;
   padding: 12px;
   border-radius: 10px;
 `;

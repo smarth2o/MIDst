@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Wrapper = styled.header`
-  top: 0;
+export const Wrapper = styled.div`
   padding: 0 3%;
   max-height: 70px;
   height: 100%;
@@ -33,8 +32,8 @@ export const Logo = styled(Link)`
     width: 40px;
     height: 40px;
   }
-
   p {
+    margin: 0;
     font-family: "Copperplate";
     font-weight: 400;
     font-size: 32px;
@@ -59,9 +58,6 @@ export const NavLink = styled(Link)`
   font-size: 16px;
   padding-right: 3vmin;
   color: #6e7cd7;
-  &:hover {
-    font-weight: 800;
-  }
 `;
 
 export const Login = styled(NavLink)`
@@ -71,8 +67,4 @@ export const Login = styled(NavLink)`
   padding: 5px 15px;
 
   color: #9564d3;
-  &:hover {
-    font-weight: 800;
-    background-color: #9564d320;
-  }
 `;
