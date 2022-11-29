@@ -11,15 +11,13 @@ import {
 const DiaryCreatePage = (): JSX.Element => {
   return (
     <>
-      <AllBackGroundStyled>
-        <DiaryAlignStyled>
-          <DiarySide />
-          <DiaryMainStyled>
-            <DiaryCreate />
-            <DiaryBottom />
-          </DiaryMainStyled>
-        </DiaryAlignStyled>
-      </AllBackGroundStyled>
+      <DiaryAlignStyled>
+        <DiarySide />
+        <DiaryMainStyled>
+          <DiaryCreate />
+          <DiaryBottom />
+        </DiaryMainStyled>
+      </DiaryAlignStyled>
     </>
   );
 };

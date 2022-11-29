@@ -15,7 +15,6 @@ const DiaryPage = (): JSX.Element => {
       <AllBackGroundStyled>
         <DiaryAlignStyled>
           <DiarySide />
-
           <DiaryMainStyled>
             <DiaryCreateAlign></DiaryCreateAlign>
             <DiaryBottom />

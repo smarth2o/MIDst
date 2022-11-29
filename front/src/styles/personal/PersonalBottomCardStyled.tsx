@@ -56,8 +56,53 @@ export const PBCardTabStyled = styled.div`
 `;
 
 export const PBCardItemStyled = styled.div`
+  display: flex;
+  justify-content: space-between;
   border: solid 0.5px rgba(128, 128, 128, 0.652);
-  margin: 2%;
+  margin: 10px;
   padding: 12px;
   border-radius: 10px;
+  .cloudIcon {
+    width: 30px;
+    height: 15px;
+    cursor: pointer;
+  }
+  button {
+    border: none;
+    background-color: white;
+    &:active {
+      border: none;
+    }
+  }
+`;
+
+export const PBCWordItemStyled = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border: solid 0.5px rgba(128, 128, 128, 0.652);
+  margin: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  .cloudIcon {
+    width: 30px;
+    height: 15px;
+    cursor: pointer;
+  }
+  button {
+    border: none;
+    background-color: white;
+    &:active {
+      border: none;
+    }
+  }
+`;
+
+export const PBCardWordAlignStyled = styled.div`
+  margin: 2%;
+  display: grid;
+  grid-template-columns: 200px 200px 500px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 `;
