@@ -7,7 +7,7 @@ export const ROUTES = {
     DIARY_CREATE: "/diary/diaryCreate",
     DIARY_DETAIL: "/diary/diaryDetail/:no",
   },
-  USER: { LOGIN: "/login", REGISTER: "/register" },
+  USER: { LOGIN: "/login", REGISTER: "/register", FIND_PW: "/findPassword" },
   PERSONAL: "/personal",
   COMMUNITY: {
     ROOT: "/community",

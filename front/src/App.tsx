@@ -14,6 +14,7 @@ import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
 import PersonalPage from "./pages/PersonalPage";
 import RegisterPage from "./pages/RegisterPage";
+import FindPasswordPage from "./pages/FindPasswordPage";
 
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
@@ -25,6 +26,9 @@ const App = (): JSX.Element => {
         <GlobalStyle />
         <Routes>
           <Route path={ROUTES.MAIN} element={<MainPage />} />
+          <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
+          <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
+          <Route path={ROUTES.USER.FIND_PW} element={<FindPasswordPage />} />
           <Route element={<Header />}>
             <Route path={ROUTES.DIARY.ROOT} element={<DiaryPage />} />
             <Route
@@ -35,8 +39,6 @@ const App = (): JSX.Element => {
               path={ROUTES.DIARY.DIARY_DETAIL}
               element={<DiaryDetailPage />}
             />
-            <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
-            <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
             <Route path={ROUTES.PERSONAL} element={<PersonalPage />} />
             <Route path={ROUTES.COMMUNITY.ROOT} element={<CommunityPage />} />
             <Route
