@@ -73,7 +73,7 @@ class userController{
         return UserbyUserId
     }
 
-    //유저 정보 수정
+    //유저 이름 정보 수정
     async updateUser(userId:string,name:string){
         const updateUser=await prisma.user.update({
             where:{
@@ -85,6 +85,19 @@ class userController{
         });
         return updateUser;
     }
+
+    //비밀번호 재발급
+    async updatePassword(userId:string,password:string){
+        const updateUser=await prisma.user.update({
+            where:{
+                userId:userId,
+            },
+            data:{
+                password:password,
+            },
+        });
+        return updateUser;
+    }    
 
     //회원탈퇴
     async updateWithdrawal(userId:string, updatewithdrawal:number){
