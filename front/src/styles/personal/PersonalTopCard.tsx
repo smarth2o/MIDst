@@ -171,6 +171,7 @@ export const PTBtnStyled = styled.div`
 `;
 export const UPTopAlignStyled = styled.div`
   display: grid;
+
   grid-template-columns: 98fr 2fr;
 `;
 export const UserProfileImgStyled = styled.div`
@@ -181,6 +182,9 @@ export const UserProfileImgStyled = styled.div`
   img {
     border-radius: 50px;
     width: 80px;
+  }
+  a {
+    text-decoration: none;
   }
 `;
 export const UPBottomAlignStyled = styled.div``;

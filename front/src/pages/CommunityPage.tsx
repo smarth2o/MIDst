@@ -1,10 +1,15 @@
 import React from "react";
+import CommunityCreate from "../components/community/CommunityCreate";
+import CommunityList from "../components/community/CommunityList";
+import { AllBackGroundStyled } from "../styles/diary/DiaryCreatePage";
 
 const CommunityPage = (): JSX.Element => {
   return (
-    <div className="CommunityPage">
-      <p> 커뮤니티 렌딩(리스트) 페이지</p>
-    </div>
+    <>
+      <AllBackGroundStyled>
+        <CommunityList />
+      </AllBackGroundStyled>
+    </>
   );
 };
 

@@ -23,6 +23,9 @@ export const PBCardAlignStyled = styled.div`
     border: none;
     background-color: #eef1f4;
   }
+  @media (min-width: 1500px) {
+    width: 1200px;
+  }
 `;
 
 export const PBCardTabStyled = styled.div`

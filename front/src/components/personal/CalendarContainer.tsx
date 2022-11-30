@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Calendar } from "react-calendar";
-import { PTCalendarStyled } from "./PersonalTopCard";
+import { PTCalendarStyled } from "../../styles/personal/PersonalTopCard";
 
 const CalendarContainer = (): JSX.Element => {
   const [value, onChange] = useState(new Date());

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   PTBtnStyled,
   PTCardAlignStyled,
@@ -9,12 +8,15 @@ import {
   UserProfileImgStyled,
 } from "../../styles/personal/PersonalTopCard";
 import "react-calendar/dist/Calendar.css";
-import { ArrowRightOutlined, MailOutlined } from "@ant-design/icons";
-import CalendarContainer from "../../styles/personal/CalendarContainer";
+import {
+  ArrowRightOutlined,
+  MailOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
+import CalendarContainer from "./CalendarContainer";
 
 const UserProfile = (): JSX.Element => {
   const profileImg = require("../../assets/profile.png");
-  const settingImg = require("../../assets/settings.png");
   const userName = "MarkBaker";
   const userEmail = "email1234@gmail.com";
   const userMessage = "I love watching Friends";
@@ -25,7 +27,7 @@ const UserProfile = (): JSX.Element => {
           <img src={profileImg} />
         </UserProfileImgStyled>
         <a href="/">
-          <img src={settingImg} className="settingIcon" />
+          <SettingOutlined />
         </a>
       </UPTopAlignStyled>
       <h3>{userName}</h3>
