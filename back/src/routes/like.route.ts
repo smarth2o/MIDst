@@ -1,33 +1,43 @@
 import { Router, Request, Response, NextFunction, json } from "express";
+import { loginRequired } from "middlewares/authMiddleware";
 
 import LikeService from "services/like.service";
 
 const likeRouter: Router = Router();
 
 likeRouter.get(
-  "/:boardId",
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    try {
-      const boardId = req.params.boardId;
-      const result = await LikeService.getLikes(boardId);
-      res.status(200).json({ data: result });
-    } catch (error) {
-      next(error);
+    "/:postId",
+    /*
+  #swagger.tags=['Like']
+  #swagger.summary="커뮤니티 글 좋아요 목록"
+  */
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const postId = req.params.postId;
+            const result = await LikeService.getLikes(postId);
+            res.status(200).json({ data: result });
+        } catch (error) {
+            next(error);
+        }
     }
-  }
 );
 likeRouter.post(
-  "/:boardId/like",
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    try {
-      const userId: any = req.headers["currentUserId"];
-      const boardId = req.params.boardId;
-      const result = await LikeService.LikePost(userId, boardId);
-      res.status(200).json({ data: result });
-    } catch (error) {
-      next(error);
+    "/:postId/like",
+    /*
+  #swagger.tags=['Like']
+  #swagger.summary="커뮤니티 글 좋아요 토글"
+  */
+    loginRequired,
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const userId: any = req.headers["currentUserId"];
+            const postId = req.params.postId;
+            const result = await LikeService.LikePost(userId, postId);
+            res.status(200).json({ data: result });
+        } catch (error) {
+            next(error);
+        }
     }
-  }
 );
 
 export default likeRouter;

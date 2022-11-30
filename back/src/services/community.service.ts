@@ -1,41 +1,48 @@
-import { NextFunction, Request, Response } from "express";
 import CommunityRepository from "repositories/community.repository";
 
 class CommunityService {
-  public createPost = async (userId: string, postData: {}) => {
-    const createPostData = await CommunityRepository.createPost(
-      userId,
-      postData
-    );
-    return createPostData;
-  };
+    public createPost = async (userId: string, postData: {}) => {
+        const createPostData = await CommunityRepository.createPost(
+            userId,
+            postData
+        );
+        return createPostData;
+    };
 
-  public getPosts = async () => {
-    const findAllPostsData = await CommunityRepository.findAllPosts();
-    return findAllPostsData;
-  };
+    public getPostsByN = async () => {
+        const findAllPostsData = await CommunityRepository.findAllPostsN();
+        return findAllPostsData;
+    };
 
-  public getPostsByUserId = async (userId: string) => {
-    const findUsersPostsData = await CommunityRepository.findPostsByUserId(
-      userId
-    );
-    return findUsersPostsData;
-  };
+    public getPostsByP = async () => {
+        const findAllPostsData = await CommunityRepository.findAllPostsP();
+        return findAllPostsData;
+    };
 
-  public getPostById = async (id: string) => {
-    const findOnediary = await CommunityRepository.findPostById(id);
-    return findOnediary;
-  };
+    public getPostsByUserId = async (userId: string) => {
+        const findUsersPostsData = await CommunityRepository.findPostsByUserId(
+            userId
+        );
+        return findUsersPostsData;
+    };
 
-  public updatePost = async (id: string, postData: {}) => {
-    const updatePostData = await CommunityRepository.updatePost(id, postData);
-    return updatePostData;
-  };
+    public getPostById = async (id: string) => {
+        const findOnediary = await CommunityRepository.findPostById(id);
+        return findOnediary;
+    };
 
-  public deletePost = async (id: string) => {
-    const deletePostData = await CommunityRepository.deletePost(id);
-    return deletePostData;
-  };
+    public updatePost = async (id: string, postData: {}) => {
+        const updatePostData = await CommunityRepository.updatePost(
+            id,
+            postData
+        );
+        return updatePostData;
+    };
+
+    public deletePost = async (id: string) => {
+        const deletePostData = await CommunityRepository.deletePost(id);
+        return deletePostData;
+    };
 }
 
 export default new CommunityService();

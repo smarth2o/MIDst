@@ -1,20 +1,20 @@
 import LikeRepository from "repositories/like.repository";
 
 class LikeService {
-  public getLikes = async (boardId: string) => {
-    const findLikesData = await LikeRepository.findLikes(boardId);
-    return findLikesData;
-  };
+    public getLikes = async (postId: string) => {
+        const findLikesData = await LikeRepository.findLikes(postId);
+        return findLikesData;
+    };
 
-  public LikePost = async (boardId: string, userId: string) => {
-    const likeData = await LikeRepository.findLike(boardId, userId);
-    if (likeData.length !== 0) {
-      await LikeRepository.deleteLike(boardId, userId);
-      return "cancle";
-    }
-    await LikeRepository.createLike(boardId, userId);
-    return "like";
-  };
+    public LikePost = async (userId: string, postId: string) => {
+        const likeData = await LikeRepository.findLike(userId, postId);
+        if (likeData.length !== 0) {
+            await LikeRepository.deleteLike(userId, postId);
+            return "cancle";
+        }
+        await LikeRepository.createLike(userId, postId);
+        return "like";
+    };
 }
 
 export default new LikeService();
