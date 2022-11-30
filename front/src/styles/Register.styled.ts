@@ -11,9 +11,9 @@ export const Layout = styled.div`
 `;
 
 export const Box = styled.form`
-  width: 450px;
-  height: 550px;
-  margin-top: 150px;
+  width: 400px;
+  height: 500px;
+  margin-top: 200px;
 
   background: rgba(255, 255, 255, 0.7);
   border-radius: 20px;
@@ -21,7 +21,6 @@ export const Box = styled.form`
 
 export const Form = styled.div`
   height: 500px;
-  // width: 304px;
 
   display: flex;
   flex-direction: column;
@@ -63,7 +62,7 @@ export const Logo = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 180px;
-  margin: 30px 30px;
+  margin: 20px 20px;
 
   img {
     width: 50px;
@@ -105,7 +104,8 @@ export const Button = styled.button`
   box-sizing: border-box;
   width: 300px;
   height: 40px;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 
   background: #7ec9ca;
   border: 1px solid rgba(85, 85, 85, 0.2);
@@ -122,6 +122,7 @@ export const OtherWrapper = styled.div`
   justify-content: space-evenly;
   align-items: center;
   width: 300px;
+  margin-bottom: 20px;
 
   p {
     font-family: "Saira";

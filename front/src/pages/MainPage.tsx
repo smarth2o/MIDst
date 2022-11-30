@@ -1,7 +1,27 @@
-import React from "react";
+import {
+  Layout,
+  SearchWrapper,
+  Suggest,
+  Suggestions,
+  Search,
+} from "../styles/Search.styled";
 
 const MainPage = (): JSX.Element => {
-  return <div className="MainPage">{/* <p> 메인 렌딩 페이지</p> */}</div>;
+  return (
+    <Layout>
+      <SearchWrapper>
+        <Suggestions>
+          <Suggest></Suggest>
+          <Suggest></Suggest>
+          <Suggest></Suggest>
+          <Suggest></Suggest>
+        </Suggestions>
+        <Search>
+          <p>Search for expressions or words you're curious about!</p>
+        </Search>
+      </SearchWrapper>
+    </Layout>
+  );
 };
 
 export default MainPage;
