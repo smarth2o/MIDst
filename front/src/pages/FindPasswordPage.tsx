@@ -20,7 +20,7 @@ const FindPasswordPage = (): JSX.Element => {
           </Logo>
           <Line></Line>
           <Text>
-            <span>Please enter your ID and Email address</span>
+            <span>Please enter your email address</span>
             <p>
               Verification code will be sent to you via the Email address you
               chose.

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import background from "../pinkbrain.png";
 
-export const Layout = styled.div`
+export const MainLayout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,50 +15,207 @@ export const SearchWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 138px;
 `;
 
 export const Suggestions = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 827px;
+  width: 550px;
 `;
 
 export const Suggest = styled.div`
-  width: 184px;
-  height: 42px;
+  width: fit-content;
+  height: 25px;
 
   background: rgba(126, 114, 213, 0.7);
   backdrop-filter: blur(12px);
 
-  border-radius: 30px;
-`;
-
-export const Search = styled.div`
-  box-sizing: border-box;
-  width: 927px;
-  height: 75px;
-
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.9) 69.79%
-  );
-  border: 1px solid rgba(153, 153, 153, 0.5);
   border-radius: 30px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
+  padding: 3px 20px;
+  margin-right: 10px;
+
+  p {
+    font-family: "Saira";
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+
+    color: #ffffff;
+  }
+`;
+
+export const Search = styled.div`
+  box-sizing: border-box;
+  width: 650px;
+  height: 60px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.9) 69.79%
+  );
+  border-radius: 40px;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 32px;
+
+  img {
+    width: 20px;
+    height: 20px;
+    padding-left: 30px;
+  }
+
   p {
     font-family: "Saira";
     font-weight: 600;
-    font-size: 26px;
-    line-height: 41px;
+    font-size: 20px;
     text-align: center;
 
     color: #7e72d5;
+    padding-left: 30px;
+  }
+`;
+
+export const SearchPageLayout = styled.div`
+  display: flex;
+  width: 100%;
+  margin-top: 67px;
+`;
+
+export const FilterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 103px;
+  margin-left: 85px;
+  margin-right: 57px;
+
+  h2 {
+    font-family: "Saira";
+    font-weight: 600;
+    font-size: 18px;
+
+    color: #333333;
+
+    padding-left: 20px;
+  }
+`;
+
+export const FilterBox = styled.div`
+  width: 228px;
+
+  background: #ffffff;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+
+  padding: 10px 25px;
+  margin-bottom: 20px;
+
+  flex: display;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  h3 {
+    font-family: "Saira";
+    font-weight: 600;
+    font-size: 16px;
+
+    color: #999999;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  img {
+    position: absolute;
+    right: 30px;
+    top: 23px;
+  }
+`;
+
+export const SearchLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 51px;
+`;
+
+export const SearchResultBox = styled.div`
+  width: 931px;
+
+  background: #ffffff;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+
+  padding: 35px 50px;
+  position: relative;
+
+  h3 {
+    font-family: "Saira";
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+
+    color: #333333;
+  }
+
+  p {
+    font-family: "Saira";
+    font-weight: 400;
+    font-size: 14px;
+
+    color: #555555;
+  }
+`;
+
+export const SearchResultSort = styled.div`
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 136px;
+  height: 31px;
+  right: 50px;
+  top: 35px;
+
+  background: #ffffff;
+  border: 1px solid rgba(153, 153, 153, 0.5);
+  border-radius: 10px;
+`;
+
+export const SearchResults = styled.div``;
+
+export const SearchResult = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border: solid 0.5px rgba(128, 128, 128, 0.652);
+  border-radius: 10px;
+
+  padding: 12px 18px;
+  margin: 15px 5px;
+
+  p {
+    font-family: "Saira";
+    font-weight: 400;
+    font-size: 16px;
+    color: #333333;
+    margin: 0px;
+  }
+
+  button {
+    border: none;
+    background-color: white;
+    &:active {
+      border: none;
+    }
   }
 `;

@@ -1,26 +1,32 @@
 import {
-  Layout,
+  MainLayout,
   SearchWrapper,
   Suggest,
   Suggestions,
   Search,
 } from "../styles/Search.styled";
+import search from "../assets/search.svg";
 
 const MainPage = (): JSX.Element => {
   return (
-    <Layout>
+    <MainLayout>
       <SearchWrapper>
         <Suggestions>
-          <Suggest></Suggest>
-          <Suggest></Suggest>
-          <Suggest></Suggest>
-          <Suggest></Suggest>
+          <Suggest>
+            <p>hello hello hello</p>
+          </Suggest>
+          <Suggest>
+            <p>happy</p>
+          </Suggest>
+          {/* <Suggest></Suggest>
+          <Suggest></Suggest> */}
         </Suggestions>
         <Search>
+          <img src={search} alt="search"></img>
           <p>Search for expressions or words you're curious about!</p>
         </Search>
       </SearchWrapper>
-    </Layout>
+    </MainLayout>
   );
 };
 

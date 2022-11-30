@@ -15,6 +15,7 @@ import MainPage from "./pages/MainPage";
 import PersonalPage from "./pages/PersonalPage";
 import RegisterPage from "./pages/RegisterPage";
 import FindPasswordPage from "./pages/FindPasswordPage";
+import SearchPage from "./pages/SearchPage";
 
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
@@ -31,6 +32,7 @@ const App = (): JSX.Element => {
           <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
           <Route path={ROUTES.USER.FIND_PW} element={<FindPasswordPage />} />
           {/* <Route element={<Header />}> */}
+          <Route path={ROUTES.SEARCH} element={<SearchPage />} />
           <Route path={ROUTES.DIARY.ROOT} element={<DiaryPage />} />
           <Route
             path={ROUTES.DIARY.DIARY_CREATE}
