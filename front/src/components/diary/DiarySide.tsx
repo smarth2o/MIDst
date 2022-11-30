@@ -3,7 +3,7 @@ import {
   DiaryListAlign,
   DiarySideAlign,
 } from "../../styles/diary/DiarySide";
-import { CalendarContainer } from "../personal/PersonalTopCard";
+import CalendarContainer from "../../styles/personal/CalendarContainer";
 
 const DiaryList = (): JSX.Element => {
   return (

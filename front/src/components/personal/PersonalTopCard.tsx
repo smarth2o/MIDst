@@ -1,27 +1,43 @@
 import React, { useState } from "react";
 import {
   PTBtnStyled,
-  PTCalendarStyled,
   PTCardAlignStyled,
   PTCardContainerStyled,
+  UPBottomAlignStyled,
+  UPBottomDetail,
+  UPTopAlignStyled,
+  UserProfileImgStyled,
 } from "../../styles/personal/PersonalTopCard";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { ArrowRightOutlined } from "@ant-design/icons";
+import { ArrowRightOutlined, MailOutlined } from "@ant-design/icons";
+import CalendarContainer from "../../styles/personal/CalendarContainer";
 
-export const CalendarContainer = (): JSX.Element => {
-  const [value, onChange] = useState(new Date());
+const UserProfile = (): JSX.Element => {
+  const profileImg = require("../../assets/profile.png");
+  const settingImg = require("../../assets/settings.png");
+  const userName = "MarkBaker";
+  const userEmail = "email1234@gmail.com";
+  const userMessage = "I love watching Friends";
   return (
     <>
-      <PTCalendarStyled>
-        <Calendar
-          onChange={onChange}
-          value={value}
-          formatDay={(locale, date) =>
-            date.toLocaleString("en", { day: "numeric" })
-          }
-        />
-      </PTCalendarStyled>
+      <UPTopAlignStyled>
+        <UserProfileImgStyled>
+          <img src={profileImg} />
+        </UserProfileImgStyled>
+        <a href="/">
+          <img src={settingImg} className="settingIcon" />
+        </a>
+      </UPTopAlignStyled>
+      <h3>{userName}</h3>
+      <UPBottomAlignStyled>
+        <p>
+          <MailOutlined /> {userEmail}
+        </p>
+        <UPBottomDetail>
+          <p>{userMessage}</p>
+          <button className="btn-go-search">EDIT</button>
+        </UPBottomDetail>
+      </UPBottomAlignStyled>
     </>
   );
 };
@@ -30,7 +46,9 @@ export const PersonalTopCard = (): JSX.Element => {
   return (
     <>
       <PTCardContainerStyled>
-        <PTCardAlignStyled>test1</PTCardAlignStyled>
+        <PTCardAlignStyled>
+          <UserProfile />
+        </PTCardAlignStyled>
         <PTCardAlignStyled>
           <CalendarContainer />
         </PTCardAlignStyled>
