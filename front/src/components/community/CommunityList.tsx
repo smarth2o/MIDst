@@ -1,15 +1,20 @@
 import {
   ClockCircleOutlined,
+  DownOutlined,
   HeartOutlined,
   MessageOutlined,
 } from "@ant-design/icons";
 import { useState } from "react";
 import {
+  CommunityAllAlignStyled,
   CommunityCardAlignStyled,
   CommunityInfo,
   CommunityListAlignStyled,
+  CommunitySortBtnStyled,
+  CommunityWriteBtnStyled,
 } from "../../styles/community/CommunityList";
 import dayjs from "dayjs";
+import UserProfile from "../common/UserProfile";
 
 const CommunityCard = (): JSX.Element => {
   const [commTitle, setCommTitle] = useState("미드로 영어공부하는 방법 총정리");
@@ -23,15 +28,7 @@ const CommunityCard = (): JSX.Element => {
   return (
     <>
       <CommunityCardAlignStyled>
-        <ul className="title-profile-align">
-          <li>
-            <h3>{commTitle}</h3>
-          </li>
-          <li className="profile-align">
-            <img src={userProfileImg} />
-            <h3> {userName}</h3>
-          </li>
-        </ul>
+        <UserProfile />
         <CommunityInfo>
           <ul>
             <li>
@@ -53,9 +50,28 @@ const CommunityCard = (): JSX.Element => {
 const CommunityList = (): JSX.Element => {
   return (
     <>
-      <CommunityListAlignStyled>
-        <CommunityCard />
-      </CommunityListAlignStyled>
+      <CommunityAllAlignStyled>
+        <CommunitySortBtnStyled>
+          <button>
+            <p>
+              좋아요 순 <DownOutlined />
+            </p>
+          </button>
+          <button>
+            <p>
+              최신 순 <DownOutlined />
+            </p>
+          </button>
+        </CommunitySortBtnStyled>
+        <CommunityListAlignStyled>
+          <CommunityCard />
+        </CommunityListAlignStyled>
+        <CommunityWriteBtnStyled>
+          <a href="/community/communityCreate">
+            <button>Write</button>
+          </a>
+        </CommunityWriteBtnStyled>
+      </CommunityAllAlignStyled>
     </>
   );
 };
