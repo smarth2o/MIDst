@@ -1,8 +1,9 @@
 //로그인, 회원가입 관련
 //로그인, 회원가입 관련
 import { Router, Response, Request, NextFunction } from "express";
-import  userService  from "../services/userService";
+import  userService  from "../services/user.service";
 import { loginRequired } from "../middlewares/authMiddleware";
+import userMailService from "services/user.mail.service";
 const userRouter = Router();
 //회원가입
 userRouter.post(
@@ -35,6 +36,23 @@ userRouter.post(
     }
   }
 );
+//회원가입-인증메일전송
+userRouter.post(
+  "/register/email",
+  async function (req, res, next) {
+    try{
+      const email = req.body.email;
+      
+      const randomNumber = Math.floor(Math.random() * 1000000);
+      const text=`인증번호는 ${randomNumber}입니다.`;
+      await userMailService.sendMail(email,text);
+      res.status(200).json(randomNumber);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 
 //로그인
 userRouter.post(
@@ -51,6 +69,27 @@ userRouter.post(
   }
 );
 
+//메일회원가입
+
+
+
+//비밀번호 재발급
+userRouter.post(
+  "/resetPassword",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try{
+    const  email  = req.body.email;
+    const randomPassword = Math.random().toString(36).slice(2);
+    const updatePassword=await userService.updatePassword(email,randomPassword)
+    const text=`임시 비밀번호는 ${randomPassword}입니다.`;
+    await userMailService.sendMail(email,text);
+    res.status(200).send(updatePassword);
+    }catch(error){
+      next(error);
+    }
+  }
+);
+
 userRouter.get(
   "/currentUser",
   loginRequired,
@@ -59,7 +98,6 @@ userRouter.get(
       const userId: any = req.headers["currentUserId"];
       console.log(userId);
       const currentUser = await userService.findCurrentUser(userId);
-
       res.status(200).json(currentUser);
     } catch (error) {
       next(error);
@@ -67,7 +105,7 @@ userRouter.get(
   }
 );
 
-//정보수정
+//이름정보수정
 userRouter.put(
   "/updateuser",
   loginRequired,
@@ -75,14 +113,31 @@ userRouter.put(
     try {
       const userId: any = req.headers["currentUserId"];
       const name = req.body.name;
-      const updateUser = await userService.updateUsername(userId, name);
-      res.status(200).json(updateUser);
+      const updateUsername = await userService.updateUsername(userId, name);
+      res.status(200).json(updateUsername);
     } catch (error) {
       next(error);
     }
   }
 );
 
+//비밀번호 수정
+userRouter.put(
+  "/updateuserPassword",
+  loginRequired,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userId: any = req.headers["currentUserId"];
+      const password=req.body.password;
+      const newpassword=req.body.newpassword;
+      const confirmpassword = req.body.confirmpassword;
+      const updateUserPassword = await userService.updateUserPassword(userId,password,newpassword,confirmpassword);
+      res.status(200).json(updateUserPassword);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 //탈퇴
 userRouter.put(
   "/withdrawal/:id",
