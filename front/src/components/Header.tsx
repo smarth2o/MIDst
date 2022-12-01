@@ -10,7 +10,7 @@ function Header() {
           <Logo to={ROUTES.MAIN}>
             <ul className="topnav-first-ul ">
               <li>
-                <img src={require("../mist.png")} alt="logo" />
+                <img src={require("../assets/mist.png")} alt="logo" />
               </li>
               <li>
                 <p>MIDst</p>

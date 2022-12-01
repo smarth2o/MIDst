@@ -1,110 +1,85 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import background from "../pinkbrain.png";
+import background from "../assets/pinkbrain.png";
+import logo from "../assets/mist.png";
 
 export const Layout = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   background: url(${background}) no-repeat center center;
   width: 100%;
   min-height: 100vh;
 `;
 
-export const Box = styled.form`
-  width: 400px;
-  height: 500px;
-  margin-top: 200px;
+export const Box = styled.div`
+  max-width: 350px;
+  min-height: 300px;
+
+  padding: 20px 40px 50px 40px;
 
   background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
   border-radius: 20px;
 `;
 
-export const Form = styled.div`
-  height: 500px;
-
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
-`;
 
-export const Text = styled.div`
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  span {
-    font-family: "Saira";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 28px;
-    text-align: center;
-
-    color: #333333;
-  }
-  p {
-    font-family: "Saira";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 22px;
-    text-align: center;
-
-    color: #555555;
+  input:focus {
+    outline: none;
   }
 `;
 
-export const Logo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 180px;
-  margin: 20px 20px;
-
-  img {
-    width: 50px;
-    height: 50px;
-  }
-  p {
-    font-family: "Copperplate";
-    font-weight: 400;
-    font-size: 42px;
-
-    margin: 0px 0px;
-
-    background: linear-gradient(270deg, #9d5ed1 37.07%, #3c99db 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-  }
+export const Logo = styled.img.attrs({
+  src: logo,
+  alt: "logo",
+})`
+  width: 40px;
+  height: 40px;
 `;
 
-export const Line = styled.div`
-  width: 350px;
-  margin-bottom: 30px;
+export const Title = styled.h3`
+  font-family: "Saira";
+  font-weight: 600;
+  font-size: 24px;
+  text-align: center;
+  color: #333333;
+`;
 
-  border: 1px solid #ffffff;
+export const Text = styled.p`
+  font-family: "Saira";
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 24px;
+
+  color: #555555;
 `;
 
 export const Input = styled.input`
   box-sizing: border-box;
+  width: 280px;
+  height: 40px;
+  margin: 8px;
+  padding: 10px;
 
-  width: 304px;
-  height: 36px;
-
-  background: #ffffff;
+  background-color: #ffffff;
   border: 1px solid rgba(85, 85, 85, 0.2);
   border-radius: 10px;
+
+  font-family: "Saira";
 `;
 
 export const Button = styled.button`
   box-sizing: border-box;
-  width: 300px;
+  width: 280px;
   height: 40px;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 20px;
 
   background: #7ec9ca;
@@ -113,41 +88,28 @@ export const Button = styled.button`
 
   font-family: "Saira";
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
   color: #ffffff;
 `;
 
-export const OtherWrapper = styled.div`
+export const BottomWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 300px;
-  margin-bottom: 20px;
+  width: 280px;
 
   p {
     font-family: "Saira";
-    font-style: normal;
     font-weight: 500;
     font-size: 14px;
-    line-height: 22px;
+    margin: 0px;
 
     color: rgba(85, 85, 85, 0.8);
   }
 `;
 
-export const FindButton = styled(Link)`
+export const OtherButton = styled(Link)`
   font-family: "Saira";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 22px;
-
-  color: rgba(85, 85, 85, 0.8);
-`;
-
-export const SignUpButton = styled(Link)`
-  font-family: "Saira";
-  font-style: normal;
   font-weight: 600;
   font-size: 14px;
   line-height: 22px;

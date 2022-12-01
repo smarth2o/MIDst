@@ -10,11 +10,12 @@ import CommunityPage from "./pages/CommunityPage";
 import DiaryCreatePage from "./pages/DiaryCreatePage";
 import DiaryDetailPage from "./pages/DiaryDetailPage";
 import DiaryPage from "./pages/DiaryPage";
-import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
 import PersonalPage from "./pages/PersonalPage";
 import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/LoginPage";
 import FindPasswordPage from "./pages/FindPasswordPage";
+import ChangePasswordPage from "./pages/ChangePasswordPage";
 import SearchPage from "./pages/SearchPage";
 
 export const UserStateContext = createContext(null);
@@ -31,7 +32,10 @@ const App = (): JSX.Element => {
           <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
           <Route path={ROUTES.USER.FIND_PW} element={<FindPasswordPage />} />
-          {/* <Route element={<Header />}> */}
+          <Route
+            path={ROUTES.USER.CHANGE_PW}
+            element={<ChangePasswordPage />}
+          />
           <Route path={ROUTES.SEARCH} element={<SearchPage />} />
           <Route path={ROUTES.DIARY.ROOT} element={<DiaryPage />} />
           <Route
@@ -57,7 +61,6 @@ const App = (): JSX.Element => {
             element={<CommunityEditPage />}
           />
           <Route path="/*">Not Found</Route>
-          {/* </Route> */}
         </Routes>
       </Router>
     </>

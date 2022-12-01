@@ -3,33 +3,53 @@ import {
   Box,
   Form,
   Logo,
+  Title,
   Input,
   Button,
-  OtherWrapper,
-  SignUpButton,
-  Line,
+  BottomWrapper,
+  OtherButton,
 } from "../styles/Register.styled";
 import { ROUTES } from "../enum/routes";
+import { useState } from "react";
+
+interface RegisterData {
+  ID: string;
+  email: string;
+  password: string;
+}
 
 const RegisterPage = (): JSX.Element => {
+  const [formData, setFormData] = useState<RegisterData>({
+    ID: "",
+    email: "",
+    password: "",
+  });
   return (
     <Layout>
       <Box>
         <Form>
-          <Logo>
-            <img src={require("../mist.png")} alt="logo"></img>
-            <p>MIDst</p>
-          </Logo>
-          <Line></Line>
-          <Input type="email" placeholder="Email"></Input>
-          <Input type="text" placeholder="ID"></Input>
-          <Input type="password" placeholder="Password"></Input>
+          <Logo></Logo>
+          <Title>Register</Title>
+          <Input type="text" placeholder="ID" value={formData.ID}></Input>
+          <Input
+            type="email"
+            placeholder="Email address"
+            autoComplete="off"
+            value={formData.email}
+          ></Input>
+          <Input type="text" placeholder="Verification Code"></Input>
+          <Input
+            type="password"
+            placeholder="Password"
+            autoComplete="off"
+            value={formData.password}
+          ></Input>
           <Input type="password" placeholder="Password Confirm"></Input>
           <Button>Sign Up</Button>
-          <OtherWrapper>
+          <BottomWrapper>
             <p>Already have an account?</p>
-            <SignUpButton to={ROUTES.USER.LOGIN}>Sign In</SignUpButton>
-          </OtherWrapper>
+            <OtherButton to={ROUTES.USER.LOGIN}>Sign in</OtherButton>
+          </BottomWrapper>
         </Form>
       </Box>
     </Layout>

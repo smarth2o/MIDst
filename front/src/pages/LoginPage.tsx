@@ -5,10 +5,9 @@ import {
   Logo,
   Input,
   Button,
-  OtherWrapper,
-  FindButton,
-  SignUpButton,
-  Line,
+  BottomWrapper,
+  OtherButton,
+  Title,
 } from "../styles/Register.styled";
 import { ROUTES } from "../enum/routes";
 
@@ -17,20 +16,18 @@ const LoginPage = (): JSX.Element => {
     <Layout>
       <Box>
         <Form>
-          <Logo>
-            <img src={require("../mist.png")} alt="logo"></img>
-            <p>MIDst</p>
-          </Logo>
-          <Line></Line>
-          <Input type="email" placeholder="Email"></Input>
+          <Logo></Logo>
+          <Title>Sign In</Title>
+          <Input type="email" placeholder="Email address"></Input>
           <Input type="password" placeholder="Password"></Input>
           <Button>Sign In</Button>
-          <OtherWrapper>
-            <FindButton to={ROUTES.USER.FIND_PW}>
+          <BottomWrapper>
+            {/* <OtherButton to={ROUTES.USER.FIND_PW}>
               Forgot your Password?
-            </FindButton>
-            <SignUpButton to={ROUTES.USER.REGISTER}>Sign Up</SignUpButton>
-          </OtherWrapper>
+            </OtherButton> */}
+            <p>Don't have an account?</p>
+            <OtherButton to={ROUTES.USER.REGISTER}>Sign Up</OtherButton>
+          </BottomWrapper>
         </Form>
       </Box>
     </Layout>

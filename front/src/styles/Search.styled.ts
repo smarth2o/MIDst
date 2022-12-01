@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import background from "../pinkbrain.png";
+import background from "../assets/pinkbrain.png";
 
 export const MainLayout = styled.div`
   display: flex;
@@ -40,7 +40,7 @@ export const Suggest = styled.div`
   margin-right: 10px;
 
   p {
-    font-family: "Saira";
+    // font-family: "Saira";
     font-weight: 500;
     font-size: 14px;
     text-align: center;
@@ -74,7 +74,7 @@ export const Search = styled.div`
   }
 
   p {
-    font-family: "Saira";
+    // font-family: "Saira";
     font-weight: 600;
     font-size: 20px;
     text-align: center;
@@ -99,7 +99,7 @@ export const FilterWrapper = styled.div`
   margin-right: 57px;
 
   h2 {
-    font-family: "Saira";
+    // font-family: "Saira";
     font-weight: 600;
     font-size: 18px;
 
@@ -125,7 +125,7 @@ export const FilterBox = styled.div`
   position: relative;
 
   h3 {
-    font-family: "Saira";
+    // font-family: "Saira";
     font-weight: 600;
     font-size: 16px;
 
@@ -161,16 +161,15 @@ export const SearchResultBox = styled.div`
   position: relative;
 
   h3 {
-    font-family: "Saira";
+    // font-family: "Saira";
     font-weight: 600;
     font-size: 18px;
-    line-height: 28px;
 
     color: #333333;
   }
 
   p {
-    font-family: "Saira";
+    // font-family: "Saira";
     font-weight: 400;
     font-size: 14px;
 
@@ -204,7 +203,7 @@ export const SearchResult = styled.div`
   margin: 15px 5px;
 
   p {
-    font-family: "Saira";
+    // font-family: "Saira";
     font-weight: 400;
     font-size: 16px;
     color: #333333;
