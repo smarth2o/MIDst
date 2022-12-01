@@ -4,8 +4,8 @@ export const ROUTES = {
   SHARE: "/share",
   DIARY: {
     ROOT: "/diary",
-    DIARY_CREATE: "/diary/diaryCreate",
-    DIARY_DETAIL: "/diary/diaryDetail/:no",
+    DETAIL: ":detial",
+    CREATE: "create",
   },
   USER: { LOGIN: "/login", REGISTER: "/register" },
   PERSONAL: "/personal",
