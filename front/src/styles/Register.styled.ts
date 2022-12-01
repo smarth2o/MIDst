@@ -61,6 +61,10 @@ export const Text = styled.p`
   color: #555555;
 `;
 
+export const SmallWrapper = styled.div`
+  position: relative;
+`;
+
 export const Input = styled.input`
   box-sizing: border-box;
   width: 280px;
@@ -90,6 +94,19 @@ export const Button = styled.button`
   font-weight: 600;
   font-size: 16px;
   color: #ffffff;
+`;
+
+export const SmallButton = styled(Button)`
+  width: 50px;
+  height: 30px;
+
+  margin-top: 8px;
+  margin-bottom: 8px;
+  position: absolute;
+  right: 15px;
+  top: 4.5px;
+
+  font-size: 12px;
 `;
 
 export const BottomWrapper = styled.div`

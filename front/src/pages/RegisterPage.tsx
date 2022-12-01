@@ -8,6 +8,8 @@ import {
   Button,
   BottomWrapper,
   OtherButton,
+  SmallButton,
+  SmallWrapper,
 } from "../styles/Register.styled";
 import { ROUTES } from "../enum/routes";
 import { useState } from "react";
@@ -31,13 +33,19 @@ const RegisterPage = (): JSX.Element => {
           <Logo></Logo>
           <Title>Register</Title>
           <Input type="text" placeholder="ID" value={formData.ID}></Input>
-          <Input
-            type="email"
-            placeholder="Email address"
-            autoComplete="off"
-            value={formData.email}
-          ></Input>
-          <Input type="text" placeholder="Verification Code"></Input>
+          <SmallWrapper>
+            <Input
+              type="email"
+              placeholder="Email address"
+              autoComplete="off"
+              value={formData.email}
+            ></Input>
+            <SmallButton>Send</SmallButton>
+          </SmallWrapper>
+          <SmallWrapper>
+            <Input type="text" placeholder="Verification Code"></Input>
+            <SmallButton>Verify</SmallButton>
+          </SmallWrapper>
           <Input
             type="password"
             placeholder="Password"

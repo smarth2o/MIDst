@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import background from "../assets/pinkbrain.png";
+import search from "../assets/search.svg";
 
 export const MainLayout = styled.div`
   display: flex;
@@ -40,7 +41,7 @@ export const Suggest = styled.div`
   margin-right: 10px;
 
   p {
-    // font-family: "Saira";
+    font-family: "Saira";
     font-weight: 500;
     font-size: 14px;
     text-align: center;
@@ -49,39 +50,59 @@ export const Suggest = styled.div`
   }
 `;
 
-export const Search = styled.div`
+export const SearchbarWrapper = styled.div`
+  position: relative;
+  padding: 0px;
+`;
+
+export const Search = styled.input`
   box-sizing: border-box;
   width: 650px;
   height: 60px;
+  margin-top: 15px;
+  margin-bottom: 32px;
+  padding: 10px;
 
   background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0.9) 0%,
     rgba(255, 255, 255, 0.9) 69.79%
   );
+  border: 1px solid rgba(85, 85, 85, 0.2);
   border-radius: 40px;
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
 
-  display: flex;
-  align-items: center;
-  margin-top: 15px;
-  margin-bottom: 32px;
+  font-family: "Saira";
+  font-size: 18px;
+  font-weight: 600;
+  padding-left: 30px;
+  color: #7e72d5;
 
-  img {
-    width: 20px;
-    height: 20px;
-    padding-left: 30px;
+  :focus {
+    outline: none;
   }
 
-  p {
-    // font-family: "Saira";
-    font-weight: 600;
-    font-size: 20px;
-    text-align: center;
-
+  ::placeholder {
     color: #7e72d5;
-    padding-left: 30px;
   }
+`;
+
+export const SearchButton = styled.button`
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  background-color: transparent;
+`;
+
+export const SearchIcon = styled.img.attrs({
+  src: search,
+  alt: "search",
+})`
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
 `;
 
 export const SearchPageLayout = styled.div`
