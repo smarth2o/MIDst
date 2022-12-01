@@ -96,7 +96,6 @@ userRouter.get(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userId: any = req.headers["currentUserId"];
-      console.log(userId);
       const currentUser = await userService.findCurrentUser(userId);
       res.status(200).json(currentUser);
     } catch (error) {
