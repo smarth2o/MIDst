@@ -1,15 +1,15 @@
 import React from "react";
 import PersonalBottomCard from "../components/personal/PersonalBottomCard";
 import { PersonalTopCard } from "../components/personal/PersonalTopCard";
-import { PersonalPageBack } from "../styles/personal/PersonalPage";
+import { PersonalPageBackStyled } from "../styles/personal/PersonalPage";
 
 const PersonalPage = (): JSX.Element => {
   return (
     <>
-      <PersonalPageBack>
+      <PersonalPageBackStyled>
         <PersonalTopCard />
         <PersonalBottomCard />
-      </PersonalPageBack>
+      </PersonalPageBackStyled>
     </>
   );
 };

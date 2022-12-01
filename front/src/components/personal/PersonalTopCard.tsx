@@ -1,27 +1,45 @@
-import React, { useState } from "react";
 import {
-  PTBtn,
-  PTCalendar,
-  PTCardAlign,
-  PTCardContainer,
+  PTBtnStyled,
+  PTCardAlignStyled,
+  PTCardContainerStyled,
+  UPBottomAlignStyled,
+  UPBottomDetail,
+  UPTopAlignStyled,
+  UserProfileImgStyled,
 } from "../../styles/personal/PersonalTopCard";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { ArrowRightOutlined } from "@ant-design/icons";
+import {
+  ArrowRightOutlined,
+  MailOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
+import CalendarContainer from "./CalendarContainer";
 
-export const CalendarContainer = (): JSX.Element => {
-  const [value, onChange] = useState(new Date());
+const UserProfile = (): JSX.Element => {
+  const profileImg = require("../../assets/profile.png");
+  const userName = "MarkBaker";
+  const userEmail = "email1234@gmail.com";
+  const userMessage = "I love watching Friends";
   return (
     <>
-      <PTCalendar>
-        <Calendar
-          onChange={onChange}
-          value={value}
-          formatDay={(locale, date) =>
-            date.toLocaleString("en", { day: "numeric" })
-          }
-        />
-      </PTCalendar>
+      <UPTopAlignStyled>
+        <UserProfileImgStyled>
+          <img src={profileImg} />
+        </UserProfileImgStyled>
+        <a href="/">
+          <SettingOutlined />
+        </a>
+      </UPTopAlignStyled>
+      <h3>{userName}</h3>
+      <UPBottomAlignStyled>
+        <p>
+          <MailOutlined /> {userEmail}
+        </p>
+        <UPBottomDetail>
+          <p>{userMessage}</p>
+          <button className="btn-go-search">EDIT</button>
+        </UPBottomDetail>
+      </UPBottomAlignStyled>
     </>
   );
 };
@@ -29,13 +47,15 @@ export const CalendarContainer = (): JSX.Element => {
 export const PersonalTopCard = (): JSX.Element => {
   return (
     <>
-      <PTCardContainer>
-        <PTCardAlign>test1</PTCardAlign>
-        <PTCardAlign>
+      <PTCardContainerStyled>
+        <PTCardAlignStyled>
+          <UserProfile />
+        </PTCardAlignStyled>
+        <PTCardAlignStyled>
           <CalendarContainer />
-        </PTCardAlign>
+        </PTCardAlignStyled>
 
-        <PTCardAlign>
+        <PTCardAlignStyled>
           <ul className="PTItem2">
             <li>
               <h3>
@@ -45,18 +65,18 @@ export const PersonalTopCard = (): JSX.Element => {
               </h3>
             </li>
             <li>
-              <PTBtn>
+              <PTBtnStyled>
                 <button>
                   Check your attendance
                   <br /> by writing today’s journal
                   <ArrowRightOutlined />
                 </button>
-              </PTBtn>
+              </PTBtnStyled>
             </li>
           </ul>
-        </PTCardAlign>
+        </PTCardAlignStyled>
 
-        <PTCardAlign>
+        <PTCardAlignStyled>
           <ul className="card-align-ul">
             <li className="card-align-li">
               <h3>Search for 327 expressions</h3>
@@ -79,9 +99,9 @@ export const PersonalTopCard = (): JSX.Element => {
               </li>
             </li>
           </ul>
-        </PTCardAlign>
+        </PTCardAlignStyled>
 
-        <PTCardAlign>
+        <PTCardAlignStyled>
           <ul className="card-align-ul">
             <li className="card-align-li">
               <h3>Search for 327 expressions</h3>
@@ -104,8 +124,8 @@ export const PersonalTopCard = (): JSX.Element => {
               </li>
             </li>
           </ul>
-        </PTCardAlign>
-      </PTCardContainer>
+        </PTCardAlignStyled>
+      </PTCardContainerStyled>
     </>
   );
 };
