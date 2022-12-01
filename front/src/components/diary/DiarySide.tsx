@@ -1,26 +1,21 @@
-import {
-  CalendarAlign,
-  DiaryListAlign,
-  DiarySideAlign,
-} from "../../styles/diary/DiarySide";
+import { DiaryValueType } from "../../pages/DiaryPage";
+import { DiaryTypes } from "../../stores/DiaryAtom";
+import { CalendarAlign, DiarySideAlign } from "../../styles/diary/DiarySide";
 import CalendarContainer from "../personal/CalendarContainer";
 
-const DiaryList = (): JSX.Element => {
-  return (
-    <>
-      <DiaryListAlign></DiaryListAlign>
-    </>
-  );
-};
+import DiaryList from "./DiaryList";
 
-export const DiarySide = (): JSX.Element => {
+export const DiarySide = ({
+  diarys,
+  setDiarys,
+}: DiaryValueType): JSX.Element => {
   return (
     <>
       <DiarySideAlign>
         <CalendarAlign>
           <CalendarContainer />
         </CalendarAlign>
-        <DiaryList />
+        <DiaryList diarys={diarys} setDiarys={setDiarys} />
       </DiarySideAlign>
     </>
   );

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   DiaryBtn,
   DiaryCreateAlign,
   DiaryForm,
 } from "../../styles/diary/DiaryCreate";
 import moment from "moment";
+import { useSetRecoilState } from "recoil";
+import { diaryState } from "../../stores/DiaryAtom";
 
 const onSubmitDiary = () => {
   alert("제출이 완료되었습니다.");
@@ -12,6 +14,7 @@ const onSubmitDiary = () => {
 
 const DiaryCreate = (): JSX.Element => {
   const nowDate = moment().format("MMM Do YY");
+
   return (
     <>
       <DiaryCreateAlign>

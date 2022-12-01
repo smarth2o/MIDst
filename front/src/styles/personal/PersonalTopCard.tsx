@@ -62,7 +62,6 @@ export const PTCardContainerStyled = styled.div`
   /* overflow: scroll; */
   /* 가로 스크롤 */
   overflow: auto;
-  white-space: nowrap;
   ::-webkit-scrollbar {
     display: none;
   }
