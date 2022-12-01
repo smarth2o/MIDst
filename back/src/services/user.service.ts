@@ -44,7 +44,7 @@ class userService {
   async userLogin(email: string, password: string) {
     const data = await userController.findByEmail(email);
     const user = data[0];
-
+  
     //탈퇴회원 확인
     if (data.length) {
       if (data) {
@@ -53,6 +53,12 @@ class userService {
           return errorMessage;
         }
       }
+    }
+    if(!data.length){
+      const errorMessage: string = "존재하지 않는 계정입니다.";
+      return errorMessage;
+  }
+      
       const userpassword = user.password;
       const isCorrect = await bcrypt.compare(password, userpassword);
 
@@ -67,10 +73,18 @@ class userService {
       //2.
 
       const secretKey = process.env.JWT_SECRET_KEY;
-      const accessToken: string = jwt.sign({ userId: user.userId }, secretKey, {
-        expiresIn: "3h",
-      });
-      const refreshToken:string=jwt.sign({ userId: user.userId }, secretKey, {expiresIn: "14d",});
+      const accessToken: string = jwt.sign(
+        { userId: user.userId },
+        secretKey,
+        {
+            expiresIn: "3h",
+        }
+      );
+      const refreshToken: string = jwt.sign(
+          { userId: user.userId },
+          secretKey,
+          { expiresIn: "14d" }
+      );
       const userId = user.userId;
       const name = user.name;
       await userController.tokenUpdate(userId, refreshToken);
@@ -84,7 +98,7 @@ class userService {
         errorMessage: null,
       };
       return findeUser;
-    }
+    
   }
   async findCurrentUser(userId: string) {
     const userData = await userController.findByUserId(userId);

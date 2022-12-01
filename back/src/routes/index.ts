@@ -1,5 +1,5 @@
 import { Router } from "express";
-import userRouter from "./userRouter";
+import userRouter from "./user.route";
 import mainRouter from "./main.router";
 import diaryRouter from "./diary.route";
 import communityRouter from "./community.route";
