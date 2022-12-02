@@ -5,17 +5,14 @@ import CalendarContainer from "../personal/CalendarContainer";
 
 import DiaryList from "./DiaryList";
 
-export const DiarySide = ({
-  diarys,
-  setDiarys,
-}: DiaryValueType): JSX.Element => {
+export const DiarySide = (): JSX.Element => {
   return (
     <>
       <DiarySideAlign>
         <CalendarAlign>
           <CalendarContainer />
         </CalendarAlign>
-        <DiaryList diarys={diarys} setDiarys={setDiarys} />
+        <DiaryList />
       </DiarySideAlign>
     </>
   );

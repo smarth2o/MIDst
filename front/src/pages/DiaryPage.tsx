@@ -1,14 +1,9 @@
-import React from "react";
-import {
-  SetterOrUpdater,
-  useRecoilState,
-  useRecoilValue,
-  useSetRecoilState,
-} from "recoil";
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router";
+import { SetterOrUpdater } from "recoil";
 import DiaryBottom from "../components/diary/DiaryBottom";
-import DiaryDetail from "../components/diary/DiaryDetail";
 import { DiarySide } from "../components/diary/DiarySide";
-import { diaryState, DiaryTypes } from "../stores/DiaryAtom";
+import { DiaryTypes } from "../stores/DiaryAtom";
 
 import {
   AllBackGroundStyled,
@@ -22,14 +17,17 @@ export interface DiaryValueType {
 }
 
 const DiaryPage = (): JSX.Element => {
-  const diarys = useRecoilValue<DiaryTypes[]>(diaryState);
-  const setDiarys = useSetRecoilState<DiaryTypes[]>(diaryState);
+  useEffect(() => {
+    // 가장 최근 일기의 id값을 구해서
+    // 'diary/id' 로 보내는 로직
+  }, []);
+
   return (
     <AllBackGroundStyled>
       <DiaryAlignStyled>
-        <DiarySide diarys={diarys} setDiarys={setDiarys} />
+        <DiarySide />
         <DiaryMainStyled>
-          <DiaryDetail diarys={diarys} setDiarys={setDiarys} />
+          <Outlet />
           <DiaryBottom />
         </DiaryMainStyled>
       </DiaryAlignStyled>

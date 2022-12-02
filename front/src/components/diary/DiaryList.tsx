@@ -1,28 +1,28 @@
 import { Link } from "react-router-dom";
-import { DiaryValueType } from "../../pages/DiaryPage";
-import { DiaryTypes } from "../../stores/DiaryAtom";
+import { useRecoilState } from "recoil";
+
+import { diaryState, DiaryTypes } from "../../stores/DiaryAtom";
 import { DiaryListAlign } from "../../styles/diary/DiarySide";
 
 import DiaryItem from "./DiaryItem";
 
-const DiaryList = ({ diarys }: DiaryValueType): JSX.Element => {
+const DiaryList = (): JSX.Element => {
+  const [diarys, setState] = useRecoilState(diaryState);
+
   return (
     <>
       <DiaryListAlign>
         {diarys.map((diary: DiaryTypes) => {
           const { id, title, date, description } = diary;
           return (
-            <>
-              <a href={`/diary/diaryDetail/${diary.id}`}>
-                <DiaryItem
-                  key={id}
-                  id={id}
-                  date={date}
-                  title={title}
-                  description={description}
-                />
-              </a>
-            </>
+            <Link key={id} to={`/diary/${diary.id}`}>
+              <DiaryItem
+                id={id}
+                date={date}
+                title={title}
+                description={description}
+              />
+            </Link>
           );
         })}
       </DiaryListAlign>
