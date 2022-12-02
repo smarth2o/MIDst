@@ -13,7 +13,7 @@ mainRouter.post(
             const searchword = req.body.searchword;
             const description=req.body.description;
             const translation=req.body.translation;
-    
+            const response_word = await axios.post("http://127.0.0.1:8080/success", {searchword: searchword,});
             const saveSearch=await mainService.saveSearch(
                 userId,
                 searchword,
