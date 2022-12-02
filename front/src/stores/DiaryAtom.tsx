@@ -11,12 +11,6 @@ export const diaryState = atom<DiaryTypes[]>({
   key: "DiaryDetail",
   default: [
     {
-      id: 1,
-      date: "2022-10-22",
-      title: "i feel good today",
-      description: "Because I watched my favorite movie last night",
-    },
-    {
       id: 0,
       date: "2022-10-28",
       title: "I am happy today",

@@ -23,7 +23,7 @@
     }
   },
   "paths": {
-    "/register": {
+    "/user/register": {
       "post": {
         "description": "",
         "parameters": [
@@ -56,7 +56,31 @@
         }
       }
     },
-    "/login": {
+    "/user/register/email": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/user/login": {
       "post": {
         "description": "",
         "parameters": [
@@ -83,7 +107,31 @@
         }
       }
     },
-    "/currentUser": {
+    "/user/resetPassword": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/user/currentUser": {
       "get": {
         "description": "",
         "parameters": [
@@ -116,7 +164,7 @@
         }
       }
     },
-    "/updateuser": {
+    "/user/updateuser": {
       "put": {
         "description": "",
         "parameters": [
@@ -161,7 +209,58 @@
         }
       }
     },
-    "/withdrawal/{id}": {
+    "/user/updateuserPassword": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "currentUserId",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "refresh",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "password": {
+                  "example": "any"
+                },
+                "newpassword": {
+                  "example": "any"
+                },
+                "confirmpassword": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/user/withdrawal/{id}": {
       "put": {
         "description": "",
         "parameters": [
@@ -212,7 +311,7 @@
         }
       }
     },
-    "/saveSearch": {
+    "/main/saveSearch": {
       "post": {
         "description": "",
         "parameters": [
@@ -263,7 +362,7 @@
         }
       }
     },
-    "/getSearch": {
+    "/main/getSearch": {
       "get": {
         "description": "",
         "parameters": [
@@ -296,7 +395,7 @@
         }
       }
     },
-    "/getCountSearch": {
+    "/main/getCountSearch": {
       "get": {
         "description": "",
         "parameters": [
@@ -329,7 +428,7 @@
         }
       }
     },
-    "/deleteSearch": {
+    "/main/deleteSearch": {
       "put": {
         "description": "",
         "parameters": [
@@ -502,14 +601,21 @@
         }
       }
     },
-    "/posts/all": {
+    "/posts/all/{sort}": {
       "get": {
         "tags": [
           "Community"
         ],
         "summary": "커뮤니티 글 전체 목록",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
