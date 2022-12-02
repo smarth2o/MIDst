@@ -7,8 +7,11 @@ import {
   SearchButton,
   SearchIcon,
 } from "../styles/Search.styled";
+import { useNavigate } from "react-router";
 
 const SearchBar = (): JSX.Element => {
+  const navigate = useNavigate();
+
   return (
     <SearchWrapper>
       <Suggestions>
@@ -26,7 +29,7 @@ const SearchBar = (): JSX.Element => {
           type="text"
           placeholder="Search for expressions or words you're curious about!"
         ></Search>
-        <SearchButton>
+        <SearchButton type="submit" onClick={() => navigate("/search")}>
           <SearchIcon></SearchIcon>
         </SearchButton>
       </SearchbarWrapper>
