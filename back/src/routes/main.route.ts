@@ -1,6 +1,6 @@
 //검색 관련
 import { Router, Response, Request, NextFunction } from "express";
-import { mainService } from "../services/mainService";
+import mainService  from "../services/main.service";
 import { loginRequired } from "../middlewares/authMiddleware";
 const mainRouter = Router();
 
@@ -84,4 +84,4 @@ mainRouter.put(
 );
 
 
-export { mainRouter };
+export default mainRouter ;

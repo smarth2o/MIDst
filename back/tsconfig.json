@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "esModuleInterop": true,
+    "resolveJsonModule":true,
     "baseUrl": "src",
     "moduleResolution": "node",
     "module": "commonjs",
@@ -7,8 +9,7 @@
     "sourceMap": true,
     "outDir": "./build",
     "experimentalDecorators": true,
-    "esModuleInterop": true,
-    "importHelpers": true // tslib
+    "importHelpers": true 
   },
   "include": ["src/**/*", "@types/**/*"],
   "exclude": ["node_modules"],
