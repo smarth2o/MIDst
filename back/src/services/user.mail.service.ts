@@ -1,33 +1,21 @@
 const nodemailer = require("nodemailer");
- 
+import mailService from "./mail.service";
+import  userService  from "../services/user.service";
 class userMailService{
-    async sendMail(email:string, text:string) {
-        const User = process.env.MAIL_EMAIL || null;
-        const Pass = process.env.MAIL_PASSWORD || null;
-    
-        const transport = nodemailer.createTransport({
-        service: "Gmail",
-        auth: {
-            user: User,
-            pass: Pass,
-        },
-        });
-
-        const message = {
-        from: User,
-        to: email,
-        subject: "MiDst",
-        text: text,
-        };
-        
-        transport.sendMail(message, (err, info) => {
-        if (err) {
-            console.error("error", err);
-            return;
-        }
-        
-        console.log("ok", info);
-        });
+    async sendRandomNumber(email:string) {
+        const randomNumber = Math.floor(Math.random() * 1000000);
+        const text=`인증번호는 ${randomNumber}입니다.`;
+        await mailService.sendMail(email,text);
+        return randomNumber;
     }
+
+    async sendresetPassword(email:string) {
+        const randomPassword = Math.random().toString(36).slice(2);
+        const updatePassword=await userService.updatePassword(email,randomPassword);
+        const text=`임시 비밀번호는 ${randomPassword}입니다.`;
+        await mailService.sendMail(email,text);
+        return updatePassword;
+    }
+
 }
 export default new userMailService();

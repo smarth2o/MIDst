@@ -43,9 +43,7 @@ userRouter.post(
     try{
       const email = req.body.email;
       
-      const randomNumber = Math.floor(Math.random() * 1000000);
-      const text=`인증번호는 ${randomNumber}입니다.`;
-      await userMailService.sendMail(email,text);
+      const randomNumber=await userMailService.sendRandomNumber(email);
       res.status(200).json(randomNumber);
     } catch (error) {
       next(error);
@@ -79,10 +77,8 @@ userRouter.post(
   async (req: Request, res: Response, next: NextFunction) => {
     try{
     const  email  = req.body.email;
-    const randomPassword = Math.random().toString(36).slice(2);
-    const updatePassword=await userService.updatePassword(email,randomPassword)
-    const text=`임시 비밀번호는 ${randomPassword}입니다.`;
-    await userMailService.sendMail(email,text);
+    
+    const updatePassword=await userMailService.sendresetPassword(email);
     res.status(200).send(updatePassword);
     }catch(error){
       next(error);
