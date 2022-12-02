@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import {
-  PTBtn,
-  PTCalendar,
-  PTCardAlign,
-  PTCardContainer,
+  PTBtnStyled,
+  PTCalendarStyled,
+  PTCardAlignStyled,
+  PTCardContainerStyled,
 } from "../../styles/personal/PersonalTopCard";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -13,7 +13,7 @@ export const CalendarContainer = (): JSX.Element => {
   const [value, onChange] = useState(new Date());
   return (
     <>
-      <PTCalendar>
+      <PTCalendarStyled>
         <Calendar
           onChange={onChange}
           value={value}
@@ -21,7 +21,7 @@ export const CalendarContainer = (): JSX.Element => {
             date.toLocaleString("en", { day: "numeric" })
           }
         />
-      </PTCalendar>
+      </PTCalendarStyled>
     </>
   );
 };
@@ -29,13 +29,13 @@ export const CalendarContainer = (): JSX.Element => {
 export const PersonalTopCard = (): JSX.Element => {
   return (
     <>
-      <PTCardContainer>
-        <PTCardAlign>test1</PTCardAlign>
-        <PTCardAlign>
+      <PTCardContainerStyled>
+        <PTCardAlignStyled>test1</PTCardAlignStyled>
+        <PTCardAlignStyled>
           <CalendarContainer />
-        </PTCardAlign>
+        </PTCardAlignStyled>
 
-        <PTCardAlign>
+        <PTCardAlignStyled>
           <ul className="PTItem2">
             <li>
               <h3>
@@ -45,18 +45,18 @@ export const PersonalTopCard = (): JSX.Element => {
               </h3>
             </li>
             <li>
-              <PTBtn>
+              <PTBtnStyled>
                 <button>
                   Check your attendance
                   <br /> by writing today’s journal
                   <ArrowRightOutlined />
                 </button>
-              </PTBtn>
+              </PTBtnStyled>
             </li>
           </ul>
-        </PTCardAlign>
+        </PTCardAlignStyled>
 
-        <PTCardAlign>
+        <PTCardAlignStyled>
           <ul className="card-align-ul">
             <li className="card-align-li">
               <h3>Search for 327 expressions</h3>
@@ -79,9 +79,9 @@ export const PersonalTopCard = (): JSX.Element => {
               </li>
             </li>
           </ul>
-        </PTCardAlign>
+        </PTCardAlignStyled>
 
-        <PTCardAlign>
+        <PTCardAlignStyled>
           <ul className="card-align-ul">
             <li className="card-align-li">
               <h3>Search for 327 expressions</h3>
@@ -104,8 +104,8 @@ export const PersonalTopCard = (): JSX.Element => {
               </li>
             </li>
           </ul>
-        </PTCardAlign>
-      </PTCardContainer>
+        </PTCardAlignStyled>
+      </PTCardContainerStyled>
     </>
   );
 };

@@ -1,8 +1,7 @@
-import React from "react";
 import styled from "styled-components";
 
-export const PersonalPageBack = styled.div`
-  margin: 0;
+export const PersonalPageBackStyled = styled.div`
+  margin: 67px 0 0 0;
   padding: 0%;
   background: linear-gradient(
     to top left,

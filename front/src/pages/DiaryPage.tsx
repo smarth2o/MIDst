@@ -1,26 +1,29 @@
 import React from "react";
 import DiaryBottom from "../components/diary/DiaryBottom";
-import DiaryCreate from "../components/diary/DiaryCreate";
 import { DiarySide } from "../components/diary/DiarySide";
 import { DiaryCreateAlign } from "../styles/diary/DiaryCreate";
 import {
-  AllBackGround,
-  DiaryAlign,
-  DiaryMain,
+  AllBackGroundStyled,
+  DiaryAlignStyled,
+  DiaryMainStyled,
 } from "../styles/diary/DiaryCreatePage";
+import { CreateDiaryBtn } from "../styles/diary/DiaryPage";
 
 const DiaryPage = (): JSX.Element => {
   return (
     <div className="DiaryPage">
-      <AllBackGround>
-        <DiaryAlign>
+      <AllBackGroundStyled>
+        <DiaryAlignStyled>
           <DiarySide />
-          <DiaryMain>
+          <DiaryMainStyled>
             <DiaryCreateAlign></DiaryCreateAlign>
             <DiaryBottom />
-          </DiaryMain>
-        </DiaryAlign>
-      </AllBackGround>
+          </DiaryMainStyled>
+          <CreateDiaryBtn>
+            <a href="/diary/diaryCreate">+</a>
+          </CreateDiaryBtn>
+        </DiaryAlignStyled>
+      </AllBackGroundStyled>
     </div>
   );
 };

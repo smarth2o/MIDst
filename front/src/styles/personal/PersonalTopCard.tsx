@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-export const PTCardAlign = styled.div`
+export const PTCardAlignStyled = styled.div`
   // 기본축을 세로로 변경
   grid-auto-flow: column;
   border-radius: 20px;
@@ -52,7 +51,7 @@ export const PTCardAlign = styled.div`
   }
 `;
 
-export const PTCardContainer = styled.div`
+export const PTCardContainerStyled = styled.div`
   display: flex;
   white-space: nowrap;
   text-align: center;
@@ -69,7 +68,7 @@ export const PTCardContainer = styled.div`
   }
 `;
 
-export const PTCalendar = styled.div`
+export const PTCalendarStyled = styled.div`
   .react-calendar {
     width: 300px;
     margin: 0;
@@ -160,7 +159,7 @@ export const PTCalendar = styled.div`
   }
 `;
 
-export const PTBtn = styled.div`
+export const PTBtnStyled = styled.div`
   button {
     padding: 15px;
     border-radius: 5px;
