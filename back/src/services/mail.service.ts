@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
  
 class userMailService{
+    //기본
     async sendMail(email:string, text:string) {
         const User = process.env.MAIL_EMAIL || null;
         const Pass = process.env.MAIL_PASSWORD || null;
@@ -29,6 +30,6 @@ class userMailService{
         console.log("ok", info);
         });
     }
-    
+
 }
 export default new userMailService();

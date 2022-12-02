@@ -2,6 +2,7 @@ const nodemailer = require("nodemailer");
 import mailService from "./mail.service";
 import  userService  from "../services/user.service";
 class userMailService{
+    //회원가입 인증번호
     async sendRandomNumber(email:string) {
         const randomNumber = Math.floor(Math.random() * 1000000);
         const text=`인증번호는 ${randomNumber}입니다.`;
@@ -9,6 +10,7 @@ class userMailService{
         return randomNumber;
     }
 
+    //비밀번호 임시 초기화
     async sendresetPassword(email:string) {
         const randomPassword = Math.random().toString(36).slice(2);
         const updatePassword=await userService.updatePassword(email,randomPassword);
