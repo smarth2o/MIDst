@@ -1,10 +1,19 @@
 import React from "react";
+import { BackBtn } from "../components/common/CommonBtn";
+import CommunityCreate from "../components/community/CommunityCreate";
+import { BackBtnAlignStyled, CCPAlignStyled } from "../styles/common/CommonBtn";
+import { AllBackGroundStyled } from "../styles/diary/DiaryCreatePage";
 
 const CommunityCreatePage = (): JSX.Element => {
   return (
-    <div className="CommunityCreatePage">
-      <p> 커뮤니티 작성 페이지</p>
-    </div>
+    <AllBackGroundStyled>
+      <CCPAlignStyled>
+        <BackBtnAlignStyled>
+          <BackBtn />
+        </BackBtnAlignStyled>
+        <CommunityCreate />
+      </CCPAlignStyled>
+    </AllBackGroundStyled>
   );
 };
 

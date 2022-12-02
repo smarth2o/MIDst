@@ -24,9 +24,29 @@ export const DiaryListAlign = styled.div`
   height: 500px;
   padding: 20px;
   margin: 30px;
+
+  white-space: nowrap;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const DiarySideAlign = styled.div`
   display: flex;
   flex-direction: column;
+  a {
+    color: black;
+    text-decoration: none;
+  }
+`;
+
+export const DiaryItemStyled = styled.div`
+  padding-bottom: 15px;
+  div {
+    border: 1px solid #999999;
+    border-radius: 10px;
+    padding: 10px;
+    color: gray;
+  }
 `;

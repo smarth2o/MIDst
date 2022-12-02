@@ -3,8 +3,8 @@ export const ROUTES = {
   SEARCH: "/search",
   DIARY: {
     ROOT: "/diary",
-    DIARY_CREATE: "/diary/diaryCreate",
-    DIARY_DETAIL: "/diary/diaryDetail/:no",
+    DETAIL: ":detail",
+    CREATE: "create",
   },
   USER: {
     LOGIN: "/login",

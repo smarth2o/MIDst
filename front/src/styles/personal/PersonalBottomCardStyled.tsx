@@ -23,6 +23,9 @@ export const PBCardAlignStyled = styled.div`
     border: none;
     background-color: #eef1f4;
   }
+  @media (min-width: 1500px) {
+    width: 1200px;
+  }
 `;
 
 export const PBCardTabStyled = styled.div`
@@ -100,7 +103,6 @@ export const PBCWordItemStyled = styled.div`
 export const PBCardWordAlignStyled = styled.div`
   margin: 2%;
   display: grid;
-  grid-template-columns: 200px 200px 500px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   @media (max-width: 1000px) {
     grid-template-columns: 1fr 1fr 1fr;

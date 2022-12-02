@@ -1,4 +1,3 @@
-import React from "react";
 import {
   DiaryBtn,
   DiaryCreateAlign,
@@ -15,7 +14,6 @@ const DiaryCreate = (): JSX.Element => {
   return (
     <>
       <DiaryCreateAlign>
-        <p>{nowDate}</p>
         <DiaryForm action="" onSubmit={onSubmitDiary}>
           <input maxLength={20} placeholder="Title" />
           <br />
