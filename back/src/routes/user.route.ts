@@ -4,6 +4,7 @@ import  userService  from "../services/user.service";
 import { loginRequired } from "../middlewares/authMiddleware";
 import userMailService from "services/user.mail.service";
 const userRouter = Router();
+
 //회원가입
 userRouter.post(
   "/register",
@@ -66,10 +67,6 @@ userRouter.post(
     }
   }
 );
-
-//메일회원가입
-
-
 
 //비밀번호 재발급
 userRouter.post(
