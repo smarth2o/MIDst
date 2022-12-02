@@ -19,7 +19,7 @@ const DiaryDetailCard = ({
   diarys,
   setDiarys,
 }: DiaryPropsTypes): JSX.Element => {
-  return <>test</>;
+  return <>{title}</>;
 };
 
 export default DiaryDetailCard;

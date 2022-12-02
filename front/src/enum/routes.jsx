@@ -4,7 +4,7 @@ export const ROUTES = {
   SHARE: "/share",
   DIARY: {
     ROOT: "/diary",
-    DETAIL: ":detial",
+    DETAIL: ":detail",
     CREATE: "create",
   },
   USER: { LOGIN: "/login", REGISTER: "/register" },

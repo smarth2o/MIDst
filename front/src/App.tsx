@@ -27,7 +27,7 @@ const App = (): JSX.Element => {
           <Route path={ROUTES.MAIN} element={<MainPage />} />
           <Route element={<Header />}>
             <Route path={ROUTES.DIARY.ROOT} element={<DiaryPage />}>
-              <Route path={ROUTES.DIARY.DETAIL} element={<DiaryDetail />} />
+              <Route path={ROUTES.DIARY.DETAIL} element={<DiaryDetail/>} />
               <Route path={ROUTES.DIARY.CREATE} element={<DiaryCreate />} />
             </Route>
 
