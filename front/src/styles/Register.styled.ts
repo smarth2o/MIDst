@@ -48,6 +48,7 @@ export const Title = styled.h3`
   font-weight: 600;
   font-size: 24px;
   text-align: center;
+  line-height: 30px;
   color: #333333;
 `;
 
@@ -56,6 +57,7 @@ export const Text = styled.p`
   font-weight: 600;
   font-size: 14px;
   text-align: center;
+  line-height: 20px;
   margin-bottom: 24px;
 
   color: #555555;

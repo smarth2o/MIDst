@@ -17,6 +17,7 @@ import LoginPage from "./pages/LoginPage";
 import FindPasswordPage from "./pages/FindPasswordPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
 import SearchPage from "./pages/SearchPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
@@ -60,7 +61,7 @@ const App = (): JSX.Element => {
             path={ROUTES.COMMUNITY.COMMUNITY_EDIT}
             element={<CommunityEditPage />}
           />
-          <Route path="/*">Not Found</Route>
+          <Route path="/*" element={<NotFoundPage />} />
         </Routes>
       </Router>
     </>
