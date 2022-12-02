@@ -29,5 +29,6 @@ class userMailService{
         console.log("ok", info);
         });
     }
+    
 }
 export default new userMailService();

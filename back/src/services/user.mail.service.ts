@@ -16,6 +16,7 @@ class userMailService{
         await mailService.sendMail(email,text);
         return updatePassword;
     }
+    
 
 }
 export default new userMailService();
