@@ -33,6 +33,7 @@ export const DiaryListAlign = styled.div`
 `;
 
 export const DiarySideAlign = styled.div`
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   a {

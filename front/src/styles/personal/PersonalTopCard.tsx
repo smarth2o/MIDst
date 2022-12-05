@@ -189,7 +189,6 @@ export const UserProfileImgStyled = styled.div`
 export const UPBottomAlignStyled = styled.div``;
 
 export const UPBottomDetail = styled.div`
-  border: 0.1px solid #00000043;
   border-radius: 15px;
   padding: 2%;
   .btn-go-search {
