@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-export const PTCardAlign = styled.div`
+export const PTCardAlignStyled = styled.div`
   // 기본축을 세로로 변경
   grid-auto-flow: column;
   border-radius: 20px;
@@ -52,7 +51,7 @@ export const PTCardAlign = styled.div`
   }
 `;
 
-export const PTCardContainer = styled.div`
+export const PTCardContainerStyled = styled.div`
   display: flex;
   white-space: nowrap;
   text-align: center;
@@ -63,13 +62,12 @@ export const PTCardContainer = styled.div`
   /* overflow: scroll; */
   /* 가로 스크롤 */
   overflow: auto;
-  white-space: nowrap;
-  .wrap-vertical::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     display: none;
   }
 `;
 
-export const PTCalendar = styled.div`
+export const PTCalendarStyled = styled.div`
   .react-calendar {
     width: 300px;
     margin: 0;
@@ -160,7 +158,7 @@ export const PTCalendar = styled.div`
   }
 `;
 
-export const PTBtn = styled.div`
+export const PTBtnStyled = styled.div`
   button {
     padding: 15px;
     border-radius: 5px;
@@ -168,5 +166,34 @@ export const PTBtn = styled.div`
     margin-top: 20px;
     background-color: rgba(127, 202, 203, 1);
     color: white;
+  }
+`;
+export const UPTopAlignStyled = styled.div`
+  display: grid;
+
+  grid-template-columns: 98fr 2fr;
+`;
+export const UserProfileImgStyled = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  margin-left: 42%;
+  margin-top: 0;
+  img {
+    border-radius: 50px;
+    width: 80px;
+  }
+  a {
+    text-decoration: none;
+  }
+`;
+export const UPBottomAlignStyled = styled.div``;
+
+export const UPBottomDetail = styled.div`
+  border: 0.1px solid #00000043;
+  border-radius: 15px;
+  padding: 2%;
+  .btn-go-search {
+    border-radius: 20px;
+    padding: 10px 30px;
   }
 `;

@@ -1,10 +1,11 @@
-import React from "react";
+import { MainLayout } from "../styles/Search.styled";
+import SearchBar from "../components/SearchBar";
 
 const MainPage = (): JSX.Element => {
   return (
-    <div className="MainPage">
-      <p> 메인 렌딩 페이지</p>
-    </div>
+    <MainLayout>
+      <SearchBar></SearchBar>
+    </MainLayout>
   );
 };
 

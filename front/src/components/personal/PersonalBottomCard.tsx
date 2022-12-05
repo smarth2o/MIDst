@@ -1,54 +1,114 @@
 import { ArrowRightOutlined } from "@ant-design/icons";
+import { Action } from "@remix-run/router";
 import axios from "axios";
 import { useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { cloudIconState } from "../../stores/PersonalAtom";
 import {
-  PBCardAlign,
+  PBCardAlignStyled,
   PBCardItemStyled,
-  PBCardTab,
+  PBCardTabStyled,
+  PBCardWordAlignStyled,
+  PBCWordItemStyled,
 } from "../../styles/personal/PersonalBottomCardStyled";
 import PBCardData, { PBCardDataType } from "./personalData";
 
 export interface PBCardItemType {
   user_id: number;
-  expressions: string[];
+  expressions: { expression: string[]; res: boolean };
   words: string[];
   grammar: string[];
 }
 
-// interface PBCardProps {
-//   PBCardList: PBCardItemType[];
-// }
-
-const PBCExpressionItem = ({ expressions, user_id }: PBCardItemType) => {
-  return <>{expressions}</>;
-};
+const cloudFull = require("../../assets/cloudFull.png");
 
 const PersonalBottomCard = (): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [expressions, setExpressions] = useState<PBCardDataType>(PBCardData);
+  const [items, setItems] = useState<PBCardDataType>(PBCardData);
+  const [cloudIcon, setCloudIcon] = useState(false);
+  const cloudEmpty = useRecoilValue(cloudIconState);
+
+  const tabList = ["Expressions", "Words", "Grammar"];
+
   const tabClickHandler = (index: any) => {
     setActiveIndex(index);
   };
 
   const onClick = () => {
-    axios.get("./personData.tsx").then((res: any) => {
-      setExpressions(res.data);
+    axios.get("./personData.tsx").then((res) => {
+      setItems(res.data);
     });
   };
+
+  const cloudChange = (
+    res: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    setCloudIcon(!cloudIcon);
+  };
+
   const expressionItem = () => {
-    const expressionList = expressions.map((res: any) => (
-      <PBCExpressionItem
-        expressions={res.expressions}
-        user_id={res.user_id}
-        words={res.words}
-        grammar={res.grammar}
-      />
-    ));
-    return (
-      <ul>
-        <PBCardItemStyled>{expressionList}</PBCardItemStyled>
-      </ul>
+    const expressionsList = items.map((res) =>
+      res.expressions.map((expression) => (
+        <PBCardItemStyled>
+          {expression}
+          <button
+            onClick={(res) => {
+              cloudChange(res);
+            }}
+          >
+            <img
+              className="cloudIcon"
+              src={cloudIcon ? cloudEmpty : cloudFull}
+            />
+          </button>
+        </PBCardItemStyled>
+      ))
     );
+
+    return <ul>{expressionsList}</ul>;
+  };
+  const wordsItem = () => {
+    const wordsList = items.map((res) =>
+      res.words.map((expression) => (
+        <PBCWordItemStyled>
+          {expression}
+          <button
+            onClick={(res) => {
+              cloudChange(res);
+            }}
+          >
+            <img
+              className="cloudIcon"
+              src={cloudIcon ? cloudEmpty : cloudFull}
+            />
+          </button>
+        </PBCWordItemStyled>
+      ))
+    );
+
+    return <PBCardWordAlignStyled>{wordsList}</PBCardWordAlignStyled>;
+  };
+
+  const grammarItem = () => {
+    const grammarList = items.map((res) =>
+      res.grammar.map((grammar) => (
+        <PBCardItemStyled>
+          {grammar}
+          <button
+            onClick={(res) => {
+              cloudChange(res);
+            }}
+          >
+            <img
+              className="cloudIcon"
+              src={cloudIcon ? cloudEmpty : cloudFull}
+            />
+          </button>
+        </PBCardItemStyled>
+      ))
+    );
+
+    return <ul>{grammarList}</ul>;
   };
 
   const tabContArr = [
@@ -72,7 +132,7 @@ const PersonalBottomCard = (): JSX.Element => {
           Words
         </li>
       ),
-      tabCont: <div> 탭2 내용 </div>,
+      tabCont: <div>{wordsItem()} </div>,
     },
     {
       tabTitle: (
@@ -83,19 +143,24 @@ const PersonalBottomCard = (): JSX.Element => {
           Grammar
         </li>
       ),
-      tabCont: <div> 탭3 내용 </div>,
+      tabCont: <div> {grammarItem()}</div>,
     },
   ];
 
   return (
     <>
-      <PBCardAlign>
+      <PBCardAlignStyled>
         <div>
-          <PBCardTab>
+          <PBCardTabStyled>
             <ul className="tabs is-boxed">
-              {tabContArr.map((section, index) => {
-                return section.tabTitle;
-              })}
+              {tabList.map((tab, index) => (
+                <li
+                  className={activeIndex === index ? "is-active" : ""}
+                  onClick={() => tabClickHandler(index)}
+                >
+                  {tab}
+                </li>
+              ))}
             </ul>
             <ul>
               <button className="btn-go-search">
@@ -104,11 +169,11 @@ const PersonalBottomCard = (): JSX.Element => {
                 </a>
               </button>
             </ul>
-          </PBCardTab>
+          </PBCardTabStyled>
 
           <div>{tabContArr[activeIndex].tabCont}</div>
         </div>
-      </PBCardAlign>
+      </PBCardAlignStyled>
     </>
   );
 };

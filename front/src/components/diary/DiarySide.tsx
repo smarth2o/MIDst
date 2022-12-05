@@ -1,17 +1,9 @@
-import {
-  CalendarAlign,
-  DiaryListAlign,
-  DiarySideAlign,
-} from "../../styles/diary/DiarySide";
-import { CalendarContainer } from "../personal/PersonalTopCard";
+import { DiaryValueType } from "../../pages/DiaryPage";
+import { DiaryTypes } from "../../stores/DiaryAtom";
+import { CalendarAlign, DiarySideAlign } from "../../styles/diary/DiarySide";
+import CalendarContainer from "../personal/CalendarContainer";
 
-const DiaryList = (): JSX.Element => {
-  return (
-    <>
-      <DiaryListAlign></DiaryListAlign>
-    </>
-  );
-};
+import DiaryList from "./DiaryList";
 
 export const DiarySide = (): JSX.Element => {
   return (

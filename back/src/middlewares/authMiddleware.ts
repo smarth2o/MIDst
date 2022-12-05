@@ -1,29 +1,54 @@
-import jwt from "jsonwebtoken";
-import { Router, Response, Request, NextFunction } from "express";
+import { Response, Request, NextFunction } from "express";
+import UserRepository from "repositories/user.repository";
+import { generateToken, verifyToken } from "utils/jwt-util";
 
-function loginRequired(req:Request,res: Response, next: NextFunction) {
-  // request 헤더로부터 authorization bearer 토큰을 받음.
-  const accessToken  = req.headers["authorization"]?.split(" ")[1] ?? "null";
+async function loginRequired(req: Request, res: Response, next: NextFunction) {
+    try {
+        // request header로 AT,RT 둘 다 받음.
+        let accessToken: string =
+            req.headers["authorization"]?.split(" ")[1] ?? null;
+        let refreshToken = req.headers["refresh"] ?? null;
 
-  // 이 토큰은 jwt 토큰 문자열이거나, 혹은 "null" 문자열임.
-  // 토큰이 "null" 일 경우, loginRequired 가 필요한 서비스 사용을 제한함.
-  if (accessToken  === "null") {
-    console.log("accessToken이 null");
-    res.status(400).send("accessToken이 null");
-    return;
-  }
+        //AT,RT 둘다 null
+        if (accessToken === null && refreshToken === null) {
+            return res
+                .status(400)
+                .send("no accessToken or refreshToken in header");
+        }
 
-  // 해당 token 이 정상적인 token인지 확인 -> 토큰에 담긴 user_id 정보 추출
-  try {
-    const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
-    const jwtDecoded = jwt.verify(accessToken, secretKey);
-    const userId = jwtDecoded.userId;
-    req.headers["currentUserId"] = userId;
-    next();
-  } catch (error) {
-    res.status(400).send("정상적인 토큰이 아닙니다. 다시 한 번 확인해 주세요.");
-    return;
-  }
+        //AT 있음 -> 1. 유효함 -> 통과
+        //       -> 2. 유효하지 않음 -> 1. RT도 없음 -> AT 만료
+        //                        -> 2. RT는 있음 -> RT 검증 -> 1. RT 검증 안됨 -> RT 유효하지 않음.
+        //                                                -> 2. RT 검증됨 -> AT발급 후 통과
+        if (accessToken !== null) {
+            const accessPayload = verifyToken(accessToken);
+            //AT만료, RT 없음
+            if (accessPayload === null && refreshToken === null) {
+                return res.status(401).send("accessToken in expired");
+            }
+
+            //AT만료, RT 있음
+            if (accessPayload === null && typeof refreshToken === "string") {
+                const token = await UserRepository.checkToken(refreshToken);
+
+                //RT 검증 안됨
+                if (!token) {
+                    return res.status(401).send("refreshToken is not valid");
+                }
+                accessToken = generateToken(
+                    { userId: token.userId },
+                    "accessToken"
+                );
+                req.headers["currentUserId"] = token.userId;
+                next();
+                return;
+            }
+            req.headers["currentUserId"] = accessPayload.decoded.userId;
+        }
+        next();
+    } catch (error) {
+        next(error);
+    }
 }
 
 export { loginRequired };

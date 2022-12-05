@@ -1,21 +1,19 @@
-import React from "react";
 import {
   DiaryBtn,
   DiaryCreateAlign,
   DiaryForm,
 } from "../../styles/diary/DiaryCreate";
-import moment from "moment";
+import dayjs from "dayjs";
 
 const onSubmitDiary = () => {
   alert("제출이 완료되었습니다.");
 };
 
 const DiaryCreate = (): JSX.Element => {
-  const nowDate = moment().format("MMM Do YY");
+  const nowDate = dayjs().format("MMM Do YY");
   return (
     <>
       <DiaryCreateAlign>
-        <p>{nowDate}</p>
         <DiaryForm action="" onSubmit={onSubmitDiary}>
           <input maxLength={20} placeholder="Title" />
           <br />
