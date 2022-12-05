@@ -8,6 +8,7 @@ export const Layout = styled.div`
   justify-content: center;
   align-items: center;
   background: url(${background}) no-repeat center center;
+  background-size: cover;
   width: 100%;
   min-height: 100vh;
 `;

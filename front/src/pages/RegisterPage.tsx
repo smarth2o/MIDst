@@ -30,7 +30,7 @@ const RegisterPage = (): JSX.Element => {
     <Layout>
       <Box>
         <Form>
-          <Logo></Logo>
+          <Logo />
           <Title>Register</Title>
           <Input type="text" placeholder="ID" value={formData.ID}></Input>
           <SmallWrapper>

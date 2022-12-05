@@ -6,10 +6,10 @@ import SearchResultsCard from "../components/SearchResultsCard";
 const SearchPage = (): JSX.Element => {
   return (
     <SearchPageLayout>
-      <FilterCard></FilterCard>
+      <FilterCard />
       <SearchLayout>
-        <SearchBar></SearchBar>
-        <SearchResultsCard></SearchResultsCard>
+        <SearchBar />
+        <SearchResultsCard />
       </SearchLayout>
     </SearchPageLayout>
   );

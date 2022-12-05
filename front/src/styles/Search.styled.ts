@@ -24,30 +24,27 @@ export const Suggestions = styled.div`
   width: 550px;
 `;
 
-export const Suggest = styled.div`
+export const Suggest = styled.button`
   width: fit-content;
-  height: 25px;
+  // height: 25px;
+  height: max-content;
 
   background: rgba(126, 114, 213, 0.7);
   backdrop-filter: blur(12px);
-
+  border: none;
   border-radius: 30px;
 
   display: flex;
   justify-content: center;
   align-items: center;
-
   padding: 3px 20px;
   margin-right: 10px;
 
-  p {
-    font-family: "Saira";
-    font-weight: 500;
-    font-size: 14px;
-    text-align: center;
-
-    color: #ffffff;
-  }
+  font-family: "Saira";
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  color: #ffffff;
 `;
 
 export const SearchbarWrapper = styled.div`
@@ -68,7 +65,7 @@ export const Search = styled.input`
     rgba(255, 255, 255, 0.9) 0%,
     rgba(255, 255, 255, 0.9) 69.79%
   );
-  border: 1px solid rgba(85, 85, 85, 0.2);
+  border: none;
   border-radius: 40px;
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
 

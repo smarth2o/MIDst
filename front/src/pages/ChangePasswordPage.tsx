@@ -13,14 +13,14 @@ import { useState } from "react";
 const ChangePasswordPage = (): JSX.Element => {
   const [changed, setChanged] = useState<boolean>(false);
   const handleChange = () => {
-    setChanged(changed);
+    setChanged(true);
   };
 
   return (
     <Layout>
       <Box>
         <Form>
-          <Logo></Logo>
+          <Logo />
           <Title>Change Password</Title>
           {changed ? (
             <Text>Your password has been changed successfully.</Text>

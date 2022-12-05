@@ -18,6 +18,7 @@ import RegisterPage from "./pages/RegisterPage";
 import FindPasswordPage from "./pages/FindPasswordPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
 import NotFoundPage from "./pages/NotFoundPage";
+// import Background from "./styles/common/BrainBackground.styled";
 
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
@@ -56,7 +57,6 @@ const App = (): JSX.Element => {
               path={ROUTES.USER.CHANGE_PW}
               element={<ChangePasswordPage />}
             />
-
             <Route path="/*" element={<NotFoundPage />} />
           </Route>
         </Routes>

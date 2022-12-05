@@ -1,6 +1,5 @@
 import {
   SearchWrapper,
-  Suggest,
   Suggestions,
   Search,
   SearchbarWrapper,
@@ -9,28 +8,24 @@ import {
 } from "../styles/Search.styled";
 import { useNavigate } from "react-router";
 
-const SearchBar = (): JSX.Element => {
+interface SearchBarProps {
+  children?: React.ReactNode;
+  primary?: boolean;
+}
+
+const SearchBar = ({ children, primary }: SearchBarProps): JSX.Element => {
   const navigate = useNavigate();
 
   return (
     <SearchWrapper>
-      <Suggestions>
-        <Suggest>
-          <p>hello hello hello</p>
-        </Suggest>
-        <Suggest>
-          <p>happy</p>
-        </Suggest>
-        {/* <Suggest></Suggest>
-            <Suggest></Suggest> */}
-      </Suggestions>
+      {children && <Suggestions>{children}</Suggestions>}
       <SearchbarWrapper>
         <Search
           type="text"
           placeholder="Search for expressions or words you're curious about!"
         ></Search>
         <SearchButton type="submit" onClick={() => navigate("/search")}>
-          <SearchIcon></SearchIcon>
+          <SearchIcon />
         </SearchButton>
       </SearchbarWrapper>
     </SearchWrapper>

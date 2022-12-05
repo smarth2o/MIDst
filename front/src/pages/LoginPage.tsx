@@ -16,7 +16,7 @@ const LoginPage = (): JSX.Element => {
     <Layout>
       <Box>
         <Form>
-          <Logo></Logo>
+          <Logo />
           <Title>Sign In</Title>
           <Input type="email" placeholder="Email address"></Input>
           <Input

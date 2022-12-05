@@ -13,15 +13,14 @@ import { useState } from "react";
 const FindPasswordPage = (): JSX.Element => {
   const [changed, setChanged] = useState<boolean>(false);
   const handleChange = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // e.preventDefault();
-    setChanged(changed);
+    setChanged(true);
   };
 
   return (
     <Layout>
       <Box>
         <Form>
-          <Logo></Logo>
+          <Logo />
           {changed ? (
             <>
               <Title>Check your email</Title>
