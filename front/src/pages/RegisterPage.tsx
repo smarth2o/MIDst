@@ -49,7 +49,7 @@ const RegisterPage = (): JSX.Element => {
           <Input
             type="password"
             placeholder="Password"
-            autoComplete="off"
+            autoComplete="new-password"
             value={formData.password}
           ></Input>
           <Input type="password" placeholder="Password Confirm"></Input>

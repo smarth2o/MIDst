@@ -19,7 +19,11 @@ const LoginPage = (): JSX.Element => {
           <Logo></Logo>
           <Title>Sign In</Title>
           <Input type="email" placeholder="Email address"></Input>
-          <Input type="password" placeholder="Password"></Input>
+          <Input
+            type="password"
+            placeholder="Password"
+            autoComplete="new-password"
+          ></Input>
           <Button>Sign In</Button>
           <BottomWrapper>
             {/* <OtherButton to={ROUTES.USER.FIND_PW}>
