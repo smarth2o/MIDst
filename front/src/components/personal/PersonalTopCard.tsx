@@ -19,7 +19,6 @@ const UserProfile = (): JSX.Element => {
   const profileImg = require("../../assets/profile.png");
   const userName = "MarkBaker";
   const userEmail = "email1234@gmail.com";
-  const userMessage = "I love watching Friends";
   return (
     <>
       <UPTopAlignStyled>
@@ -36,7 +35,6 @@ const UserProfile = (): JSX.Element => {
           <MailOutlined /> {userEmail}
         </p>
         <UPBottomDetail>
-          <p>{userMessage}</p>
           <button className="btn-go-search">EDIT</button>
         </UPBottomDetail>
       </UPBottomAlignStyled>
