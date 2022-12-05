@@ -12,7 +12,6 @@ model community {
   userId      String    @db.VarChar(45)
   title       String    @db.VarChar(30)
   description String    @db.VarChar(200)
-  likes       Int       @default(0)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   user    user    @relation(fields: [userId], references: [userId])
@@ -24,12 +23,12 @@ model community {
 
 model like {
   id Int @id @unique @default(autoincrement())
-  boardId Int
+  postId Int
   userId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   user user @relation(fields: [userId],references: [userId])
-  community community @relation(fields: [boardId],references: [id])
+  community community @relation(fields: [postId],references: [id])
 
 }
 
@@ -37,7 +36,7 @@ model diary {
   id          Int      @id @unique @default(autoincrement())
   userId      String   @db.VarChar(45)
   date        String
-  emotion     String   @db.VarChar(30)
+  emotion     String?   @db.VarChar(30)
   title       String   @db.VarChar(10)
   description String   @db.VarChar(100)
   createdAt   DateTime @default(now())
@@ -56,14 +55,14 @@ model refreshtoken {
 model reply {
   id          Int       @id @unique @default(autoincrement())
   userId      String    @db.VarChar(45)
-  boardId     Int
+  postId     Int
   description String    @db.VarChar(200)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  community community @relation(fields: [boardId], references: [id])
+  community community @relation(fields: [postId], references: [id])
   user      user      @relation(fields: [userId], references: [userId])
 
-  @@index([boardId], map: "reply_boardId_fkey")
+  @@index([postId], map: "reply_postId_fkey")
   @@index([userId], map: "reply_userId_fkey")
 }
 

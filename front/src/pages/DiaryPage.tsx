@@ -1,30 +1,41 @@
-import React from "react";
+import { useEffect } from "react";
+import { Outlet, useNavigate, useParams } from "react-router";
+import { SetterOrUpdater, useRecoilState } from "recoil";
 import DiaryBottom from "../components/diary/DiaryBottom";
 import { DiarySide } from "../components/diary/DiarySide";
-import { DiaryCreateAlign } from "../styles/diary/DiaryCreate";
+import { diaryState, DiaryTypes } from "../stores/DiaryAtom";
+
 import {
   AllBackGroundStyled,
   DiaryAlignStyled,
   DiaryMainStyled,
 } from "../styles/diary/DiaryCreatePage";
-import { CreateDiaryBtn } from "../styles/diary/DiaryPage";
+
+export interface DiaryValueType {
+  diarys: DiaryTypes[];
+  setDiarys: SetterOrUpdater<DiaryTypes[]>;
+}
 
 const DiaryPage = (): JSX.Element => {
+
+  const [diarys, setDiarys] = useRecoilState(diaryState)
+
+
+  useEffect(() => {
+    // 가장 최근 일기의 id값을 구해서
+    // 'diary/id' 로 보내는 로직
+  }, []);
+
   return (
-    <div className="DiaryPage">
-      <AllBackGroundStyled>
-        <DiaryAlignStyled>
-          <DiarySide />
-          <DiaryMainStyled>
-            <DiaryCreateAlign></DiaryCreateAlign>
-            <DiaryBottom />
-          </DiaryMainStyled>
-          <CreateDiaryBtn>
-            <a href="/diary/diaryCreate">+</a>
-          </CreateDiaryBtn>
-        </DiaryAlignStyled>
-      </AllBackGroundStyled>
-    </div>
+    <AllBackGroundStyled>
+      <DiaryAlignStyled>
+        <DiarySide />
+        <DiaryMainStyled>
+          <Outlet context={{diarys, setDiarys}}/>
+          <DiaryBottom />
+        </DiaryMainStyled>
+      </DiaryAlignStyled>
+    </AllBackGroundStyled>
   );
 };
 
