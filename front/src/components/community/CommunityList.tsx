@@ -15,39 +15,63 @@ import {
 } from "../../styles/community/CommunityList";
 import dayjs from "dayjs";
 import UserProfile from "../common/UserProfile";
+import { UserProfileStyled } from "../../styles/common/UserProfile";
+import { communityState, CommunityType } from "../../stores/CommunityAtom";
+import { SetterOrUpdater, useRecoilState } from "recoil";
+import { Link } from "react-router-dom";
 
-const CommunityCard = (): JSX.Element => {
-  const [commTitle, setCommTitle] = useState("미드로 영어공부하는 방법 총정리");
+export interface CommunityPropsTypes {
+  id: number,
+  title: string,
+  createdAt: string,
+  description: string,
+  count:{
+    reply:number,
+    like:number,
+};
+  communityItems: CommunityType[];
+  setCommunityItems : SetterOrUpdater<CommunityType[]>;
+} 
+
+const CommunityItem = ({id, title, createdAt, description, count}:CommunityPropsTypes): JSX.Element => {
+ 
   const [heart, setHeart] = useState(11);
   const [messageCount, setMessageCount] = useState(5);
   const userName = "Mary Baker";
   const userProfileImg = require("../../assets/profile.png");
-  const writingTime = dayjs("2022-11-30 10:30:25");
+  const writingTime = dayjs(createdAt);
   const nowTime = dayjs();
 
   return (
     <>
-      <CommunityCardAlignStyled>
-        <UserProfile />
+        <CommunityCardAlignStyled>
+        <UserProfileStyled>
+        <li>
+          <h3>{title}</h3>
+        </li>
+        <UserProfile/>
+        </UserProfileStyled>
         <CommunityInfo>
           <ul>
             <li>
               <ClockCircleOutlined /> {nowTime.diff(writingTime, "h")}시간전
             </li>
             <li>
-              <HeartOutlined /> {heart}
+              <HeartOutlined /> {count.like}
             </li>
             <li>
-              <MessageOutlined /> {messageCount}
+              <MessageOutlined /> {count.reply}
             </li>
           </ul>
         </CommunityInfo>
-      </CommunityCardAlignStyled>
+        </CommunityCardAlignStyled>
+
     </>
   );
 };
 
 const CommunityList = (): JSX.Element => {
+  const [communityItems, setCommunityItems] = useRecoilState(communityState);
   return (
     <>
       <CommunityAllAlignStyled>
@@ -64,7 +88,16 @@ const CommunityList = (): JSX.Element => {
           </button>
         </CommunitySortBtnStyled>
         <CommunityListAlignStyled>
-          <CommunityCard />
+
+        {communityItems.map((communityItem:CommunityType)=>{
+            const {id, title, createdAt, description, count} = communityItem;
+            return(
+                <Link key={id} to={`/community/${communityItem.id}`} className="community-link">
+          <CommunityItem id={id} title={title} createdAt={createdAt} description={description}count= {count} communityItems={communityItems}setCommunityItems={setCommunityItems}/>
+          </Link>
+            );
+        })}
+
         </CommunityListAlignStyled>
         <CommunityWriteBtnStyled>
           <a href="/community/communityCreate">

@@ -1,3 +1,4 @@
+
 import CommunityList from "../components/community/CommunityList";
 import { AllBackGroundStyled } from "../styles/diary/DiaryCreatePage";
 

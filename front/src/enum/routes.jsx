@@ -16,7 +16,7 @@ export const ROUTES = {
   COMMUNITY: {
     ROOT: "/community",
     COMMUNITY_CREATE: "/community/communityCreate",
-    COMMUNITY_DETAIL: "/community/communityDetail",
+    COMMUNITY_DETAIL: ":detail",
     COMMUNITY_EDIT: "/community/communityEdit",
   },
 };
