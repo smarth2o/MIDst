@@ -59,9 +59,9 @@ export const Text = styled.p`
   font-size: 14px;
   text-align: center;
   line-height: 20px;
-  margin-bottom: 24px;
-
   color: #555555;
+
+  margin-bottom: 24px;
 `;
 
 export const SmallWrapper = styled.div`

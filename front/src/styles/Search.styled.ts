@@ -24,6 +24,7 @@ export const SearchWrapper = styled.div`
 
 export const MainSearchWrapper = styled(SearchWrapper)`
   margin: 20rem auto;
+
   input::placeholder {
     color: #7e72d5;
   }

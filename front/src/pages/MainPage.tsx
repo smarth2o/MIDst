@@ -1,9 +1,16 @@
 import {
+  TransparentWrapper,
+  Logo,
+  Navbar,
+  Login,
+} from "../styles/Header.styled";
+import {
   MainLayout,
   MainSearchWrapper,
   Suggestions,
   Suggest,
 } from "../styles/Search.styled";
+import { ROUTES } from "../enum/routes";
 import SearchBar from "../components/SearchBar";
 import { useNavigate } from "react-router";
 import {
@@ -39,32 +46,51 @@ const MainPage = (): JSX.Element => {
   boxList.forEach((el) => io.observe(el));
 
   return (
-    <MainLayout>
-      <ChatWrapper>
-        <LeftChatBox>Learn English?</LeftChatBox>
-        <RightChatBox>공부하려고 미드 보는데 그냥 즐기다 끝나 ㅜ</RightChatBox>
-        <LeftChatBox>서비스 소개글 - Search</LeftChatBox>
-        <RightChatBox></RightChatBox>
-        <LeftChatBox>서비스 소개글 - Diary</LeftChatBox>
-        <RightChatBox></RightChatBox>
-        <LeftChatBox>START?</LeftChatBox>
-      </ChatWrapper>
-      <MainSearchWrapper>
-        <Suggestions>
-          <Suggest onClick={() => navigate("/search")}>
-            #Search for phrases
-          </Suggest>
-          <Suggest onClick={() => navigate("/community")}>
-            #Share your experience
-          </Suggest>
-          <Suggest onClick={() => navigate("/diary")}>#Write a diary</Suggest>
-          <Suggest onClick={() => navigate("/personal")}>
-            #Check out your record
-          </Suggest>
-        </Suggestions>
-        <SearchBar></SearchBar>
-      </MainSearchWrapper>
-    </MainLayout>
+    <>
+      <TransparentWrapper>
+        <Logo to={ROUTES.MAIN}>
+          <ul className="topnav-first-ul ">
+            <li>
+              <img src={require("../assets/mist.png")} alt="logo" />
+            </li>
+            <li>
+              <p>MIDst</p>
+            </li>
+          </ul>
+        </Logo>
+        <Navbar>
+          <Login to={ROUTES.USER.LOGIN}>Login</Login>
+        </Navbar>
+      </TransparentWrapper>
+      <MainLayout>
+        <ChatWrapper>
+          <LeftChatBox>Learn English?</LeftChatBox>
+          <RightChatBox>
+            공부하려고 미드 보는데 그냥 즐기다 끝나 ㅜ
+          </RightChatBox>
+          <LeftChatBox>서비스 소개글 - Search</LeftChatBox>
+          <RightChatBox></RightChatBox>
+          <LeftChatBox>서비스 소개글 - Diary</LeftChatBox>
+          <RightChatBox></RightChatBox>
+          <LeftChatBox>START?</LeftChatBox>
+        </ChatWrapper>
+        <MainSearchWrapper>
+          <Suggestions>
+            <Suggest onClick={() => navigate("/search")}>
+              #Search for phrases
+            </Suggest>
+            <Suggest onClick={() => navigate("/community")}>
+              #Share your experience
+            </Suggest>
+            <Suggest onClick={() => navigate("/diary")}>#Write a diary</Suggest>
+            <Suggest onClick={() => navigate("/personal")}>
+              #Check out your record
+            </Suggest>
+          </Suggestions>
+          <SearchBar></SearchBar>
+        </MainSearchWrapper>
+      </MainLayout>
+    </>
   );
 };
 
