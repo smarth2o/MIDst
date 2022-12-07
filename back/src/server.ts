@@ -2,4 +2,4 @@ import { app } from "./app";
 
 const PORT = Number(process.env.PORT) || 8080;
 
-app.listen(PORT, () => console.log(`server running at ${PORT}`));
+app.listen(5000, () => console.log(`server running at ${PORT}`));
