@@ -57,6 +57,8 @@ export const Suggest = styled.button`
   font-size: 14px;
   text-align: center;
   color: #ffffff;
+
+  cursor: pointer;
 `;
 
 export const SearchbarWrapper = styled.div`
