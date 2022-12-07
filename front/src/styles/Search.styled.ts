@@ -172,10 +172,11 @@ export const SearchResults = styled.div``;
 export const SearchResult = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border: solid 0.5px rgba(128, 128, 128, 0.652);
   border-radius: 10px;
 
-  padding: 0.8em 1em;
+  padding: 0.5em 1em;
   margin: 0.8em 0.2em;
 
   p {
