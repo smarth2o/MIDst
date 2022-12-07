@@ -1,14 +1,28 @@
-import { FilterBox, FilterWrapper } from "../styles/Search.styled";
-import arrowUp from "../assets/arrowUp.svg";
-import arrowDown from "../assets/arrowDown.svg";
+import {
+  FilterBox,
+  FilterIcon,
+  FilterTitleWrapper,
+  FilterWrapper,
+  Button,
+  DownIcon,
+} from "../styles/Filter.styled";
 
 const FilterCard = (): JSX.Element => {
   return (
     <FilterWrapper>
-      <h2>Filters</h2>
+      <FilterTitleWrapper>
+        <h2>Filters</h2>
+        <Button>
+          <FilterIcon />
+        </Button>
+      </FilterTitleWrapper>
       <FilterBox>
-        <h3>Media</h3>
-        <img src={arrowUp} alt="arrowUp" />
+        <FilterTitleWrapper>
+          <h3>Media</h3>
+          <Button>
+            <DownIcon />
+          </Button>
+        </FilterTitleWrapper>
         <ul>
           <li>
             <input type="checkbox"></input>Friends
@@ -19,8 +33,12 @@ const FilterCard = (): JSX.Element => {
         </ul>
       </FilterBox>
       <FilterBox>
-        <h3>Emotion</h3>
-        <img src={arrowDown} alt="arrowDown" />
+        <FilterTitleWrapper>
+          <h3>Emotion</h3>
+          <Button>
+            <DownIcon />
+          </Button>
+        </FilterTitleWrapper>
       </FilterBox>
     </FilterWrapper>
   );

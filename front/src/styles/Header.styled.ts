@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const TransparentWrapper = styled.header`
+export const Wrapper = styled.header`
   top: 0;
   padding: 0 3%;
   max-height: 70px;
@@ -10,10 +10,11 @@ export const TransparentWrapper = styled.header`
   display: flex;
   justify-content: space-between;
   position: fixed;
+  background: rgba(255, 255, 255, 0.7);
 `;
 
-export const Wrapper = styled(TransparentWrapper)`
-  background: rgba(255, 255, 255, 0.7);
+export const TransparentWrapper = styled(Wrapper)`
+  background-color: transparent;
 `;
 
 export const Logo = styled(Link)`

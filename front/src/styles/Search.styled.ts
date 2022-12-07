@@ -90,10 +90,6 @@ export const Search = styled.input`
   :focus {
     outline: none;
   }
-
-  // ::placeholder {
-  //   color: #7e72d5;
-  // }
 `;
 
 export const SearchButton = styled.button`
@@ -118,59 +114,6 @@ export const SearchPageLayout = styled.div`
   display: flex;
   width: 100%;
   margin-top: 67px;
-`;
-
-export const FilterWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  margin-top: 103px;
-  margin-left: 85px;
-  margin-right: 57px;
-
-  h2 {
-    // font-family: "Saira";
-    font-weight: 600;
-    font-size: 18px;
-
-    color: #333333;
-
-    padding-left: 20px;
-  }
-`;
-
-export const FilterBox = styled.div`
-  width: 228px;
-
-  background: #ffffff;
-  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-
-  padding: 10px 25px;
-  margin-bottom: 20px;
-
-  flex: display;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-
-  h3 {
-    // font-family: "Saira";
-    font-weight: 600;
-    font-size: 16px;
-
-    color: #999999;
-  }
-
-  ul {
-    list-style-type: none;
-  }
-
-  img {
-    position: absolute;
-    right: 30px;
-    top: 23px;
-  }
 `;
 
 export const SearchLayout = styled.div`
