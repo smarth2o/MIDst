@@ -15,30 +15,46 @@ import { ROUTES } from "../enum/routes";
 import { useState } from "react";
 
 interface RegisterData {
-  ID: string;
   email: string;
   password: string;
+  confirmpassword: string;
+  name: string;
 }
 
 const RegisterPage = (): JSX.Element => {
-  const [formData, setFormData] = useState<RegisterData>({
-    ID: "",
+  const [form, setForm] = useState<RegisterData>({
     email: "",
     password: "",
+    confirmpassword: "",
+    name: "",
   });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setForm({ ...form, [name]: value });
+  };
+
   return (
     <Layout>
       <Box>
         <Form>
           <Logo />
           <Title>Register</Title>
-          <Input type="text" placeholder="ID" value={formData.ID}></Input>
+          <Input
+            type="text"
+            name="name"
+            placeholder="ID"
+            value={form.name}
+            onChange={handleChange}
+          ></Input>
           <SmallWrapper>
             <Input
               type="email"
+              name="email"
               placeholder="Email address"
               autoComplete="off"
-              value={formData.email}
+              value={form.email}
+              onChange={handleChange}
             ></Input>
             <SmallButton>Send</SmallButton>
           </SmallWrapper>
@@ -48,11 +64,19 @@ const RegisterPage = (): JSX.Element => {
           </SmallWrapper>
           <Input
             type="password"
+            name="password"
             placeholder="Password"
             autoComplete="new-password"
-            value={formData.password}
+            value={form.password}
+            onChange={handleChange}
           ></Input>
-          <Input type="password" placeholder="Password Confirm"></Input>
+          <Input
+            type="password"
+            name="confirmpassword"
+            placeholder="Password Confirm"
+            value={form.confirmpassword}
+            onChange={handleChange}
+          ></Input>
           <Button>Sign Up</Button>
           <BottomWrapper>
             <p>Already have an account?</p>

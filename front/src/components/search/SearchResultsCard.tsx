@@ -16,9 +16,10 @@ interface SearchResultCardProps {
 
 const SearchResultCard = ({ children }: SearchResultCardProps): JSX.Element => {
   const [cloud, setCloud] = useState(false);
+  const [translate, setTranslate] = useState(false);
 
   return (
-    <SearchResult>
+    <SearchResult onClick={() => setTranslate(!translate)}>
       <p>{children}</p>
       <button onClick={() => setCloud(!cloud)}>
         <img src={cloud ? cloudFull : cloudEmp} alt="cloud" />

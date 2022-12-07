@@ -99,7 +99,9 @@ export const Button = styled.button`
   color: #ffffff;
 `;
 
-export const SmallButton = styled(Button)`
+export const SmallButton = styled(Button).attrs({
+  type: "button",
+})`
   width: 50px;
   height: 30px;
 
