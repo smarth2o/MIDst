@@ -4,9 +4,9 @@ import search from "../assets/search.svg";
 
 export const MainLayout = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   background: url(${background}) no-repeat center center;
+  background-attachment: fixed;
   width: 100%;
   min-height: 100vh;
 `;
@@ -16,6 +16,17 @@ export const SearchWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  input::placeholder {
+    color: #c9c5ec;
+  }
+`;
+
+export const MainSearchWrapper = styled(SearchWrapper)`
+  margin: 20rem auto;
+  input::placeholder {
+    color: #7e72d5;
+  }
 `;
 
 export const Suggestions = styled.div`
@@ -79,9 +90,9 @@ export const Search = styled.input`
     outline: none;
   }
 
-  ::placeholder {
-    color: #7e72d5;
-  }
+  // ::placeholder {
+  //   color: #7e72d5;
+  // }
 `;
 
 export const SearchButton = styled.button`
