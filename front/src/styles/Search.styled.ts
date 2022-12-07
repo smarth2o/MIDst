@@ -137,34 +137,56 @@ export const SearchResultBox = styled.div`
   position: relative;
 
   h3 {
-    // font-family: "Saira";
+    font-family: "Saira";
     font-weight: 600;
     font-size: 18px;
-
     color: #333333;
   }
 
   p {
-    // font-family: "Saira";
+    font-family: "Saira";
     font-weight: 400;
     font-size: 14px;
-
     color: #555555;
   }
 `;
 
 export const SearchResultSort = styled.div`
   box-sizing: border-box;
+  width: 8em;
+  height: 2em;
 
   position: absolute;
-  width: 136px;
-  height: 31px;
-  right: 50px;
-  top: 35px;
+  right: 3.5em;
+  top: 2.5em;
+
+  display: flex;
+  align-items: center;
 
   background: #ffffff;
   border: 1px solid rgba(153, 153, 153, 0.5);
   border-radius: 10px;
+
+  span {
+    font-family: "Saira";
+    font-weight: 400;
+    font-size: 14px;
+    color: #555555;
+
+    padding-left: 1.2em;
+  }
+`;
+
+export const Button = styled.button`
+  padding: 0.2em;
+
+  position: absolute;
+  right: 0.8em;
+  top: 0;
+
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 `;
 
 export const SearchResults = styled.div``;

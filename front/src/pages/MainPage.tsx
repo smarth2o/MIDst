@@ -11,7 +11,7 @@ import {
   Suggest,
 } from "../styles/Search.styled";
 import { ROUTES } from "../enum/routes";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../components/search/SearchBar";
 import { useNavigate } from "react-router";
 import {
   ChatWrapper,

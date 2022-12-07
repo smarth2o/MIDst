@@ -1,11 +1,13 @@
-import cloudEmp from "../assets/cloudEmp.svg";
-import cloudFull from "../assets/cloudFull.svg";
+import cloudEmp from "../../assets/cloudEmp.svg";
+import cloudFull from "../../assets/cloudFull.svg";
 import {
   SearchResultBox,
   SearchResultSort,
   SearchResults,
   SearchResult,
-} from "../styles/Search.styled";
+  Button,
+} from "../../styles/Search.styled";
+import { DownIcon, UpIcon } from "../../styles/Filter.styled";
 import { useState } from "react";
 
 interface SearchResultCardProps {
@@ -26,11 +28,23 @@ const SearchResultCard = ({ children }: SearchResultCardProps): JSX.Element => {
 };
 
 const SearchResultsCard = (): JSX.Element => {
+  const [sortAsc, setSortAsc] = useState(false);
+
+  const handleSort = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    setSortAsc((prev) => !prev);
+  };
+
   return (
     <SearchResultBox>
       <h3>Results</h3>
       <p>About 35 search results</p>
-      <SearchResultSort></SearchResultSort>
+      <SearchResultSort>
+        <span>저장 많은 순</span>
+        <Button onClick={handleSort}>
+          {sortAsc ? <DownIcon /> : <UpIcon />}
+        </Button>
+      </SearchResultSort>
       <SearchResults>
         <SearchResultCard>
           I had a good time and I <b>feel good</b>.

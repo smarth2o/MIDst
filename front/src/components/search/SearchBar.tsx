@@ -3,7 +3,7 @@ import {
   SearchbarWrapper,
   SearchButton,
   SearchIcon,
-} from "../styles/Search.styled";
+} from "../../styles/Search.styled";
 import { useNavigate } from "react-router";
 
 const SearchBar = (): JSX.Element => {
