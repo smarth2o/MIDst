@@ -28,8 +28,10 @@ def function(df, input2):
     a = []
     for i in results.argsort()[:-20:-1]:
         if results[i] > 0:
-            a.append("({}) {} - {}: {} {}%".format(i, df.iloc[i, 0], df.iloc[i, 1], df.iloc[i, 2],
-                                               round(100*results[i])))
+            a.append("({}) {} - {}: {} {}%".format(i, df.iloc[i, 0],
+                                                   df.iloc[i, 1],
+                                                   df.iloc[i, 2],
+                                                   round(100*results[i])))
     return a
 
 
