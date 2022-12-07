@@ -175,11 +175,11 @@ export const SearchResult = styled.div`
   border: solid 0.5px rgba(128, 128, 128, 0.652);
   border-radius: 10px;
 
-  padding: 12px 18px;
-  margin: 15px 5px;
+  padding: 0.8em 1em;
+  margin: 0.8em 0.2em;
 
   p {
-    // font-family: "Saira";
+    font-family: "Saira";
     font-weight: 400;
     font-size: 16px;
     color: #333333;

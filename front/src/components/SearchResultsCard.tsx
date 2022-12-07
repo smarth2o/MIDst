@@ -6,6 +6,21 @@ import {
   SearchResult,
 } from "../styles/Search.styled";
 
+interface SearchResultCardProps {
+  children: React.ReactNode;
+}
+
+const SearchResultCard = ({ children }: SearchResultCardProps): JSX.Element => {
+  return (
+    <SearchResult>
+      <p>{children}</p>
+      <button>
+        <img src={cloudEmp} alt="cloud" />
+      </button>
+    </SearchResult>
+  );
+};
+
 const SearchResultsCard = (): JSX.Element => {
   return (
     <SearchResultBox>
