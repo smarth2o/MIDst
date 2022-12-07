@@ -105,3 +105,24 @@ export const UpIcon = styled(Icon).attrs({
   src: arrowUp,
   alt: "arrowUp",
 })``;
+
+export const SearchButton = styled.button`
+  padding: 0.5em;
+
+  background: #7ec9ca;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
+
+  font-family: "Saira";
+  font-weight: 600;
+  font-size: 16px;
+  color: #ffffff;
+
+  :hover {
+    background-color: #69abac;
+  }
+  :active {
+    box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.1);
+  }
+`;

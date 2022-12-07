@@ -7,6 +7,7 @@ import {
   DownIcon,
   UpIcon,
   FilterContentWrapper,
+  SearchButton,
 } from "../styles/Filter.styled";
 import { useState } from "react";
 
@@ -102,6 +103,7 @@ const FilterCard = (): JSX.Element => {
           </FilterContentWrapper>
         )}
       </FilterBox>
+      <SearchButton>Search</SearchButton>
     </FilterWrapper>
   );
 };
