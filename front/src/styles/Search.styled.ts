@@ -7,7 +7,7 @@ export const MainLayout = styled.div`
   flex-direction: column;
   background: url(${background}) no-repeat center center;
   background-attachment: fixed;
-  width: 100%;
+  background-size: cover;
   min-height: 100vh;
 `;
 
@@ -87,7 +87,8 @@ export const Search = styled.input`
   font-size: 18px;
   font-weight: 600;
   padding-left: 30px;
-  color: #7e72d5;
+  // color: #7e72d5;
+  color: #333333;
 
   :focus {
     outline: none;
