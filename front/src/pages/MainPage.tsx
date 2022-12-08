@@ -18,32 +18,30 @@ import {
   LeftChatBox,
   RightChatBox,
 } from "../styles/Landing.styled";
+import { useEffect } from "react";
 
 const MainPage = (): JSX.Element => {
   const navigate = useNavigate();
 
-  const options = {
-    root: null, // viewport
-    rootMargin: "0px",
-    threshold: 1.0, // 50%가 viewport에 들어와 있어야 callback 실행
-  };
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      console.log(entry);
-      if (entry.isIntersecting) {
-        // entry.target.classList.add("active");
-        entry.target.className = "active";
-        console.log(entry.target);
-      } else {
-        // entry.target.classList.remove("active");
-        entry.target.className = "";
-        console.log(entry.target);
-      }
-    });
-  }, options);
+  useEffect(() => {
+    const boxList = document.querySelectorAll(".left-chat-box");
+    const options = {
+      root: null, // viewport
+      rootMargin: "0px",
+      threshold: 1.0, // 50%가 viewport에 들어와 있어야 callback 실행
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        } else {
+          entry.target.classList.remove("active");
+        }
+      });
+    }, options);
 
-  const boxList = document.querySelectorAll("LeftChatBox");
-  boxList.forEach((el) => io.observe(el));
+    boxList.forEach((el) => io.observe(el));
+  }, []);
 
   return (
     <>
@@ -64,15 +62,19 @@ const MainPage = (): JSX.Element => {
       </TransparentWrapper>
       <MainLayout>
         <ChatWrapper>
-          <LeftChatBox>Learn English?</LeftChatBox>
+          <LeftChatBox className="left-chat-box">Learn English?</LeftChatBox>
           <RightChatBox>
             공부하려고 미드 보는데 그냥 즐기다 끝나 ㅜ
           </RightChatBox>
-          <LeftChatBox>서비스 소개글 - Search</LeftChatBox>
+          <LeftChatBox className="left-chat-box">
+            서비스 소개글 - Search
+          </LeftChatBox>
           <RightChatBox></RightChatBox>
-          <LeftChatBox>서비스 소개글 - Diary</LeftChatBox>
+          <LeftChatBox className="left-chat-box">
+            서비스 소개글 - Diary
+          </LeftChatBox>
           <RightChatBox></RightChatBox>
-          <LeftChatBox>START?</LeftChatBox>
+          <LeftChatBox className="left-chat-box">START?</LeftChatBox>
         </ChatWrapper>
         <MainSearchWrapper>
           <Suggestions>
