@@ -108,6 +108,8 @@ export const UpIcon = styled(Icon).attrs({
 
 export const SearchButton = styled.button`
   padding: 0.5em;
+  margin-top: 0.8em;
+  margin-bottom: 5rem;
 
   background: #7ec9ca;
   border: none;

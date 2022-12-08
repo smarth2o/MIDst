@@ -77,14 +77,16 @@ const MainPage = (): JSX.Element => {
         <MainSearchWrapper>
           <Suggestions>
             <Suggest onClick={() => navigate("/search")}>
-              #Search for phrases
+              # Search for phrases
             </Suggest>
             <Suggest onClick={() => navigate("/community")}>
-              #Share your experience
+              # Share your experience
             </Suggest>
-            <Suggest onClick={() => navigate("/diary")}>#Write a diary</Suggest>
+            <Suggest onClick={() => navigate("/diary")}>
+              # Write a diary
+            </Suggest>
             <Suggest onClick={() => navigate("/personal")}>
-              #Check out your record
+              # Check out your record
             </Suggest>
           </Suggestions>
           <SearchBar></SearchBar>

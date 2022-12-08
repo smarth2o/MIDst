@@ -54,7 +54,7 @@ export const Suggest = styled.button`
 
   font-family: "Saira";
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
   color: #ffffff;
 

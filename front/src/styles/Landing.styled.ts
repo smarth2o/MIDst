@@ -18,7 +18,7 @@ const ChatBox = styled.div`
 
   font-family: "Inter";
   font-weight: 700;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 29px;
   text-align: center;
 

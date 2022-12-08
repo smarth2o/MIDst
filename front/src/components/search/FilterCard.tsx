@@ -54,7 +54,7 @@ const FilterCard = (): JSX.Element => {
         <FilterTitleWrapper>
           <h3>Media</h3>
           <Button onClick={handleMedia}>
-            {showMedia ? <DownIcon /> : <UpIcon />}
+            {showMedia ? <UpIcon /> : <DownIcon />}
           </Button>
         </FilterTitleWrapper>
         {showMedia && (
@@ -88,7 +88,7 @@ const FilterCard = (): JSX.Element => {
         <FilterTitleWrapper>
           <h3>Emotion</h3>
           <Button onClick={handleEmotion}>
-            {showEmotion ? <DownIcon /> : <UpIcon />}
+            {showEmotion ? <UpIcon /> : <DownIcon />}
           </Button>
         </FilterTitleWrapper>
         {showEmotion && (
