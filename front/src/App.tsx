@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, createContext } from "react";
+import React, { createContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ROUTES } from "./enum/routes";
 import { GlobalStyle } from "./styles/GlobalStyle.styled";
@@ -14,6 +14,7 @@ import PersonalPage from "./pages/PersonalPage";
 import RegisterPage from "./pages/RegisterPage";
 import DiaryDetail from "./components/diary/DiaryDetail";
 import DiaryCreate from "./components/diary/DiaryCreate";
+import CommunityDetail from "./components/community/CommunityDetail";
 
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
@@ -27,26 +28,33 @@ const App = (): JSX.Element => {
           <Route path={ROUTES.MAIN} element={<MainPage />} />
           <Route element={<Header />}>
             <Route path={ROUTES.DIARY.ROOT} element={<DiaryPage />}>
-              <Route path={ROUTES.DIARY.DETAIL} element={<DiaryDetail/>} />
+              <Route path={ROUTES.DIARY.DETAIL} element={<DiaryDetail />} />
               <Route path={ROUTES.DIARY.CREATE} element={<DiaryCreate />} />
             </Route>
 
             <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
             <Route path={ROUTES.USER.REGISTER} element={<RegisterPage />} />
             <Route path={ROUTES.PERSONAL} element={<PersonalPage />} />
+
             <Route path={ROUTES.COMMUNITY.ROOT} element={<CommunityPage />} />
             <Route
-              path={ROUTES.COMMUNITY.COMMUNITY_CREATE}
+              path={ROUTES.COMMUNITY.CREATE}
               element={<CommunityCreatePage />}
             />
             <Route
-              path={ROUTES.COMMUNITY.COMMUNITY_DETAIL}
+              path={ROUTES.COMMUNITY.DETAIL}
               element={<CommunityDetailPage />}
-            />
+            >
+              <Route
+                path={ROUTES.COMMUNITY.DETAIL}
+                element={<CommunityDetail />}
+              />
+            </Route>
             <Route
-              path={ROUTES.COMMUNITY.COMMUNITY_EDIT}
+              path={ROUTES.COMMUNITY.EDIT}
               element={<CommunityEditPage />}
             />
+
             <Route path="/*">Not Found</Route>
           </Route>
         </Routes>

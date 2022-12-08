@@ -8,6 +8,5 @@ export const CommunityPostBoxStyled = styled.div`
 
 export const CommunityCommentStyled = styled.div`
   display: flex;
-  padding: 5% 0 20px 0;
   justify-content: space-around;
 `;
