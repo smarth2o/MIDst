@@ -47,11 +47,15 @@ const DiaryDetailCard = ({
   setDiarys,
 }: DiaryPropsTypes): JSX.Element => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [, setTitle] = useRecoilState(diaryState);
+
+  const [diaryTitle, setDiaryTitle] = useState(title);
 
   const ClickHandler: ClickHandler = (props) => (e) => {
     e.preventDefault();
     setIsEdit(!props);
+    // if (isEdit) {
+    // 백엔드로 연결하기
+    // }
   };
 
   if (!isEdit) {
@@ -90,8 +94,10 @@ const DiaryDetailCard = ({
               <input
                 maxLength={20}
                 placeholder="Title"
-                value={title}
-                // onChange={(e) => { setTitle(e.target.value) }}
+                value={diaryTitle}
+                onChange={(e) => {
+                  setDiaryTitle(e.target.value);
+                }}
               />
               <br />
               <textarea
