@@ -35,6 +35,27 @@ def function(df, input2):
     return a
 
 
+# 제목별 검색 함수
+title = input()
+
+
+def search_by_title(df, title):
+    if title == 'Friends':
+        print(df[df['Label'] == 'Friends'])
+    elif title == 'Harry Potter':
+        print(df[df['Label'] == 'Harry Potter'])
+    else:
+        print("검색 결과 없음")
+
+
+# 등장인물별 검색 함수
+name = input()
+
+
+def search_by_name(df, name):
+    print(df[df['Name'] == name])
+
+
 @app.route('/')
 def index():
     return render_template("test.html")
