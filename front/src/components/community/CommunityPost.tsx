@@ -1,11 +1,24 @@
-import CommunityComment from "./CommunityComment";
-import CommunityDetail from "./CommunityDetail";
-import { CommunityPropsTypes } from "./CommunityList";
+import { CommunityPostAlignStyled } from "../../styles/community/CommunityPost";
+import { CommunityPropsType } from "./CommunityList";
 
-const CommunityPost = ({id, title, description, createdAt, count}:CommunityPropsTypes ): JSX.Element => {
+const CommunityPost = ({
+  id,
+  title,
+  description,
+  createdAt,
+  reply,
+  like,
+}: CommunityPropsType): JSX.Element => {
+  const userProfileImg = require("../../assets/profile.png");
+
   return (
     <>
-      <div>ㅍ스트 들어가야함</div>
+      <CommunityPostAlignStyled>
+        <p>{createdAt}</p>
+        <img src={userProfileImg} />
+        <h3>{title}</h3>
+        <p>{description}</p>
+      </CommunityPostAlignStyled>
     </>
   );
 };

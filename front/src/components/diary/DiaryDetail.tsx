@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link, useOutletContext, useParams } from "react-router-dom";
 import { DiaryValueType } from "../../pages/DiaryPage";
 import { DiaryTypes } from "../../stores/DiaryAtom";

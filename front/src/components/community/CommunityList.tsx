@@ -4,7 +4,6 @@ import {
   HeartOutlined,
   MessageOutlined,
 } from "@ant-design/icons";
-import { useState } from "react";
 import {
   CommunityAllAlignStyled,
   CommunityCardAlignStyled,
@@ -19,53 +18,53 @@ import { UserProfileStyled } from "../../styles/common/UserProfile";
 import { communityState, CommunityType } from "../../stores/CommunityAtom";
 import { SetterOrUpdater, useRecoilState } from "recoil";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../../enum/routes";
 
-export interface CommunityPropsTypes {
-  id: number,
-  title: string,
-  createdAt: string,
-  description: string,
-  count:{
-    reply:number,
-    like:number,
-};
+export interface CommunityPropsType {
+  id: number;
+  title: string;
+  createdAt: string;
+  description: string;
+  reply: number;
+  like: number;
   communityItems: CommunityType[];
-  setCommunityItems : SetterOrUpdater<CommunityType[]>;
-} 
+  setCommunityItems: SetterOrUpdater<CommunityType[]>;
+}
 
-const CommunityItem = ({id, title, createdAt, description, count}:CommunityPropsTypes): JSX.Element => {
- 
-  const [heart, setHeart] = useState(11);
-  const [messageCount, setMessageCount] = useState(5);
-  const userName = "Mary Baker";
-  const userProfileImg = require("../../assets/profile.png");
+const CommunityItem = ({
+  id,
+  title,
+  createdAt,
+  description,
+  reply,
+  like,
+}: CommunityPropsType): JSX.Element => {
   const writingTime = dayjs(createdAt);
   const nowTime = dayjs();
 
   return (
     <>
-        <CommunityCardAlignStyled>
+      <CommunityCardAlignStyled>
         <UserProfileStyled>
-        <li>
-          <h3>{title}</h3>
-        </li>
-        <UserProfile/>
+          <li>
+            <h3>{title}</h3>
+          </li>
+          <UserProfile />
         </UserProfileStyled>
         <CommunityInfo>
           <ul>
             <li>
-              <ClockCircleOutlined /> {nowTime.diff(writingTime, "h")}시간전
+              <ClockCircleOutlined /> {nowTime.diff(writingTime, "h")}시간 전
             </li>
             <li>
-              <HeartOutlined /> {count.like}
+              <HeartOutlined /> {like}
             </li>
             <li>
-              <MessageOutlined /> {count.reply}
+              <MessageOutlined /> {reply}
             </li>
           </ul>
         </CommunityInfo>
-        </CommunityCardAlignStyled>
-
+      </CommunityCardAlignStyled>
     </>
   );
 };
@@ -88,21 +87,32 @@ const CommunityList = (): JSX.Element => {
           </button>
         </CommunitySortBtnStyled>
         <CommunityListAlignStyled>
-
-        {communityItems.map((communityItem:CommunityType)=>{
-            const {id, title, createdAt, description, count} = communityItem;
-            return(
-                <Link key={id} to={`/community/${communityItem.id}`} className="community-link">
-          <CommunityItem id={id} title={title} createdAt={createdAt} description={description}count= {count} communityItems={communityItems}setCommunityItems={setCommunityItems}/>
-          </Link>
+          {communityItems.map((communityItem: CommunityType) => {
+            const { id, title, createdAt, description, count } = communityItem;
+            return (
+              <Link
+                key={id}
+                to={`/community/${communityItem.id}`}
+                className="community-link"
+              >
+                <CommunityItem
+                  id={id}
+                  title={title}
+                  createdAt={createdAt}
+                  description={description}
+                  reply={count.reply}
+                  like={count.like}
+                  communityItems={communityItems}
+                  setCommunityItems={setCommunityItems}
+                />
+              </Link>
             );
-        })}
-
+          })}
         </CommunityListAlignStyled>
         <CommunityWriteBtnStyled>
-          <a href="/community/communityCreate">
+          <Link to={ROUTES.COMMUNITY.CREATE}>
             <button>Write</button>
-          </a>
+          </Link>
         </CommunityWriteBtnStyled>
       </CommunityAllAlignStyled>
     </>

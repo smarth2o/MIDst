@@ -4,19 +4,20 @@ export const CommunityListAlignStyled = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  width: 80vw;
   padding: 20px;
-  .community-link{
-    text-decoration:none;
-    color:black;
+  .community-link {
+    text-decoration: none;
+    color: black;
   }
 `;
 
 export const CommunityCardAlignStyled = styled.div`
   background-color: white;
+  height: 150px;
   border-radius: 20px;
-  padding: 0 4%;
-  margin-bottom: 5%;
-  width: 80%;
+  padding: 4%;
+  margin-bottom: 20px;
   img {
     border-radius: 50px;
     width: 40px;
@@ -24,9 +25,10 @@ export const CommunityCardAlignStyled = styled.div`
   li {
     list-style: none;
   }
-
   @media (min-width: 1500px) {
+    align-items: center;
     width: 1200px;
+    height: 8vh;
   }
 `;
 
@@ -60,7 +62,7 @@ export const CommunitySortBtnStyled = styled.div`
   padding-top: 2%;
   display: grid;
   grid-template-columns: 150px 150px;
-  align-items:start;
+  align-items: start;
   button {
     margin-left: 0%;
     width: 121px;
@@ -78,13 +80,10 @@ export const CommunitySortBtnStyled = styled.div`
       background: #d6d6d6;
     }
   }
-  @media (min-width: 1500px) {
-    padding-left: 20%;
-  }
 `;
 
 export const CommunityAllAlignStyled = styled.div`
   display: flex;
-  align-items:center;
-  flex-direction:column;
+  align-items: center;
+  flex-direction: column;
 `;
