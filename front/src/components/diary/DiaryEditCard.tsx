@@ -1,9 +1,17 @@
 import { DiaryEditCardalignStyled } from "../../styles/diary/DiaryEditCard";
+import { DiaryPropsTypes } from "./DiaryDetailCard";
 
-const DiaryEditCard = (): JSX.Element => {
+const DiaryEditCard = ({
+  id,
+  date,
+  title,
+  description,
+  diarys,
+  setDiarys,
+}: DiaryPropsTypes): JSX.Element => {
   return (
     <>
-      <DiaryEditCardalignStyled>test</DiaryEditCardalignStyled>
+      <DiaryEditCardalignStyled></DiaryEditCardalignStyled>
     </>
   );
 };
