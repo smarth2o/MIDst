@@ -38,6 +38,7 @@ const CommunityDetail = (): JSX.Element => {
           title={currentCommunityItem.title}
           description={currentCommunityItem.description}
           createdAt={currentCommunityItem.createdAt}
+          updatedAt={currentCommunityItem.updatedAt}
           reply={currentCommunityItem.count.reply}
           like={currentCommunityItem.count.like}
           communityItems={communityItems}

@@ -26,6 +26,7 @@ export interface CommunityPropsType {
   createdAt: string;
   description: string;
   reply: number;
+  updatedAt: string;
   like: number;
   communityItems: CommunityType[];
   setCommunityItems: SetterOrUpdater<CommunityType[]>;
@@ -88,7 +89,8 @@ const CommunityList = (): JSX.Element => {
         </CommunitySortBtnStyled>
         <CommunityListAlignStyled>
           {communityItems.map((communityItem: CommunityType) => {
-            const { id, title, createdAt, description, count } = communityItem;
+            const { id, title, createdAt, updatedAt, description, count } =
+              communityItem;
             return (
               <Link
                 key={id}
@@ -99,6 +101,7 @@ const CommunityList = (): JSX.Element => {
                   id={id}
                   title={title}
                   createdAt={createdAt}
+                  updatedAt={updatedAt}
                   description={description}
                   reply={count.reply}
                   like={count.like}

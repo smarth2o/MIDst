@@ -3,16 +3,18 @@ import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { replyState, ReplyType } from "../../stores/ReplyAtom";
 import { CommentAlignStyled } from "../../styles/community/CommunityComment";
+import CommunityReplyCreate from "./CommunityReplyCreate";
+import CommunityReplyItem from "./CommunityReplyItem";
 
 const backPort = "8080";
 const autoBaseUrl = window.location.hostname;
-const serverUrl = `http://${autoBaseUrl}:${backPort}/`;
+const serverUrl = `http://${autoBaseUrl}:${backPort}`;
 
 const CommunityReply = (): JSX.Element => {
   const replys = useRecoilValue(replyState);
 
   const sendRequest = async () => {
-    const response = await axios.get("http://localhost:8080");
+    const response = await axios.get(`${serverUrl}/replies/${0}/all`);
     console.log(response);
     console.log(response.data);
   };
@@ -29,16 +31,19 @@ const CommunityReply = (): JSX.Element => {
             reply;
           return (
             <>
-              <ul>
-                <li>
-                  <p>{userId}</p>
-                </li>
-                <li>{createdAt}</li>
-                <li>{description}</li>
-              </ul>
+              <CommunityReplyItem
+                key={id}
+                id={id}
+                postId={postId}
+                description={description}
+                createdAt={createdAt}
+                userId={userId}
+                updatedAt={updatedAt}
+              />
             </>
           );
         })}
+        <CommunityReplyCreate />
       </CommentAlignStyled>
     </>
   );

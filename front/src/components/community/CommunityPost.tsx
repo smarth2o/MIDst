@@ -6,6 +6,7 @@ const CommunityPost = ({
   title,
   description,
   createdAt,
+  updatedAt,
   reply,
   like,
 }: CommunityPropsType): JSX.Element => {
