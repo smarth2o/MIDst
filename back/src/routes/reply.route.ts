@@ -13,14 +13,9 @@ replyRouter.post(
     loginRequired,
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const userId: any = req.headers["currentUserId"];
             const postId = req.params.postId;
             const replyData = req.body;
-            const result = await ReplyService.createReply(
-                userId,
-                postId,
-                replyData
-            );
+            const result = await ReplyService.createReply(postId, replyData);
             res.status(201).json({ data: result });
         } catch (error) {
             next(error);

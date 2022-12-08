@@ -3,13 +3,15 @@ import { PrismaClient } from "@prisma/client";
 class CommunityRepository {
     prisma = new PrismaClient();
 
-    async createPost(userId: string, postData) {
+    async createPost(postData) {
+        const { name, title, description } = postData;
         const result = await this.prisma.community.create({
             data: {
-                ...postData,
+                title,
+                description,
                 user: {
                     connect: {
-                        userId,
+                        name,
                     },
                 },
             },
@@ -17,43 +19,29 @@ class CommunityRepository {
         await this.prisma.$disconnect();
         return result;
     }
-    async findAllPostsN() {
+    async findAllPosts(orderBy) {
         const result = await this.prisma.community.findMany({
             select: {
                 id: true,
-                userId: true,
+                author: true,
                 title: true,
                 description: true,
                 createdAt: true,
                 _count: { select: { reply: true, like: true } },
             },
-            orderBy: [{ createdAt: "desc" }],
+            orderBy: [orderBy],
         });
-        await this.prisma.$disconnect();
-        return result;
-    }
-    async findAllPostsP() {
-        const result = await this.prisma.community.findMany({
-            select: {
-                id: true,
-                userId: true,
-                title: true,
-                description: true,
-                createdAt: true,
-                _count: { select: { reply: true, like: true } },
-            },
-            orderBy: { like: { _count: "desc" } },
-        });
+
         await this.prisma.$disconnect();
         return result;
     }
 
-    async findPostsByUserId(userId: string) {
+    async findPostsByUserId(name: string) {
         const result = await this.prisma.community.findMany({
-            where: { userId },
+            where: { author: name },
             select: {
                 id: true,
-                userId: true,
+                author: true,
                 title: true,
                 description: true,
                 createdAt: true,
@@ -69,7 +57,7 @@ class CommunityRepository {
             where: { id: Number(id) },
             select: {
                 id: true,
-                userId: true,
+                author: true,
                 title: true,
                 description: true,
                 createdAt: true,
