@@ -26,7 +26,6 @@ model usertosearch {
   userId      String @db.VarChar(45)
   searchWord  String @db.VarChar(100)
   description String @db.VarChar(1000)
-  translation String @db.VarChar(1000)
   user        user   @relation(fields: [userId], references: [userId], map: "userToSearch_userId_fkey")
 
   @@index([userId], map: "userToSearch_userId_fkey")
