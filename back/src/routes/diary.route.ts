@@ -1,4 +1,4 @@
-import spellCheck from "../../spell.js";
+import textgears from "textgears-api";
 import { Router, Request, Response, NextFunction } from "express";
 import { loginRequired } from "middlewares/authMiddleware";
 import DiaryService from "services/diary.service";
@@ -128,14 +128,22 @@ diaryRouter.put(
     }
 );
 
+const responseFilter = (data) => {
+    const errorList = data["response"]["errors"];
+    return errorList;
+};
+
 diaryRouter.post(
     "/spell",
     async (req: Request, res: Response, next: NextFunction) => {
         try {
             const description = req.body.description;
-            console.log(description);
-            const spell = await spellCheck.checkspellings(description);
-            res.status(200).json(spell);
+            const textgearsApi = textgears(process.env.TEXTGEARS_API_KEY, {
+                language: "en-US",
+            });
+            const check = await textgearsApi.checkGrammar(description);
+            const result = responseFilter(check);
+            res.status(200).json(result);
         } catch (error) {
             next(error);
         }
