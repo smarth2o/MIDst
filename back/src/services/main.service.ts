@@ -11,12 +11,12 @@ class mainService {
       });
 
       const result=searchData.data["searchword"];
-      var i;
-      var word=[]
-      for(i=0;i<result.length;i++){
-        word[i]=result[i].split(" - ")
+      // var i;
+      // var word=[]
+      // for(i=0;i<result.length;i++){
+      //   word[i]=result[i].split(" - ")
 
-      }
+      // }
       console.log(result);
       return result;
   }

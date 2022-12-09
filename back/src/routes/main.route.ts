@@ -49,7 +49,7 @@ mainRouter.post(
       
     }
 );
-
+//번역
 mainRouter.post(
     '/translate',
     async (req: Request, res: Response, next: NextFunction)=>{

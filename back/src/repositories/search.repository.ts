@@ -2,7 +2,6 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 class mainController{
-    //검색한 결과 표출(AI랑 어떻게 연결..?)
     
     //문장 저장
     async create(userId:string,searchword:string,searchSentence:string){
