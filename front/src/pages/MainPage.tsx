@@ -13,22 +13,20 @@ import {
 import { ROUTES } from "../enum/routes";
 import SearchBar from "../components/search/SearchBar";
 import { useNavigate } from "react-router";
-import {
-  ChatWrapper,
-  LeftChatBox,
-  RightChatBox,
-} from "../styles/Landing.styled";
+import { ChatWrapper, ChatBox } from "../styles/Landing.styled";
 import { useEffect } from "react";
 
 const MainPage = (): JSX.Element => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const boxList = document.querySelectorAll(".left-chat-box");
+    const boxList = document.querySelectorAll(
+      ".left-chat-box, .right-chat-box"
+    );
     const options = {
       root: null, // viewport
       rootMargin: "0px",
-      threshold: 1.0, // 50%가 viewport에 들어와 있어야 callback 실행
+      threshold: 0.5,
     };
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -62,19 +60,15 @@ const MainPage = (): JSX.Element => {
       </TransparentWrapper>
       <MainLayout>
         <ChatWrapper>
-          <LeftChatBox className="left-chat-box">Learn English?</LeftChatBox>
-          <RightChatBox>
+          <ChatBox className="left-chat-box">Learn English?</ChatBox>
+          <ChatBox className="right-chat-box">
             공부하려고 미드 보는데 그냥 즐기다 끝나 ㅜ
-          </RightChatBox>
-          <LeftChatBox className="left-chat-box">
-            서비스 소개글 - Search
-          </LeftChatBox>
-          <RightChatBox></RightChatBox>
-          <LeftChatBox className="left-chat-box">
-            서비스 소개글 - Diary
-          </LeftChatBox>
-          <RightChatBox></RightChatBox>
-          <LeftChatBox className="left-chat-box">START?</LeftChatBox>
+          </ChatBox>
+          <ChatBox className="left-chat-box">서비스 소개글 - Search</ChatBox>
+          <ChatBox className="right-chat-box"></ChatBox>
+          <ChatBox className="left-chat-box">서비스 소개글 - Diary</ChatBox>
+          <ChatBox className="right-chat-box"></ChatBox>
+          <ChatBox className="left-chat-box">START?</ChatBox>
         </ChatWrapper>
         <MainSearchWrapper>
           <Suggestions>

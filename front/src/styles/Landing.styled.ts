@@ -7,36 +7,39 @@ export const ChatWrapper = styled.div`
   margin-bottom: 10rem;
 `;
 
-const ChatBox = styled.div`
+export const ChatBox = styled.div`
   width: fit-content;
   height: fit-content;
-  padding: 3rem 5rem;
-  margin: 5rem 10rem;
+  padding: 2rem 2rem;
+  margin: 5rem 5rem;
 
   backdrop-filter: blur(12px);
   border-radius: 30px;
 
   font-family: "Inter";
   font-weight: 700;
-  font-size: 20px;
+  font-size: 14px;
   line-height: 29px;
   text-align: center;
 
-  .active {
+  transition: 0.4s;
+
+  &.left-chat-box {
+    align-self: flex-start;
+    background: rgba(126, 114, 213, 0.4);
+    color: #ffffff;
+  }
+
+  &.right-chat-box {
+    align-self: flex-end;
+    background: rgba(255, 255, 255, 0.6);
+    color: #333333;
+  }
+
+  &.active {
     width: max-content;
     height: max-content;
-    color: red;
+    padding: 3rem 5rem;
+    font-size: 20px;
   }
-`;
-
-export const LeftChatBox = styled(ChatBox)`
-  align-self: flex-start;
-  background: rgba(126, 114, 213, 0.4);
-  color: #ffffff;
-`;
-
-export const RightChatBox = styled(ChatBox)`
-  align-self: flex-end;
-  background: rgba(255, 255, 255, 0.6);
-  color: #333333;
 `;
