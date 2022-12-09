@@ -8,7 +8,7 @@ class EmotionService {
         });
 
         const result = await DiaryRepository.updateDiary(id, {
-            emotion: checkEmotion,
+            emotion: checkEmotion["data"]["emotion"],
         });
 
         return result;
