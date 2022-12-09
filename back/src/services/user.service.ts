@@ -48,7 +48,7 @@ class userService {
     //탈퇴회원 확인
     if (data.length) {
       if (data) {
-        if (user.withdrawal == 1) {
+        if (user.withdrawal === 1) {
           const errorMessage: string = "존재하지 않는 계정입니다.";
           return errorMessage;
         }
@@ -153,7 +153,7 @@ class userService {
       const errorMessage: String = "UserId가 틀립니다.";
       return errorMessage;
     }
-    if (withdrawal == 1) {
+    if (withdrawal === 1) {
       let userData = await userController.findByUserId(userId);
       let user = userData[0];
       console.log(user);
