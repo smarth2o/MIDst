@@ -1,11 +1,17 @@
 export const ROUTES = {
   MAIN: "/",
+  SEARCH: "/search",
   DIARY: {
     ROOT: "/diary",
-    DIARY_CREATE: "/diary/diaryCreate",
-    DIARY_DETAIL: "/diary/diaryDetail/:no",
+    DETAIL: ":detail",
+    CREATE: "create",
   },
-  USER: { LOGIN: "/login", REGISTER: "/register" },
+  USER: {
+    LOGIN: "/login",
+    REGISTER: "/register",
+    FIND_PW: "/findPassword",
+    CHANGE_PW: "/changePassword",
+  },
   PERSONAL: "/personal",
   COMMUNITY: {
     ROOT: "/community",
