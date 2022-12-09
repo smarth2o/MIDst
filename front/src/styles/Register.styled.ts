@@ -104,11 +104,12 @@ export const SmallButton = styled(Button).attrs({
 })`
   width: 50px;
   height: 30px;
+  border-radius: 7px;
 
   margin-top: 8px;
   margin-bottom: 8px;
   position: absolute;
-  right: 15px;
+  right: 14px;
   top: 4.5px;
 
   font-size: 12px;
