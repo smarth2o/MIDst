@@ -3,16 +3,17 @@ import { PrismaClient } from "@prisma/client";
 class ReplyRepository {
     prisma = new PrismaClient();
 
-    async createReply(userId: string, postId: string, replyData) {
+    async createReply(postId: string, replyData) {
+        const { name, description } = replyData;
         const result = await this.prisma.reply.create({
             data: {
                 user: {
-                    connect: { userId },
+                    connect: { name },
                 },
                 community: {
                     connect: { id: Number(postId) },
                 },
-                ...replyData,
+                description,
             },
         });
         await this.prisma.$disconnect();

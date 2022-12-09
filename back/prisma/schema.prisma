@@ -7,40 +7,77 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model community {
-  id          Int       @id @unique @default(autoincrement())
-  userId      String    @db.VarChar(45)
-  title       String    @db.VarChar(30)
-  description String    @db.VarChar(200)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  user    user    @relation(fields: [userId], references: [userId])
-  reply   reply[]
-  like like[]
+model user {
+  userId       String         @id @db.VarChar(45)
+  name         String         @unique @db.VarChar(20)
+  email        String         @db.VarChar(45)
+  password     String         @db.VarChar(100)
+  withdrawal   Int?           @db.TinyInt
+  community    community[]
+  diary        diary[]
+  refreshtoken refreshtoken?
+  reply        reply[]
+  usertosearch usertosearch[]
+  like         like[]
+}
 
-  @@index([userId], map: "community_userId_fkey")
+model usertosearch {
+  searchId    Int    @id @unique(map: "userToSearch_searchId_key") @default(autoincrement())
+  userId      String @db.VarChar(45)
+  searchWord  String @db.VarChar(100)
+  description String @db.VarChar(1000)
+  user        user   @relation(fields: [userId], references: [userId], map: "userToSearch_userId_fkey")
+
+  @@index([userId], map: "userToSearch_userId_fkey")
+}
+
+model community {
+  id          Int      @id @unique @default(autoincrement())
+  author      String   @db.VarChar(45)
+  title       String   @db.VarChar(30)
+  description String   @db.VarChar(200)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        user     @relation(fields: [author], references: [name])
+  reply       reply[]
+  like        like[]
+
+  @@index([author], map: "community_userId_fkey")
 }
 
 model like {
-  id Int @id @unique @default(autoincrement())
-  postId Int
-  userId String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user user @relation(fields: [userId],references: [userId])
-  community community @relation(fields: [postId],references: [id])
+  id        Int       @id @unique @default(autoincrement())
+  postId    Int
+  userId    String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  user      user      @relation(fields: [userId], references: [name])
+  community community @relation(fields: [postId], references: [id])
+}
 
+model reply {
+  id          Int       @id @unique @default(autoincrement())
+  author      String    @db.VarChar(45)
+  postId      Int
+  description String    @db.VarChar(200)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  community   community @relation(fields: [postId], references: [id])
+  user        user      @relation(fields: [author], references: [name])
+
+  @@index([postId], map: "reply_postId_fkey")
+  @@index([author], map: "reply_userId_fkey")
 }
 
 model diary {
   id          Int      @id @unique @default(autoincrement())
   userId      String   @db.VarChar(45)
   date        String
-  emotion     String?   @db.VarChar(30)
   title       String   @db.VarChar(10)
   description String   @db.VarChar(100)
+  emotion     String?
   createdAt   DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt   DateTime @updatedAt
   user        user     @relation(fields: [userId], references: [userId])
 
   @@index([userId], map: "diary_userId_fkey")
@@ -50,43 +87,4 @@ model refreshtoken {
   userId       String @unique(map: "userId_UNIQUE")
   refreshToken String @db.VarChar(500)
   user         user   @relation(fields: [userId], references: [userId], map: "refreshToken_userId_fkey")
-}
-
-model reply {
-  id          Int       @id @unique @default(autoincrement())
-  userId      String    @db.VarChar(45)
-  postId     Int
-  description String    @db.VarChar(200)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  community community @relation(fields: [postId], references: [id])
-  user      user      @relation(fields: [userId], references: [userId])
-
-  @@index([postId], map: "reply_postId_fkey")
-  @@index([userId], map: "reply_userId_fkey")
-}
-
-model user {
-  userId       String         @id @db.VarChar(45)
-  name         String?        @db.VarChar(20)
-  email        String?        @db.VarChar(45)
-  password     String?        @db.VarChar(100)
-  withdrawal   Int?           @db.TinyInt
-  community    community[]
-  diary        diary[]
-  refreshtoken refreshtoken?
-  reply        reply[]
-  usertosearch usertosearch[]
-  like  like[]
-}
-
-model usertosearch {
-  searchId    Int    @id @unique(map: "userToSearch_searchId_key") @default(autoincrement())
-  userId      String @db.VarChar(45)
-  searchWord  String @db.VarChar(100)
-  description String @db.VarChar(1000)
-  translation String @db.VarChar(1000)
-  user        user   @relation(fields: [userId], references: [userId], map: "userToSearch_userId_fkey")
-
-  @@index([userId], map: "userToSearch_userId_fkey")
 }
