@@ -1,7 +1,6 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { loginRequired } from "middlewares/authMiddleware";
 import CommunityService from "services/community.service";
-import { stringify } from "uuid";
 
 const communityRouter: Router = Router();
 
@@ -14,9 +13,8 @@ communityRouter.post(
     loginRequired,
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const userId: any = req.headers["currentUserId"];
             const postData = req.body;
-            const result = await CommunityService.createPost(userId, postData);
+            const result = await CommunityService.createPost(postData);
             res.status(201).json({ data: result });
         } catch (error) {
             next(error);
@@ -32,11 +30,13 @@ communityRouter.get(
     async (req: Request, res: Response, next: NextFunction) => {
         try {
             if (req.params.sort === "newest") {
-                const result = await CommunityService.getPostsByN();
+                const orderBy = { createdAt: "desc" };
+                const result = await CommunityService.getPosts(orderBy);
                 res.status(200).json({ data: result });
             }
             if (req.params.sort === "popular") {
-                const result = await CommunityService.getPostsByP();
+                const orderBy = { like: { _count: "desc" } };
+                const result = await CommunityService.getPosts(orderBy);
                 res.status(200).json({ data: result });
             }
         } catch (error) {
@@ -53,8 +53,8 @@ communityRouter.get(
   */
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const userId: any = req.headers["currentUserId"];
-            const result = await CommunityService.getPostsByUserId(userId);
+            const name = req.body.name;
+            const result = await CommunityService.getPostsByUserId(name);
             res.status(200).json({ data: result });
         } catch (error) {
             next(error);

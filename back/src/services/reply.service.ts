@@ -1,9 +1,8 @@
 import ReplyRepository from "repositories/reply.repository";
 
 class ReplyService {
-    public createReply = async (userId: string, postId: string, replyData) => {
+    public createReply = async (postId: string, replyData) => {
         const createReplyData = await ReplyRepository.createReply(
-            userId,
             postId,
             replyData
         );

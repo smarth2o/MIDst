@@ -1,6 +1,8 @@
+import spellCheck from "../../spell.js";
 import { Router, Request, Response, NextFunction } from "express";
 import { loginRequired } from "middlewares/authMiddleware";
 import DiaryService from "services/diary.service";
+import EmotionService from "services/emotion.service";
 
 const diaryRouter: Router = Router();
 
@@ -105,6 +107,35 @@ diaryRouter.delete(
             const id = req.params.id;
             const result = await DiaryService.deleteDiary(id);
             res.status(200).json({ data: result });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+diaryRouter.put(
+    "/:id/emotions",
+    loginRequired,
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const id = req.params.id;
+            const { description } = req.body;
+            const result = await EmotionService.checkEmotion(id, description);
+            res.status(200).json({ data: result });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+diaryRouter.post(
+    "/spell",
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const description = req.body.description;
+            console.log(description);
+            const spell = await spellCheck.checkspellings(description);
+            res.status(200).json(spell);
         } catch (error) {
             next(error);
         }
