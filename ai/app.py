@@ -15,6 +15,15 @@ def predict():
         return jsonify({
             "emotion": mode_predited ###수정예정
         })
-    
+
+@app.route('/success', methods=['POST'])
+def success():
+    if request.method == "POST":
+        searchword = request.get_json()
+        b = function(df, searchword)
+        return jsonify({"searchword": b})
+    else:
+        pass
+
 if __name__ == "__main__": 
     app.run(host = '127.0.0.1', port=8080)
