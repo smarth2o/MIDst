@@ -4,10 +4,10 @@ import search from "../assets/search.svg";
 
 export const MainLayout = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   background: url(${background}) no-repeat center center;
-  width: 100%;
+  background-attachment: fixed;
+  background-size: cover;
   min-height: 100vh;
 `;
 
@@ -16,37 +16,57 @@ export const SearchWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  input::placeholder {
+    color: #c9c5ec;
+  }
+`;
+
+export const MainSearchWrapper = styled(SearchWrapper)`
+  margin: 20rem auto;
+
+  input::placeholder {
+    color: #7e72d5;
+  }
 `;
 
 export const Suggestions = styled.div`
   display: flex;
   align-items: center;
-  width: 550px;
+  width: 35em;
 `;
 
-export const Suggest = styled.div`
+export const Suggest = styled.button`
   width: fit-content;
-  height: 25px;
+  height: fit-content;
+  box-sizing: content-box;
 
   background: rgba(126, 114, 213, 0.7);
   backdrop-filter: blur(12px);
-
+  border: none;
   border-radius: 30px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  padding: 3px 20px;
-  margin-right: 10px;
+  padding: 0.4em 0.6em;
+  margin-right: 1em;
 
-  p {
-    font-family: "Saira";
-    font-weight: 500;
-    font-size: 14px;
-    text-align: center;
+  font-family: "Saira";
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  color: #ffffff;
 
-    color: #ffffff;
+  cursor: pointer;
+  transition: 0.3s;
+
+  :hover {
+    padding: 0.5em 0.6em;
+    margin-right: 0.6em;
+    font-weight: 600;
+    font-size: 16px;
   }
 `;
 
@@ -68,7 +88,7 @@ export const Search = styled.input`
     rgba(255, 255, 255, 0.9) 0%,
     rgba(255, 255, 255, 0.9) 69.79%
   );
-  border: 1px solid rgba(85, 85, 85, 0.2);
+  border: none;
   border-radius: 40px;
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
 
@@ -76,14 +96,10 @@ export const Search = styled.input`
   font-size: 18px;
   font-weight: 600;
   padding-left: 30px;
-  color: #7e72d5;
+  color: #333333;
 
   :focus {
     outline: none;
-  }
-
-  ::placeholder {
-    color: #7e72d5;
   }
 `;
 
@@ -111,59 +127,6 @@ export const SearchPageLayout = styled.div`
   margin-top: 67px;
 `;
 
-export const FilterWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  margin-top: 103px;
-  margin-left: 85px;
-  margin-right: 57px;
-
-  h2 {
-    // font-family: "Saira";
-    font-weight: 600;
-    font-size: 18px;
-
-    color: #333333;
-
-    padding-left: 20px;
-  }
-`;
-
-export const FilterBox = styled.div`
-  width: 228px;
-
-  background: #ffffff;
-  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-
-  padding: 10px 25px;
-  margin-bottom: 20px;
-
-  flex: display;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-
-  h3 {
-    // font-family: "Saira";
-    font-weight: 600;
-    font-size: 16px;
-
-    color: #999999;
-  }
-
-  ul {
-    list-style-type: none;
-  }
-
-  img {
-    position: absolute;
-    right: 30px;
-    top: 23px;
-  }
-`;
-
 export const SearchLayout = styled.div`
   display: flex;
   flex-direction: column;
@@ -182,34 +145,56 @@ export const SearchResultBox = styled.div`
   position: relative;
 
   h3 {
-    // font-family: "Saira";
+    font-family: "Saira";
     font-weight: 600;
     font-size: 18px;
-
     color: #333333;
   }
 
   p {
-    // font-family: "Saira";
+    font-family: "Saira";
     font-weight: 400;
     font-size: 14px;
-
     color: #555555;
   }
 `;
 
 export const SearchResultSort = styled.div`
   box-sizing: border-box;
+  width: 8em;
+  height: 2em;
 
   position: absolute;
-  width: 136px;
-  height: 31px;
-  right: 50px;
-  top: 35px;
+  right: 3.5em;
+  top: 2.5em;
+
+  display: flex;
+  align-items: center;
 
   background: #ffffff;
   border: 1px solid rgba(153, 153, 153, 0.5);
   border-radius: 10px;
+
+  span {
+    font-family: "Saira";
+    font-weight: 400;
+    font-size: 14px;
+    color: #555555;
+
+    padding-left: 1.2em;
+  }
+`;
+
+export const Button = styled.button`
+  padding: 0.2em;
+
+  position: absolute;
+  right: 0.8em;
+  top: 0;
+
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 `;
 
 export const SearchResults = styled.div``;
@@ -217,14 +202,15 @@ export const SearchResults = styled.div``;
 export const SearchResult = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border: solid 0.5px rgba(128, 128, 128, 0.652);
   border-radius: 10px;
 
-  padding: 12px 18px;
-  margin: 15px 5px;
+  padding: 0.5em 1em;
+  margin: 0.8em 0.2em;
 
   p {
-    // font-family: "Saira";
+    font-family: "Saira";
     font-weight: 400;
     font-size: 16px;
     color: #333333;

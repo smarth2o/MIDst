@@ -13,6 +13,10 @@ export const Wrapper = styled.header`
   background: rgba(255, 255, 255, 0.7);
 `;
 
+export const TransparentWrapper = styled(Wrapper)`
+  background-color: transparent;
+`;
+
 export const Logo = styled(Link)`
   text-decoration: none;
   display: flex;

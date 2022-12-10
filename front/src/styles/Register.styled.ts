@@ -8,6 +8,7 @@ export const Layout = styled.div`
   justify-content: center;
   align-items: center;
   background: url(${background}) no-repeat center center;
+  background-size: cover;
   width: 100%;
   min-height: 100vh;
 `;
@@ -58,9 +59,9 @@ export const Text = styled.p`
   font-size: 14px;
   text-align: center;
   line-height: 20px;
-  margin-bottom: 24px;
-
   color: #555555;
+
+  margin-bottom: 24px;
 `;
 
 export const SmallWrapper = styled.div`
@@ -98,14 +99,17 @@ export const Button = styled.button`
   color: #ffffff;
 `;
 
-export const SmallButton = styled(Button)`
+export const SmallButton = styled(Button).attrs({
+  type: "button",
+})`
   width: 50px;
   height: 30px;
+  border-radius: 7px;
 
   margin-top: 8px;
   margin-bottom: 8px;
   position: absolute;
-  right: 15px;
+  right: 14px;
   top: 4.5px;
 
   font-size: 12px;

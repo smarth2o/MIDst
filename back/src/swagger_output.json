@@ -311,6 +311,17 @@
         }
       }
     },
+    "/main/showSearch": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/main/saveSearch": {
       "post": {
         "description": "",
@@ -339,10 +350,7 @@
                 "searchword": {
                   "example": "any"
                 },
-                "description": {
-                  "example": "any"
-                },
-                "translation": {
+                "searchSentence": {
                   "example": "any"
                 }
               }
@@ -360,6 +368,26 @@
             "description": "Unauthorized"
           }
         }
+      }
+    },
+    "/main/translate": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "searchSentence": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
       }
     },
     "/main/getSearch": {
@@ -580,6 +608,60 @@
         "responses": {}
       }
     },
+    "/diaries/{id}/emotions": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/diaries/spell": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/posts/": {
       "post": {
         "tags": [
@@ -587,13 +669,7 @@
         ],
         "summary": "커뮤니티 글 작성",
         "description": "",
-        "parameters": [
-          {
-            "name": "currentUserId",
-            "in": "header",
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "201": {
             "description": "Created"
@@ -630,13 +706,7 @@
         ],
         "summary": "유저가 작성한 커뮤니티 글 목록",
         "description": "",
-        "parameters": [
-          {
-            "name": "currentUserId",
-            "in": "header",
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
