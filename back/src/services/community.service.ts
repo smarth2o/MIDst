@@ -1,27 +1,21 @@
 import CommunityRepository from "repositories/community.repository";
 
 class CommunityService {
-    public createPost = async (userId: string, postData: {}) => {
-        const createPostData = await CommunityRepository.createPost(
-            userId,
-            postData
-        );
+    public createPost = async (postData: {}) => {
+        const createPostData = await CommunityRepository.createPost(postData);
         return createPostData;
     };
 
-    public getPostsByN = async () => {
-        const findAllPostsData = await CommunityRepository.findAllPostsN();
+    public getPosts = async (orderBy) => {
+        const findAllPostsData = await CommunityRepository.findAllPosts(
+            orderBy
+        );
         return findAllPostsData;
     };
 
-    public getPostsByP = async () => {
-        const findAllPostsData = await CommunityRepository.findAllPostsP();
-        return findAllPostsData;
-    };
-
-    public getPostsByUserId = async (userId: string) => {
+    public getPostsByUserId = async (name: string) => {
         const findUsersPostsData = await CommunityRepository.findPostsByUserId(
-            userId
+            name
         );
         return findUsersPostsData;
     };

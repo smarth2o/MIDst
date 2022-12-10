@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link, useOutletContext, useParams } from "react-router-dom";
 import { DiaryValueType } from "../../pages/DiaryPage";
 import { DiaryTypes } from "../../stores/DiaryAtom";
@@ -16,10 +15,6 @@ const DiaryDetail = (): JSX.Element => {
   const currentDiary = diarys.find(
     (diary) => diary.id === currentIndex
   ) as DiaryTypes;
-
-  console.log("다이어리내용", currentDiary);
-  console.log("떠야하는 글 넘버", currentIndex);
-  console.log("URL 넘버", detail);
 
   return (
     <>

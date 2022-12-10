@@ -1,6 +1,8 @@
+import textgears from "textgears-api";
 import { Router, Request, Response, NextFunction } from "express";
 import { loginRequired } from "middlewares/authMiddleware";
 import DiaryService from "services/diary.service";
+import EmotionService from "services/emotion.service";
 
 const diaryRouter: Router = Router();
 
@@ -105,6 +107,43 @@ diaryRouter.delete(
             const id = req.params.id;
             const result = await DiaryService.deleteDiary(id);
             res.status(200).json({ data: result });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+diaryRouter.put(
+    "/:id/emotions",
+    loginRequired,
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const id = req.params.id;
+            const { description } = req.body;
+            const result = await EmotionService.checkEmotion(id, description);
+            res.status(200).json({ data: result });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+const responseFilter = (data) => {
+    const errorList = data["response"]["errors"];
+    return errorList;
+};
+
+diaryRouter.post(
+    "/spell",
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const description = req.body.description;
+            const textgearsApi = textgears(process.env.TEXTGEARS_API_KEY, {
+                language: "en-US",
+            });
+            const check = await textgearsApi.checkGrammar(description);
+            const result = responseFilter(check);
+            res.status(200).json(result);
         } catch (error) {
             next(error);
         }
