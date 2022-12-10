@@ -1,5 +1,7 @@
 from flask import Flask,render_template,request,jsonify
 from predict_sentiment import predict_sent
+from Cosine_Search import function, df
+
 app = Flask(__name__)
 @app.route('/dd')
 def index():
