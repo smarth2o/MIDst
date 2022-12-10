@@ -7,10 +7,29 @@ export const AllBackGroundStyled = styled.div`
 `;
 export const DiaryAlignStyled = styled.div`
   display: flex;
-  padding: 2% 4% 2% 4%;
+  justify-content: space-around;
+  .diary-content {
+    display: flex;
+  }
 `;
 export const DiaryMainStyled = styled.div`
   display: flex;
+  width: 50vw;
   flex-direction: column;
-  width: 100vw;
+`;
+export const DiaryAllAlign = styled.div`
+  display: flex;
+  justify-content: space-around;
+  .content-cover {
+    display: flex;
+    justify-content: space-around;
+  }
+  .diary-align-styled {
+    @media all and (min-width: 1300px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 70vw;
+    }
+  }
 `;

@@ -1,9 +1,4 @@
-import {
-  ButtonHTMLAttributes,
-  DetailedHTMLProps,
-  MouseEventHandler,
-  useState,
-} from "react";
+import { useState } from "react";
 import { SetterOrUpdater, useRecoilState, useSetRecoilState } from "recoil";
 import { diaryState, DiaryTypes } from "../../stores/DiaryAtom";
 import {
@@ -49,6 +44,7 @@ const DiaryDetailCard = ({
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const [diaryTitle, setDiaryTitle] = useState(title);
+  const [diaryDescription, setDiaryDescription] = useState(description);
 
   const ClickHandler: ClickHandler = (props) => (e) => {
     e.preventDefault();
@@ -102,7 +98,10 @@ const DiaryDetailCard = ({
               <br />
               <textarea
                 placeholder="Write about your day..."
-                value={description}
+                value={diaryDescription}
+                onChange={(e) => {
+                  setDiaryDescription(e.target.value);
+                }}
               />
             </DiaryForm>
           </div>

@@ -8,6 +8,7 @@ import { diaryState, DiaryTypes } from "../stores/DiaryAtom";
 import {
   AllBackGroundStyled,
   DiaryAlignStyled,
+  DiaryAllAlign,
   DiaryMainStyled,
 } from "../styles/diary/DiaryCreatePage";
 
@@ -26,13 +27,21 @@ const DiaryPage = (): JSX.Element => {
 
   return (
     <AllBackGroundStyled>
-      <DiaryAlignStyled>
-        <DiarySide />
-        <DiaryMainStyled>
-          <Outlet context={{ diarys, setDiarys }} />
-          <DiaryBottom />
-        </DiaryMainStyled>
-      </DiaryAlignStyled>
+      <DiaryAllAlign>
+        <div className="content-cover">
+          <div className="diary-align-styled">
+            <DiaryAlignStyled>
+              <div className="diary-content">
+                <DiarySide />
+                <DiaryMainStyled>
+                  <Outlet context={{ diarys, setDiarys }} />
+                  <DiaryBottom />
+                </DiaryMainStyled>
+              </div>
+            </DiaryAlignStyled>
+          </div>
+        </div>
+      </DiaryAllAlign>
     </AllBackGroundStyled>
   );
 };

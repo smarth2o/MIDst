@@ -4,6 +4,7 @@ import { CommunityType } from "../../stores/CommunityAtom";
 import { BackBtnAlignStyled } from "../../styles/common/CommonBtn";
 import {
   CommunityCommentStyled,
+  CommunityDetaillAllStyled,
   CommunityPostBoxStyled,
 } from "../../styles/community/CommunityDetailPost";
 import CommunityComment from "./CommunityReply";
@@ -25,29 +26,33 @@ const CommunityDetail = (): JSX.Element => {
 
   return (
     <>
-      <BackBtnAlignStyled>
-        <button className="back-btn" onClick={onClickBtn}>
-          <ArrowLeftOutlined />
-          돌아가기
-        </button>
-      </BackBtnAlignStyled>
-
-      <CommunityPostBoxStyled>
-        <CommunityPost
-          id={currentIndex}
-          title={currentCommunityItem.title}
-          description={currentCommunityItem.description}
-          createdAt={currentCommunityItem.createdAt}
-          updatedAt={currentCommunityItem.updatedAt}
-          reply={currentCommunityItem.count.reply}
-          like={currentCommunityItem.count.like}
-          communityItems={communityItems}
-          setCommunityItems={setCommunityItems}
-        />
-      </CommunityPostBoxStyled>
-      <CommunityCommentStyled>
-        <CommunityComment />
-      </CommunityCommentStyled>
+      <CommunityDetaillAllStyled>
+        <div className="community-detail-align">
+          <BackBtnAlignStyled>
+            <button className="back-btn" onClick={onClickBtn}>
+              <ArrowLeftOutlined />
+              돌아가기
+            </button>
+          </BackBtnAlignStyled>
+          <CommunityPostBoxStyled>
+            <CommunityPost
+              id={currentIndex}
+              userName={currentCommunityItem.userName}
+              title={currentCommunityItem.title}
+              description={currentCommunityItem.description}
+              createdAt={currentCommunityItem.createdAt}
+              updatedAt={currentCommunityItem.updatedAt}
+              reply={currentCommunityItem.count.reply}
+              like={currentCommunityItem.count.like}
+              communityItems={communityItems}
+              setCommunityItems={setCommunityItems}
+            />
+          </CommunityPostBoxStyled>
+          <CommunityCommentStyled>
+            <CommunityComment />
+          </CommunityCommentStyled>
+        </div>
+      </CommunityDetaillAllStyled>
     </>
   );
 };

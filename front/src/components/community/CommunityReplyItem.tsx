@@ -1,4 +1,6 @@
+import dayjs from "dayjs";
 import { ReplyType } from "../../stores/ReplyAtom";
+import { ReplyLiStyled } from "../../styles/community/CommunityReplyItem";
 
 const CommunityReplyItem = ({
   id,
@@ -6,15 +8,21 @@ const CommunityReplyItem = ({
   createdAt,
   description,
 }: ReplyType): JSX.Element => {
+  const replyCreatedAt = dayjs(createdAt);
+
   return (
     <>
-      <ul>
-        <li key={id}>
-          <p>{userId}</p>
-        </li>
-        <li>{createdAt}</li>
-        <li>{description}</li>
-      </ul>
+      <ReplyLiStyled>
+        <ul>
+          <li className="reply-user-info">
+            <li className="userId">{userId}</li>
+            <li className="createdAt">
+              {replyCreatedAt.format("YYYY-MM-DD H시간전")}
+            </li>
+          </li>
+          <li>{description}</li>
+        </ul>
+      </ReplyLiStyled>
     </>
   );
 };

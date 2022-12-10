@@ -192,7 +192,29 @@ export const UPBottomDetail = styled.div`
   border-radius: 15px;
   padding: 2%;
   .btn-go-search {
+    margin-top: 30px;
     border-radius: 20px;
     padding: 10px 30px;
+  }
+`;
+
+export const UserProfileFormStyled = styled.div`
+  .profile-form-item {
+    margin-top: 20px;
+  }
+  button {
+    margin-top: 30px;
+  }
+  input {
+    padding: 10px;
+    border: solid 1px #999;
+    border-radius: 20px;
+  }
+`;
+
+export const UPTopInfo = styled.div`
+  .profile-info-item {
+    padding: 10px;
+    margin-top: 20px;
   }
 `;
