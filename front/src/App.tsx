@@ -18,6 +18,7 @@ import RegisterPage from "./pages/RegisterPage";
 import FindPasswordPage from "./pages/FindPasswordPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import CommunityDetail from "./components/community/CommunityDetail";
 // import Background from "./styles/common/BrainBackground.styled";
 
 export const UserStateContext = createContext(null);
@@ -46,6 +47,7 @@ const App = (): JSX.Element => {
                 element={<CommunityDetail />}
               />
             </Route>
+
             <Route
               path={ROUTES.COMMUNITY.EDIT}
               element={<CommunityEditPage />}
