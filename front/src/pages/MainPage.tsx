@@ -9,7 +9,7 @@ import {
   MainSearchWrapper,
   Suggestions,
   Suggest,
-} from "../styles/Search.styled";
+} from "../styles/search/Search.styled";
 import { ROUTES } from "../enum/routes";
 import SearchBar from "../components/search/SearchBar";
 import { useNavigate } from "react-router";

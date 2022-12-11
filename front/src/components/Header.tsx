@@ -1,6 +1,7 @@
 import { Wrapper, Logo, Navbar, NavLink, Login } from "../styles/Header.styled";
 import { ROUTES } from "../enum/routes";
 import { Outlet } from "react-router-dom";
+import { LogoIcon } from "../assets/index";
 
 function Header() {
   return (
@@ -9,7 +10,7 @@ function Header() {
         <Logo to={ROUTES.MAIN}>
           <ul className="topnav-first-ul ">
             <li>
-              <img src={require("../assets/mist.png")} alt="logo" />
+              <img src={LogoIcon} alt="logo" />
             </li>
             <li>
               <p>MIDst</p>

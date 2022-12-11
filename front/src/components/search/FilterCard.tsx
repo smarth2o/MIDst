@@ -8,7 +8,7 @@ import {
   UpIcon,
   FilterContentWrapper,
   SearchButton,
-} from "../../styles/Filter.styled";
+} from "../../styles/search/Filter.styled";
 import { useState } from "react";
 
 interface ListProps {

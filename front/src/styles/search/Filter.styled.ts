@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import refresh from "../assets/refresh.svg";
-import arrowUp from "../assets/arrowUp.svg";
-import arrowDown from "../assets/arrowDown.svg";
+import { Refresh, ArrowUp, ArrowDown } from "../../assets/index";
 
 export const FilterWrapper = styled.div`
   display: flex;
@@ -92,17 +90,17 @@ const Icon = styled.img`
 `;
 
 export const FilterIcon = styled(Icon).attrs({
-  src: refresh,
+  src: Refresh,
   alt: "refresh",
 })``;
 
 export const DownIcon = styled(Icon).attrs({
-  src: arrowDown,
+  src: ArrowDown,
   alt: "arrowDown",
 })``;
 
 export const UpIcon = styled(Icon).attrs({
-  src: arrowUp,
+  src: ArrowUp,
   alt: "arrowUp",
 })``;
 

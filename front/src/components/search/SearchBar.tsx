@@ -2,8 +2,8 @@ import {
   Search,
   SearchbarWrapper,
   SearchButton,
-  SearchIcon,
-} from "../../styles/Search.styled";
+  SearchImg,
+} from "../../styles/search/Search.styled";
 import { useNavigate } from "react-router";
 
 const SearchBar = (): JSX.Element => {
@@ -16,7 +16,7 @@ const SearchBar = (): JSX.Element => {
         placeholder="Search for expressions or words you're curious about!"
       ></Search>
       <SearchButton type="submit" onClick={() => navigate("/search")}>
-        <SearchIcon />
+        <SearchImg />
       </SearchButton>
     </SearchbarWrapper>
   );
