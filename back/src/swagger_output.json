@@ -311,10 +311,17 @@
         }
       }
     },
-    "/main/showSearch": {
+    "/main/showSearch/{searchword}": {
       "get": {
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "searchword",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"

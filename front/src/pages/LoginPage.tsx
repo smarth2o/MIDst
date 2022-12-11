@@ -37,13 +37,13 @@ const LoginPage = (): JSX.Element => {
     event.preventDefault();
 
     try {
-      const res = await Api.post("user/login", form);
+      const res = await Api.post(`user/login`, form);
 
       // const user = res.data;
       // setUser({ email: user.email, password: user.password });
       // window.sessionStorage.setItem("email", user.email);
 
-      console.log(res);
+      console.log(res.data);
       navigate("/");
     } catch (err) {
       console.log("로그인 실패");

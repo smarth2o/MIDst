@@ -6,14 +6,15 @@ import { loginRequired } from "../middlewares/authMiddleware";
 const mainRouter = Router();
 
 mainRouter.get(
-  "/showSearch",
+  "/showSearch/:searchword",
   //loginRequired,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const searchword = req.body.searchword;
-      const title = req.body.title || null;
-      const name = req.body.name || null;
+      const searchword = req.params.searchword;
+      const title = req.params.title || null;
+      const name = req.params.name || null;
       console.log(searchword);
+
       const searchSentence = await mainService.showSearch(
         searchword,
         title,

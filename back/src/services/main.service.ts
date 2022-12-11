@@ -1,27 +1,28 @@
 import mainController from "../repositories/search.repository";
 import axios from "axios";
-var express = require('express');
+var express = require("express");
 class mainService {
-
-  async showSearch(searchword:string,title:string,name:string){
-    const searchData = await axios.post("http://127.0.0.1:8080/success", {
+  async showSearch(searchword: string, title: string, name: string) {
+    const searchData = await axios.get(`http://127.0.0.1:8080/success`, {
+      params: {
         searchword: searchword,
-        title:title,
-        name:name
-      });
+        title: title,
+        name: name,
+      },
+    });
 
-      const result=searchData.data["searchword"];
-      // var i;
-      // var word=[]
-      // for(i=0;i<result.length;i++){
-      //   word[i]=result[i].split(" - ")
+    const result = searchData.data["searchword"];
+    // var i;
+    // var word=[]
+    // for(i=0;i<result.length;i++){
+    //   word[i]=result[i].split(" - ")
 
-      // }
-      console.log(result);
-      return result;
+    // }
+    console.log(result);
+    return result;
   }
 
-  async saveSearch(userId: string,searchword: string,searchSentence: string) {
+  async saveSearch(userId: string, searchword: string, searchSentence: string) {
     const saveSearch = await mainController.create(
       userId,
       searchword,
