@@ -7,10 +7,8 @@ class mainService {
     const searchData = await axios.post("http://127.0.0.1:8080/success", {
         searchword: searchword,
       });
-
+      
       const result=searchData.data["searchword"];
-
-      console.log(result);
       return result;
   }
 
