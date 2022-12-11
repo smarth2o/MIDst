@@ -1,17 +1,12 @@
 import { useState } from "react";
-import { SetterOrUpdater, useRecoilState, useSetRecoilState } from "recoil";
+import { SetterOrUpdater } from "recoil";
 import { diaryState, DiaryTypes } from "../../stores/DiaryAtom";
-import {
-  DiaryBtn,
-  DiaryCreateAlign,
-  DiaryForm,
-} from "../../styles/diary/DiaryCreate";
+import { DiaryForm } from "../../styles/diary/DiaryCreate";
 import {
   DiaryDetailBtn,
   DiaryDetailCardAlignStyled,
   DiaryDetailText,
 } from "../../styles/diary/DiaryDetailCard";
-import DiaryEditCard from "./DiaryEditCard";
 
 export interface DiaryPropsTypes {
   id: number;
@@ -77,14 +72,6 @@ const DiaryDetailCard = ({
     return (
       <>
         <DiaryDetailCardAlignStyled>
-          {/* <DiaryEditCard
-            id={id}
-            date={date}
-            title={title}
-            description={description}
-            diarys={diarys}
-            setDiarys={setDiarys}
-          /> */}
           <div>
             <DiaryForm onSubmit={onSubmitDiary}>
               <input

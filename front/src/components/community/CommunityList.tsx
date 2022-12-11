@@ -23,6 +23,7 @@ import { ROUTES } from "../../enum/routes";
 
 export interface CommunityPropsType {
   id: number;
+  userId: string;
   userName: string;
   title: string;
   createdAt: string;
@@ -102,6 +103,7 @@ const CommunityList = (): JSX.Element => {
                 const {
                   id,
                   title,
+                  userId,
                   createdAt,
                   updatedAt,
                   userName,
@@ -116,6 +118,7 @@ const CommunityList = (): JSX.Element => {
                   >
                     <CommunityItem
                       id={id}
+                      userId={userId}
                       userName={userName}
                       title={title}
                       createdAt={createdAt}

@@ -16,7 +16,7 @@ export const BackBtnStyled = styled.button`
 `;
 
 export const BackBtnAlignStyled = styled.div`
-  margin-top: 10vh;
+  /* margin-top: 10vh; */
   display: grid;
   grid-template-columns: 50px 1fr;
   padding-left: 5%;
@@ -41,6 +41,7 @@ export const BackBtnAlignStyled = styled.div`
 `;
 
 export const CCPAlignStyled = styled.div`
+  margin-top: 10vh;
   display: grid;
   grid-template-rows: 50px 1fr;
 `;

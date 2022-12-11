@@ -16,6 +16,10 @@ export const CPContentStyled = styled.div`
   li {
     list-style: none;
   }
+  .CPContent-title {
+    text-align: center;
+    margin: 5vh;
+  }
 `;
 export const CPTopAlignStyled = styled.div`
   display: flex;
@@ -28,4 +32,8 @@ export const CPTopInfoAlign = styled.div`
   .postInfo {
     padding-right: 20px;
   }
+`;
+
+export const CommunityPostBtn = styled.div`
+  padding-top: 40px;
 `;

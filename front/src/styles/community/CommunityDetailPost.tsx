@@ -16,6 +16,7 @@ export const CommunityDetaillAllStyled = styled.div`
   flex-direction: row;
   justify-content: space-around;
   .community-detail-align {
+    margin-top: 5vh;
     @media all and (min-width: 1300px) {
       display: flex;
       flex-direction: column;

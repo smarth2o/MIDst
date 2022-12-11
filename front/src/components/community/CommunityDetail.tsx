@@ -37,6 +37,7 @@ const CommunityDetail = (): JSX.Element => {
           <CommunityPostBoxStyled>
             <CommunityPost
               id={currentIndex}
+              userId={currentCommunityItem.userId}
               userName={currentCommunityItem.userName}
               title={currentCommunityItem.title}
               description={currentCommunityItem.description}

@@ -2,6 +2,7 @@ import { atom } from "recoil";
 
 export interface CommunityType {
   id: number;
+  userId: string;
   userName: string;
   title: string;
   description: string;
@@ -18,6 +19,7 @@ export const communityState = atom<CommunityType[]>({
   default: [
     {
       id: 0,
+      userId: "9f215230-70c6-11ed-9305-09f6ced2f775",
       userName: "Mark",
       title: "미드로 공부하는 방법 총정리",
       description:
@@ -31,6 +33,7 @@ export const communityState = atom<CommunityType[]>({
     },
     {
       id: 1,
+      userId: "9f215230-70c6-11ed-9305-09f6ced2f775",
       userName: "Amy",
       title: "어떤 미드를 공부할지 모르는 당신을 위한 추천",
       description:
@@ -44,6 +47,7 @@ export const communityState = atom<CommunityType[]>({
     },
     {
       id: 2,
+      userId: "9f215230-70c6-11ed-9305-09f6ced2f775",
       userName: "annoying orange",
       title: "무슨 미국드라마를 선택해야 할지 모르겠다면",
       description:

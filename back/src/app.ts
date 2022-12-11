@@ -19,7 +19,7 @@ app.use(router);
 app.use(errorMiddleware);
 
 app.use(
-    "/doc",
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerFile, { explorer: true })
+  "/doc",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerFile, { explorer: true })
 );

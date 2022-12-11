@@ -15,11 +15,17 @@ export const ReplyStyled = styled.div`
     justify-content: space-between;
   }
   input {
-    margin: 10px;
+    height: 38px;
+    border-radius: 10px;
+    width: 100%;
+    /* margin: 10px; */
     border: none;
     background: #ffffff;
     display: flex;
     justify-content: space-between;
+    :focus {
+      outline: none;
+    }
   }
   button {
     justify-content: center;
@@ -29,5 +35,6 @@ export const ReplyStyled = styled.div`
     background: #eef1f4;
     border-radius: 10px;
     border: none;
+    cursor: pointer;
   }
 `;
