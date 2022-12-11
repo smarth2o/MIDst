@@ -13,6 +13,13 @@ class mainService {
   }
 
   async saveSearch(userId: string,searchword: string,searchSentence: string) {
+    const findSearch = await mainController.find(userId);
+    for(var i=0;i<findSearch.length;i++){
+      if(searchSentence===findSearch[i]["description"]){
+        const errorMessage: string = "이미 저장한 문구입니다.";
+          return errorMessage;
+      }
+    }
     const saveSearch = await mainController.create(
       userId,
       searchword,
