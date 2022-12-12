@@ -13,6 +13,8 @@ import { ROUTES } from "../enum/routes";
 import * as Api from "../api";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import userState from "../stores/UserAtom";
 
 interface LoginData {
   email: string;
@@ -20,8 +22,8 @@ interface LoginData {
 }
 
 const LoginPage = (): JSX.Element => {
-  // const setUser = useSetRecoilState(userState);
   const navigate = useNavigate();
+  const setUser = useSetRecoilState(userState);
 
   const [form, setForm] = useState<LoginData>({
     email: "",
@@ -38,12 +40,14 @@ const LoginPage = (): JSX.Element => {
 
     try {
       const res = await Api.post("user/login", form);
-
-      // const user = res.data;
-      // setUser({ email: user.email, password: user.password });
-      // window.sessionStorage.setItem("email", user.email);
-
-      console.log("로그인 성공", res.data);
+      setUser({
+        name: res.data.name,
+        email: res.data.email,
+        password: res.data.password,
+        accessToken: res.data.refreshToken,
+      });
+      window.sessionStorage.setItem("email", res.data.name);
+      console.log("로그인 성공");
       navigate("/");
     } catch (err) {
       console.log("로그인 실패");

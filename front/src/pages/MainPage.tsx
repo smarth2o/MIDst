@@ -2,7 +2,8 @@ import {
   TransparentWrapper,
   Logo,
   Navbar,
-  Login,
+  SignIn,
+  SignOut,
 } from "../styles/Header.styled";
 import {
   MainLayout,
@@ -55,7 +56,11 @@ const MainPage = (): JSX.Element => {
           </ul>
         </Logo>
         <Navbar>
-          <Login to={ROUTES.USER.LOGIN}>Login</Login>
+          {window.sessionStorage.getItem("name") ? (
+            <SignIn to={ROUTES.USER.LOGIN}>Sign In</SignIn>
+          ) : (
+            <SignOut to={ROUTES.MAIN}>Sign Out</SignOut>
+          )}
         </Navbar>
       </TransparentWrapper>
       <MainLayout>

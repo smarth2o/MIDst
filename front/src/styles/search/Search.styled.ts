@@ -16,6 +16,7 @@ export const SearchWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  margin: 0rem 4rem 3rem 3rem;
 
   input::placeholder {
     color: #c9c5ec;
@@ -123,6 +124,7 @@ export const SearchImg = styled.img.attrs({
 
 export const SearchPageLayout = styled.div`
   display: flex;
+  justify-content: center;
   width: 100%;
   margin-top: 67px;
 `;

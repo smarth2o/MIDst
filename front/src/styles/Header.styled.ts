@@ -68,7 +68,7 @@ export const NavLink = styled(Link)`
   }
 `;
 
-export const Login = styled(NavLink)`
+export const SignIn = styled(NavLink)`
   box-sizing: border-box;
   border: 1.5px solid #9564d3;
   border-radius: 30px;
@@ -79,4 +79,16 @@ export const Login = styled(NavLink)`
     font-weight: 800;
     background-color: #9564d320;
   }
+`;
+
+export const SignOut = styled(NavLink)`
+  box-sizing: border-box;
+  background: #9564d3;
+  border: 1.5px solid #9564d3;
+  border-radius: 30px;
+  padding: 5px 15px;
+
+  font-weight: 600;
+  // font-size: 16px;
+  color: #ffffff;
 `;
