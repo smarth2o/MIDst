@@ -14,6 +14,8 @@ import {
 const CommunityCreate = (): JSX.Element => {
   const [communityTitle, setCommunityTitle] = useState("");
   const [communityContent, setCommunityContent] = useState("");
+  const [id, setId] = useState(0);
+  const [nowAuthorId, setNowAuthorId] = useState("");
   const createdAt = dayjs();
 
   const navigate = useNavigate();
@@ -23,27 +25,56 @@ const CommunityCreate = (): JSX.Element => {
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const getUserData = async () => {
+      const currentUser = await Api.get(`user/currentUser`);
+      if (currentUser.status !== 200) {
+        console.log(currentUser);
+      } else {
+        setNowAuthorId(currentUser.data.userId);
+        console.log(currentUser);
+      }
+    };
+
+    getUserData();
+  });
 
   const onFinish = async (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(e);
-
     const response = await Api.post(`posts`, {
-      id: 1,
-      userId: "2",
+      id: id,
+      userId: nowAuthorId,
       title: communityTitle,
       description: communityContent,
       createdAt: createdAt,
       updatedAt: createdAt,
     });
     if (response.status !== 200) {
-      return console.log(response.status);
+      console.log(response);
     } else {
-      console.log("성공:", response.data);
+      console.log(response.data);
+      navigate(ROUTES.COMMUNITY.ROOT);
     }
-    navigate(ROUTES.COMMUNITY.ROOT);
   };
+
+  // const onFinish = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   console.log(e);
+
+  //   const response = await Api.post(`posts`, {
+  //     id: 1,
+  //     userId: "2",
+  //     title: communityTitle,
+  //     description: communityContent,
+  //     createdAt: createdAt,
+  //     updatedAt: createdAt,
+  //   });
+  //   if (response.status !== 200) {
+  //     return console.log(response.status);
+  //   } else {
+  //     console.log("성공:", response.data);
+  //   }
+  //   navigate(ROUTES.COMMUNITY.ROOT);
+  // };
 
   return (
     <>

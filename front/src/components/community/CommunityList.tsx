@@ -22,16 +22,15 @@ import { Link } from "react-router-dom";
 import { ROUTES } from "../../enum/routes";
 import { useEffect } from "react";
 import * as Api from "../../api";
+import { Profile } from "../../assets";
 
 export interface CommunityPropsType {
   id: number;
-  userId: string;
-  userName: string;
+  author: string;
   title: string;
   createdAt: string;
   description: string;
   reply: number;
-  updatedAt: string;
   like: number;
   communityItems: CommunityType[];
   setCommunityItems: SetterOrUpdater<CommunityType[]>;
@@ -40,9 +39,9 @@ export interface CommunityPropsType {
 const CommunityItem = ({
   id,
   title,
+  author,
   createdAt,
   description,
-  userName,
   reply,
   like,
 }: CommunityPropsType): JSX.Element => {
@@ -58,8 +57,8 @@ const CommunityItem = ({
               <h3>{title}</h3>
             </li>
             <li className="profile-align ">
-              <img src="../../assets/profile.png" />
-              <h4>{userName}</h4>
+              <img src={Profile} />
+              <h4>{author}</h4>
             </li>
           </UserProfileStyled>
           <CommunityInfo>
@@ -91,7 +90,9 @@ const CommunityList = (): JSX.Element => {
       if (response.status !== 200) {
         return console.log(response);
       } else {
-        console.log("성공:", response.data);
+        setCommunityItems(response.data.data);
+        console.log("성공:", communityItems);
+        console.log(response.data.data);
       }
     };
     CommunityData();
@@ -116,16 +117,8 @@ const CommunityList = (): JSX.Element => {
           <CommunityListStyled>
             <div>
               {communityItems.map((communityItem: CommunityType) => {
-                const {
-                  id,
-                  title,
-                  userId,
-                  createdAt,
-                  updatedAt,
-                  userName,
-                  description,
-                  count,
-                } = communityItem;
+                const { id, title, createdAt, author, description, _count } =
+                  communityItem;
                 return (
                   <Link
                     key={id}
@@ -134,14 +127,12 @@ const CommunityList = (): JSX.Element => {
                   >
                     <CommunityItem
                       id={id}
-                      userId={userId}
-                      userName={userName}
+                      author={author}
                       title={title}
                       createdAt={createdAt}
-                      updatedAt={updatedAt}
                       description={description}
-                      reply={count.reply}
-                      like={count.like}
+                      reply={_count.reply}
+                      like={_count.like}
                       communityItems={communityItems}
                       setCommunityItems={setCommunityItems}
                     />
