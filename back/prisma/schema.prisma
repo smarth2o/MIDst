@@ -79,8 +79,22 @@ model diary {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   user        user     @relation(fields: [userId], references: [userId])
+  grammer grammer[]
 
   @@index([userId], map: "diary_userId_fkey")
+}
+
+model grammer{
+  id Int @id @default(autoincrement())
+  diaryId Int 
+  type String
+  description String
+  before String
+  bad String
+  better String
+  index Int
+  length Int
+  diary diary @relation(fields: [diaryId],references: [id])
 }
 
 model refreshtoken {
