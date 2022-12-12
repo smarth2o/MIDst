@@ -13,6 +13,7 @@ import {
 } from "../styles/search/Search.styled";
 import { ROUTES } from "../enum/routes";
 import SearchBar from "../components/search/SearchBar";
+import { LogoIcon } from "../assets/index";
 import { useNavigate } from "react-router";
 import { ChatWrapper, ChatBox } from "../styles/Landing.styled";
 import { useState, useEffect } from "react";
@@ -87,7 +88,7 @@ const MainPage = (): JSX.Element => {
         <Logo to={ROUTES.MAIN}>
           <ul className="topnav-first-ul ">
             <li>
-              <img src={require("../assets/mist.png")} alt="logo" />
+              <img src={LogoIcon} alt="logo" />
             </li>
             <li>
               <p>MIDst</p>

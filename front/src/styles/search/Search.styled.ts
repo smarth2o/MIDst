@@ -24,8 +24,9 @@ export const SearchWrapper = styled.div`
 `;
 
 export const MainSearchWrapper = styled(SearchWrapper)`
-  margin: 20rem auto;
+  margin: 25rem auto 20rem auto;
 
+  position: relative;
   input::placeholder {
     color: #7e72d5;
   }
@@ -35,6 +36,8 @@ export const Suggestions = styled.div`
   display: flex;
   align-items: center;
   width: 35em;
+  position: absolute;
+  top: -50px;
 `;
 
 export const Suggest = styled.button`
