@@ -40,3 +40,21 @@ export const DBCGrammarBtn = styled.button`
   width: 116px;
   height: 42px;
 `;
+
+export const DiaryBottomOpenCard = styled.div`
+  .DBOC-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  align-items: center;
+  border-radius: 20px;
+  height: 100%;
+  box-shadow: 3px 3px 3px 3px rgba(128, 128, 128, 0.252);
+  background-color: white;
+  padding: 20px;
+  margin: 30px;
+  a {
+    text-decoration: none;
+  }
+`;

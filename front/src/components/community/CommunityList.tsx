@@ -9,19 +9,24 @@ import {
   CommunityCardAlignStyled,
   CommunityInfo,
   CommunityListAlignStyled,
+  CommunityListStyled,
   CommunitySortBtnStyled,
   CommunityWriteBtnStyled,
 } from "../../styles/community/CommunityList";
 import dayjs from "dayjs";
-import UserProfile from "../common/UserProfile";
+import userProfileImg from "../../assets/profile.png";
 import { UserProfileStyled } from "../../styles/common/UserProfile";
 import { communityState, CommunityType } from "../../stores/CommunityAtom";
 import { SetterOrUpdater, useRecoilState } from "recoil";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../enum/routes";
+import { useEffect } from "react";
+import * as Api from "../../api";
 
 export interface CommunityPropsType {
   id: number;
+  userId: string;
+  userName: string;
   title: string;
   createdAt: string;
   description: string;
@@ -37,6 +42,7 @@ const CommunityItem = ({
   title,
   createdAt,
   description,
+  userName,
   reply,
   like,
 }: CommunityPropsType): JSX.Element => {
@@ -46,25 +52,30 @@ const CommunityItem = ({
   return (
     <>
       <CommunityCardAlignStyled>
-        <UserProfileStyled>
-          <li>
-            <h3>{title}</h3>
-          </li>
-          <UserProfile />
-        </UserProfileStyled>
-        <CommunityInfo>
-          <ul>
+        <div>
+          <UserProfileStyled>
             <li>
-              <ClockCircleOutlined /> {nowTime.diff(writingTime, "h")}시간 전
+              <h3>{title}</h3>
             </li>
-            <li>
-              <HeartOutlined /> {like}
+            <li className="profile-align ">
+              <img src={userProfileImg} />
+              <h4>{userName}</h4>
             </li>
-            <li>
-              <MessageOutlined /> {reply}
-            </li>
-          </ul>
-        </CommunityInfo>
+          </UserProfileStyled>
+          <CommunityInfo>
+            <ul>
+              <li>
+                <ClockCircleOutlined /> {nowTime.diff(writingTime, "h")}시간 전
+              </li>
+              <li>
+                <HeartOutlined /> {like}
+              </li>
+              <li>
+                <MessageOutlined /> {reply}
+              </li>
+            </ul>
+          </CommunityInfo>
+        </div>
       </CommunityCardAlignStyled>
     </>
   );
@@ -72,6 +83,20 @@ const CommunityItem = ({
 
 const CommunityList = (): JSX.Element => {
   const [communityItems, setCommunityItems] = useRecoilState(communityState);
+
+  const newest = `newest`;
+  useEffect(() => {
+    const CommunityData = async () => {
+      const response = await Api.get(`posts/all/${newest}`);
+      if (response.status !== 200) {
+        return console.log(response);
+      } else {
+        console.log("성공:", response.data);
+      }
+    };
+    CommunityData();
+  }, []);
+
   return (
     <>
       <CommunityAllAlignStyled>
@@ -88,30 +113,45 @@ const CommunityList = (): JSX.Element => {
           </button>
         </CommunitySortBtnStyled>
         <CommunityListAlignStyled>
-          {communityItems.map((communityItem: CommunityType) => {
-            const { id, title, createdAt, updatedAt, description, count } =
-              communityItem;
-            return (
-              <Link
-                key={id}
-                to={`/community/${communityItem.id}`}
-                className="community-link"
-              >
-                <CommunityItem
-                  id={id}
-                  title={title}
-                  createdAt={createdAt}
-                  updatedAt={updatedAt}
-                  description={description}
-                  reply={count.reply}
-                  like={count.like}
-                  communityItems={communityItems}
-                  setCommunityItems={setCommunityItems}
-                />
-              </Link>
-            );
-          })}
+          <CommunityListStyled>
+            <div>
+              {communityItems.map((communityItem: CommunityType) => {
+                const {
+                  id,
+                  title,
+                  userId,
+                  createdAt,
+                  updatedAt,
+                  userName,
+                  description,
+                  count,
+                } = communityItem;
+                return (
+                  <Link
+                    key={id}
+                    to={`/community/${communityItem.id}`}
+                    className="community-link"
+                  >
+                    <CommunityItem
+                      id={id}
+                      userId={userId}
+                      userName={userName}
+                      title={title}
+                      createdAt={createdAt}
+                      updatedAt={updatedAt}
+                      description={description}
+                      reply={count.reply}
+                      like={count.like}
+                      communityItems={communityItems}
+                      setCommunityItems={setCommunityItems}
+                    />
+                  </Link>
+                );
+              })}
+            </div>
+          </CommunityListStyled>
         </CommunityListAlignStyled>
+
         <CommunityWriteBtnStyled>
           <Link to={ROUTES.COMMUNITY.CREATE}>
             <button>Write</button>

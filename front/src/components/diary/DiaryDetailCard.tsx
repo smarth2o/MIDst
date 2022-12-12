@@ -1,22 +1,12 @@
-import {
-  ButtonHTMLAttributes,
-  DetailedHTMLProps,
-  MouseEventHandler,
-  useState,
-} from "react";
-import { SetterOrUpdater, useRecoilState, useSetRecoilState } from "recoil";
-import { diaryState, DiaryTypes } from "../../stores/DiaryAtom";
-import {
-  DiaryBtn,
-  DiaryCreateAlign,
-  DiaryForm,
-} from "../../styles/diary/DiaryCreate";
+import { useState } from "react";
+import { SetterOrUpdater } from "recoil";
+import { DiaryTypes } from "../../stores/DiaryAtom";
+import { DiaryForm } from "../../styles/diary/DiaryCreate";
 import {
   DiaryDetailBtn,
   DiaryDetailCardAlignStyled,
   DiaryDetailText,
 } from "../../styles/diary/DiaryDetailCard";
-import DiaryEditCard from "./DiaryEditCard";
 
 export interface DiaryPropsTypes {
   id: number;
@@ -49,6 +39,7 @@ const DiaryDetailCard = ({
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const [diaryTitle, setDiaryTitle] = useState(title);
+  const [diaryDescription, setDiaryDescription] = useState(description);
 
   const ClickHandler: ClickHandler = (props) => (e) => {
     e.preventDefault();
@@ -81,14 +72,6 @@ const DiaryDetailCard = ({
     return (
       <>
         <DiaryDetailCardAlignStyled>
-          {/* <DiaryEditCard
-            id={id}
-            date={date}
-            title={title}
-            description={description}
-            diarys={diarys}
-            setDiarys={setDiarys}
-          /> */}
           <div>
             <DiaryForm onSubmit={onSubmitDiary}>
               <input
@@ -102,7 +85,10 @@ const DiaryDetailCard = ({
               <br />
               <textarea
                 placeholder="Write about your day..."
-                value={description}
+                value={diaryDescription}
+                onChange={(e) => {
+                  setDiaryDescription(e.target.value);
+                }}
               />
             </DiaryForm>
           </div>

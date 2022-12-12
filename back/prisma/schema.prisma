@@ -15,10 +15,10 @@ model user {
   withdrawal   Int?           @db.TinyInt
   community    community[]
   diary        diary[]
+  like         like[]
   refreshtoken refreshtoken?
   reply        reply[]
   usertosearch usertosearch[]
-  like         like[]
 }
 
 model usertosearch {
@@ -33,14 +33,14 @@ model usertosearch {
 
 model community {
   id          Int      @id @unique @default(autoincrement())
-  author      String   @db.VarChar(45)
   title       String   @db.VarChar(30)
   description String   @db.VarChar(200)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  author      String   @db.VarChar(45)
   user        user     @relation(fields: [author], references: [name])
-  reply       reply[]
   like        like[]
+  reply       reply[]
 
   @@index([author], map: "community_userId_fkey")
 }
@@ -51,19 +51,22 @@ model like {
   userId    String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  user      user      @relation(fields: [userId], references: [name])
   community community @relation(fields: [postId], references: [id])
+  user      user      @relation(fields: [userId], references: [name])
+
+  @@index([postId], map: "like_postId_fkey")
+  @@index([userId], map: "like_userId_fkey")
 }
 
 model reply {
   id          Int       @id @unique @default(autoincrement())
-  author      String    @db.VarChar(45)
   postId      Int
   description String    @db.VarChar(200)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  community   community @relation(fields: [postId], references: [id])
+  author      String    @db.VarChar(45)
   user        user      @relation(fields: [author], references: [name])
+  community   community @relation(fields: [postId], references: [id])
 
   @@index([postId], map: "reply_postId_fkey")
   @@index([author], map: "reply_userId_fkey")
@@ -73,9 +76,9 @@ model diary {
   id          Int      @id @unique @default(autoincrement())
   userId      String   @db.VarChar(45)
   date        String
+  emotion     String?
   title       String   @db.VarChar(10)
   description String   @db.VarChar(100)
-  emotion     String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   user        user     @relation(fields: [userId], references: [userId])

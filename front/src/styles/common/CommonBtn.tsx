@@ -16,16 +16,13 @@ export const BackBtnStyled = styled.button`
 `;
 
 export const BackBtnAlignStyled = styled.div`
-  margin-top: 20px;
+  /* margin-top: 10vh; */
   display: grid;
   grid-template-columns: 50px 1fr;
-  padding-left: 7%;
+  padding-left: 5%;
   text-decoration: none;
   .back-btn-link {
     text-decoration: none;
-  }
-  @media (min-width: 1500px) {
-    padding-left: 20%;
   }
   .back-btn {
     display: flex;
@@ -44,6 +41,7 @@ export const BackBtnAlignStyled = styled.div`
 `;
 
 export const CCPAlignStyled = styled.div`
+  margin-top: 10vh;
   display: grid;
   grid-template-rows: 50px 1fr;
 `;

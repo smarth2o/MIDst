@@ -3,14 +3,12 @@ import {
   DiaryCreateAlign,
   DiaryForm,
 } from "../../styles/diary/DiaryCreate";
-import dayjs from "dayjs";
 
 const onSubmitDiary = () => {
   alert("제출이 완료되었습니다.");
 };
 
 const DiaryCreate = (): JSX.Element => {
-  const nowDate = dayjs().format("MMM Do YY");
   return (
     <>
       <DiaryCreateAlign>

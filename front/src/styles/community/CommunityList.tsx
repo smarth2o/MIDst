@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CommunityListAlignStyled = styled.div`
+export const CommunityListStyled = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -10,11 +10,17 @@ export const CommunityListAlignStyled = styled.div`
     text-decoration: none;
     color: black;
   }
+
+  div {
+    @media all and (min-width: 1300px) {
+      width: 70vw;
+    }
+  }
 `;
 
 export const CommunityCardAlignStyled = styled.div`
   background-color: white;
-  height: 150px;
+  height: 100px;
   border-radius: 20px;
   padding: 4%;
   margin-bottom: 20px;
@@ -24,11 +30,6 @@ export const CommunityCardAlignStyled = styled.div`
   }
   li {
     list-style: none;
-  }
-  @media (min-width: 1500px) {
-    align-items: center;
-    width: 1200px;
-    height: 8vh;
   }
 `;
 
@@ -86,4 +87,9 @@ export const CommunityAllAlignStyled = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+`;
+
+export const CommunityListAlignStyled = styled.div`
+  display: flex;
+  justify-content: space-around;
 `;

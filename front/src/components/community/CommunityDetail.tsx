@@ -4,11 +4,13 @@ import { CommunityType } from "../../stores/CommunityAtom";
 import { BackBtnAlignStyled } from "../../styles/common/CommonBtn";
 import {
   CommunityCommentStyled,
+  CommunityDetaillAllStyled,
   CommunityPostBoxStyled,
 } from "../../styles/community/CommunityDetailPost";
 import CommunityComment from "./CommunityReply";
 import { CommunityPropsType } from "./CommunityList";
 import CommunityPost from "./CommunityPost";
+import { ROUTES } from "../../enum/routes";
 
 const CommunityDetail = (): JSX.Element => {
   const { communityItems, setCommunityItems } =
@@ -20,34 +22,39 @@ const CommunityDetail = (): JSX.Element => {
   ) as CommunityType;
   const navigate = useNavigate();
   const onClickBtn = () => {
-    navigate(-1);
+    navigate(ROUTES.COMMUNITY.ROOT);
   };
 
   return (
     <>
-      <BackBtnAlignStyled>
-        <button className="back-btn" onClick={onClickBtn}>
-          <ArrowLeftOutlined />
-          돌아가기
-        </button>
-      </BackBtnAlignStyled>
-
-      <CommunityPostBoxStyled>
-        <CommunityPost
-          id={currentIndex}
-          title={currentCommunityItem.title}
-          description={currentCommunityItem.description}
-          createdAt={currentCommunityItem.createdAt}
-          updatedAt={currentCommunityItem.updatedAt}
-          reply={currentCommunityItem.count.reply}
-          like={currentCommunityItem.count.like}
-          communityItems={communityItems}
-          setCommunityItems={setCommunityItems}
-        />
-      </CommunityPostBoxStyled>
-      <CommunityCommentStyled>
-        <CommunityComment />
-      </CommunityCommentStyled>
+      <CommunityDetaillAllStyled>
+        <div className="community-detail-align">
+          <BackBtnAlignStyled>
+            <button className="back-btn" onClick={onClickBtn}>
+              <ArrowLeftOutlined />
+              돌아가기
+            </button>
+          </BackBtnAlignStyled>
+          <CommunityPostBoxStyled>
+            <CommunityPost
+              id={currentIndex}
+              userId={currentCommunityItem.userId}
+              userName={currentCommunityItem.userName}
+              title={currentCommunityItem.title}
+              description={currentCommunityItem.description}
+              createdAt={currentCommunityItem.createdAt}
+              updatedAt={currentCommunityItem.updatedAt}
+              reply={currentCommunityItem.count.reply}
+              like={currentCommunityItem.count.like}
+              communityItems={communityItems}
+              setCommunityItems={setCommunityItems}
+            />
+          </CommunityPostBoxStyled>
+          <CommunityCommentStyled>
+            <CommunityComment />
+          </CommunityCommentStyled>
+        </div>
+      </CommunityDetaillAllStyled>
     </>
   );
 };
