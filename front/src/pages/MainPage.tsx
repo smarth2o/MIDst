@@ -15,10 +15,15 @@ import { ROUTES } from "../enum/routes";
 import SearchBar from "../components/search/SearchBar";
 import { useNavigate } from "react-router";
 import { ChatWrapper, ChatBox } from "../styles/Landing.styled";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useResetRecoilState } from "recoil";
+import userState from "../stores/UserAtom";
+import * as Api from "../api";
 
 const MainPage = (): JSX.Element => {
   const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState<boolean>();
+  const userReset = useResetRecoilState(userState);
 
   useEffect(() => {
     const boxList = document.querySelectorAll(
@@ -42,6 +47,40 @@ const MainPage = (): JSX.Element => {
     boxList.forEach((el) => io.observe(el));
   }, []);
 
+  const handleSignout = async () => {
+    try {
+      userReset();
+      window.localStorage.removeItem("accessToken");
+      window.localStorage.removeItem("refreshToken");
+      // navigate("/", { replace: true });
+      console.log("로그아웃 성공");
+      window.location.reload();
+    } catch (err) {
+      console.log("로그아웃 실패");
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const res = await Api.get("user/currentUser");
+        // setUser({
+        //   name: res.data.name,
+        //   email: res.data.email,
+        //   password: res.data.password,
+        //   accessToken: res.data.refreshToken,
+        // });
+        setIsLogin(true);
+        console.log("로그인 된 상태");
+      } catch (error) {
+        setIsLogin(false);
+        console.log("로그인 안된 상태");
+      }
+    };
+    checkUser();
+  }, []);
+
   return (
     <>
       <TransparentWrapper>
@@ -56,25 +95,29 @@ const MainPage = (): JSX.Element => {
           </ul>
         </Logo>
         <Navbar>
-          {window.sessionStorage.getItem("name") ? (
-            <SignIn to={ROUTES.USER.LOGIN}>Sign In</SignIn>
+          {isLogin ? (
+            <SignOut to={ROUTES.MAIN} onClick={handleSignout}>
+              Sign Out
+            </SignOut>
           ) : (
-            <SignOut to={ROUTES.MAIN}>Sign Out</SignOut>
+            <SignIn to={ROUTES.USER.LOGIN}>Sign In</SignIn>
           )}
         </Navbar>
       </TransparentWrapper>
       <MainLayout>
-        <ChatWrapper>
-          <ChatBox className="left-chat-box">Learn English?</ChatBox>
-          <ChatBox className="right-chat-box">
-            공부하려고 미드 보는데 그냥 즐기다 끝나 ㅜ
-          </ChatBox>
-          <ChatBox className="left-chat-box">서비스 소개글 - Search</ChatBox>
-          <ChatBox className="right-chat-box"></ChatBox>
-          <ChatBox className="left-chat-box">서비스 소개글 - Diary</ChatBox>
-          <ChatBox className="right-chat-box"></ChatBox>
-          <ChatBox className="left-chat-box">START?</ChatBox>
-        </ChatWrapper>
+        {!isLogin && (
+          <ChatWrapper>
+            <ChatBox className="left-chat-box">Learn English?</ChatBox>
+            <ChatBox className="right-chat-box">
+              공부하려고 미드 보는데 그냥 즐기다 끝나 ㅜ
+            </ChatBox>
+            <ChatBox className="left-chat-box">서비스 소개글 - Search</ChatBox>
+            <ChatBox className="right-chat-box"></ChatBox>
+            <ChatBox className="left-chat-box">서비스 소개글 - Diary</ChatBox>
+            <ChatBox className="right-chat-box"></ChatBox>
+            <ChatBox className="left-chat-box">START?</ChatBox>
+          </ChatWrapper>
+        )}
         <MainSearchWrapper>
           <Suggestions>
             <Suggest onClick={() => navigate("/search")}>
