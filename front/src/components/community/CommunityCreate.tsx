@@ -1,14 +1,15 @@
+import React from "react";
 import dayjs from "dayjs";
 import { FormEventHandler, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../enum/routes";
+import * as Api from "../../api";
+import { CommunityPropsType } from "./CommunityList";
 import {
   CommunityCreateAlign,
   CommunityCreateBtnAlignStyled,
   CommunityCreateStyled,
 } from "../../styles/community/CommunityCreate";
-import * as Api from "../../api";
-import { CommunityPropsType } from "./CommunityList";
 
 const CommunityCreate = (): JSX.Element => {
   const [communityTitle, setCommunityTitle] = useState("");

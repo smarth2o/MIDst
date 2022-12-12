@@ -3,25 +3,23 @@ import axios from "axios";
 var express = require('express');
 class mainService {
 
-  async showSearch(searchword:string,title:string,name:string){
+  async showSearch(searchword:string){
     const searchData = await axios.post("http://127.0.0.1:8080/success", {
         searchword: searchword,
-        title:title,
-        name:name
       });
-
+      
       const result=searchData.data["searchword"];
-      // var i;
-      // var word=[]
-      // for(i=0;i<result.length;i++){
-      //   word[i]=result[i].split(" - ")
-
-      // }
-      console.log(result);
       return result;
   }
 
   async saveSearch(userId: string,searchword: string,searchSentence: string) {
+    const findSearch = await mainController.find(userId);
+    for(var i=0;i<findSearch.length;i++){
+      if(searchSentence===findSearch[i]["description"]){
+        const errorMessage: string = "이미 저장한 문구입니다.";
+          return errorMessage;
+      }
+    }
     const saveSearch = await mainController.create(
       userId,
       searchword,

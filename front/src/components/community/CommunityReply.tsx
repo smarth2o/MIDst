@@ -1,3 +1,4 @@
+import React from "react";
 import { useRecoilValue } from "recoil";
 import { replyState, ReplyType } from "../../stores/ReplyAtom";
 import { CommentAlignStyled } from "../../styles/community/CommunityComment";

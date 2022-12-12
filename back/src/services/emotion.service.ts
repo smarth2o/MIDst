@@ -6,9 +6,8 @@ class EmotionService {
         const checkEmotion = await axios.post("http://127.0.0.1:8080/predict", {
             feeling: description,
         });
-
         const result = await DiaryRepository.updateDiary(id, {
-            emotion: checkEmotion["data"]["emotion"],
+            emotion: checkEmotion["data"]["emotion"].toString(),
         });
 
         return result;

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   ClockCircleOutlined,
   DownOutlined,
@@ -14,7 +15,6 @@ import {
   CommunityWriteBtnStyled,
 } from "../../styles/community/CommunityList";
 import dayjs from "dayjs";
-import userProfileImg from "../../assets/profile.png";
 import { UserProfileStyled } from "../../styles/common/UserProfile";
 import { communityState, CommunityType } from "../../stores/CommunityAtom";
 import { SetterOrUpdater, useRecoilState } from "recoil";
@@ -58,7 +58,7 @@ const CommunityItem = ({
               <h3>{title}</h3>
             </li>
             <li className="profile-align ">
-              <img src={userProfileImg} />
+              <img src="../../assets/profile.png" />
               <h4>{userName}</h4>
             </li>
           </UserProfileStyled>

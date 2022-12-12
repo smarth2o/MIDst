@@ -6,15 +6,11 @@ const replyRouter: Router = Router();
 
 replyRouter.post(
     "/:postId",
-    /*
-  #swagger.tags=['Reply']
-  #swagger.summary="커뮤니티 글 댓글 작성"
-  */
     loginRequired,
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const postId = req.params.postId;
-            const replyData = req.body;
+            const postId: string = req.params.postId;
+            const replyData: { name: string; description: string } = req.body;
             const result = await ReplyService.createReply(postId, replyData);
             res.status(201).json({ data: result });
         } catch (error) {
@@ -24,13 +20,9 @@ replyRouter.post(
 );
 replyRouter.get(
     "/:postId/all",
-    /*
-  #swagger.tags=['Reply']
-  #swagger.summary="커뮤니티 글 댓글 목록"
-  */
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const postId = req.params.postId;
+            const postId: string = req.params.postId;
             const result = await ReplyService.getReplies(postId);
             res.status(200).json({ data: result });
         } catch (error) {
@@ -41,13 +33,9 @@ replyRouter.get(
 
 replyRouter.get(
     "/:id",
-    /*
-  #swagger.tags=['Reply']
-  #swagger.summary="커뮤니티 글 특정 댓글 상세"
-  */
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const id = req.params.id;
+            const id: string = req.params.id;
             const result = await ReplyService.getReplyById(id);
             res.status(200).json({ data: result });
         } catch (error) {
@@ -57,15 +45,11 @@ replyRouter.get(
 );
 replyRouter.put(
     "/:id",
-    /*
-  #swagger.tags=['Reply']
-  #swagger.summary="커뮤니티 글 댓글 수정"
-  */
     loginRequired,
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const id = req.params.id;
-            const replyData = req.body;
+            const id: string = req.params.id;
+            const replyData: { description: string } = req.body;
             const result = await ReplyService.updateReply(id, replyData);
             res.status(200).json({ data: result });
         } catch (error) {
@@ -75,14 +59,10 @@ replyRouter.put(
 );
 replyRouter.delete(
     "/:id",
-    /*
-  #swagger.tags=['Reply']
-  #swagger.summary="커뮤니티 글 댓글 삭제"
-  */
     loginRequired,
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const id = req.params.id;
+            const id: string = req.params.id;
             const result = await ReplyService.deleteReply(id);
             res.status(200).json({ data: result });
         } catch (error) {

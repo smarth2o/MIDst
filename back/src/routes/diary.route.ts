@@ -8,10 +8,6 @@ const diaryRouter: Router = Router();
 
 diaryRouter.post(
     "/",
-    /*
-  #swagger.tags=['Diaries']
-  #swagger.summary="일기 작성"
-  */
     loginRequired,
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
@@ -28,13 +24,9 @@ diaryRouter.post(
         }
     }
 );
+
 diaryRouter.get(
     "/",
-    loginRequired,
-    /*
-  #swagger.tags=['Diaries']
-  #swagger.summary="유저 일기 목록 조회"
-  */
     loginRequired,
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
@@ -46,16 +38,13 @@ diaryRouter.get(
         }
     }
 );
+
 diaryRouter.get(
     "/:id",
-    /*
-  #swagger.tags=['Diaries']
-  #swagger.summary="특정 일기 조회"
-  */
     loginRequired,
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const id = req.params.id;
+            const id: string = req.params.id;
             const result = await DiaryService.getDiaryById(id);
             res.status(200).json({ data: result });
         } catch (error) {
@@ -63,31 +52,18 @@ diaryRouter.get(
         }
     }
 );
+
 diaryRouter.put(
     "/:id",
-    /*
-  #swagger.tags=['Diaries']
-  #swagger.summary="일기 수정"
-  */
     loginRequired,
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            /*
-      #swagger.parameters['obj'] = {
-                in: 'body',
-                description: 'diaryData',
-                schema:{
-                  diaryData:{
-                    $date: 'string',
-                    $title: 'string',
-                    $description:'string',
-                    $emotion:'string'
-                  }
-                }
-            }
-      */
-            const id = req.params.id;
-            const diaryData = req.body;
+            const id: string = req.params.id;
+            const diaryData: {
+                date?: string;
+                title?: string;
+                description?: string;
+            } = req.body;
             const result = await DiaryService.updateDiary(id, diaryData);
             res.status(200).json({ data: result });
         } catch (error) {
@@ -95,16 +71,13 @@ diaryRouter.put(
         }
     }
 );
+
 diaryRouter.delete(
     "/:id",
-    /*
-  #swagger.tags=['Diaries']
-  #swagger.summary="일기 삭제"
-  */
     loginRequired,
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const id = req.params.id;
+            const id: string = req.params.id;
             const result = await DiaryService.deleteDiary(id);
             res.status(200).json({ data: result });
         } catch (error) {
@@ -113,13 +86,13 @@ diaryRouter.delete(
     }
 );
 
-diaryRouter.put(
+diaryRouter.post(
     "/:id/emotions",
     loginRequired,
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const id = req.params.id;
-            const { description } = req.body;
+            const id: string = req.params.id;
+            const description: string = req.body.description;
             const result = await EmotionService.checkEmotion(id, description);
             res.status(200).json({ data: result });
         } catch (error) {
@@ -128,22 +101,70 @@ diaryRouter.put(
     }
 );
 
-const responseFilter = (data) => {
+const responseFilter = (description: string, data) => {
     const errorList = data["response"]["errors"];
+    errorList.forEach((error) => {
+        let start = description.lastIndexOf(".", error.offset);
+        if (start === -1) {
+            start = description.lastIndexOf("?", error.offset);
+        }
+        if (start === -1) {
+            start = description.lastIndexOf("!", error.offset);
+        }
+        let end = description.indexOf(".", error.offset);
+        if (end === -1) {
+            end = description.indexOf("?", error.offset);
+        }
+        if (end === -1) {
+            end = description.indexOf("!", error.offset);
+        }
+        if (start === -1) {
+            error["before"] = description.slice(start + 1, end + 1);
+        } else {
+            error["before"] = description.slice(start + 2, end + 1);
+        }
+        error["index"] = error.offset - start - 1;
+
+        delete error.offset;
+        delete error.id;
+    });
     return errorList;
 };
 
 diaryRouter.post(
-    "/spell",
+    "/grammerCheck",
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const description = req.body.description;
+            const description: string = req.body.description;
             const textgearsApi = textgears(process.env.TEXTGEARS_API_KEY, {
                 language: "en-US",
             });
             const check = await textgearsApi.checkGrammar(description);
-            const result = responseFilter(check);
+            const result = responseFilter(description, check);
             res.status(200).json(result);
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+diaryRouter.post(
+    "/:id/grammerCheck",
+    loginRequired,
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const id: string = req.params.id;
+            const grammerData: {
+                type: string;
+                description: string;
+                before: string;
+                bad: string;
+                better: string;
+                index: number;
+                length: number;
+            } = req.body;
+            const result = await DiaryService.createCheck(id, grammerData);
+            res.status(200).json({ data: result });
         } catch (error) {
             next(error);
         }

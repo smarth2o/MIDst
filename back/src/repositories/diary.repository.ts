@@ -4,7 +4,14 @@ import { PrismaClient } from "@prisma/client";
 class DiaryRepository {
     prisma = new PrismaClient();
 
-    async createDiary(userId: string, diaryData) {
+    async createDiary(
+        userId: string,
+        diaryData: {
+            date: string;
+            title: string;
+            description: string;
+        }
+    ) {
         const result = await this.prisma.diary.create({
             data: {
                 ...diaryData,
@@ -41,7 +48,15 @@ class DiaryRepository {
         return result;
     }
 
-    async updateDiary(id: string, diaryData) {
+    async updateDiary(
+        id: string,
+        diaryData: {
+            date?: string;
+            title?: string;
+            description?: string;
+            emotion?: string;
+        }
+    ) {
         const result = await this.prisma.diary.update({
             where: { id: Number(id) },
             data: { ...diaryData },
@@ -58,9 +73,34 @@ class DiaryRepository {
         return result;
     }
 
-    async checkEmotion(description) {
+    async checkEmotion(description: string) {
         const result = await axios.post("http://127.0.0.1:8080/predict", {
             feeling: description,
+        });
+        return result;
+    }
+
+    async createCheck(
+        id: string,
+        grammerData: {
+            type: string;
+            description: string;
+            before: string;
+            bad: string;
+            better: string;
+            index: number;
+            length: number;
+        }
+    ) {
+        const result = await this.prisma.grammer.create({
+            data: {
+                ...grammerData,
+                diary: {
+                    connect: {
+                        id: Number(id),
+                    },
+                },
+            },
         });
         return result;
     }

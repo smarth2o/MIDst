@@ -1,7 +1,10 @@
 import DiaryRepository from "repositories/diary.repository";
 
 class DiaryService {
-    public createDiary = async (userId: string, diaryData: {}) => {
+    public createDiary = async (
+        userId: string,
+        diaryData: { date: string; title: string; description: string }
+    ) => {
         const createDiaryData = await DiaryRepository.createDiary(
             userId,
             diaryData
@@ -19,7 +22,14 @@ class DiaryService {
         return findOneDiary;
     };
 
-    public updateDiary = async (id: string, diaryData: {}) => {
+    public updateDiary = async (
+        id: string,
+        diaryData: {
+            date?: string;
+            title?: string;
+            description?: string;
+        }
+    ) => {
         const updateDiaryData = await DiaryRepository.updateDiary(
             id,
             diaryData
@@ -30,6 +40,25 @@ class DiaryService {
     public deleteDiary = async (id: string) => {
         const deleteDiaryData = await DiaryRepository.deleteDiary(id);
         return deleteDiaryData;
+    };
+
+    public createCheck = async (
+        id: string,
+        grammerData: {
+            type: string;
+            description: string;
+            before: string;
+            bad: string;
+            better: string;
+            index: number;
+            length: number;
+        }
+    ) => {
+        const createGrammer = await DiaryRepository.createCheck(
+            id,
+            grammerData
+        );
+        return createGrammer;
     };
 }
 

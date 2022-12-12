@@ -1,7 +1,11 @@
 import CommunityRepository from "repositories/community.repository";
 
 class CommunityService {
-    public createPost = async (postData: {}) => {
+    public createPost = async (postData: {
+        name: string;
+        title: string;
+        description: string;
+    }) => {
         const createPostData = await CommunityRepository.createPost(postData);
         return createPostData;
     };
@@ -25,7 +29,10 @@ class CommunityService {
         return findOnediary;
     };
 
-    public updatePost = async (id: string, postData: {}) => {
+    public updatePost = async (
+        id: string,
+        postData: { title?: string; description?: string }
+    ) => {
         const updatePostData = await CommunityRepository.updatePost(
             id,
             postData

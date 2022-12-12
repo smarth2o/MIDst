@@ -87,6 +87,15 @@ class userController {
         return UserbyUserId;
     }
 
+    async findByName(name: string) {
+        const UserByName = await prisma.user.findMany({
+            where: {
+                name,
+            },
+        });
+        return UserByName;
+    }
+
     //유저 이름 정보 수정
     async updateUser(userId: string, name: string) {
         const updateUser = await prisma.user.update({
