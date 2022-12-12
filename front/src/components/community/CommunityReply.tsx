@@ -5,6 +5,7 @@ import { replyState, ReplyType } from "../../stores/ReplyAtom";
 import { CommentAlignStyled } from "../../styles/community/CommunityComment";
 import CommunityReplyCreate from "./CommunityReplyCreate";
 import CommunityReplyItem from "./CommunityReplyItem";
+import * as Api from "../../api";
 
 const backPort = "8080";
 const autoBaseUrl = window.location.hostname;
@@ -14,7 +15,7 @@ const CommunityReply = (): JSX.Element => {
   const replys = useRecoilValue(replyState);
 
   const sendRequest = async () => {
-    const response = await axios.get(`${serverUrl}/replies/${0}/all`);
+    const response = await Api.get(`replies/${0}/all`);
     console.log(response);
     console.log(response.data);
   };

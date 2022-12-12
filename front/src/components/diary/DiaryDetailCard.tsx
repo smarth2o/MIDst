@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SetterOrUpdater } from "recoil";
-import { diaryState, DiaryTypes } from "../../stores/DiaryAtom";
+import { DiaryTypes } from "../../stores/DiaryAtom";
 import { DiaryForm } from "../../styles/diary/DiaryCreate";
 import {
   DiaryDetailBtn,

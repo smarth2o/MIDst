@@ -10,6 +10,7 @@ import {
 import CommunityComment from "./CommunityReply";
 import { CommunityPropsType } from "./CommunityList";
 import CommunityPost from "./CommunityPost";
+import { ROUTES } from "../../enum/routes";
 
 const CommunityDetail = (): JSX.Element => {
   const { communityItems, setCommunityItems } =
@@ -21,7 +22,7 @@ const CommunityDetail = (): JSX.Element => {
   ) as CommunityType;
   const navigate = useNavigate();
   const onClickBtn = () => {
-    navigate(-1);
+    navigate(ROUTES.COMMUNITY.ROOT);
   };
 
   return (

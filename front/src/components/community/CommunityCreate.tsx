@@ -1,7 +1,6 @@
-import axios from "axios";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import { ROUTES } from "../../enum/routes";
 import {
   CommunityCreateAlign,
@@ -10,15 +9,10 @@ import {
 } from "../../styles/community/CommunityCreate";
 import * as Api from "../../api";
 
-const backPort = "8080";
-const autoBaseUrl = window.location.hostname;
-const serverUrl = `http://${autoBaseUrl}:${backPort}`;
-
 const CommunityCreate = (): JSX.Element => {
   const [communityTitle, setCommunityTitle] = useState("");
   const [communityContent, setCommunityContent] = useState("");
   const createdAt = dayjs();
-  const params = useParams();
 
   const navigate = useNavigate();
   const onCancel = () => {
@@ -26,29 +20,6 @@ const CommunityCreate = (): JSX.Element => {
       navigate(ROUTES.COMMUNITY.ROOT);
     }
   };
-  // const onPostCreate = async (value: CommunityPropsType) => {
-  //   try {
-  //     await axios
-  //       .post(`${serverUrl}/posts`, {
-  //         id: value.id,
-  //         userId: value.userId,
-  //         title: value.title,
-  //         description: value.description,
-  //         createdAt: value.createdAt,
-  //         updatedAt: value.createdAt,
-  //       })
-  //       .then(function (res) {
-  //         console.log(res);
-  //         console.log(res.data);
-  //       });
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   onPostCreate();
-  // }, []);
 
   useEffect(() => {}, []);
 
@@ -65,7 +36,7 @@ const CommunityCreate = (): JSX.Element => {
       updatedAt: createdAt,
     })
       .then(function (res) {
-        console.log(res);
+        console.log("성공:", res.data);
       })
       .catch(function (err) {
         console.log(err);
