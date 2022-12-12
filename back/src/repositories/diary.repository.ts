@@ -1,3 +1,4 @@
+import axios from "axios";
 import { PrismaClient } from "@prisma/client";
 
 class DiaryRepository {
@@ -54,6 +55,13 @@ class DiaryRepository {
             where: { id: Number(id) },
         });
         await this.prisma.$disconnect();
+        return result;
+    }
+
+    async checkEmotion(description) {
+        const result = await axios.post("http://127.0.0.1:8080/predict", {
+            feeling: description,
+        });
         return result;
     }
 }

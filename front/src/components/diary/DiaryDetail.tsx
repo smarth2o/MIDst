@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link, useOutletContext, useParams } from "react-router-dom";
 import { DiaryValueType } from "../../pages/DiaryPage";
 import { DiaryTypes } from "../../stores/DiaryAtom";
@@ -7,17 +6,15 @@ import {
   CreateDiaryBtn,
   DiaryDetailAlignStyled,
 } from "../../styles/diary/DiaryPage";
+import DiaryDetailCard from "./DiaryDetailCard";
 
 const DiaryDetail = (): JSX.Element => {
-
-  const {diarys, setDiarys} = useOutletContext<DiaryValueType>();
-  const { detail } =useParams();
-  const currentIndex =  Number(detail ?? 1);
-  const currentDiary = diarys.find((diary)=> diary.id === currentIndex)
-
-console.log("다이어리내용",currentDiary) 
-console.log("떠야하는 글 넘버",currentIndex)
-console.log("URL 넘버",detail)
+  const { diarys, setDiarys } = useOutletContext<DiaryValueType>();
+  const { detail } = useParams();
+  const currentIndex = Number(detail ?? 1);
+  const currentDiary = diarys.find(
+    (diary) => diary.id === currentIndex
+  ) as DiaryTypes;
 
   return (
     <>
@@ -27,7 +24,16 @@ console.log("URL 넘버",detail)
         </Link>
       </DiaryDetailAlignStyled>
 
-      {/* <DiaryCreateAlign><DiaryDetailCard id={currentIndex} title={currentDiary.title}/></DiaryCreateAlign> */}
+      <DiaryCreateAlign>
+        <DiaryDetailCard
+          id={currentIndex}
+          title={currentDiary.title}
+          description={currentDiary.description}
+          date={currentDiary.date}
+          diarys={diarys}
+          setDiarys={setDiarys}
+        />
+      </DiaryCreateAlign>
     </>
   );
 };

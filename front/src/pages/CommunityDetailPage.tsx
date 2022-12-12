@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import { Outlet } from "react-router";
+import { useRecoilState } from "recoil";
+import CommunityDetail from "../components/community/CommunityDetail";
+import { communityState } from "../stores/CommunityAtom";
+import { AllBackGroundStyled } from "../styles/diary/DiaryCreatePage";
 
 const CommunityDetailPage = (): JSX.Element => {
+  const [communityItems, setCommunityItems] = useRecoilState(communityState);
+
   return (
-    <div className="CommunityDetailPage">
-      <p> 커뮤니티 글 세부 페이지</p>
-    </div>
+    <AllBackGroundStyled>
+      <Outlet context={{ communityItems, setCommunityItems }} />;
+    </AllBackGroundStyled>
   );
 };
 

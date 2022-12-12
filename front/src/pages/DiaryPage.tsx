@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Outlet, useNavigate, useParams } from "react-router";
+import { Outlet } from "react-router";
 import { SetterOrUpdater, useRecoilState } from "recoil";
 import DiaryBottom from "../components/diary/DiaryBottom";
 import { DiarySide } from "../components/diary/DiarySide";
@@ -17,9 +17,7 @@ export interface DiaryValueType {
 }
 
 const DiaryPage = (): JSX.Element => {
-
-  const [diarys, setDiarys] = useRecoilState(diaryState)
-
+  const [diarys, setDiarys] = useRecoilState(diaryState);
 
   useEffect(() => {
     // 가장 최근 일기의 id값을 구해서
@@ -31,7 +29,7 @@ const DiaryPage = (): JSX.Element => {
       <DiaryAlignStyled>
         <DiarySide />
         <DiaryMainStyled>
-          <Outlet context={{diarys, setDiarys}}/>
+          <Outlet context={{ diarys, setDiarys }} />
           <DiaryBottom />
         </DiaryMainStyled>
       </DiaryAlignStyled>

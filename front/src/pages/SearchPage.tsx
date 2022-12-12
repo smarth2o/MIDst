@@ -1,15 +1,21 @@
-import { SearchLayout, SearchPageLayout } from "../styles/Search.styled";
-import FilterCard from "../components/FilterCard";
-import SearchBar from "../components/SearchBar";
-import SearchResultsCard from "../components/SearchResultsCard";
+import {
+  SearchLayout,
+  SearchPageLayout,
+  SearchWrapper,
+} from "../styles/Search.styled";
+import FilterCard from "../components/search/FilterCard";
+import SearchBar from "../components/search/SearchBar";
+import SearchResultsCard from "../components/search/SearchResultsCard";
 
 const SearchPage = (): JSX.Element => {
   return (
     <SearchPageLayout>
-      <FilterCard></FilterCard>
+      <FilterCard />
       <SearchLayout>
-        <SearchBar></SearchBar>
-        <SearchResultsCard></SearchResultsCard>
+        <SearchWrapper>
+          <SearchBar />
+        </SearchWrapper>
+        <SearchResultsCard />
       </SearchLayout>
     </SearchPageLayout>
   );
