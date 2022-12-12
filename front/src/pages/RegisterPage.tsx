@@ -89,7 +89,6 @@ const RegisterPage = (): JSX.Element => {
               type="email"
               name="email"
               placeholder="Email address"
-              autoComplete="off"
               value={form.email}
               onChange={handleChange}
             ></Input>

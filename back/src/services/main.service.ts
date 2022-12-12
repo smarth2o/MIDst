@@ -3,8 +3,10 @@ import axios from "axios";
 var express = require("express");
 class mainService {
   async showSearch(searchword: string, title: string, name: string) {
+    // post -> get으로 수정함
     const searchData = await axios.get(`http://127.0.0.1:8080/success`, {
       params: {
+        // params 추가
         searchword: searchword,
         title: title,
         name: name,

@@ -6,7 +6,7 @@ axios.defaults.headers.get["Content-Type"] = "application/json";
 
 async function get(endpoint: string, params = "") {
   return axios.get(serverUrl + endpoint + "/" + params, {
-    // params: params,
+    // params: params, -> string이 아닌 object 이어야 함 (query?)
     // JWT 토큰을 헤더에 담아 백엔드 서버에 보냄.
     headers: {
       "Content-Type": "application/json",
