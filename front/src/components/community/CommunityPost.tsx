@@ -24,7 +24,7 @@ const CommunityPost = ({
   title,
   description,
   createdAt,
-  userName,
+  author,
   reply,
   like,
 }: CommunityPropsType): JSX.Element => {
@@ -62,7 +62,7 @@ const CommunityPost = ({
             <UserProfileStyled>
               <li className="profile-align">
                 <UserProfile />
-                <h3>{userName}</h3>
+                <h3>{author}</h3>
               </li>
             </UserProfileStyled>
           </CPTopAlignStyled>

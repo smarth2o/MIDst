@@ -38,14 +38,12 @@ const CommunityDetail = (): JSX.Element => {
           <CommunityPostBoxStyled>
             <CommunityPost
               id={currentIndex}
-              userId={currentCommunityItem.userId}
-              userName={currentCommunityItem.userName}
+              author={currentCommunityItem.author}
               title={currentCommunityItem.title}
               description={currentCommunityItem.description}
               createdAt={currentCommunityItem.createdAt}
-              updatedAt={currentCommunityItem.updatedAt}
-              reply={currentCommunityItem.count.reply}
-              like={currentCommunityItem.count.like}
+              reply={currentCommunityItem._count.reply}
+              like={currentCommunityItem._count.like}
               communityItems={communityItems}
               setCommunityItems={setCommunityItems}
             />
