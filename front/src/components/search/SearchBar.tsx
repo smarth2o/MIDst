@@ -23,7 +23,7 @@ const SearchBar = (): JSX.Element => {
   //   name: "",
   // });
 
-  const [search, setSearch] = useState<string>("");
+  const [searchword, setSearch] = useState<string>("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // const { name, value } = event.target;
@@ -32,9 +32,9 @@ const SearchBar = (): JSX.Element => {
   };
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(search);
+    console.log(searchword,"이거");
     try {
-      const res = await Api.get("main/showSearch", search);
+      const res = await Api.get(`main/showSearch/${searchword}`);
       console.log(res.data);
       navigate("/search");
     } catch (err) {
@@ -49,7 +49,7 @@ const SearchBar = (): JSX.Element => {
         type="text"
         name="searchword"
         placeholder="Search for expressions or words you're curious about!"
-        value={search}
+        value={searchword}
         onChange={handleChange}
       ></Search>
       <SearchButton onClick={handleSubmit}>
