@@ -20,6 +20,8 @@ import { communityState, CommunityType } from "../../stores/CommunityAtom";
 import { SetterOrUpdater, useRecoilState } from "recoil";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../enum/routes";
+import { useEffect } from "react";
+import * as Api from "../../api";
 
 export interface CommunityPropsType {
   id: number;
@@ -81,6 +83,20 @@ const CommunityItem = ({
 
 const CommunityList = (): JSX.Element => {
   const [communityItems, setCommunityItems] = useRecoilState(communityState);
+
+  const newest = `newest`;
+  useEffect(() => {
+    const CommunityData = async () => {
+      const response = await Api.get(`posts/all/${newest}`);
+      if (response.status !== 200) {
+        return console.log(response);
+      } else {
+        console.log("성공:", response.data);
+      }
+    };
+    CommunityData();
+  }, []);
+
   return (
     <>
       <CommunityAllAlignStyled>

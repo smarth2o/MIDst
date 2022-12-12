@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { FormEventHandler, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../enum/routes";
 import {
@@ -8,6 +8,7 @@ import {
   CommunityCreateStyled,
 } from "../../styles/community/CommunityCreate";
 import * as Api from "../../api";
+import { CommunityPropsType } from "./CommunityList";
 
 const CommunityCreate = (): JSX.Element => {
   const [communityTitle, setCommunityTitle] = useState("");
@@ -23,25 +24,24 @@ const CommunityCreate = (): JSX.Element => {
 
   useEffect(() => {}, []);
 
-  const onFinish = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onFinish = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log(e);
 
-    await Api.post(`posts`, {
+    const response = await Api.post(`posts`, {
       id: 1,
       userId: "2",
       title: communityTitle,
       description: communityContent,
       createdAt: createdAt,
       updatedAt: createdAt,
-    })
-      .then(function (res) {
-        console.log("성공:", res.data);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-    return navigate(ROUTES.COMMUNITY.ROOT);
+    });
+    if (response.status !== 200) {
+      return console.log(response.status);
+    } else {
+      console.log("성공:", response.data);
+    }
+    navigate(ROUTES.COMMUNITY.ROOT);
   };
 
   return (
