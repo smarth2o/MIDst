@@ -127,10 +127,10 @@ const MainPage = (): JSX.Element => {
             <Suggest onClick={() => navigate("/community")}>
               # Share your experience
             </Suggest>
-            <Suggest onClick={() => navigate("/diary")}>
+            <Suggest disabled={!isLogin} onClick={() => navigate("/diary")}>
               # Write a diary
             </Suggest>
-            <Suggest onClick={() => navigate("/personal")}>
+            <Suggest disabled={!isLogin} onClick={() => navigate("/personal")}>
               # Check out your record
             </Suggest>
           </Suggestions>
