@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import background from "../assets/pinkbrain.png";
-import logo from "../assets/mist.png";
+import { BackgroundImg, LogoIcon } from "../assets/index";
 
 export const Layout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url(${background}) no-repeat center center;
+  background: url(${BackgroundImg}) no-repeat center center;
   background-size: cover;
   width: 100%;
   min-height: 100vh;
@@ -37,7 +36,7 @@ export const Form = styled.form`
 `;
 
 export const Logo = styled.img.attrs({
-  src: logo,
+  src: LogoIcon,
   alt: "logo",
 })`
   width: 40px;

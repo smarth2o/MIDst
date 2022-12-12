@@ -13,8 +13,8 @@ import {
 } from "../styles/Register.styled";
 import { ROUTES } from "../enum/routes";
 import { useState } from "react";
-import * as Api from "../api";
 import { useNavigate } from "react-router-dom";
+import * as Api from "../api";
 
 interface RegisterData {
   email: string;
@@ -42,7 +42,7 @@ const RegisterPage = (): JSX.Element => {
 
   const handleValidEmail = async () => {
     try {
-      await Api.post("user/register/email", form.email);
+      await Api.post(`user/register/email`, form.email);
     } catch (err) {
       console.log("이메일 전송 에러");
     }
@@ -59,7 +59,7 @@ const RegisterPage = (): JSX.Element => {
     event.preventDefault();
 
     try {
-      const res = await Api.post("user/register", form);
+      const res = await Api.post(`user/register`, form);
       console.log(res);
       navigate("/login");
     } catch (err) {
@@ -89,7 +89,6 @@ const RegisterPage = (): JSX.Element => {
               type="email"
               name="email"
               placeholder="Email address"
-              autoComplete="off"
               value={form.email}
               onChange={handleChange}
             ></Input>

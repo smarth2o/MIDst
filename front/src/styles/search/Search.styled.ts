@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import background from "../assets/pinkbrain.png";
-import search from "../assets/search.svg";
+import { BackgroundImg, SearchIcon } from "../../assets/index";
 
 export const MainLayout = styled.div`
   display: flex;
   flex-direction: column;
-  background: url(${background}) no-repeat center center;
+  background: url(${BackgroundImg}) no-repeat center center;
   background-attachment: fixed;
   background-size: cover;
+  width: 100%;
   min-height: 100vh;
 `;
 
@@ -112,8 +112,8 @@ export const SearchButton = styled.button`
   background-color: transparent;
 `;
 
-export const SearchIcon = styled.img.attrs({
-  src: search,
+export const SearchImg = styled.img.attrs({
+  src: SearchIcon,
   alt: "search",
 })`
   width: 25px;

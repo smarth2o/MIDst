@@ -2,7 +2,7 @@ import {
   SearchLayout,
   SearchPageLayout,
   SearchWrapper,
-} from "../styles/Search.styled";
+} from "../styles/search/Search.styled";
 import FilterCard from "../components/search/FilterCard";
 import SearchBar from "../components/search/SearchBar";
 import SearchResultsCard from "../components/search/SearchResultsCard";

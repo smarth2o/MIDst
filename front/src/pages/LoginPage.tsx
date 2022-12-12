@@ -43,7 +43,7 @@ const LoginPage = (): JSX.Element => {
       // setUser({ email: user.email, password: user.password });
       // window.sessionStorage.setItem("email", user.email);
 
-      console.log(res);
+      console.log("로그인 성공", res.data);
       navigate("/");
     } catch (err) {
       console.log("로그인 실패");
@@ -61,6 +61,7 @@ const LoginPage = (): JSX.Element => {
             type="email"
             name="email"
             placeholder="Email address"
+            autoComplete="off"
             value={form.email}
             onChange={handleChange}
           ></Input>

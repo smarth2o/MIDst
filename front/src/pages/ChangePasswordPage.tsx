@@ -34,7 +34,7 @@ const ChangePasswordPage = (): JSX.Element => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const res = await Api.put("user/updateuserPassword", password);
+      const res = await Api.put(`user/updateuserPassword`, password);
       console.log(res);
       setChanged(true);
     } catch (err) {

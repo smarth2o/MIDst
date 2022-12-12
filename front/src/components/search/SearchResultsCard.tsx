@@ -1,14 +1,13 @@
-import cloudEmp from "../../assets/cloudEmp.svg";
-import cloudFull from "../../assets/cloudFull.svg";
 import {
   SearchResultBox,
   SearchResultSort,
   SearchResults,
   SearchResult,
   Button,
-} from "../../styles/Search.styled";
-import { DownIcon, UpIcon } from "../../styles/Filter.styled";
+} from "../../styles/search/Search.styled";
+import { DownIcon, UpIcon } from "../../styles/search/Filter.styled";
 import { useState } from "react";
+import { CloudEmp, CloudFull } from "../../assets/index";
 
 interface SearchResultCardProps {
   children: React.ReactNode;
@@ -22,7 +21,7 @@ const SearchResultCard = ({ children }: SearchResultCardProps): JSX.Element => {
     <SearchResult onClick={() => setTranslate(!translate)}>
       <p>{children}</p>
       <button onClick={() => setCloud(!cloud)}>
-        <img src={cloud ? cloudFull : cloudEmp} alt="cloud" />
+        <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
       </button>
     </SearchResult>
   );
