@@ -6,14 +6,14 @@ const communityRouter: Router = Router();
 
 communityRouter.post(
     "/",
-    /*
-  #swagger.tags=['Community']
-  #swagger.summary="커뮤니티 글 작성"
-  */
     loginRequired,
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const postData = req.body;
+            const postData: {
+                name: string;
+                title: string;
+                description: string;
+            } = req.body;
             const result = await CommunityService.createPost(postData);
             res.status(201).json({ data: result });
         } catch (error) {
@@ -23,10 +23,6 @@ communityRouter.post(
 );
 communityRouter.get(
     "/all/:sort",
-    /*
-  #swagger.tags=['Community']
-  #swagger.summary="커뮤니티 글 전체 목록"
-  */
     async (req: Request, res: Response, next: NextFunction) => {
         try {
             if (req.params.sort === "newest") {
@@ -45,15 +41,11 @@ communityRouter.get(
     }
 );
 communityRouter.get(
-    "/my",
+    "/my/:name",
     loginRequired,
-    /*
-  #swagger.tags=['Community']
-  #swagger.summary="유저가 작성한 커뮤니티 글 목록"
-  */
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const name = req.body.name;
+            const name: string = req.params.name;
             const result = await CommunityService.getPostsByUserId(name);
             res.status(200).json({ data: result });
         } catch (error) {
@@ -63,13 +55,9 @@ communityRouter.get(
 );
 communityRouter.get(
     "/:id",
-    /*
-  #swagger.tags=['Community']
-  #swagger.summary="커뮤니티 특정 글"
-  */
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const id = req.params.id;
+            const id: string = req.params.id;
             const result = await CommunityService.getPostById(id);
             res.status(200).json({ data: result });
         } catch (error) {
@@ -80,14 +68,10 @@ communityRouter.get(
 communityRouter.put(
     "/:id",
     loginRequired,
-    /*
-  #swagger.tags=['Community']
-  #swagger.summary="커뮤니티 글 수정"
-  */
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const id = req.params.id;
-            const postData = req.body;
+            const id: string = req.params.id;
+            const postData: { title?: string; description?: string } = req.body;
             const result = await CommunityService.updatePost(id, postData);
             res.status(200).json({ data: result });
         } catch (error) {
@@ -97,14 +81,10 @@ communityRouter.put(
 );
 communityRouter.delete(
     "/:id",
-    /*
-  #swagger.tags=['Community']
-  #swagger.summary="커뮤니티 글 삭제"
-  */
     loginRequired,
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const id = req.params.id;
+            const id: string = req.params.id;
             const result = await CommunityService.deletePost(id);
             res.status(200).json({ data: result });
         } catch (error) {

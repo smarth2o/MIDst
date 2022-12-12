@@ -3,7 +3,11 @@ import { PrismaClient } from "@prisma/client";
 class CommunityRepository {
     prisma = new PrismaClient();
 
-    async createPost(postData) {
+    async createPost(postData: {
+        name: string;
+        title: string;
+        description: string;
+    }) {
         const { name, title, description } = postData;
         const result = await this.prisma.community.create({
             data: {
@@ -67,7 +71,10 @@ class CommunityRepository {
         await this.prisma.$disconnect();
         return result;
     }
-    async updatePost(id: string, postData) {
+    async updatePost(
+        id: string,
+        postData: { title?: string; description?: string }
+    ) {
         const result = await this.prisma.community.update({
             where: { id: Number(id) },
             data: { ...postData },
