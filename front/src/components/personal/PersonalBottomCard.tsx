@@ -1,9 +1,6 @@
 import { ArrowRightOutlined } from "@ant-design/icons";
-import { Action } from "@remix-run/router";
 import axios from "axios";
 import { useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { cloudIconState } from "../../stores/PersonalAtom";
 import {
   PBCardAlignStyled,
   PBCardItemStyled,
@@ -12,6 +9,7 @@ import {
   PBCWordItemStyled,
 } from "../../styles/personal/PersonalBottomCardStyled";
 import PBCardData, { PBCardDataType } from "./personalData";
+import { CloudEmp, CloudFull } from "../../assets/index";
 
 export interface PBCardItemType {
   user_id: number;
@@ -20,13 +18,12 @@ export interface PBCardItemType {
   grammar: string[];
 }
 
-const cloudFull = require("../../assets/cloudFull.png");
-
 const PersonalBottomCard = (): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [items, setItems] = useState<PBCardDataType>(PBCardData);
-  const [cloudIcon, setCloudIcon] = useState(false);
-  const cloudEmpty = useRecoilValue(cloudIconState);
+
+  const [cloud, setCloud] = useState(false);
+  const [translate, setTranslate] = useState(false);
 
   const tabList = ["Expressions", "Words", "Grammar"];
 
@@ -40,26 +37,13 @@ const PersonalBottomCard = (): JSX.Element => {
     });
   };
 
-  const cloudChange = (
-    res: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    setCloudIcon(!cloudIcon);
-  };
-
   const expressionItem = () => {
     const expressionsList = items.map((res) =>
       res.expressions.map((expression) => (
-        <PBCardItemStyled>
+        <PBCardItemStyled onClick={() => setTranslate(!translate)}>
           {expression}
-          <button
-            onClick={(res) => {
-              cloudChange(res);
-            }}
-          >
-            <img
-              className="cloudIcon"
-              src={cloudIcon ? cloudEmpty : cloudFull}
-            />
+          <button onClick={() => setCloud(!cloud)}>
+            <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
           </button>
         </PBCardItemStyled>
       ))
@@ -72,15 +56,8 @@ const PersonalBottomCard = (): JSX.Element => {
       res.words.map((expression) => (
         <PBCWordItemStyled>
           {expression}
-          <button
-            onClick={(res) => {
-              cloudChange(res);
-            }}
-          >
-            <img
-              className="cloudIcon"
-              src={cloudIcon ? cloudEmpty : cloudFull}
-            />
+          <button onClick={() => setCloud(!cloud)}>
+            <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
           </button>
         </PBCWordItemStyled>
       ))
@@ -94,15 +71,8 @@ const PersonalBottomCard = (): JSX.Element => {
       res.grammar.map((grammar) => (
         <PBCardItemStyled>
           {grammar}
-          <button
-            onClick={(res) => {
-              cloudChange(res);
-            }}
-          >
-            <img
-              className="cloudIcon"
-              src={cloudIcon ? cloudEmpty : cloudFull}
-            />
+          <button onClick={() => setCloud(!cloud)}>
+            <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
           </button>
         </PBCardItemStyled>
       ))

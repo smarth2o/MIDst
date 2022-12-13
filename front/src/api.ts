@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const serverUrl = `http://localhost:8080/`;
+const serverUrl = `http://localhost:5000/`;
 //axios.defaults.headers[`Access-Control-Allow-Origin`] = "*";
 //axios.defaults.withCredentials = true;
 

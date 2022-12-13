@@ -19,6 +19,7 @@ import {
 import CalendarContainer from "./CalendarContainer";
 import profileImg from "../../assets/profile.png";
 import { useState } from "react";
+import PersonalModal from "./PersonalModal";
 
 type ClickHandler = (props: boolean) => (e: React.MouseEvent) => void;
 
@@ -26,6 +27,7 @@ const UserProfile = (): JSX.Element => {
   const [userName, setUserName] = useState("Mark Baker");
   const [userEmail, setUserEmail] = useState("email1234@gmail.com");
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [isToggle, setIsToggle] = useState(false);
 
   const ClickHandler: ClickHandler = (props) => (e) => {
     e.preventDefault();
@@ -41,9 +43,8 @@ const UserProfile = (): JSX.Element => {
           <UserProfileImgStyled>
             <img src={profileImg} />
           </UserProfileImgStyled>
-          <a href="/">
-            <SettingOutlined />
-          </a>
+          <SettingOutlined onClick={() => setIsToggle(!isToggle)} />
+          {isToggle === true ? <PersonalModal /> : null}
         </UPTopAlignStyled>
         <UPTopInfo>
           <h3 className="profile-info-item">{userName}</h3>
@@ -68,9 +69,8 @@ const UserProfile = (): JSX.Element => {
           <UserProfileImgStyled>
             <img src={profileImg} />
           </UserProfileImgStyled>
-          <a href="/">
-            <SettingOutlined />
-          </a>
+          <SettingOutlined onClick={() => setIsToggle(!isToggle)} />
+          {isToggle === true ? <PersonalModal /> : null}
         </UPTopAlignStyled>
         <UserProfileFormStyled>
           <form action="">

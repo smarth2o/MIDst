@@ -67,12 +67,18 @@ const MainPage = (): JSX.Element => {
         <ChatWrapper>
           <ChatBox className="left-chat-box">Learn English?</ChatBox>
           <ChatBox className="right-chat-box">
-            공부하려고 미드 보는데 그냥 즐기다 끝나 ㅜ
+            공부하려고 미드 보는데 그냥 드라마에만 빠져 있다면?
           </ChatBox>
-          <ChatBox className="left-chat-box">서비스 소개글 - Search</ChatBox>
-          <ChatBox className="right-chat-box"></ChatBox>
-          <ChatBox className="left-chat-box">서비스 소개글 - Diary</ChatBox>
-          <ChatBox className="right-chat-box"></ChatBox>
+          <ChatBox className="left-chat-box">MIDst를 통해 공부하기!</ChatBox>
+          <ChatBox className="right-chat-box">
+            MIDst를 통해 미드 속 표현 찾아서 저장하고
+          </ChatBox>
+          <ChatBox className="left-chat-box">
+            영어일기 쓰면서 작문실력을 길러
+          </ChatBox>
+          <ChatBox className="right-chat-box">
+            미드를 나만의 실력으로 만들자!
+          </ChatBox>
           <ChatBox className="left-chat-box">START?</ChatBox>
         </ChatWrapper>
         <MainSearchWrapper>

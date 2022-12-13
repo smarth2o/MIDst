@@ -12,10 +12,6 @@ import { CommunityPropsType } from "./CommunityList";
 import * as Api from "../../api";
 import dayjs from "dayjs";
 
-const backPort = "8080";
-const autoBaseUrl = window.location.hostname;
-const serverUrl = `http://${autoBaseUrl}:${backPort}`;
-
 const CommunityEdit = (): JSX.Element => {
   const [editTitle, setEditTitle] = useState("");
   const [editDescription, setEditDescription] = useState("");
@@ -45,31 +41,31 @@ const CommunityEdit = (): JSX.Element => {
     postCommunityPost();
   }, []);
 
-  const onEditFinish = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(e);
+  // const onEditFinish = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   console.log(e);
 
-    await axios
-      .post(`${serverUrl}/posts`, {
-        id: 1,
-        title: editTitle,
-        description: editDescription,
-        createdAt: updatedAt,
-        updatedAt: updatedAt,
-      })
-      .then(function (res) {
-        console.log(res);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-    return navigate(ROUTES.COMMUNITY.ROOT);
-  };
+  //   await axios
+  //     .post(`${s/posts`, {
+  //       id: 1,
+  //       title: editTitle,
+  //       description: editDescription,
+  //       createdAt: updatedAt,
+  //       updatedAt: updatedAt,
+  //     })
+  //     .then(function (res) {
+  //       console.log(res);
+  //     })
+  //     .catch(function (err) {
+  //       console.log(err);
+  //     });
+  //   return navigate(ROUTES.COMMUNITY.ROOT);
+  // };
 
   return (
     <>
       <CommunityCreateAlign>
-        <form onSubmit={onEditFinish}>
+        <form>
           <CommunityCreateStyled>
             <input
               className="community-create-title"
