@@ -12,7 +12,7 @@ import { CommunityPropsType } from "./CommunityList";
 import * as Api from "../../api";
 import dayjs from "dayjs";
 
-const backPort = "8080";
+const backPort = "5000";
 const autoBaseUrl = window.location.hostname;
 const serverUrl = `http://${autoBaseUrl}:${backPort}`;
 
