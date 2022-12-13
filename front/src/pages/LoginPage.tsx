@@ -46,9 +46,10 @@ const LoginPage = (): JSX.Element => {
         password: res.data.password,
         accessToken: res.data.refreshToken,
       });
-      window.sessionStorage.setItem("email", res.data.name);
+      window.localStorage.setItem("accessToken", res.data.accessToken);
+      window.localStorage.setItem("refreshToken", res.data.refreshToken);
       console.log("로그인 성공");
-      navigate("/");
+      navigate(-1);
     } catch (err) {
       console.log("로그인 실패");
       console.error(err);

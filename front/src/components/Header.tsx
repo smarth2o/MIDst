@@ -11,24 +11,46 @@ import { Outlet } from "react-router-dom";
 import { LogoIcon } from "../assets/index";
 import userState from "../stores/UserAtom";
 import { useResetRecoilState } from "recoil";
+import { useState, useEffect } from "react";
 import * as Api from "../api";
 
 function Header() {
-  // const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState<boolean>();
   const userReset = useResetRecoilState(userState);
 
   const handleSignout = async () => {
     try {
-      // await Api.post("logout/");
       userReset();
-      window.sessionStorage.removeItem("name");
-      // navigate("/", { replace: true });
+      window.localStorage.removeItem("accessToken");
+      window.localStorage.removeItem("refreshToken");
       console.log("로그아웃 성공");
+      window.location.reload();
     } catch (err) {
       console.log("로그아웃 실패");
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const res = await Api.get("user/currentUser");
+        // setUser({
+        //   name: res.data.name,
+        //   email: res.data.email,
+        //   password: res.data.password,
+        //   accessToken: res.data.refreshToken,
+        // });
+        setIsLogin(true);
+        console.log("로그인 된 상태");
+      } catch (error) {
+        setIsLogin(false);
+        console.log("로그인 안된 상태");
+      }
+    };
+
+    checkUser();
+  }, []);
 
   return (
     <>
@@ -48,12 +70,12 @@ function Header() {
           <NavLink to={ROUTES.COMMUNITY.ROOT}>Share</NavLink>
           <NavLink to={ROUTES.DIARY.ROOT}>Diary</NavLink>
           <NavLink to={ROUTES.PERSONAL}>My</NavLink>
-          {window.sessionStorage.getItem("name") ? (
-            <SignIn to={ROUTES.USER.LOGIN}>Sign In</SignIn>
-          ) : (
+          {isLogin ? (
             <SignOut to={ROUTES.MAIN} onClick={handleSignout}>
               Sign Out
             </SignOut>
+          ) : (
+            <SignIn to={ROUTES.USER.LOGIN}>Sign In</SignIn>
           )}
         </Navbar>
       </Wrapper>

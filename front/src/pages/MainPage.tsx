@@ -13,12 +13,18 @@ import {
 } from "../styles/search/Search.styled";
 import { ROUTES } from "../enum/routes";
 import SearchBar from "../components/search/SearchBar";
+import { LogoIcon } from "../assets/index";
 import { useNavigate } from "react-router";
 import { ChatWrapper, ChatBox } from "../styles/Landing.styled";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useResetRecoilState } from "recoil";
+import userState from "../stores/UserAtom";
+import * as Api from "../api";
 
 const MainPage = (): JSX.Element => {
   const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState<boolean>();
+  const userReset = useResetRecoilState(userState);
 
   useEffect(() => {
     const boxList = document.querySelectorAll(
@@ -42,13 +48,47 @@ const MainPage = (): JSX.Element => {
     boxList.forEach((el) => io.observe(el));
   }, []);
 
+  const handleSignout = async () => {
+    try {
+      userReset();
+      window.localStorage.removeItem("accessToken");
+      window.localStorage.removeItem("refreshToken");
+      // navigate("/", { replace: true });
+      console.log("로그아웃 성공");
+      window.location.reload();
+    } catch (err) {
+      console.log("로그아웃 실패");
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const res = await Api.get("user/currentUser");
+        // setUser({
+        //   name: res.data.name,
+        //   email: res.data.email,
+        //   password: res.data.password,
+        //   accessToken: res.data.refreshToken,
+        // });
+        setIsLogin(true);
+        console.log("로그인 된 상태");
+      } catch (error) {
+        setIsLogin(false);
+        console.log("로그인 안된 상태");
+      }
+    };
+    checkUser();
+  }, []);
+
   return (
     <>
       <TransparentWrapper>
         <Logo to={ROUTES.MAIN}>
           <ul className="topnav-first-ul ">
             <li>
-              <img src={require("../assets/mist.png")} alt="logo" />
+              <img src={LogoIcon} alt="logo" />
             </li>
             <li>
               <p>MIDst</p>
@@ -56,31 +96,35 @@ const MainPage = (): JSX.Element => {
           </ul>
         </Logo>
         <Navbar>
-          {window.sessionStorage.getItem("name") ? (
-            <SignIn to={ROUTES.USER.LOGIN}>Sign In</SignIn>
+          {isLogin ? (
+            <SignOut to={ROUTES.MAIN} onClick={handleSignout}>
+              Sign Out
+            </SignOut>
           ) : (
-            <SignOut to={ROUTES.MAIN}>Sign Out</SignOut>
+            <SignIn to={ROUTES.USER.LOGIN}>Sign In</SignIn>
           )}
         </Navbar>
       </TransparentWrapper>
       <MainLayout>
-        <ChatWrapper>
-          <ChatBox className="left-chat-box">Learn English?</ChatBox>
-          <ChatBox className="right-chat-box">
-            공부하려고 미드 보는데 그냥 드라마에만 빠져 있다면?
-          </ChatBox>
-          <ChatBox className="left-chat-box">MIDst를 통해 공부하기!</ChatBox>
-          <ChatBox className="right-chat-box">
-            MIDst를 통해 미드 속 표현 찾아서 저장하고
-          </ChatBox>
-          <ChatBox className="left-chat-box">
-            영어일기 쓰면서 작문실력을 길러
-          </ChatBox>
-          <ChatBox className="right-chat-box">
-            미드를 나만의 실력으로 만들자!
-          </ChatBox>
-          <ChatBox className="left-chat-box">START?</ChatBox>
-        </ChatWrapper>
+        {!isLogin && (
+          <ChatWrapper>
+            <ChatBox className="left-chat-box">Learn English?</ChatBox>
+            <ChatBox className="right-chat-box">
+              공부하려고 미드 보는데 그냥 드라마에만 빠져 있다면?
+            </ChatBox>
+            <ChatBox className="left-chat-box">MIDst를 통해 공부하기!</ChatBox>
+            <ChatBox className="right-chat-box">
+              MIDst를 통해 미드 속 표현 찾아서 저장하고
+            </ChatBox>
+            <ChatBox className="left-chat-box">
+              영어일기 쓰면서 작문실력을 길러
+            </ChatBox>
+            <ChatBox className="right-chat-box">
+              미드를 나만의 실력으로 만들자!
+            </ChatBox>
+            <ChatBox className="left-chat-box">START?</ChatBox>
+          </ChatWrapper>
+        )}
         <MainSearchWrapper>
           <Suggestions>
             <Suggest onClick={() => navigate("/search")}>
@@ -89,10 +133,10 @@ const MainPage = (): JSX.Element => {
             <Suggest onClick={() => navigate("/community")}>
               # Share your experience
             </Suggest>
-            <Suggest onClick={() => navigate("/diary")}>
+            <Suggest disabled={!isLogin} onClick={() => navigate("/diary")}>
               # Write a diary
             </Suggest>
-            <Suggest onClick={() => navigate("/personal")}>
+            <Suggest disabled={!isLogin} onClick={() => navigate("/personal")}>
               # Check out your record
             </Suggest>
           </Suggestions>
