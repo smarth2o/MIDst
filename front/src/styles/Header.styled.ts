@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export const Wrapper = styled.header`
   top: 0;
   padding: 0 3%;
+  z-index: 999;
   max-height: 70px;
   height: 100%;
   width: 100%;
