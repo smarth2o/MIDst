@@ -1,6 +1,5 @@
 import { ArrowRightOutlined } from "@ant-design/icons";
-import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   PBCardAlignStyled,
   PBCardItemStyled,
@@ -10,6 +9,7 @@ import {
 } from "../../styles/personal/PersonalBottomCardStyled";
 import PBCardData, { PBCardDataType } from "./personalData";
 import { CloudEmp, CloudFull } from "../../assets/index";
+import * as Api from "../../api";
 
 export interface PBCardItemType {
   user_id: number;
@@ -31,11 +31,17 @@ const PersonalBottomCard = (): JSX.Element => {
     setActiveIndex(index);
   };
 
-  const onClick = () => {
-    axios.get("./personData.tsx").then((res) => {
-      setItems(res.data);
-    });
-  };
+  useEffect(() => {
+    const getPersonalData = async () => {
+      const response = await Api.get(`main/getSearch`);
+      if (response.status !== 200) {
+        console.log(response);
+      } else {
+        console.log(response.data);
+      }
+    };
+    getPersonalData();
+  }, []);
 
   const expressionItem = () => {
     const expressionsList = items.map((res) =>
