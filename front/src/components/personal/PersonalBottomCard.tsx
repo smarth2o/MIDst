@@ -12,9 +12,9 @@ import { CloudEmp, CloudFull } from "../../assets/index";
 import * as Api from "../../api";
 
 export interface PBCardItemType {
-  user_id: number;
-  expressions: { expression: string[]; res: boolean };
-  words: string[];
+  userId: number;
+  description: { expression: string[]; res: boolean };
+  searchWord: string[];
   grammar: string[];
 }
 
@@ -38,51 +38,57 @@ const PersonalBottomCard = (): JSX.Element => {
         console.log(response);
       } else {
         console.log(response.data);
+        setItems(response.data);
       }
     };
     getPersonalData();
   }, []);
-
   const expressionItem = () => {
-    const expressionsList = items.map((res) =>
-      res.expressions.map((expression) => (
-        <PBCardItemStyled onClick={() => setTranslate(!translate)}>
-          {expression}
-          <button onClick={() => setCloud(!cloud)}>
-            <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
-          </button>
-        </PBCardItemStyled>
-      ))
-    );
-
-    return <ul>{expressionsList}</ul>;
+    const expression = items.map((res) => {
+      return (
+        <>
+          <PBCardItemStyled onClick={() => setTranslate(!translate)}>
+            {res.description}
+            <button onClick={() => setCloud(!cloud)}>
+              <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
+            </button>
+          </PBCardItemStyled>
+        </>
+      );
+    });
+    // res.description.map((expression) => (
+    // console.log(expression)
+    // <PBCardItemStyled onClick={() => setTranslate(!translate)}>
+    //   {expression}
+    //   <button onClick={() => setCloud(!cloud)}>
+    //     <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
+    //   </button>
+    // </PBCardItemStyled>
+    // ))
+    return <PBCardWordAlignStyled>{expression}</PBCardWordAlignStyled>;
   };
   const wordsItem = () => {
-    const wordsList = items.map((res) =>
-      res.words.map((expression) => (
-        <PBCWordItemStyled>
-          {expression}
-          <button onClick={() => setCloud(!cloud)}>
-            <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
-          </button>
-        </PBCWordItemStyled>
-      ))
-    );
+    const wordsList = items.map((res) => (
+      <PBCWordItemStyled>
+        {res.searchWord}
+        <button onClick={() => setCloud(!cloud)}>
+          <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
+        </button>
+      </PBCWordItemStyled>
+    ));
 
     return <PBCardWordAlignStyled>{wordsList}</PBCardWordAlignStyled>;
   };
 
   const grammarItem = () => {
-    const grammarList = items.map((res) =>
-      res.grammar.map((grammar) => (
-        <PBCardItemStyled>
-          {grammar}
-          <button onClick={() => setCloud(!cloud)}>
-            <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
-          </button>
-        </PBCardItemStyled>
-      ))
-    );
+    const grammarList = items.map((res) => (
+      <PBCardItemStyled>
+        {res.grammar}
+        <button onClick={() => setCloud(!cloud)}>
+          <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
+        </button>
+      </PBCardItemStyled>
+    ));
 
     return <ul>{grammarList}</ul>;
   };

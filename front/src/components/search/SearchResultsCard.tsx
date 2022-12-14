@@ -41,7 +41,7 @@ const SearchResultCard = ({ name, script }: any): JSX.Element => {
         }
       } else {
         try {
-          // console.log(searchId);
+          console.log(searchId);
           const res = await Api.delete(`main/deleteSearch/${searchId}`);
           // console.log(res);
           console.log("삭제 성공");

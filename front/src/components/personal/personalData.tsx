@@ -1,14 +1,14 @@
 export type PBCardDataType = {
-  user_id: number;
-  expressions: string[];
-  words: string[];
+  userId: number;
+  description: string[];
+  searchWord: string[];
   grammar: string[];
 }[];
 
 const PBCardData: PBCardDataType = [
   {
-    user_id: 1,
-    expressions: [
+    userId: 1,
+    description: [
       "test",
       "누워서 쉬니깐 너무 좋아요",
       "It feels so good to lie down and rest.",
@@ -16,7 +16,7 @@ const PBCardData: PBCardDataType = [
       "It feels so good to lie down and rest.",
       "It feels so good to lie down and rest.",
     ],
-    words: [
+    searchWord: [
       "hysterical",
       "hysterical",
       "hysterical",

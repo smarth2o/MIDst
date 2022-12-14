@@ -2,116 +2,30 @@ import {
   PTBtnStyled,
   PTCardAlignStyled,
   PTCardContainerStyled,
-  UPBottomAlignStyled,
-  UPBottomDetail,
-  UPTopAlignStyled,
-  UPTopInfo,
-  UserProfileFormStyled,
-  UserProfileImgStyled,
 } from "../../styles/personal/PersonalTopCard";
 import "react-calendar/dist/Calendar.css";
-import {
-  ArrowRightOutlined,
-  MailOutlined,
-  SettingOutlined,
-  TeamOutlined,
-} from "@ant-design/icons";
+import { ArrowRightOutlined } from "@ant-design/icons";
 import CalendarContainer from "./CalendarContainer";
-import profileImg from "../../assets/profile.png";
-import { useState } from "react";
-import PersonalModal from "./PersonalModal";
-
-type ClickHandler = (props: boolean) => (e: React.MouseEvent) => void;
-
-const UserProfile = (): JSX.Element => {
-  const [userName, setUserName] = useState("Mark Baker");
-  const [userEmail, setUserEmail] = useState("email1234@gmail.com");
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [isToggle, setIsToggle] = useState(false);
-
-  const ClickHandler: ClickHandler = (props) => (e) => {
-    e.preventDefault();
-    setIsEdit(!props);
-    // if (isEdit) {
-    // 백엔드로 연결하기
-    // }
-  };
-  if (!isEdit) {
-    return (
-      <>
-        <UPTopAlignStyled>
-          <UserProfileImgStyled>
-            <img src={profileImg} />
-          </UserProfileImgStyled>
-          <SettingOutlined onClick={() => setIsToggle(!isToggle)} />
-          {isToggle === true ? <PersonalModal /> : null}
-        </UPTopAlignStyled>
-        <UPTopInfo>
-          <h3 className="profile-info-item">{userName}</h3>
-          <p className="profile-info-item">
-            <MailOutlined /> {userEmail}
-          </p>
-        </UPTopInfo>
-
-        <UPBottomAlignStyled>
-          <UPBottomDetail>
-            <button className="btn-go-search" onClick={ClickHandler(isEdit)}>
-              EDIT
-            </button>
-          </UPBottomDetail>
-        </UPBottomAlignStyled>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <UPTopAlignStyled>
-          <UserProfileImgStyled>
-            <img src={profileImg} />
-          </UserProfileImgStyled>
-          <SettingOutlined onClick={() => setIsToggle(!isToggle)} />
-          {isToggle === true ? <PersonalModal /> : null}
-        </UPTopAlignStyled>
-        <UserProfileFormStyled>
-          <form action="">
-            <TeamOutlined />{" "}
-            <input
-              maxLength={20}
-              placeholder="Title"
-              value={userName}
-              onChange={(e) => {
-                setUserName(e.target.value);
-              }}
-              className="profile-form-item"
-            />
-            <UPBottomAlignStyled>
-              <MailOutlined />{" "}
-              <input
-                maxLength={20}
-                placeholder="Title"
-                value={userEmail}
-                onChange={(e) => {
-                  setUserEmail(e.target.value);
-                }}
-                className="profile-form-item"
-              />
-              <UPBottomDetail>
-                <button
-                  className="btn-go-search"
-                  onClick={ClickHandler(isEdit)}
-                >
-                  SAVE
-                </button>
-              </UPBottomDetail>
-            </UPBottomAlignStyled>
-          </form>
-        </UserProfileFormStyled>
-      </>
-    );
-  }
-};
+import UserProfile from "./UserProfile";
+import { useEffect, useState } from "react";
+import * as Api from "../../api";
 
 export const PersonalTopCard = (): JSX.Element => {
+  const [expressionsCount, setExpressionCount] = useState(0);
+
+  useEffect(() => {
+    const getExpressionsCount = async () => {
+      const response = await Api.get(`main/getCountSearch`);
+      if (response.status !== 200) {
+        console.log("갯수 저장 실패");
+      } else {
+        console.log("갯수 저장 성공 : ", response.data);
+        setExpressionCount(response.data);
+      }
+    };
+    getExpressionsCount();
+  }, []);
+
   return (
     <>
       <PTCardContainerStyled>
@@ -146,7 +60,7 @@ export const PersonalTopCard = (): JSX.Element => {
         <PTCardAlignStyled>
           <ul className="card-align-ul">
             <li className="card-align-li">
-              <h3>Search for 327 expressions</h3>
+              <h3>Search for {expressionsCount} expressions</h3>
               <li>
                 <button className="btn-go-search">
                   <a href="/">
