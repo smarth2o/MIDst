@@ -41,7 +41,7 @@ const CommunityPost = ({
         console.log(onDelete);
       } else {
         console.log(onDelete);
-        navigate(ROUTES.COMMUNITY.ROOT);
+        window.location.replace("/community");
       }
     }
   };
