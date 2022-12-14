@@ -9,6 +9,8 @@ import CalendarContainer from "./CalendarContainer";
 import UserProfile from "./UserProfile";
 import { useEffect, useState } from "react";
 import * as Api from "../../api";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../enum/routes";
 
 export const PersonalTopCard = (): JSX.Element => {
   const [expressionsCount, setExpressionCount] = useState(0);
@@ -49,18 +51,20 @@ export const PersonalTopCard = (): JSX.Element => {
           <ul className="PTItem2">
             <li>
               <h3>
-                Studied for 500 days
-                <br />
-                (17 days straight)
+                Write an English diary,
+                <br /> study expressions,
+                <br /> and study English steadily.
               </h3>
             </li>
             <li>
               <PTBtnStyled>
-                <button>
-                  Check your attendance
-                  <br /> by writing today’s journal
-                  <ArrowRightOutlined />
-                </button>
+                <Link to={ROUTES.DIARY.ROOT}>
+                  <button>
+                    Check your attendance
+                    <br /> by writing today’s journal
+                    <ArrowRightOutlined />
+                  </button>
+                </Link>
               </PTBtnStyled>
             </li>
           </ul>

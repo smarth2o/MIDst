@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const AllBackGroundStyled = styled.div`
   height: 100%;
-  margin: 67px 0 0 0;
+  margin: 80px 0 0 0;
   padding-bottom: 5%;
 `;
 export const DiaryAlignStyled = styled.div`

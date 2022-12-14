@@ -12,6 +12,11 @@ import {
   DiaryAllAlign,
   DiaryMainStyled,
 } from "../styles/diary/DiaryCreatePage";
+import {
+  CreateDiaryBtn,
+  DiaryDetailAlignStyled,
+} from "../styles/diary/DiaryPage";
+import { Link } from "react-router-dom";
 
 export interface DiaryValueType {
   diarys: DiaryTypes[];
@@ -42,12 +47,18 @@ const DiaryPage = (): JSX.Element => {
 
   return (
     <AllBackGroundStyled>
+      <DiaryDetailAlignStyled>
+        <Link to="/diary/create">
+          <CreateDiaryBtn>+</CreateDiaryBtn>
+        </Link>
+      </DiaryDetailAlignStyled>
       <DiaryAllAlign>
         <div className="content-cover">
           <div className="diary-align-styled">
             <DiaryAlignStyled>
               <div className="diary-content">
                 <DiarySide />
+
                 <DiaryMainStyled>
                   <Outlet context={{ diarys, setDiarys }} />
                   <DiaryBottom />

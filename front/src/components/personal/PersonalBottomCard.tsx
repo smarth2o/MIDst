@@ -41,6 +41,7 @@ const PersonalBottomCard = (): JSX.Element => {
       if (response.status !== 200) {
         console.log(response);
       } else {
+        console.log(response.data);
         setItems(response.data);
         setSearchword(response.data);
       }
@@ -48,6 +49,7 @@ const PersonalBottomCard = (): JSX.Element => {
     const getId = async () => {
       const response = await Api.get("main/getSearch");
       response.data.forEach((data: any) => {
+        console.log(data.searchId);
         setId(data.searchId);
       });
       if (response.status !== 200) {
@@ -59,25 +61,13 @@ const PersonalBottomCard = (): JSX.Element => {
     getId();
     getPersonalData();
   }, [cloud]);
-  const getSearch = async (script: any) => {
-    try {
-      const res = await Api.get("main/getSearch");
-      res.data.forEach((data: any) => {
-        if (data.description === script) {
-          setCloud(true);
-        }
-      });
-    } catch (err) {
-      console.log("가져오기 실패");
-    }
-  };
   const handleSaveSearch = async () => {
     let searchId = "";
     try {
       // console.log("가져오기 성공");
       if (window.confirm("삭제하시겠습니까")) {
         try {
-          console.log("test", searchId);
+          console.log(searchId);
           const res = await Api.delete(`main/deleteSearch/${id}`);
           console.log(res);
           console.log("삭제 성공");
