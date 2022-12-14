@@ -5,11 +5,10 @@ import {
   Button,
 } from "../../styles/search/Search.styled";
 import { DownIcon, UpIcon } from "../../styles/search/Filter.styled";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CloudEmp, CloudFull } from "../../assets/index";
 import { useRecoilValue } from "recoil";
-import { SearchResults } from "../../stores/FilterAtom";
-import { Searchword } from "../../stores/SearchAtom";
+import { Searchword, SearchResults } from "../../stores/SearchAtom";
 
 const SearchResultCard = ({ name, script }: any): JSX.Element => {
   const [cloud, setCloud] = useState(false);
@@ -58,8 +57,15 @@ const SearchResultsList = ({ title }: any): JSX.Element => {
   );
 };
 
-const SearchResultsCard = ({ isSearch }: any): JSX.Element => {
+const SearchResultsCard = (): JSX.Element => {
   const searchword = useRecoilValue(Searchword);
+  const viewResult = useRecoilValue(SearchResults);
+  const [isSearch, setIsSearch] = useState<boolean>(true);
+
+  // useEffect(() => {
+  //   setIsSearch(viewResult[2].script ? true : false);
+  // }, [viewResult]);
+
   // const [searchCount, setSearchCount] = useState({
   //   Friends: 0,
   //   Harrypotter: 0,

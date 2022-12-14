@@ -8,8 +8,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import * as Api from "../../api";
 import { useSetRecoilState, useResetRecoilState } from "recoil";
-import { SearchResults } from "../../stores/FilterAtom";
-import { Searchword } from "../../stores/SearchAtom";
+import { Searchword, SearchResults } from "../../stores/SearchAtom";
 
 const SearchBar = (): JSX.Element => {
   const navigate = useNavigate();
@@ -32,7 +31,7 @@ const SearchBar = (): JSX.Element => {
 
       for (var result of results) {
         result = String(result);
-        // console.log(result);
+        console.log(result);
 
         let id = result.split(")")[0];
         let title = result.split(")")[1];
@@ -44,6 +43,30 @@ const SearchBar = (): JSX.Element => {
         let script = result.split(":")[1];
         script = String(script).slice(0, String(script).length - 5);
         script = script.trim();
+
+        const selectedName = document.querySelectorAll(
+          'input[name="name"]:checked'
+        );
+
+        selectedName.forEach((el) => {
+          console.log(el);
+          // if (el.value === name) {
+          // }
+        });
+
+        // useEffect(() => {
+        //   const titleresult = results.filter((result) =>
+        //     titleFilter.includes(result.title)
+        //   );
+        //   const nameresult = results.filter((result) =>
+        //     nameFilter.includes(result.name)
+        //   );
+        //   let searchresults = titleresult.concat(nameresult);
+        //   searchresults = searchresults.filter(
+        //     (item, pos) => searchresults.indexOf(item) === pos
+        //   );
+        //   setResults(searchresults);
+        // }, [nameFilter, results, setResults, titleFilter]);
 
         setResults((prev) => [
           ...prev,

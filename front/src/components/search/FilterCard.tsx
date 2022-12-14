@@ -10,7 +10,8 @@ import {
 } from "../../styles/search/Filter.styled";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { SearchResults } from "../../stores/FilterAtom";
+import { SearchResults } from "../../stores/SearchAtom";
+import { titleFilter, nameFilter } from "../../stores/FilterAtom";
 
 interface ListProps {
   value: string;
@@ -20,6 +21,8 @@ interface ListProps {
 
 const FilterCard = (): JSX.Element => {
   const [results, setResults] = useRecoilState(SearchResults);
+  const [titleFilterList, setTitleFilter] = useRecoilState(titleFilter);
+  const [nameFilterList, setNameFilter] = useRecoilState(nameFilter);
   const [showMedia, setShowMedia] = useState(false);
   // const [showEmotion, setShowEmotion] = useState(false);
 
@@ -33,33 +36,18 @@ const FilterCard = (): JSX.Element => {
   //   setShowEmotion((prev) => !prev);
   // };
 
-  let nameFilter: any[] = [];
-  let titleFilter: any[] = [];
-
-  useEffect(() => {
-    const titleresult = results.filter((result) =>
-      titleFilter.includes(result.title)
-    );
-    const nameresult = results.filter((result) =>
-      nameFilter.includes(result.name)
-    );
-    let searchresults = titleresult.concat(nameresult);
-    searchresults = searchresults.filter(
-      (item, pos) => searchresults.indexOf(item) === pos
-    );
-    setResults(searchresults);
-  }, [nameFilter, results, setResults, titleFilter]);
-
   const List = ({ value, label }: ListProps): JSX.Element => {
     const getCheckedValue = (event: any) => {
-      if (event.target.checked) {
-        nameFilter.push(event.target.value);
-      } else {
-        nameFilter = nameFilter.filter(
-          (element) => element !== event.target.value
-        );
-      }
-      console.log(nameFilter);
+      // event.preventDefault();
+      console.log(event.target.value, event.target.checked);
+      // if (event.target.checked) {
+      //   setNameFilter((prev) => [...prev, event.target.value]);
+      // } else {
+      //   setNameFilter((nameFilterList) =>
+      //     nameFilterList.filter((e) => e !== event.target.value)
+      //   );
+      // }
+      // console.log("nameFilter", nameFilterList);
     };
 
     return (
@@ -79,16 +67,15 @@ const FilterCard = (): JSX.Element => {
 
   const TitleList = ({ value, label, children }: ListProps): JSX.Element => {
     const getCheckedValue = (event: any) => {
-      if (event.target.checked) {
-        titleFilter.push(event.target.value);
-      } else {
-        titleFilter = titleFilter.filter(
-          (element) => element !== event.target.value
-        );
-      }
-      console.log(titleFilter);
+      // if (event.target.checked) {
+      //   setTitleFilter((prev) => [...prev, event.target.value]);
+      // } else {
+      //   setTitleFilter((titleFilter) =>
+      //     titleFilter.filter((e) => e !== event.target.value)
+      //   );
+      // }
+      // console.log(titleFilter);
     };
-
     return (
       <li>
         <label>
