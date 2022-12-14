@@ -11,6 +11,7 @@ mainRouter.get(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const searchword = req.params.searchword;
+      console.log(searchword);
       const searchSentence = await mainService.showSearch(searchword);
       const result = [searchword, searchSentence];
       res.status(200).json(result);
@@ -99,13 +100,13 @@ mainRouter.get(
   }
 );
 
-mainRouter.put(
-  "/deleteSearch",
+mainRouter.delete(
+  "/deleteSearch/:searchId",
   loginRequired,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       //const userId :any=req.headers["currentUserId"];
-      const searchId = req.body.searchId;
+      const searchId = req.params.searchId;
       const deleteSearch = await mainService.deleteSearch(searchId);
       res.status(200).json(deleteSearch);
     } catch (error) {

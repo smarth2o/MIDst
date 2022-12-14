@@ -39,8 +39,9 @@ const RegisterPage = (): JSX.Element => {
   };
 
   const handleSendEmail = async () => {
+    console.log(form.email);
     try {
-      const res = await Api.post("user/register/email", form.email);
+      const res = await Api.post("user/register/email", { email: form.email });
       console.log(res.data);
     } catch (err) {
       console.log("이메일 전송 에러");

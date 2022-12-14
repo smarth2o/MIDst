@@ -1,6 +1,6 @@
 //로그인, 회원가입 관련
 import { Router, Response, Request, NextFunction } from "express";
-import  userService  from "../services/user.service";
+import userService from "../services/user.service";
 import { loginRequired } from "../middlewares/authMiddleware";
 import userMailService from "services/user.mail.service";
 const userRouter = Router();
@@ -37,21 +37,15 @@ userRouter.post(
   }
 );
 //회원가입-인증메일전송
-userRouter.post(
-  "/register/email",
-  async function (req, res, next) {
-    try{
-      const email = req.body.email;
-      
-      const randomNumber=await userMailService.sendRandomNumber(email);
-      res.status(200).json(randomNumber);
-    } catch (error) {
-      next(error);
-    }
+userRouter.post("/register/email", async function (req, res, next) {
+  try {
+    const email = req.body.email;
+    const randomNumber = await userMailService.sendRandomNumber(email);
+    res.status(200).json(randomNumber);
+  } catch (error) {
+    next(error);
   }
-  
-);
-
+});
 
 //로그인
 userRouter.post(
@@ -72,12 +66,12 @@ userRouter.post(
 userRouter.post(
   "/resetPassword",
   async (req: Request, res: Response, next: NextFunction) => {
-    try{
-    const  email  = req.body.email;
-    
-    const updatePassword=await userMailService.sendresetPassword(email);
-    res.status(200).send(updatePassword);
-    }catch(error){
+    try {
+      const email = req.body.email;
+
+      const updatePassword = await userMailService.sendresetPassword(email);
+      res.status(200).send(updatePassword);
+    } catch (error) {
       next(error);
     }
   }
@@ -120,10 +114,15 @@ userRouter.put(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userId: any = req.headers["currentUserId"];
-      const password=req.body.password;
-      const newpassword=req.body.newpassword;
+      const password = req.body.password;
+      const newpassword = req.body.newpassword;
       const confirmpassword = req.body.confirmpassword;
-      const updateUserPassword = await userService.updateUserPassword(userId,password,newpassword,confirmpassword);
+      const updateUserPassword = await userService.updateUserPassword(
+        userId,
+        password,
+        newpassword,
+        confirmpassword
+      );
       res.status(200).json(updateUserPassword);
     } catch (error) {
       next(error);
@@ -153,4 +152,4 @@ userRouter.put(
   }
 );
 
-export default userRouter ;
+export default userRouter;

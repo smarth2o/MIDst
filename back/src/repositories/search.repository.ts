@@ -38,10 +38,10 @@ class mainController {
   }
 
   //저장 삭제
-  async delete(searchId: number) {
+  async delete(searchId: string) {
     const result = await prisma.usertosearch.delete({
       where: {
-        searchId: searchId,
+        searchId: Number(searchId),
       },
     });
     return result;

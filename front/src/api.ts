@@ -5,7 +5,7 @@ const serverUrl =
   "http://" + window.location.hostname + ":" + backendPortNumber + "/";
 //axios.defaults.headers[`Access-Control-Allow-Origin`] = "*";
 // axios.defaults.withCredentials = true;
-axios.defaults.headers.get["Content-Type"] = "application/json";
+// axios.defaults.headers.get["Content-Type"] = "application/json";
 
 async function get(endpoint: string, params = "") {
   return axios.get(serverUrl + endpoint + "/" + params, {
@@ -22,11 +22,11 @@ async function post(endpoint: string, data?: any) {
   // JSON.stringify 함수: Javascript 객체를 JSON 형태로 변환함.
   // 예시: {name: "Kim"} => '{"name": "Kim"}'
   const bodyData = JSON.stringify(data);
-  // console.log("bodydata:", bodyData);
 
   return axios.post(serverUrl + endpoint, bodyData, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json", // -> 회원가입 에러 해결함
+      // "Content-Type": "text/html",
       Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
     },
   });

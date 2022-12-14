@@ -52,7 +52,7 @@ model like {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   community community @relation(fields: [postId], references: [id])
-2  user      user      @relation(fields: [userId], references: [userId])
+  user      user      @relation(fields: [userId], references: [userId])
 
   @@index([postId], map: "like_postId_fkey")
   @@index([userId], map: "like_userId_fkey")
