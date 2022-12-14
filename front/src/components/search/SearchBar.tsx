@@ -78,8 +78,8 @@ const SearchBar = (): JSX.Element => {
           },
         ]);
       }
-
       setSearchWord(searchword); // search results
+      console.log("검색 성공");
       navigate("/search");
     } catch (err) {
       console.log("검색 실패");

@@ -233,6 +233,7 @@ export const SearchResult = styled.div`
     font-size: 16px;
     color: #333333;
     margin: 0px;
+    cursor: pointer;
   }
 
   button {

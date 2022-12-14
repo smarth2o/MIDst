@@ -13,7 +13,7 @@ import * as Api from "../../api";
 
 const SearchResultCard = ({ name, script }: any): JSX.Element => {
   const [cloud, setCloud] = useState(false);
-  const [translate, setTranslate] = useState(false);
+  const [translate, setTranslate] = useState("");
   const searchword = useRecoilValue(Searchword);
 
   const handleSaveSearch = async () => {
@@ -21,28 +21,30 @@ const SearchResultCard = ({ name, script }: any): JSX.Element => {
     try {
       const my = await Api.get("main/getSearch");
       my.data.forEach((data: any) => {
-        console.log(data);
+        // console.log(data);
         if (data.description === script) {
           setCloud(true);
           searchId = data.searchId;
         }
       });
-
+      // console.log("가져오기 성공");
       if (!cloud) {
         try {
           const res = await Api.post("main/saveSearch", {
             searchword: searchword,
             searchSentence: script,
           });
-          console.log(res.data);
+          // console.log(res.data);
+          console.log("저장 성공");
         } catch (err) {
           console.log("저장 실패");
         }
       } else {
         try {
-          console.log(searchId);
+          // console.log(searchId);
           const res = await Api.delete(`main/deleteSearch/${searchId}`);
-          console.log(res);
+          // console.log(res);
+          console.log("삭제 성공");
         } catch (err) {
           console.log("삭제 실패");
         }
@@ -68,11 +70,29 @@ const SearchResultCard = ({ name, script }: any): JSX.Element => {
 
   getSearch(script);
 
+  const handleTranslate = async () => {
+    if (!translate) {
+      try {
+        const res = await Api.post("main/translate", {
+          searchSentence: script,
+        });
+        setTranslate(res.data);
+      } catch (err) {
+        console.log("번역 실패");
+        console.log(err);
+      }
+    } else {
+      setTranslate("");
+    }
+  };
+
   return (
-    <SearchResult onClick={() => setTranslate(!translate)}>
-      <p>
-        {name}: {script}
-      </p>
+    <SearchResult>
+      {
+        <p onClick={handleTranslate}>
+          {name} : {translate ? translate : script}
+        </p>
+      }
       <button onClick={handleSaveSearch}>
         <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
       </button>
