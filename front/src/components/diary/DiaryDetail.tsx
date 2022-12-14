@@ -48,12 +48,6 @@ const DiaryDetail = (): JSX.Element => {
 
   return (
     <>
-      <DiaryDetailAlignStyled>
-        <Link to="/diary/create">
-          <CreateDiaryBtn>+</CreateDiaryBtn>
-        </Link>
-      </DiaryDetailAlignStyled>
-
       <DiaryCreateAlign>
         <DiaryDetailCard
           id={id}
