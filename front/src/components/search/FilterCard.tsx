@@ -7,39 +7,102 @@ import {
   DownIcon,
   UpIcon,
   FilterContentWrapper,
-  SearchButton,
 } from "../../styles/search/Filter.styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { SearchResults } from "../../stores/FilterAtom";
 
 interface ListProps {
+  value: string;
   label: string;
   children?: React.ReactNode;
 }
 
-const List = ({ label, children }: ListProps): JSX.Element => {
-  return (
-    <li>
-      <label>
-        <input type="checkbox" />
-        {label}
-      </label>
-      {children}
-    </li>
-  );
-};
-
 const FilterCard = (): JSX.Element => {
+  const [results, setResults] = useRecoilState(SearchResults);
   const [showMedia, setShowMedia] = useState(false);
-  const [showEmotion, setShowEmotion] = useState(false);
+  // const [showEmotion, setShowEmotion] = useState(false);
 
-  const handleMedia = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    setShowMedia((prev) => !prev);
+  // const handleMedia = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   // event.preventDefault();
+  //   setShowMedia((prev) => !prev);
+  // };
+
+  // const handleEmotion = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   event.preventDefault();
+  //   setShowEmotion((prev) => !prev);
+  // };
+
+  let nameFilter: any[] = [];
+  let titleFilter: any[] = [];
+
+  useEffect(() => {
+    const titleresult = results.filter((result) =>
+      titleFilter.includes(result.title)
+    );
+    const nameresult = results.filter((result) =>
+      nameFilter.includes(result.name)
+    );
+    let searchresults = titleresult.concat(nameresult);
+    searchresults = searchresults.filter(
+      (item, pos) => searchresults.indexOf(item) === pos
+    );
+    setResults(searchresults);
+  }, [nameFilter, results, setResults, titleFilter]);
+
+  const List = ({ value, label }: ListProps): JSX.Element => {
+    const getCheckedValue = (event: any) => {
+      if (event.target.checked) {
+        nameFilter.push(event.target.value);
+      } else {
+        nameFilter = nameFilter.filter(
+          (element) => element !== event.target.value
+        );
+      }
+      console.log(nameFilter);
+    };
+
+    return (
+      <li>
+        <label>
+          <input
+            type="checkbox"
+            name="name"
+            value={value}
+            onClick={getCheckedValue}
+          />
+          {label}
+        </label>
+      </li>
+    );
   };
 
-  const handleEmotion = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    setShowEmotion((prev) => !prev);
+  const TitleList = ({ value, label, children }: ListProps): JSX.Element => {
+    const getCheckedValue = (event: any) => {
+      if (event.target.checked) {
+        titleFilter.push(event.target.value);
+      } else {
+        titleFilter = titleFilter.filter(
+          (element) => element !== event.target.value
+        );
+      }
+      console.log(titleFilter);
+    };
+
+    return (
+      <li>
+        <label>
+          <input
+            type="checkbox"
+            name="title"
+            value={value}
+            onClick={getCheckedValue}
+          />
+          {label}
+        </label>
+        {children}
+      </li>
+    );
   };
 
   return (
@@ -53,38 +116,38 @@ const FilterCard = (): JSX.Element => {
       <FilterBox>
         <FilterTitleWrapper>
           <h3>Media</h3>
-          <Button onClick={handleMedia}>
+          <Button onClick={() => setShowMedia((prev) => !prev)}>
             {showMedia ? <UpIcon /> : <DownIcon />}
           </Button>
         </FilterTitleWrapper>
         {showMedia && (
           <FilterContentWrapper>
-            <List label="Friends">
+            <TitleList label="Friends" value="Friends">
               {/* <Button>+</Button> */}
               <FilterContentWrapper>
-                <List label="Rachel"></List>
-                <List label="Ross"></List>
-                <List label="Monia"></List>
-                <List label="Chandler"></List>
-                <List label="Pheobe"></List>
-                <List label="Joey"></List>
+                <List label="Rachel" value="Rachel"></List>
+                <List label="Ross" value="Ross"></List>
+                <List label="Monica" value="Monica"></List>
+                <List label="Chandler" value="Chandler"></List>
+                <List label="Pheobe" value="Pheobe"></List>
+                <List label="Joey" value="Joey"></List>
               </FilterContentWrapper>
-            </List>
-            <List label="Harry Potter">
+            </TitleList>
+            <TitleList label="Harry Potter" value="Harry Potter">
               <FilterContentWrapper>
-                <List label="Harry"></List>
-                <List label="Hermione"></List>
-                <List label="Ron"></List>
-                <List label="Dumbledore"></List>
-                <List label="Voldemort"></List>
-                <List label="Snape"></List>
-                <List label="Dobby"></List>
+                <List label="Harry" value="Harry"></List>
+                <List label="Hermione" value="Hermione"></List>
+                <List label="Ron" value="Ron"></List>
+                <List label="Dumbledore" value="Dumbledore"></List>
+                <List label="Voldemort" value="Voldemort"></List>
+                <List label="Snape" value="Snape"></List>
+                <List label="Dobby" value="Dobby"></List>
               </FilterContentWrapper>
-            </List>
+            </TitleList>
           </FilterContentWrapper>
         )}
       </FilterBox>
-      <FilterBox>
+      {/* <FilterBox>
         <FilterTitleWrapper>
           <h3>Emotion</h3>
           <Button onClick={handleEmotion}>
@@ -102,8 +165,8 @@ const FilterCard = (): JSX.Element => {
             <List label="neutral"></List>
           </FilterContentWrapper>
         )}
-      </FilterBox>
-      <SearchButton>Search</SearchButton>
+      </FilterBox> */}
+      {/* <SearchButton>Search</SearchButton> */}
     </FilterWrapper>
   );
 };

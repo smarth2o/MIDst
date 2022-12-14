@@ -7,35 +7,56 @@ import {
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import * as Api from "../../api";
-
-// interface SearchData {
-//   searchword: string;
-//   title?: string;
-//   name?: string;
-// }
+import { useSetRecoilState, useResetRecoilState } from "recoil";
+import { SearchResults } from "../../stores/FilterAtom";
+import { Searchword } from "../../stores/SearchAtom";
 
 const SearchBar = (): JSX.Element => {
   const navigate = useNavigate();
-
-  // const [search, setSearch] = useState<SearchData>({
-  //   searchword: "",
-  //   title: "",
-  //   name: "",
-  // });
-
-  const [searchword, setSearch] = useState<string>("");
+  const [searchword, setSearchword] = useState("");
+  const setSearchWord = useSetRecoilState(Searchword);
+  const setResults = useSetRecoilState(SearchResults);
+  const resetResults = useResetRecoilState(SearchResults);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // const { name, value } = event.target;
-    // setSearch({ ...search, [name]: value });
-    setSearch(event.target.value);
+    setSearchword(event.target.value);
   };
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(searchword,"이거");
     try {
+      resetResults();
       const res = await Api.get(`main/showSearch/${searchword}`);
-      console.log(res.data);
+
+      let results = res.data;
+      results = String(results).split("(");
+
+      for (var result of results) {
+        result = String(result);
+        // console.log(result);
+
+        let id = result.split(")")[0];
+        let title = result.split(")")[1];
+        title = String(title).split("-")[0];
+        title = title.trim();
+        let name = result.split("-")[1];
+        name = String(name).split(":")[0];
+        name = name.trim();
+        let script = result.split(":")[1];
+        script = String(script).slice(0, String(script).length - 5);
+        script = script.trim();
+
+        setResults((prev) => [
+          ...prev,
+          {
+            id: Number(id),
+            title: String(title),
+            name: String(name),
+            script: String(script),
+          },
+        ]);
+      }
+
+      setSearchWord(searchword); // search results
       navigate("/search");
     } catch (err) {
       console.log("검색 실패");
@@ -52,9 +73,15 @@ const SearchBar = (): JSX.Element => {
         value={searchword}
         onChange={handleChange}
       ></Search>
-      <SearchButton onClick={handleSubmit}>
-        <SearchImg />
-      </SearchButton>
+      {searchword ? (
+        <SearchButton onClick={handleSubmit}>
+          <SearchImg />
+        </SearchButton>
+      ) : (
+        <SearchButton onClick={handleSubmit} disabled>
+          <SearchImg />
+        </SearchButton>
+      )}
     </SearchbarWrapper>
   );
 };

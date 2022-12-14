@@ -4,7 +4,7 @@ import { Refresh, ArrowUp, ArrowDown } from "../../assets/index";
 export const FilterWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 8rem 3rem 5rem 4rem;
+  margin: 8rem 3rem 5rem 2rem;
 `;
 
 export const FilterBox = styled.div`

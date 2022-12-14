@@ -53,7 +53,6 @@ const MainPage = (): JSX.Element => {
       userReset();
       window.localStorage.removeItem("accessToken");
       window.localStorage.removeItem("refreshToken");
-      // navigate("/", { replace: true });
       console.log("로그아웃 성공");
       window.location.reload();
     } catch (err) {

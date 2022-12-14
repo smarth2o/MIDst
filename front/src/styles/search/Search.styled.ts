@@ -83,8 +83,8 @@ export const Search = styled.input`
   box-sizing: border-box;
   width: 650px;
   height: 60px;
-  margin-top: 15px;
-  margin-bottom: 32px;
+  margin-top: 25px;
+  margin-bottom: 0;
   padding: 10px;
 
   background: linear-gradient(
@@ -105,6 +105,11 @@ export const Search = styled.input`
   :focus {
     outline: none;
   }
+
+  :-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+    box-shadow: 0 0 0 1000px white inset;
+  }
 `;
 
 export const SearchButton = styled.button`
@@ -112,8 +117,12 @@ export const SearchButton = styled.button`
   cursor: pointer;
   position: absolute;
   right: 30px;
-  top: 30px;
+  top: 40px;
   background-color: transparent;
+
+  :disabled {
+    cursor: default;
+  }
 `;
 
 export const SearchImg = styled.img.attrs({
@@ -137,30 +146,34 @@ export const SearchLayout = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 51px;
+  margin-right: 3rem;
 `;
 
 export const SearchResultBox = styled.div`
   width: 931px;
+  min-height: 30rem;
 
   background: #ffffff;
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
 
-  padding: 35px 50px;
+  padding: 30px 50px;
+  margin-bottom: 4em;
   position: relative;
-
-  h3 {
-    font-family: "Saira";
-    font-weight: 600;
-    font-size: 18px;
-    color: #333333;
-  }
 
   p {
     font-family: "Saira";
     font-weight: 400;
     font-size: 14px;
     color: #555555;
+    margin-top: 1em;
+  }
+
+  .title {
+    font-weight: 600;
+    font-size: 18px;
+    color: #333333;
+    margin: 3em 0em 1em 1em;
   }
 `;
 
@@ -202,7 +215,7 @@ export const Button = styled.button`
   cursor: pointer;
 `;
 
-export const SearchResults = styled.div``;
+// export const SearchResults = styled.div``;
 
 export const SearchResult = styled.div`
   display: flex;

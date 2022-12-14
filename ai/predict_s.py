@@ -4,7 +4,7 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader,Dataset
 from transformers import BertTokenizer, BertForSequenceClassification,TextClassificationPipeline
-from tqdm.notebook import tqdm
+
 device = torch.device('cpu')
 loaded_model = BertForSequenceClassification.from_pretrained('./bert_uncased_model3.pt').to(device)
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased',do_lower_case=True)

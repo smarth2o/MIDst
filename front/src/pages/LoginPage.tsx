@@ -49,7 +49,7 @@ const LoginPage = (): JSX.Element => {
       window.localStorage.setItem("accessToken", res.data.accessToken);
       window.localStorage.setItem("refreshToken", res.data.refreshToken);
       console.log("로그인 성공");
-      navigate(-1);
+      navigate(-1); // 뒤로가기
     } catch (err) {
       console.log("로그인 실패");
       console.error(err);
