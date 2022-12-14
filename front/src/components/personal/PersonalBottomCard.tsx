@@ -10,6 +10,8 @@ import {
 import PBCardData, { PBCardDataType } from "./personalData";
 import { CloudEmp, CloudFull } from "../../assets/index";
 import * as Api from "../../api";
+import { BackBtnStyled } from "../../styles/common/CommonBtn";
+import { DiaryDetailBtn } from "../../styles/diary/DiaryDetailCard";
 
 export interface PBCardItemType {
   userId: number;
@@ -22,10 +24,12 @@ const PersonalBottomCard = (): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [items, setItems] = useState<PBCardDataType>(PBCardData);
 
-  const [cloud, setCloud] = useState(false);
-  const [translate, setTranslate] = useState(false);
+  const [cloud, setCloud] = useState(true);
+  const [translate, setTranslate] = useState(true);
+  const [id, setId] = useState("");
+  const [searchword, setSearchword] = useState("");
 
-  const tabList = ["Expressions", "Words", "Grammar"];
+  const tabList = ["Expressions", "Words"];
 
   const tabClickHandler = (index: any) => {
     setActiveIndex(index);
@@ -37,60 +41,70 @@ const PersonalBottomCard = (): JSX.Element => {
       if (response.status !== 200) {
         console.log(response);
       } else {
-        console.log(response.data);
         setItems(response.data);
+        setSearchword(response.data);
       }
     };
+    const getId = async () => {
+      const response = await Api.get("main/getSearch");
+      response.data.forEach((data: any) => {
+        setId(data.searchId);
+      });
+      if (response.status !== 200) {
+        console.log(response);
+      } else {
+        console.log(response.data.searchId);
+      }
+    };
+    getId();
     getPersonalData();
-  }, []);
+  }, [cloud]);
+  const getSearch = async (script: any) => {
+    try {
+      const res = await Api.get("main/getSearch");
+      res.data.forEach((data: any) => {
+        if (data.description === script) {
+          setCloud(true);
+        }
+      });
+    } catch (err) {
+      console.log("가져오기 실패");
+    }
+  };
+  const handleSaveSearch = async () => {
+    let searchId = "";
+    try {
+      // console.log("가져오기 성공");
+      if (window.confirm("삭제하시겠습니까")) {
+        try {
+          console.log("test", searchId);
+          const res = await Api.delete(`main/deleteSearch/${id}`);
+          console.log(res);
+          console.log("삭제 성공");
+        } catch (err) {
+          console.log("삭제 실패");
+        }
+      }
+    } catch (err) {
+      console.log("가져오기 실패");
+    }
+  };
   const expressionItem = () => {
-    const expression = items.map((res) => {
+    const expression = items.map((res: any) => {
       return (
         <>
-          <PBCardItemStyled onClick={() => setTranslate(!translate)}>
-            {res.description}
-            <button onClick={() => setCloud(!cloud)}>
-              <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
-            </button>
-          </PBCardItemStyled>
+          <PBCardItemStyled>{res.description}</PBCardItemStyled>
         </>
       );
     });
-    // res.description.map((expression) => (
-    // console.log(expression)
-    // <PBCardItemStyled onClick={() => setTranslate(!translate)}>
-    //   {expression}
-    //   <button onClick={() => setCloud(!cloud)}>
-    //     <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
-    //   </button>
-    // </PBCardItemStyled>
-    // ))
     return <PBCardWordAlignStyled>{expression}</PBCardWordAlignStyled>;
   };
   const wordsItem = () => {
     const wordsList = items.map((res) => (
-      <PBCWordItemStyled>
-        {res.searchWord}
-        <button onClick={() => setCloud(!cloud)}>
-          <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
-        </button>
-      </PBCWordItemStyled>
+      <PBCWordItemStyled>{res.searchWord}</PBCWordItemStyled>
     ));
 
     return <PBCardWordAlignStyled>{wordsList}</PBCardWordAlignStyled>;
-  };
-
-  const grammarItem = () => {
-    const grammarList = items.map((res) => (
-      <PBCardItemStyled>
-        {res.grammar}
-        <button onClick={() => setCloud(!cloud)}>
-          <img src={cloud ? CloudFull : CloudEmp} alt="cloud" />
-        </button>
-      </PBCardItemStyled>
-    ));
-
-    return <ul>{grammarList}</ul>;
   };
 
   const tabContArr = [
@@ -115,17 +129,6 @@ const PersonalBottomCard = (): JSX.Element => {
         </li>
       ),
       tabCont: <div>{wordsItem()} </div>,
-    },
-    {
-      tabTitle: (
-        <li
-          className={activeIndex === 2 ? "is-active" : ""}
-          onClick={() => tabClickHandler(2)}
-        >
-          Grammar
-        </li>
-      ),
-      tabCont: <div> {grammarItem()}</div>,
     },
   ];
 

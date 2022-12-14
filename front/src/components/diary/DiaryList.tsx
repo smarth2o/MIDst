@@ -39,14 +39,15 @@ const DiaryList = (): JSX.Element => {
     <>
       <DiaryListAlign>
         {diaryArray.map((diary: DiaryTypes) => {
+          const { id, date, title, description } = diary;
           return (
-            <Link key={diary?.id} to={`/diary/${diary?.id}`}>
+            <Link key={id} to={`/diary/${id}`}>
               <DiaryItem
-                key={diary?.id}
-                id={diary?.id}
-                date={diary?.date}
-                title={diary?.title}
-                description={diary?.description}
+                key={id}
+                id={id}
+                date={date}
+                title={title}
+                description={description}
               />
             </Link>
           );

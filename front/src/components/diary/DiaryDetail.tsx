@@ -18,16 +18,19 @@ const DiaryDetail = (): JSX.Element => {
   const [date, setDate] = useState("");
   const { detail } = useParams();
   const currentIndex = Number(detail ?? 1);
-  // const currentDiary = diarys.find(
-  //   (diary) => diary.id === currentIndex
-  // ) as DiaryTypes;
 
-  {
-    /**  const [diarys, setDiarys] = useState([]);
-  const { detail } = useParams();
-  const currentIndex = Number(detail ?? 1);
-*/
-  }
+  useEffect(() => {
+    const getDiaryData = async () => {
+      const response = await Api.get(`diaries`);
+      if (response.status !== 200) {
+        console.log(response);
+      } else {
+        setDiarys(response.data.data);
+      }
+    };
+    getDiaryData();
+  }, []);
+
   useEffect(() => {
     const getDiaryDetail = async () => {
       const response = await Api.get(`diaries/${detail}`);
