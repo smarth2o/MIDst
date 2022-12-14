@@ -12,24 +12,24 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Api from "../api";
 
-const FindPasswordPage = (): JSX.Element => {
+const WithdrawalPage = (): JSX.Element => {
   const navigate = useNavigate();
   const [changed, setChanged] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
+  const [id, setId] = useState<string>("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
+    setId(event.target.value);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const res = await Api.post("user/resetPassword", { email: email });
-      // console.log(res.data);
-      console.log("이메일 전송 성공");
+      const res = await Api.put(`user/resetPassword/${id}`, { withdrawal: 1 });
+      console.log(res.data);
+      console.log("회원탈퇴 성공");
       setChanged(true);
     } catch (err) {
-      console.log("이메일 전송 실패");
+      console.log("회원탈퇴 실패");
       console.error(err);
     }
   };
@@ -41,26 +41,23 @@ const FindPasswordPage = (): JSX.Element => {
           <Logo />
           {changed ? (
             <>
-              <Title>Check your email</Title>
-              <Text>
-                Verification code has been sent to your email address.
-              </Text>
+              <Title>Your account has been closed.</Title>
+              <Text></Text>
               <Button onClick={() => navigate("/login")}>
-                Sign In with temporary password
+                Go to Main Page
               </Button>
             </>
           ) : (
             <>
-              <Title>Forgot your password?</Title>
-
+              <Title>Are you sure you want to close your account?</Title>
               <Text>
-                Please enter your email address. <br />
-                You will receive a verification code via email.
+                Once it's closed, you won't be able to use this account or see
+                your past records. This action can't be undone.
               </Text>
               <Input
-                type="email"
-                placeholder="Email address"
-                value={email}
+                type="id"
+                placeholder="ID"
+                value={id}
                 onChange={handleChange}
               ></Input>
               <Button type="submit">Continue</Button>
@@ -72,4 +69,4 @@ const FindPasswordPage = (): JSX.Element => {
   );
 };
 
-export default FindPasswordPage;
+export default WithdrawalPage;

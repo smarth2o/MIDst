@@ -18,5 +18,6 @@ export const ROUTES = {
     REGISTER: "/register",
     FIND_PW: "/findPassword",
     CHANGE_PW: "/changePassword",
+    WITHDRAWAL: "/withdrawal",
   },
 };

@@ -17,6 +17,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import FindPasswordPage from "./pages/FindPasswordPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
+import WithdrawalPage from "./pages/WithdrawalPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import CommunityDetail from "./components/community/CommunityDetail";
 // import Background from "./styles/common/BrainBackground.styled";
@@ -64,6 +65,7 @@ const App = (): JSX.Element => {
               path={ROUTES.USER.CHANGE_PW}
               element={<ChangePasswordPage />}
             />
+            <Route path={ROUTES.USER.WITHDRAWAL} element={<WithdrawalPage />} />
             <Route path="/*" element={<NotFoundPage />} />
           </Route>
         </Routes>

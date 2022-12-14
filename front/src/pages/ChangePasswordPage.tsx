@@ -10,6 +10,7 @@ import {
 } from "../styles/Register.styled";
 import { useState } from "react";
 import * as Api from "../api";
+import { useNavigate } from "react-router-dom";
 
 interface PasswordData {
   password: string;
@@ -18,6 +19,7 @@ interface PasswordData {
 }
 
 const ChangePasswordPage = (): JSX.Element => {
+  const navigate = useNavigate();
   const [changed, setChanged] = useState<boolean>(false);
 
   const [password, setPassword] = useState<PasswordData>({
@@ -34,8 +36,9 @@ const ChangePasswordPage = (): JSX.Element => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const res = await Api.put(`user/updateuserPassword`, password);
-      console.log(res);
+      const res = await Api.put("user/updateuserPassword", password);
+      // console.log(res.data);
+      console.log("비밀번호 변경 성공");
       setChanged(true);
     } catch (err) {
       console.log("비밀번호 변경 실패");
@@ -50,7 +53,10 @@ const ChangePasswordPage = (): JSX.Element => {
           <Logo />
           <Title>Change Password</Title>
           {changed ? (
-            <Text>Your password has been changed successfully.</Text>
+            <>
+              <Text>Your password has been changed successfully.</Text>
+              <Button onClick={() => navigate("/")}>Go to Main Page</Button>
+            </>
           ) : (
             <>
               <Input
