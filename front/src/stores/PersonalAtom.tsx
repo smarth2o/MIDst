@@ -1,4 +1,4 @@
-import { atom, atomFamily } from "recoil";
+import { atom } from "recoil";
 
 const CloudEmp = require("../assets/cloudEmp.png");
 

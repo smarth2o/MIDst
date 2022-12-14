@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const ReplyLiStyled = styled.div`
+  display: flex;
+  justify-content: space-between;
   ul {
     list-style: none;
   }
