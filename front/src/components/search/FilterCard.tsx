@@ -37,9 +37,14 @@ const FilterCard = (): JSX.Element => {
   // };
 
   const List = ({ value, label }: ListProps): JSX.Element => {
+    // const handleCheck = () => {
+
+    // }
+
     const getCheckedValue = (event: any) => {
       // event.preventDefault();
       console.log(event.target.value, event.target.checked);
+
       // if (event.target.checked) {
       //   setNameFilter((prev) => [...prev, event.target.value]);
       // } else {
@@ -57,6 +62,7 @@ const FilterCard = (): JSX.Element => {
             type="checkbox"
             name="name"
             value={value}
+            // onChange={handleCheck}
             onClick={getCheckedValue}
           />
           {label}

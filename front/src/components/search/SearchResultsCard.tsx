@@ -10,8 +10,10 @@ import { CloudEmp, CloudFull } from "../../assets/index";
 import { useRecoilValue } from "recoil";
 import { Searchword, SearchResults } from "../../stores/SearchAtom";
 import * as Api from "../../api";
+import { useNavigate } from "react-router";
 
 const SearchResultCard = ({ name, script }: any): JSX.Element => {
+  const navigate = useNavigate();
   const [cloud, setCloud] = useState(false);
   const [translate, setTranslate] = useState("");
   const searchword = useRecoilValue(Searchword);
@@ -52,23 +54,12 @@ const SearchResultCard = ({ name, script }: any): JSX.Element => {
       setCloud(!cloud);
     } catch (err) {
       console.log("가져오기 실패");
+      if (
+        window.confirm("로그인 후 사용하실 수 있습니다. 로그인 하시겠습니까?")
+      )
+        navigate("/login");
     }
   };
-
-  const getSearch = async (script: any) => {
-    try {
-      const res = await Api.get("main/getSearch");
-      res.data.forEach((data: any) => {
-        if (data.description === script) {
-          setCloud(true);
-        }
-      });
-    } catch (err) {
-      console.log("가져오기 실패");
-    }
-  };
-
-  getSearch(script);
 
   const handleTranslate = async () => {
     if (!translate) {
