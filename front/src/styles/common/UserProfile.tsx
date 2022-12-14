@@ -13,9 +13,11 @@ export const UserProfileStyled = styled.div`
     list-style: none;
   }
   .profile-align {
-    width: 200px;
+    h3 {
+      width: 50px;
+    }
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     h4 {
       padding-left: 5px;
@@ -23,6 +25,7 @@ export const UserProfileStyled = styled.div`
   }
   img {
     width: 40px;
+    margin-right: 10px;
     border-radius: 50px;
   }
 `;

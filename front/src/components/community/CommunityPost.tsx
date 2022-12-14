@@ -16,8 +16,9 @@ import {
   CPTopInfoAlign,
 } from "../../styles/community/CommunityPost";
 import UserProfile from "../common/UserProfile";
-
+import * as Api from "../../api";
 import { CommunityPropsType } from "./CommunityList";
+import { useEffect, useState } from "react";
 
 const CommunityPost = ({
   id,
@@ -29,13 +30,48 @@ const CommunityPost = ({
   like,
 }: CommunityPropsType): JSX.Element => {
   const postCreatedAt = dayjs(createdAt);
+  const [isLike, setIsLike] = useState(like);
   const { communityDetail } = useParams();
   const navigate = useNavigate();
-  const onCancel = () => {
+
+  console.log("현재 게시글 번호", communityDetail);
+
+  const onCancel = async () => {
     if (window.confirm("삭제 하시겠습니까?")) {
-      navigate(ROUTES.COMMUNITY.ROOT);
+      const onDelete = await Api.delete(`posts/${communityDetail}`);
+      if (onDelete.status !== 200) {
+        console.log(onDelete);
+      } else {
+        console.log(onDelete);
+        navigate(ROUTES.COMMUNITY.ROOT);
+      }
     }
   };
+
+  const onClickHeart = async () => {
+    const onLikePost = await Api.post(`likes/${communityDetail}/like`, {
+      like: true,
+    });
+    if (onLikePost.status !== 200) {
+      console.log(onLikePost);
+    } else {
+      setIsLike((prev) => prev + 1);
+    }
+  };
+
+  useEffect(() => {
+    const onViewHeart = async () => {
+      const onLikeGet = await Api.get(`likes/${communityDetail}`);
+      if (onLikeGet.status !== 200) {
+        console.log(onLikeGet);
+      } else {
+        console.log("like", onLikeGet.data.data.count._count);
+        setIsLike(onLikeGet.data.data.count._count);
+      }
+    };
+    onViewHeart();
+  }, [isLike]);
+
   const onEdit = () => {
     navigate(`/community/${communityDetail}/edit`);
   };
@@ -51,8 +87,8 @@ const CommunityPost = ({
                 {postCreatedAt.format("YYYY-MM-DD H시간전")}
               </li>
               <li className="postInfo">
-                <HeartOutlined />
-                {like}
+                <HeartOutlined onClick={onClickHeart} />
+                {isLike}
               </li>
               <li className="postInfo">
                 <MessageOutlined />

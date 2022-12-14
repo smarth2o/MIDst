@@ -1,10 +1,9 @@
 import React from "react";
 import dayjs from "dayjs";
-import { FormEventHandler, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import { ROUTES } from "../../enum/routes";
 import * as Api from "../../api";
-import { CommunityPropsType } from "./CommunityList";
 import {
   CommunityCreateAlign,
   CommunityCreateBtnAlignStyled,
@@ -16,6 +15,7 @@ const CommunityCreate = (): JSX.Element => {
   const [communityContent, setCommunityContent] = useState("");
   const [id, setId] = useState(0);
   const [nowAuthorId, setNowAuthorId] = useState("");
+  const [currrentName, setCurrentName] = useState("");
   const createdAt = dayjs();
 
   const navigate = useNavigate();
@@ -24,6 +24,10 @@ const CommunityCreate = (): JSX.Element => {
       navigate(ROUTES.COMMUNITY.ROOT);
     }
   };
+  const onSubmit = () => {
+    onFinish();
+    navigate(ROUTES.COMMUNITY.ROOT);
+  };
 
   useEffect(() => {
     const getUserData = async () => {
@@ -31,50 +35,32 @@ const CommunityCreate = (): JSX.Element => {
       if (currentUser.status !== 200) {
         console.log(currentUser);
       } else {
-        setNowAuthorId(currentUser.data.userId);
-        console.log(currentUser);
+        console.log(currentUser.data[0]);
+        setNowAuthorId(currentUser.data[0].userId);
+        setCurrentName(currentUser.data[0].name);
       }
     };
 
     getUserData();
-  });
+  }, []);
 
-  const onFinish = async (e: React.FormEvent) => {
+  const onFinish = async () => {
     const response = await Api.post(`posts`, {
       id: id,
       userId: nowAuthorId,
+      name: currrentName,
       title: communityTitle,
       description: communityContent,
       createdAt: createdAt,
       updatedAt: createdAt,
     });
     if (response.status !== 200) {
-      console.log(response);
+      console.log(communityTitle);
     } else {
-      console.log(response.data);
-      navigate(ROUTES.COMMUNITY.ROOT);
+      console.log("입력", response.data);
     }
+    console.log("입력", response);
   };
-
-  // const onFinish = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   console.log(e);
-
-  //   const response = await Api.post(`posts`, {
-  //     id: 1,
-  //     userId: "2",
-  //     title: communityTitle,
-  //     description: communityContent,
-  //     createdAt: createdAt,
-  //     updatedAt: createdAt,
-  //   });
-  //   if (response.status !== 200) {
-  //     return console.log(response.status);
-  //   } else {
-  //     console.log("성공:", response.data);
-  //   }
-  //   navigate(ROUTES.COMMUNITY.ROOT);
-  // };
 
   return (
     <>
@@ -96,7 +82,7 @@ const CommunityCreate = (): JSX.Element => {
             ></input>
             <CommunityCreateBtnAlignStyled>
               <button onClick={onCancel}>삭제</button>
-              <button type="submit" value="Submit">
+              <button type="submit" value="Submit" onClick={onSubmit}>
                 저장
               </button>
             </CommunityCreateBtnAlignStyled>

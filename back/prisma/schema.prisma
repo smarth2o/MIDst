@@ -52,7 +52,7 @@ model like {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   community community @relation(fields: [postId], references: [id])
-  user      user      @relation(fields: [userId], references: [name])
+  user      user      @relation(fields: [userId], references: [userId])
 
   @@index([postId], map: "like_postId_fkey")
   @@index([userId], map: "like_userId_fkey")
@@ -73,31 +73,33 @@ model reply {
 }
 
 model diary {
-  id          Int      @id @unique @default(autoincrement())
-  userId      String   @db.VarChar(45)
+  id          Int       @id @unique @default(autoincrement())
+  userId      String    @db.VarChar(45)
   date        String
   emotion     String?
-  title       String   @db.VarChar(10)
-  description String   @db.VarChar(100)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  user        user     @relation(fields: [userId], references: [userId])
-  grammer grammer[]
+  title       String    @db.VarChar(10)
+  description String    @db.VarChar(100)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  user        user      @relation(fields: [userId], references: [userId])
+  grammer     grammer[]
 
   @@index([userId], map: "diary_userId_fkey")
 }
 
-model grammer{
-  id Int @id @default(autoincrement())
-  diaryId Int 
-  type String
+model grammer {
+  id          Int    @id @default(autoincrement())
+  diaryId     Int
+  type        String
   description String
-  before String
-  bad String
-  better String
-  index Int
-  length Int
-  diary diary @relation(fields: [diaryId],references: [id])
+  before      String
+  bad         String
+  better      String
+  index       Int
+  length      Int
+  diary       diary  @relation(fields: [diaryId], references: [id])
+
+  @@index([diaryId], map: "grammer_diaryId_fkey")
 }
 
 model refreshtoken {
