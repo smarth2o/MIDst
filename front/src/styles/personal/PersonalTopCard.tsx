@@ -186,7 +186,9 @@ export const UserProfileImgStyled = styled.div`
     text-decoration: none;
   }
 `;
-export const UPBottomAlignStyled = styled.div``;
+export const UPBottomAlignStyled = styled.div`
+  margin-top: 20px;
+`;
 
 export const UPBottomDetail = styled.div`
   border-radius: 15px;

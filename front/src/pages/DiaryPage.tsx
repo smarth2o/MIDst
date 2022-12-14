@@ -49,7 +49,6 @@ const DiaryPage = (): JSX.Element => {
               <div className="diary-content">
                 <DiarySide />
                 <DiaryMainStyled>
-                  {/* <DiaryList setDiarys={setDiarys} diarys={diarys} /> */}
                   <Outlet context={{ diarys, setDiarys }} />
                   <DiaryBottom />
                 </DiaryMainStyled>

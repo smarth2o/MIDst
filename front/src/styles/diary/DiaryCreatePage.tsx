@@ -16,6 +16,7 @@ export const DiaryMainStyled = styled.div`
   display: flex;
   width: 50vw;
   flex-direction: column;
+  margin-left: 5vw;
 `;
 export const DiaryAllAlign = styled.div`
   display: flex;
@@ -25,7 +26,7 @@ export const DiaryAllAlign = styled.div`
     justify-content: space-around;
   }
   .diary-align-styled {
-    @media all and (min-width: 1300px) {
+    @media all and (min-width: 800px) {
       display: flex;
       flex-direction: column;
       justify-content: space-around;

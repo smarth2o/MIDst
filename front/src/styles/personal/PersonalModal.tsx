@@ -17,4 +17,9 @@ export const PersonalModalStyled = styled.div`
   li {
     text-align: start;
   }
+  .link {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
 `;

@@ -12,6 +12,7 @@ import * as Api from "../../api";
 
 export const PersonalTopCard = (): JSX.Element => {
   const [expressionsCount, setExpressionCount] = useState(0);
+  const [diaryCount, setDiaryCount] = useState(0);
 
   useEffect(() => {
     const getExpressionsCount = async () => {
@@ -19,11 +20,19 @@ export const PersonalTopCard = (): JSX.Element => {
       if (response.status !== 200) {
         console.log("갯수 저장 실패");
       } else {
-        console.log("갯수 저장 성공 : ", response.data);
         setExpressionCount(response.data);
       }
     };
+    const getDiaryCount = async () => {
+      const response = await Api.get(`diaries`);
+      if (response.status !== 200) {
+        console.log("다이어리 갯수 저장 실패");
+      } else {
+        setDiaryCount(response.data.data.count);
+      }
+    };
     getExpressionsCount();
+    getDiaryCount();
   }, []);
 
   return (
@@ -70,7 +79,7 @@ export const PersonalTopCard = (): JSX.Element => {
               </li>
             </li>
             <li className="card-align-li">
-              <h3>Search for 145 words</h3>
+              <h3>Search for {expressionsCount} words</h3>
               <li>
                 <button className="btn-go-search">
                   <a href="/">
@@ -81,25 +90,14 @@ export const PersonalTopCard = (): JSX.Element => {
             </li>
           </ul>
         </PTCardAlignStyled>
-
         <PTCardAlignStyled>
           <ul className="card-align-ul">
             <li className="card-align-li">
-              <h3>Search for 327 expressions</h3>
+              <h3>Wrote {diaryCount} diaries</h3>
               <li>
                 <button className="btn-go-search">
-                  <a href="/">
+                  <a href="/diary">
                     Saved Expressions <ArrowRightOutlined />
-                  </a>
-                </button>
-              </li>
-            </li>
-            <li className="card-align-li">
-              <h3>Search for 145 words</h3>
-              <li>
-                <button className="btn-go-search">
-                  <a href="/">
-                    Save Words <ArrowRightOutlined />
                   </a>
                 </button>
               </li>

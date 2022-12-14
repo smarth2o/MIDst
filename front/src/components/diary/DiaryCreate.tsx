@@ -17,24 +17,22 @@ const DiaryCreate = (): JSX.Element => {
   const date = dayjs();
   const navigator = useNavigate();
 
-  const onSubmitDiary = () => {
-    const DiaryPost = async () => {
-      const diaryPost = await Api.post(`diaries`, {
-        date: date.format("YYYY-MM-DD"),
-        title: title,
-        description: description,
-      });
-      if (diaryPost.status !== 200) {
-        console.log(diaryPost);
-      } else {
-        console.log(diaryPost.data.data);
-        //navigator()
-        alert("제출이 완료되었습니다.");
-        navigator(-1);
-      }
-    };
-    DiaryPost();
+  const onSubmitDiary = async () => {
+    const diaryPost = await Api.post(`diaries`, {
+      date: date.format("YYYY-MM-DD"),
+      title: title,
+      description: description,
+    });
+    if (diaryPost.status !== 200) {
+      console.log(diaryPost);
+    } else {
+      console.log(diaryPost.data.data);
+      //navigator()
+      alert("제출이 완료되었습니다.");
+      navigator(-1);
+    }
   };
+
   const getDiaryData = async () => {
     const response = await Api.get(`diaries`);
     if (response.status !== 200) {

@@ -1,5 +1,5 @@
 import profileImg from "../../assets/profile.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PersonalModal from "./PersonalModal";
 import {
   UPBottomAlignStyled,
@@ -9,12 +9,8 @@ import {
   UserProfileFormStyled,
   UserProfileImgStyled,
 } from "../../styles/personal/PersonalTopCard";
-import {
-  ArrowRightOutlined,
-  MailOutlined,
-  SettingOutlined,
-  TeamOutlined,
-} from "@ant-design/icons";
+import { MailOutlined, SettingOutlined, TeamOutlined } from "@ant-design/icons";
+import * as Api from "../../api";
 
 type ClickHandler = (props: boolean) => (e: React.MouseEvent) => void;
 
@@ -24,12 +20,31 @@ const UserProfile = (): JSX.Element => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isToggle, setIsToggle] = useState(false);
 
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const res = await Api.get(`user/currentUser`);
+      if (res.status !== 200) {
+        console.log("탈퇴실패");
+      } else {
+        console.log(res.data[0]);
+        setUserName(res.data[0].name);
+        setUserEmail(res.data[0].email);
+      }
+    };
+    getUserInfo();
+  }, []);
+
   const ClickHandler: ClickHandler = (props) => (e) => {
     e.preventDefault();
     setIsEdit(!props);
-    // if (isEdit) {
-    // 백엔드로 연결하기
-    // }
+    if (isEdit) {
+      const userNamePut = async () => {
+        const res = await Api.put(`user/updateuser`, {
+          name: userName,
+        });
+      };
+      userNamePut();
+    }
   };
   if (!isEdit) {
     return (
@@ -80,16 +95,8 @@ const UserProfile = (): JSX.Element => {
               className="profile-form-item"
             />
             <UPBottomAlignStyled>
-              <MailOutlined />{" "}
-              <input
-                maxLength={20}
-                placeholder="Title"
-                value={userEmail}
-                onChange={(e) => {
-                  setUserEmail(e.target.value);
-                }}
-                className="profile-form-item"
-              />
+              <MailOutlined />
+              {userEmail}
               <UPBottomDetail>
                 <button
                   className="btn-go-search"

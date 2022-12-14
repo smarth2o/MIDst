@@ -47,6 +47,10 @@ export const DiaryBottomOpenCard = styled.div`
     justify-content: space-between;
     align-items: center;
   }
+  .DBOC-bottom {
+    display: flex;
+    flex-direction: column;
+  }
   align-items: center;
   border-radius: 20px;
   height: 100%;

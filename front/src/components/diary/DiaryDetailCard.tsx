@@ -61,6 +61,7 @@ const DiaryDetailCard = ({
         console.log(response.status);
       } else {
         console.log(response.data.data);
+        window.location.replace(`/diary/${detail}`);
       }
     };
     DiaryDetailPost();
@@ -108,7 +109,7 @@ const DiaryDetailCard = ({
             <button className="gray-btn" onClick={clickDelete}>
               DELETE
             </button>
-            <button className="gray-btn" onClick={ClickHandler(isEdit)}>
+            <button className="gray-btn" onClick={() => setIsEdit(!isEdit)}>
               EDIT
             </button>
           </DiaryDetailBtn>
@@ -140,7 +141,7 @@ const DiaryDetailCard = ({
             </DiaryForm>
           </div>
           <DiaryDetailBtn>
-            <button className="gray-btn">DELETE</button>
+            <button className="gray-btn">Cancel</button>
             <button className="gray-btn" onClick={ClickHandler(isEdit)}>
               SAVE
             </button>
