@@ -96,6 +96,8 @@ export const Button = styled.button`
   font-weight: 600;
   font-size: 16px;
   color: #ffffff;
+
+  cursor: pointer;
 `;
 
 export const SmallButton = styled(Button).attrs({

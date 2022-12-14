@@ -31,7 +31,7 @@ const SearchBar = (): JSX.Element => {
 
       for (var result of results) {
         result = String(result);
-        console.log(result);
+        // console.log(result);
 
         let id = result.split(")")[0];
         let title = result.split(")")[1];

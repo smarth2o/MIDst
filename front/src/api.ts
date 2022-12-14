@@ -2,7 +2,7 @@ import axios from "axios";
 
 const backendPortNumber = "5000";
 const serverUrl =
-"http://" + window.location.hostname + ":" + backendPortNumber + "/";
+  "http://" + window.location.hostname + ":" + backendPortNumber + "/";
 //axios.defaults.headers[`Access-Control-Allow-Origin`] = "*";
 // axios.defaults.withCredentials = true;
 axios.defaults.headers.get["Content-Type"] = "application/json";
@@ -22,6 +22,7 @@ async function post(endpoint: string, data?: any) {
   // JSON.stringify 함수: Javascript 객체를 JSON 형태로 변환함.
   // 예시: {name: "Kim"} => '{"name": "Kim"}'
   const bodyData = JSON.stringify(data);
+  // console.log("bodydata:", bodyData);
 
   return axios.post(serverUrl + endpoint, bodyData, {
     headers: {

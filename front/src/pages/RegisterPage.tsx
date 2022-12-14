@@ -38,13 +38,13 @@ const RegisterPage = (): JSX.Element => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleValidID = async () => {};
-
-  const handleValidEmail = async () => {
+  const handleSendEmail = async () => {
     try {
-      await Api.post(`user/register/email`, form.email);
+      const res = await Api.post("user/register/email", form.email);
+      console.log(res.data);
     } catch (err) {
       console.log("이메일 전송 에러");
+      console.error(err);
     }
   };
 
@@ -57,14 +57,13 @@ const RegisterPage = (): JSX.Element => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     try {
-      const res = await Api.post(`user/register`, form);
+      const res = await Api.post("user/register", form);
       console.log(res);
       navigate("/login");
     } catch (err) {
       console.log("회원가입 실패");
-      console.error(err);
+      console.error("에러 메세지:", err);
     }
   };
 
@@ -82,7 +81,7 @@ const RegisterPage = (): JSX.Element => {
               value={form.name}
               onChange={handleChange}
             ></Input>
-            <SmallButton onClick={handleValidID}>Check</SmallButton>
+            {/* <SmallButton onClick={handleValidID}>Check</SmallButton> */}
           </SmallWrapper>
           <SmallWrapper>
             <Input
@@ -92,7 +91,7 @@ const RegisterPage = (): JSX.Element => {
               value={form.email}
               onChange={handleChange}
             ></Input>
-            <SmallButton onClick={handleValidEmail}>Send</SmallButton>
+            <SmallButton onClick={handleSendEmail}>Send</SmallButton>
           </SmallWrapper>
           <SmallWrapper>
             <Input type="text" placeholder="Verification Code"></Input>
@@ -113,9 +112,7 @@ const RegisterPage = (): JSX.Element => {
             value={form.confirmpassword}
             onChange={handleChange}
           ></Input>
-          <Button type="submit" onClick={handleValidPassword}>
-            Sign Up
-          </Button>
+          <Button type="submit">Sign Up</Button>
           <BottomWrapper>
             <p>Already have an account?</p>
             <OtherButton to={ROUTES.USER.LOGIN}>Sign in</OtherButton>
