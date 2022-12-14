@@ -38,7 +38,7 @@ class mainService {
     return count;
   }
 
-  async deleteSearch(searchId: number) {
+  async deleteSearch(searchId: string) {
     const deleteSearch = await mainController.delete(searchId);
   }
 }
