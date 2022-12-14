@@ -11,7 +11,7 @@ export const ChatBox = styled.div`
   width: fit-content;
   height: fit-content;
   padding: 2rem 2rem;
-  margin: 5rem 5rem;
+  margin: 3rem 10rem;
 
   backdrop-filter: blur(12px);
   border-radius: 30px;

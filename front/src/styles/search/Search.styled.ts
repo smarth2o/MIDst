@@ -54,7 +54,7 @@ export const Suggest = styled.button`
   justify-content: center;
   align-items: center;
 
-  padding: 0.4em 0.6em;
+  padding: 0.5em 0.6em;
   margin-right: 1em;
 
   font-family: "Saira";
@@ -67,10 +67,10 @@ export const Suggest = styled.button`
   transition: 0.3s;
 
   :hover {
-    padding: 0.5em 0.6em;
-    margin-right: 0.6em;
+    padding: 0.6em 0.6em;
+    margin-right: 0.8em;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 18px;
   }
 `;
 
