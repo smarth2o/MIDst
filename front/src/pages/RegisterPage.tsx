@@ -38,33 +38,74 @@ const RegisterPage = (): JSX.Element => {
     setForm({ ...form, [name]: value });
   };
 
+  const [inputCode, setInputCode] = useState("");
+
+  const handleCode = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputCode(event.target.value);
+  };
+
+  const [verifi, setVerifi] = useState(false);
+  const [same, setSame] = useState(false);
+  const [answer, setAnswer] = useState();
+
   const handleSendEmail = async () => {
-    console.log(form.email);
     try {
       const res = await Api.post("user/register/email", { email: form.email });
       console.log(res.data);
+      setAnswer(res.data);
+      alert("입력하신 이메일로 인증코드를 보냈습니다.");
     } catch (err) {
+      alert("다시 입력해주세요.");
       console.log("이메일 전송 에러");
       console.error(err);
     }
   };
 
-  const handleValidCode = async () => {};
-
-  const handleValidPassword = async () => {
-    if (form.password === form.confirmpassword) {
+  const handleValidCode = () => {
+    setVerifi(inputCode === String(answer));
+    if (verifi) {
+      alert("Correct!");
+    } else {
+      alert("Wrong. Try again.");
     }
   };
 
+  const CheckPass = (str: string) => {
+    // 영어/숫자/특수문자를 포함한 8자 이상
+    let reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$ㄷ!%*#?&]{8,}$/;
+    return reg.test(str);
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    setSame(form.password === form.confirmpassword);
+
     event.preventDefault();
-    try {
-      const res = await Api.post("user/register", form);
-      console.log(res);
-      navigate("/login");
-    } catch (err) {
-      console.log("회원가입 실패");
-      console.error("에러 메세지:", err);
+    if (!form.name) {
+      alert("아이디를 입력해주세요.");
+    } else if (!form.email) {
+      alert("이메일 주소를 입력해주세요.");
+    } else if (!inputCode) {
+      alert("인증코드를 입력해주세요.");
+    } else if (!verifi) {
+      alert("인증코드를 확인해주세요.");
+    } else if (!form.password) {
+      alert("비밀번호를 입력해주세요.");
+    } else if (!form.confirmpassword) {
+      alert("비밀번호 중복 확인을 입력해주세요.");
+    } else if (!same) {
+      alert("비밀번호가 동일하지 않습니다.");
+    } else if (!CheckPass(form.password)) {
+      alert("비밀번호는 영문+숫자 8자를 조합하여 입력해주세요.");
+    } else {
+      try {
+        const res = await Api.post("user/register", form);
+        console.log("회원가입 성공");
+        navigate("/login");
+      } catch (err) {
+        alert("다시 시도해주세요.");
+        console.log("회원가입 실패");
+        console.error("에러 메세지:", err);
+      }
     }
   };
 
@@ -95,7 +136,12 @@ const RegisterPage = (): JSX.Element => {
             <SmallButton onClick={handleSendEmail}>Send</SmallButton>
           </SmallWrapper>
           <SmallWrapper>
-            <Input type="text" placeholder="Verification Code"></Input>
+            <Input
+              type="text"
+              placeholder="Verification Code"
+              value={inputCode}
+              onChange={handleCode}
+            ></Input>
             <SmallButton onClick={handleValidCode}>Verify</SmallButton>
           </SmallWrapper>
           <Input

@@ -15,12 +15,12 @@ export const Layout = styled.div`
 export const Box = styled.div`
   max-width: 350px;
   min-height: 300px;
-
   padding: 20px 40px 50px 40px;
 
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
   border-radius: 20px;
+  position: relative;
 `;
 
 export const Form = styled.form`
@@ -140,4 +140,17 @@ export const OtherButton = styled(Link)`
   text-align: center;
 
   color: #555555;
+`;
+
+export const PasswordButton = styled(Link)`
+  font-family: "Saira";
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+
+  color: rgba(85, 85, 85, 0.8);
+
+  position: absolute;
+  top: 17.5em;
+  right: 4em;
 `;

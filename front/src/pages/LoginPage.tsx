@@ -8,6 +8,7 @@ import {
   BottomWrapper,
   OtherButton,
   Title,
+  PasswordButton,
 } from "../styles/Register.styled";
 import { ROUTES } from "../enum/routes";
 import * as Api from "../api";
@@ -49,7 +50,7 @@ const LoginPage = (): JSX.Element => {
       window.localStorage.setItem("accessToken", res.data.accessToken);
       window.localStorage.setItem("refreshToken", res.data.refreshToken);
       console.log("로그인 성공");
-      navigate(-1); // 뒤로가기
+      navigate("/"); // 뒤로가기
     } catch (err) {
       console.log("로그인 실패");
       console.error(err);
@@ -78,6 +79,9 @@ const LoginPage = (): JSX.Element => {
             value={form.password}
             onChange={handleChange}
           ></Input>
+          <PasswordButton to={ROUTES.USER.FIND_PW}>
+            Forgot password?
+          </PasswordButton>
           <Button type="submit">Sign In</Button>
           <BottomWrapper>
             {/* <OtherButton to={ROUTES.USER.FIND_PW}>
