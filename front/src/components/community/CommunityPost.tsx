@@ -34,11 +34,9 @@ const CommunityPost = ({
   const { communityDetail } = useParams();
   const navigate = useNavigate();
 
-  console.log("현재 게시글 번호", communityDetail);
-
   const onCancel = async () => {
     if (window.confirm("삭제 하시겠습니까?")) {
-      const onDelete = await Api.delete(`posts/${communityDetail}`);
+      const onDelete = await Api.delete(`posts/${id}`);
       if (onDelete.status !== 200) {
         console.log(onDelete);
       } else {
@@ -65,7 +63,6 @@ const CommunityPost = ({
       if (onLikeGet.status !== 200) {
         console.log(onLikeGet);
       } else {
-        console.log("like", onLikeGet.data.data.count._count);
         setIsLike(onLikeGet.data.data.count._count);
       }
     };

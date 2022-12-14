@@ -31,13 +31,16 @@ const CommunityDetail = (): JSX.Element => {
   //   (communityItem) => communityItem.id === currentIndex
   // ) as CommunityType;
 
+  const backtohome = () => {
+    window.location.replace(`/community`);
+  };
+
   useEffect(() => {
     const currentCommunityItem = async () => {
       const currentCommunityGet = await Api.get(`posts/${communityDetail}`);
       if (currentCommunityGet.status !== 200) {
         console.log(currentCommunityGet);
       } else {
-        console.log("포스트:", currentCommunityGet.data.data);
         setCommunityItems(currentCommunityGet.data.data);
         setId(currentCommunityGet.data.data.id);
         setLike(currentCommunityGet.data.data._count.like);
@@ -51,21 +54,15 @@ const CommunityDetail = (): JSX.Element => {
     currentCommunityItem();
   }, []);
 
-  const navigate = useNavigate();
-
-  useEffect(() => {}, []);
-
   return (
     <>
       <CommunityDetaillAllStyled>
         <div className="community-detail-align">
           <BackBtnAlignStyled>
-            <Link to={ROUTES.COMMUNITY.ROOT}>
-              <button className="back-btn">
-                <ArrowLeftOutlined />
-                돌아가기
-              </button>
-            </Link>
+            <button className="back-btn" onClick={backtohome}>
+              <ArrowLeftOutlined />
+              돌아가기
+            </button>
           </BackBtnAlignStyled>
           <CommunityPostBoxStyled>
             <CommunityPost

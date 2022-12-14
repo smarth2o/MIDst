@@ -10,7 +10,7 @@ import { useParams } from "react-router";
 
 const CommunityReply = (): JSX.Element => {
   const [replys, setReplys] = useRecoilState(replyState);
-
+  const [replysId, setReplysId] = useState("");
   const { communityDetail } = useParams();
 
   useEffect(() => {

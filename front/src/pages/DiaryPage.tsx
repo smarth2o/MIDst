@@ -12,7 +12,6 @@ import {
   DiaryAllAlign,
   DiaryMainStyled,
 } from "../styles/diary/DiaryCreatePage";
-import DiaryList from "../components/diary/DiaryList";
 
 export interface DiaryValueType {
   diarys: DiaryTypes[];
