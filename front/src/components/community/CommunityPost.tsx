@@ -39,12 +39,9 @@ const CommunityPost = ({
     if (window.confirm("삭제 하시겠습니까?")) {
       try {
         const onDelete = await Api.delete(`posts/${communityDetail}`);
-        console.log(communityDetail);
-        window.location.replace("/community");
-      } catch {
-        console.log(communityDetail);
-        console.log("삭제실패");
-      }
+
+        navigate("/community");
+      } catch {}
     }
   };
 
@@ -73,7 +70,6 @@ const CommunityPost = ({
       try {
         const res = await Api.get(`user/currentUser`);
         setCurrentUser(res.data[0].name);
-        console.log(res.data[0].name);
       } catch {
         console.log("err");
       }

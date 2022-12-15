@@ -21,7 +21,6 @@ export const PersonalTopCard = (): JSX.Element => {
     const getExpressionsCount = async () => {
       const response = await Api.get(`main/getCountSearch`);
       if (response.status !== 200) {
-        console.log("갯수 저장 실패");
       } else {
         setExpressionCount(response.data);
       }
@@ -29,7 +28,6 @@ export const PersonalTopCard = (): JSX.Element => {
     const getDiaryCount = async () => {
       const response = await Api.get(`diaries`);
       if (response.status !== 200) {
-        console.log("다이어리 갯수 저장 실패");
       } else {
         setDiaryCount(response.data.data.count);
       }
@@ -42,7 +40,6 @@ export const PersonalTopCard = (): JSX.Element => {
     const getPersonalData = async () => {
       const response = await Api.get(`main/getSearch`);
       if (response.status !== 200) {
-        console.log(response);
       } else {
         setItems(response.data);
       }

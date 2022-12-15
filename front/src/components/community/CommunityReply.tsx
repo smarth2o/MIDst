@@ -10,13 +10,11 @@ import { useParams } from "react-router";
 
 const CommunityReply = (): JSX.Element => {
   const [replys, setReplys] = useRecoilState(replyState);
-  const [replysId, setReplysId] = useState("");
   const { communityDetail } = useParams();
 
   useEffect(() => {
     const sendRequest = async () => {
       const response = await Api.get(`replies/${communityDetail}/all`);
-      console.log("댓글:", response.data.data);
       setReplys(response.data.data);
     };
 

@@ -12,6 +12,7 @@ import { CloudEmp, CloudFull } from "../../assets/index";
 import * as Api from "../../api";
 import { BackBtnStyled } from "../../styles/common/CommonBtn";
 import { DiaryDetailBtn } from "../../styles/diary/DiaryDetailCard";
+import { useNavigate } from "react-router";
 
 export interface PBCardItemType {
   userId: number;
@@ -28,6 +29,7 @@ const PersonalBottomCard = (): JSX.Element => {
   const [id, setId] = useState("");
 
   const tabList = ["Expressions", "Words"];
+  const navigator = useNavigate();
 
   const tabClickHandler = (index: any) => {
     setActiveIndex(index);
@@ -37,7 +39,6 @@ const PersonalBottomCard = (): JSX.Element => {
     const getPersonalData = async () => {
       const response = await Api.get(`main/getSearch`);
       if (response.status !== 200) {
-        console.log(response);
       } else {
         setItems(response.data);
       }
@@ -47,11 +48,6 @@ const PersonalBottomCard = (): JSX.Element => {
       response.data.forEach((data: any) => {
         setId(data.searchId);
       });
-      if (response.status !== 200) {
-        console.log(response);
-      } else {
-        console.log(response.data.searchId);
-      }
     };
     getId();
     getPersonalData();
@@ -63,12 +59,8 @@ const PersonalBottomCard = (): JSX.Element => {
       if (window.confirm("삭제하시겠습니까")) {
         try {
           const res = await Api.delete(`main/deleteSearch/${props}`);
-          console.log(res);
-          console.log("삭제 성공");
-          window.location.replace(`/personal/`);
-        } catch (err) {
-          console.log("삭제 실패");
-        }
+          navigator(`/personal`);
+        } catch (err) {}
       }
     }
   };

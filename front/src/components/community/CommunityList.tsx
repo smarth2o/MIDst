@@ -25,7 +25,6 @@ export interface CommunityPropsType {
   reply: number;
   like: number;
   communityItems: CommunityType[];
-  setCommunityItems: SetterOrUpdater<CommunityType[]>;
 }
 
 const CommunityList = (): JSX.Element => {
@@ -85,7 +84,6 @@ const CommunityList = (): JSX.Element => {
                         reply={_count.reply}
                         like={_count.like}
                         communityItems={communityItems}
-                        setCommunityItems={setCommunityItems}
                       />
                     </Link>
                   </div>

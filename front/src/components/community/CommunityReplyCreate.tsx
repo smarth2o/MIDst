@@ -36,11 +36,6 @@ const CommunityReplyCreate = (): JSX.Element => {
       createdAt: createdAt,
       updatedAt: createdAt,
     });
-    if (response.status !== 200) {
-      console.log(response);
-    } else {
-      console.log("입력", response.data);
-    }
   };
 
   return (

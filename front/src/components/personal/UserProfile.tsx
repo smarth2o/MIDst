@@ -24,9 +24,7 @@ const UserProfile = (): JSX.Element => {
     const getUserInfo = async () => {
       const res = await Api.get(`user/currentUser`);
       if (res.status !== 200) {
-        console.log("탈퇴실패");
       } else {
-        console.log(res.data[0]);
         setUserName(res.data[0].name);
         setUserEmail(res.data[0].email);
       }

@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link, useOutletContext, useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import { DiaryValueType } from "../../pages/DiaryPage";
-import { DiaryTypes } from "../../stores/DiaryAtom";
 import { DiaryCreateAlign } from "../../styles/diary/DiaryCreate";
-import {
-  CreateDiaryBtn,
-  DiaryDetailAlignStyled,
-} from "../../styles/diary/DiaryPage";
-import DiaryDetailCard, { DiaryPropsTypes } from "./DiaryDetailCard";
+import DiaryDetailCard from "./DiaryDetailCard";
 import * as Api from "../../api";
 
 const DiaryDetail = (): JSX.Element => {
@@ -17,7 +12,6 @@ const DiaryDetail = (): JSX.Element => {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const { detail } = useParams();
-  const currentIndex = Number(detail ?? 1);
 
   useEffect(() => {
     const getDiaryData = async () => {
@@ -40,7 +34,6 @@ const DiaryDetail = (): JSX.Element => {
         setTitle(response.data.data.title);
         setId(response.data.data.id);
         setDescription(response.data.data.description);
-        console.log("title", title);
       }
     };
     getDiaryDetail();

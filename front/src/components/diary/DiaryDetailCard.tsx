@@ -57,35 +57,20 @@ const DiaryDetailCard = ({
         title: diaryTitle,
         description: diaryDescription,
       });
-      if (response.status !== 200) {
-        console.log(response.status);
-      } else {
-        console.log(response.data.data);
-        window.location.replace(`/diary/${detail}`);
-      }
     };
     DiaryDetailPost();
   };
-  const clickDelete = () => {
-    const diaryDelete = async () => {
-      const response = await Api.delete(`diaries/${detail}`);
-      if (response.status !== 200) {
-        console.log(response.status);
-      } else {
-        console.log(response.data.data);
-      }
-    };
+  const clickDelete = async () => {
     if (window.confirm("삭제하시겠습니까?")) {
-      diaryDelete();
-      navigator(ROUTES.DIARY.ROOT);
+      const response = await Api.delete(`diaries/${detail}`);
     }
+    navigator(ROUTES.DIARY.ROOT);
   };
 
   useEffect(() => {
     const diaryDetailGet = async () => {
       const response = await Api.get(`diaries/${detail}`);
       if (response.status !== 200) {
-        console.log(response.status);
       } else {
         setDiaryTitle(response.data.data.title);
         setDiaryDescription(response.data.data.description);
@@ -93,7 +78,7 @@ const DiaryDetailCard = ({
       }
     };
     diaryDetailGet();
-  }, [detail]);
+  }, [detail, isEdit]);
 
   if (!isEdit) {
     return (
@@ -141,7 +126,7 @@ const DiaryDetailCard = ({
             </DiaryForm>
           </div>
           <DiaryDetailBtn>
-            <button className="gray-btn">Cancel</button>
+            <button className="gray-btn">CANCEL</button>
             <button className="gray-btn" onClick={ClickHandler(isEdit)}>
               SAVE
             </button>

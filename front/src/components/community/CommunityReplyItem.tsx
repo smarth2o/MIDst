@@ -1,12 +1,11 @@
 import dayjs from "dayjs";
 import { ReplyType } from "../../stores/ReplyAtom";
 import { CommunityCreateBtnAlignStyled } from "../../styles/community/CommunityCreate";
-import { CommunityPostBtn } from "../../styles/community/CommunityPost";
 import { ReplyLiStyled } from "../../styles/community/CommunityReplyItem";
 import * as Api from "../../api";
 import { useEffect, useState } from "react";
 import { ReplyStyled } from "../../styles/community/CommunityReplyCreate";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 const CommunityReplyItem = ({
   id,
@@ -21,13 +20,14 @@ const CommunityReplyItem = ({
   const [currentUser, setCurrentUser] = useState("");
   const { communityDetail } = useParams();
 
+  const navigator = useNavigate();
+
   const onDelete = async () => {
     const response = await Api.delete(`replies/${id}`);
     if (response.status !== 200) {
       console.log(response);
     } else {
-      console.log("삭제완료");
-      window.location.replace(`/community/${communityDetail}`);
+      navigator(`/community/${communityDetail}`);
     }
   };
 
@@ -38,7 +38,6 @@ const CommunityReplyItem = ({
     if (response.status !== 200) {
       console.log(response);
     } else {
-      console.log("수정완료");
     }
   };
   useEffect(() => {
@@ -46,10 +45,7 @@ const CommunityReplyItem = ({
       try {
         const res = await Api.get(`user/currentUser`);
         setCurrentUser(res.data[0].name);
-        console.log(res.data[0].name);
-      } catch {
-        console.log("err");
-      }
+      } catch {}
     };
     onUserCheck();
   }, []);
