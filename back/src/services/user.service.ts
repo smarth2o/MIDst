@@ -26,7 +26,6 @@ class userService {
 
         const nickname = await userController.findByName(name);
         if (nickname.length !== 0) {
-            console.log(nickname);
             const errorMessage: string = "이미 사용중인 이름입니다.";
             return errorMessage;
         }
@@ -46,6 +45,16 @@ class userService {
         );
         await userController.createToken(userId);
         return newUser;
+    }
+
+    async nameIsValid(name: string) {
+        const data = await userController.findByName(name);
+        if (data.length !== 0) {
+            const nameIsValid: Boolean = false;
+            return nameIsValid;
+        }
+        const nameIsValid: boolean = true;
+        return nameIsValid;
     }
 
     //로그인
