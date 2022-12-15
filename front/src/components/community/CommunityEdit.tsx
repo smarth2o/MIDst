@@ -63,7 +63,7 @@ const CommunityEdit = (): JSX.Element => {
     if (response.status !== 200) {
       console.log(response);
     } else {
-      navigate(`community/${communityDetail.communityDetail}`);
+      navigate(`/community/${communityDetail.communityDetail}`);
     }
   };
 

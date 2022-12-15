@@ -64,7 +64,6 @@ const RegisterPage = (): JSX.Element => {
   const handleSendEmail = async () => {
     try {
       const res = await Api.post("user/register/email", { email: form.email });
-      console.log(res.data);
       setAnswer(res.data);
       alert("입력하신 이메일로 인증코드를 보냈습니다.");
     } catch (err) {
@@ -110,7 +109,7 @@ const RegisterPage = (): JSX.Element => {
     } else {
       try {
         const res = await Api.post("user/register", form);
-        if (res.data) {
+        if (typeof res.data !== "object") {
           alert(res.data);
         } else {
           console.log("회원가입 성공");

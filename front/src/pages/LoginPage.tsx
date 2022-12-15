@@ -38,7 +38,7 @@ const LoginPage = (): JSX.Element => {
 
     try {
       const res = await Api.post("user/login", form);
-      if (res.data) {
+      if (typeof res.data !== "object") {
         alert(res.data);
       } else {
         window.localStorage.setItem("accessToken", res.data.accessToken);

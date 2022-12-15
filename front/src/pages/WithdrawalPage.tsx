@@ -36,6 +36,8 @@ const WithdrawalPage = (): JSX.Element => {
     try {
       await Api.put(`user/withdrawal/${id}`, { withdrawal: 1 });
       // console.log("회원탈퇴 성공");
+      window.localStorage.removeItem("accessToken");
+      window.localStorage.removeItem("refreshToken");
       setChanged(true);
     } catch (err) {
       // console.log("회원탈퇴 실패");
