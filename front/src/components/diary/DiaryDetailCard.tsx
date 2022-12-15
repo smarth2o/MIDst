@@ -57,22 +57,12 @@ const DiaryDetailCard = ({
         title: diaryTitle,
         description: diaryDescription,
       });
-      if (response.status !== 200) {
-        console.log(response.status);
-      } else {
-        navigator(`/diary/${detail}`);
-      }
     };
     DiaryDetailPost();
   };
   const clickDelete = async () => {
     if (window.confirm("삭제하시겠습니까?")) {
       const response = await Api.delete(`diaries/${detail}`);
-      if (response.status !== 200) {
-        console.log(response.status);
-      } else {
-        console.log(response.data.data);
-      }
     }
     navigator(ROUTES.DIARY.ROOT);
   };
@@ -81,7 +71,6 @@ const DiaryDetailCard = ({
     const diaryDetailGet = async () => {
       const response = await Api.get(`diaries/${detail}`);
       if (response.status !== 200) {
-        console.log(response.status);
       } else {
         setDiaryTitle(response.data.data.title);
         setDiaryDescription(response.data.data.description);

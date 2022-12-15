@@ -14,9 +14,6 @@ const DiaryGrammarCheckCard = (): JSX.Element => {
   const ClickHandler: ClickHandler = (props) => (e) => {
     e.preventDefault();
     isSetToggle(!props);
-    // if (isEdit) {
-    // 백엔드로 연결하기
-    // }
   };
 
   if (!isToggle) {

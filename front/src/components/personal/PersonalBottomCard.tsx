@@ -39,10 +39,8 @@ const PersonalBottomCard = (): JSX.Element => {
     const getPersonalData = async () => {
       const response = await Api.get(`main/getSearch`);
       if (response.status !== 200) {
-        console.log(response);
       } else {
         setItems(response.data);
-        console.log(items);
       }
     };
     const getId = async () => {
@@ -61,11 +59,8 @@ const PersonalBottomCard = (): JSX.Element => {
       if (window.confirm("삭제하시겠습니까")) {
         try {
           const res = await Api.delete(`main/deleteSearch/${props}`);
-          console.log("삭제 성공");
           navigator(`/personal`);
-        } catch (err) {
-          console.log("삭제 실패");
-        }
+        } catch (err) {}
       }
     }
   };

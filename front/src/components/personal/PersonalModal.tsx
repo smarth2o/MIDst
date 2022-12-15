@@ -16,7 +16,6 @@ const PersonalModal = (): JSX.Element => {
         console.log("탈퇴실패");
       } else {
         setUserId(res.data[0].userId);
-        console.log(res.data[0].userId);
       }
     };
     getUserInfo();
@@ -33,7 +32,9 @@ const PersonalModal = (): JSX.Element => {
           </li>
           <hr></hr>
           <li className="link">
-            <Link to={`/withdrawal`}>회원 탈퇴</Link>
+            <Link to={`/withdrawal`} className="link">
+              회원 탈퇴
+            </Link>
           </li>
         </ul>
       </PersonalModalStyled>

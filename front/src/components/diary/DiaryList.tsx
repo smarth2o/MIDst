@@ -18,7 +18,6 @@ const DiaryList = (): JSX.Element => {
     const getDiaryData = async () => {
       const response = await Api.get(`diaries`);
       if (response.status !== 200) {
-        console.log(response);
       } else {
         setDiarys(response.data.data);
         setCount(response.data.count);

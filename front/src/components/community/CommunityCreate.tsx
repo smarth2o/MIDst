@@ -54,12 +54,6 @@ const CommunityCreate = (): JSX.Element => {
       createdAt: createdAt,
       updatedAt: createdAt,
     });
-    if (response.status !== 200) {
-      console.log(communityTitle);
-    } else {
-      console.log("입력", response.data);
-    }
-    console.log("입력", response);
   };
 
   return (

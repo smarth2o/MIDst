@@ -27,7 +27,6 @@ const CommunityReplyItem = ({
     if (response.status !== 200) {
       console.log(response);
     } else {
-      console.log("삭제완료");
       navigator(`/community/${communityDetail}`);
     }
   };
@@ -39,7 +38,6 @@ const CommunityReplyItem = ({
     if (response.status !== 200) {
       console.log(response);
     } else {
-      console.log("수정완료");
     }
   };
   useEffect(() => {
@@ -47,10 +45,7 @@ const CommunityReplyItem = ({
       try {
         const res = await Api.get(`user/currentUser`);
         setCurrentUser(res.data[0].name);
-        console.log(res.data[0].name);
-      } catch {
-        console.log("err");
-      }
+      } catch {}
     };
     onUserCheck();
   }, []);

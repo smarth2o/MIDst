@@ -34,7 +34,6 @@ const CommunityDetail = (): JSX.Element => {
     const currentCommunityItem = async () => {
       const currentCommunityGet = await Api.get(`posts/${communityDetail}`);
       if (currentCommunityGet.status !== 200) {
-        console.log(currentCommunityGet);
       } else {
         setId(currentCommunityGet.data.data.id);
         setLike(currentCommunityGet.data.data._count.like);

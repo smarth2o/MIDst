@@ -33,10 +33,6 @@ const DiaryCreate = (): JSX.Element => {
 
   const getDiaryData = async () => {
     const response = await Api.get(`diaries`);
-    if (response.status !== 200) {
-      console.log(response);
-    } else {
-    }
   };
   useEffect(() => {
     getDiaryData();
@@ -64,7 +60,6 @@ const DiaryCreate = (): JSX.Element => {
                 SAVE
               </button>
             </Link>
-            {/* <button>DELETE</button> */}
           </DiaryBtn>
         </DiaryForm>
       </DiaryCreateAlign>

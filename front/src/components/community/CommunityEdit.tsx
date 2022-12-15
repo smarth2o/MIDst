@@ -10,8 +10,6 @@ import {
 } from "../../styles/community/CommunityCreate";
 
 import * as Api from "../../api";
-import dayjs from "dayjs";
-import { Descriptions } from "antd";
 import { Link } from "react-router-dom";
 
 const CommunityEdit = (): JSX.Element => {
@@ -35,7 +33,6 @@ const CommunityEdit = (): JSX.Element => {
         console.log(currentUser);
       } else {
         setUserId(currentUser.data[0].userId);
-        console.log(currentUser.data[0].userId);
       }
     };
 
@@ -66,8 +63,7 @@ const CommunityEdit = (): JSX.Element => {
     if (response.status !== 200) {
       console.log(response);
     } else {
-      window.location.replace(`community/${communityDetail.communityDetail}`);
-      // navigate(`community/${communityDetail.communityDetail}`);
+      navigate(`community/${communityDetail.communityDetail}`);
     }
   };
 
