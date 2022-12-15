@@ -194,7 +194,6 @@ export const UPBottomDetail = styled.div`
   border-radius: 15px;
   padding: 2%;
   .btn-go-search {
-    margin-top: 30px;
     border-radius: 20px;
     padding: 10px 30px;
   }

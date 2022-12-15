@@ -11,11 +11,12 @@ import { useEffect, useState } from "react";
 import * as Api from "../../api";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../enum/routes";
+import PBCardData, { PBCardDataType } from "./personalData";
 
 export const PersonalTopCard = (): JSX.Element => {
   const [expressionsCount, setExpressionCount] = useState(0);
   const [diaryCount, setDiaryCount] = useState(0);
-
+  const [items, setItems] = useState<PBCardDataType>(PBCardData);
   useEffect(() => {
     const getExpressionsCount = async () => {
       const response = await Api.get(`main/getCountSearch`);
@@ -36,6 +37,30 @@ export const PersonalTopCard = (): JSX.Element => {
     getExpressionsCount();
     getDiaryCount();
   }, []);
+
+  useEffect(() => {
+    const getPersonalData = async () => {
+      const response = await Api.get(`main/getSearch`);
+      if (response.status !== 200) {
+        console.log(response);
+      } else {
+        setItems(response.data);
+      }
+    };
+    getPersonalData();
+  }, []);
+
+  const wordsFiler = items.reduce(function (item: any[], current) {
+    if (
+      item.findIndex(({ searchWord }) => searchWord === current.searchWord) ===
+      -1
+    ) {
+      item.push(current);
+    }
+    return item;
+  }, []);
+
+  const wordcount = wordsFiler.length;
 
   return (
     <>
@@ -83,7 +108,7 @@ export const PersonalTopCard = (): JSX.Element => {
               </li>
             </li>
             <li className="card-align-li">
-              <h3>Search for {expressionsCount} words</h3>
+              <h3>Search for {wordcount} words</h3>
               <li>
                 <button className="btn-go-search">
                   <a href="/">

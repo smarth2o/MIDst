@@ -24,10 +24,8 @@ const PersonalBottomCard = (): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [items, setItems] = useState<PBCardDataType>(PBCardData);
 
-  const [cloud, setCloud] = useState(true);
-  const [translate, setTranslate] = useState(true);
+  const [cloud, setCloud] = useState(false);
   const [id, setId] = useState("");
-  const [searchword, setSearchword] = useState("");
 
   const tabList = ["Expressions", "Words"];
 
@@ -41,15 +39,12 @@ const PersonalBottomCard = (): JSX.Element => {
       if (response.status !== 200) {
         console.log(response);
       } else {
-        console.log(response.data);
         setItems(response.data);
-        setSearchword(response.data);
       }
     };
     const getId = async () => {
       const response = await Api.get("main/getSearch");
       response.data.forEach((data: any) => {
-        console.log(data.searchId);
         setId(data.searchId);
       });
       if (response.status !== 200) {
@@ -61,40 +56,72 @@ const PersonalBottomCard = (): JSX.Element => {
     getId();
     getPersonalData();
   }, [cloud]);
-  const handleSaveSearch = async () => {
-    let searchId = "";
-    try {
-      // console.log("가져오기 성공");
+
+  const handleDelete = async (props: any, cloud: boolean) => {
+    console.log(cloud);
+    if (cloud) {
       if (window.confirm("삭제하시겠습니까")) {
         try {
-          console.log(searchId);
-          const res = await Api.delete(`main/deleteSearch/${id}`);
+          const res = await Api.delete(`main/deleteSearch/${props}`);
           console.log(res);
           console.log("삭제 성공");
+          window.location.replace(`/personal/`);
         } catch (err) {
           console.log("삭제 실패");
         }
       }
-    } catch (err) {
-      console.log("가져오기 실패");
     }
   };
+
   const expressionItem = () => {
     const expression = items.map((res: any) => {
+      // setSearchId(res.searchId);
       return (
         <>
-          <PBCardItemStyled>{res.description}</PBCardItemStyled>
+          <PBCardItemStyled>
+            {res.description}
+            <button
+              onClick={() => {
+                handleDelete(res.searchId, true);
+              }}
+            >
+              {cloud ? <img src={CloudEmp} /> : <img src={CloudFull} />}
+            </button>
+          </PBCardItemStyled>
         </>
       );
     });
     return <PBCardWordAlignStyled>{expression}</PBCardWordAlignStyled>;
   };
   const wordsItem = () => {
-    const wordsList = items.map((res) => (
-      <PBCWordItemStyled>{res.searchWord}</PBCWordItemStyled>
-    ));
+    const wordsFiler = items.reduce(function (item: any[], current) {
+      if (
+        item.findIndex(
+          ({ searchWord }) => searchWord === current.searchWord
+        ) === -1
+      ) {
+        item.push(current);
+      }
+      return item;
+    }, []);
+    const wordsItem = wordsFiler.map((res: any) => {
+      return (
+        <>
+          <PBCardItemStyled>
+            {res.searchWord}
+            <button
+              onClick={() => {
+                handleDelete(res.searchId, true);
+              }}
+            >
+              {cloud ? <img src={CloudEmp} /> : <img src={CloudFull} />}
+            </button>
+          </PBCardItemStyled>
+        </>
+      );
+    });
 
-    return <PBCardWordAlignStyled>{wordsList}</PBCardWordAlignStyled>;
+    return <PBCardWordAlignStyled>{wordsItem}</PBCardWordAlignStyled>;
   };
 
   const tabContArr = [

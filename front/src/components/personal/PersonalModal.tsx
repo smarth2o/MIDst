@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../enum/routes";
-import { EmotionModalStyled } from "../../styles/diary/DiaryEmotionInfoModal";
 import { PersonalModalStyled } from "../../styles/personal/PersonalModal";
 import * as Api from "../../api";
 import { useEffect, useState } from "react";
@@ -15,6 +14,7 @@ const PersonalModal = (): JSX.Element => {
         console.log("탈퇴실패");
       } else {
         setUserId(res.data[0].userId);
+        console.log(res.data[0].userId);
       }
     };
     getUserInfo();
@@ -37,8 +37,6 @@ const PersonalModal = (): JSX.Element => {
     <>
       <PersonalModalStyled>
         <ul>
-          <li>이메일 변경</li>
-          <hr></hr>
           <li>
             <Link to={ROUTES.USER.CHANGE_PW} className="link">
               비밀번호 변경

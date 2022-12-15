@@ -7,14 +7,11 @@ import {
   CommunityDetaillAllStyled,
   CommunityPostBoxStyled,
 } from "../../styles/community/CommunityDetailPost";
-import { CommunityPropsType } from "./CommunityList";
 import CommunityPost from "./CommunityPost";
-import { ROUTES } from "../../enum/routes";
 import CommunityReply from "./CommunityReply";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { communityState } from "../../stores/CommunityAtom";
-import { Link } from "react-router-dom";
 
 const CommunityDetail = (): JSX.Element => {
   const [communityItems, setCommunityItems] = useRecoilState(communityState);
@@ -26,10 +23,6 @@ const CommunityDetail = (): JSX.Element => {
   const [createdAt, setCreatedAt] = useState("");
   const [reply, setReply] = useState(0);
   const [title, setTitle] = useState("");
-
-  // const currentCommunityItem = communityItems.find(
-  //   (communityItem) => communityItem.id === currentIndex
-  // ) as CommunityType;
 
   const backtohome = () => {
     window.location.replace(`/community`);

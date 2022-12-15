@@ -23,16 +23,17 @@ const DiaryEmotionCard = (): JSX.Element => {
 
   useEffect(() => {
     const getDetailPost = async () => {
-      const response = await Api.get(`diaries/${detail}`);
-      if (response.status !== 200) {
-        console.log("연결실패");
-      } else {
+      try {
+        const response = await Api.get(`diaries/${detail}`);
+        console.log(emotion);
         setDescription(response.data.data.description);
         setEmotion(response.data.data.emotion);
+      } catch {
+        console.log("연결실패");
       }
     };
     getDetailPost();
-  }, [detail]);
+  }, [detail, isToggle]);
 
   const ClickHandler: ClickHandler = (props) => (e) => {
     e.preventDefault();
@@ -44,13 +45,12 @@ const DiaryEmotionCard = (): JSX.Element => {
   };
 
   const onPostEmotion = async () => {
-    const emotionsPost = await Api.post(`diaries/${detail}/emotions`, {
-      description: description,
-    });
-    if (emotionsPost.status !== 200) {
-      console.log(emotionsPost);
-    } else {
-      console.log("연결성공", description);
+    try {
+      const emotionsPost = await Api.post(`diaries/${detail}/emotions`, {
+        description: description,
+      });
+    } catch {
+      console.log("감정연결실패");
     }
   };
 

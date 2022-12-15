@@ -37,7 +37,7 @@ const CommunityReply = (): JSX.Element => {
             updatedAt,
           } = reply;
           return (
-            <>
+            <div key={id}>
               <CommunityReplyItem
                 key={id}
                 id={id}
@@ -48,7 +48,7 @@ const CommunityReply = (): JSX.Element => {
                 userId={userId}
                 updatedAt={updatedAt}
               />
-            </>
+            </div>
           );
         })}
         <CommunityReplyCreate />
