@@ -18,6 +18,7 @@ const CommunityReplyItem = ({
   const [communityDescription, setCommunityDescription] = useState(description);
   const [isToggle, setisToggle] = useState(false);
   const replyCreatedAt = dayjs(createdAt);
+  const [currentUser, setCurrentUser] = useState("");
   const { communityDetail } = useParams();
 
   const onDelete = async () => {
@@ -40,8 +41,18 @@ const CommunityReplyItem = ({
       console.log("수정완료");
     }
   };
-
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const onUserCheck = async () => {
+      try {
+        const res = await Api.get(`user/currentUser`);
+        setCurrentUser(res.data[0].name);
+        console.log(res.data[0].name);
+      } catch {
+        console.log("err");
+      }
+    };
+    onUserCheck();
+  }, []);
 
   if (!isToggle) {
     return (
@@ -57,14 +68,16 @@ const CommunityReplyItem = ({
             <li>{communityDescription}</li>
           </ul>
           <ul>
-            <CommunityCreateBtnAlignStyled>
-              <button type="submit" onClick={() => setisToggle(!isToggle)}>
-                수정
-              </button>
-              <button type="button" className="delete" onClick={onDelete}>
-                삭제
-              </button>
-            </CommunityCreateBtnAlignStyled>
+            {currentUser === author ? (
+              <CommunityCreateBtnAlignStyled>
+                <button type="submit" onClick={() => setisToggle(!isToggle)}>
+                  수정
+                </button>
+                <button type="button" className="delete" onClick={onDelete}>
+                  삭제
+                </button>
+              </CommunityCreateBtnAlignStyled>
+            ) : null}
           </ul>
         </ReplyLiStyled>
       </>
