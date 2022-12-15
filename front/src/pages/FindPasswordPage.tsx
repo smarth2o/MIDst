@@ -24,7 +24,7 @@ const FindPasswordPage = (): JSX.Element => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const res = await Api.post("user/resetPassword", { email: email });
+      await Api.post("user/resetPassword", { email: email });
       // console.log(res.data);
       console.log("이메일 전송 성공");
       setChanged(true);

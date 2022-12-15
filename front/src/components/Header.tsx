@@ -9,18 +9,14 @@ import {
 import { ROUTES } from "../enum/routes";
 import { Outlet } from "react-router-dom";
 import { LogoIcon } from "../assets/index";
-import userState from "../stores/UserAtom";
-import { useResetRecoilState } from "recoil";
 import { useState, useEffect } from "react";
 import * as Api from "../api";
 
 function Header() {
   const [isLogin, setIsLogin] = useState<boolean>();
-  const userReset = useResetRecoilState(userState);
 
   const handleSignout = async () => {
     try {
-      userReset();
       window.localStorage.removeItem("accessToken");
       window.localStorage.removeItem("refreshToken");
       console.log("로그아웃 성공");
