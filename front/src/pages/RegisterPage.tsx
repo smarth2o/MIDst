@@ -98,7 +98,7 @@ const RegisterPage = (): JSX.Element => {
       alert("비밀번호는 영문+숫자 8자를 조합하여 입력해주세요.");
     } else {
       try {
-        const res = await Api.post("user/register", form);
+        await Api.post("user/register", form);
         console.log("회원가입 성공");
         navigate("/login");
       } catch (err) {

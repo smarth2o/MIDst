@@ -22,6 +22,26 @@ const SearchBar = (): JSX.Element => {
   };
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    let titleList: any[] = [];
+    let nameList: any[] = [];
+
+    const checkboxes: NodeListOf<HTMLInputElement> = document.querySelectorAll(
+      "input[type=checkbox]"
+    );
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        if (checkbox.name === "title") {
+          // console.log("title", checkbox.value);
+          titleList.push(checkbox.value);
+        } else {
+          // console.log("name", checkbox.value);
+          nameList.push(checkbox.value);
+        }
+      }
+    });
+    console.log("title", titleList);
+    console.log("name", nameList);
+
     try {
       resetResults();
       const res = await Api.get(`main/showSearch/${searchword}`);
@@ -44,30 +64,19 @@ const SearchBar = (): JSX.Element => {
         script = String(script).slice(0, String(script).length - 5);
         script = script.trim();
 
-        // useEffect(() => {
-        //   const titleresult = results.filter((result) =>
-        //     titleFilter.includes(result.title)
-        //   );
-        //   const nameresult = results.filter((result) =>
-        //     nameFilter.includes(result.name)
-        //   );
-        //   let searchresults = titleresult.concat(nameresult);
-        //   searchresults = searchresults.filter(
-        //     (item, pos) => searchresults.indexOf(item) === pos
-        //   );
-        //   setResults(searchresults);
-        // }, [nameFilter, results, setResults, titleFilter]);
-
-        setResults((prev) => [
-          ...prev,
-          {
-            id: Number(id),
-            title: String(title),
-            name: String(name),
-            script: String(script),
-          },
-        ]);
+        if (titleList.includes(title) || nameList.includes(name)) {
+          setResults((prev) => [
+            ...prev,
+            {
+              id: Number(id),
+              title: String(title),
+              name: String(name),
+              script: String(script),
+            },
+          ]);
+        }
       }
+
       setSearchWord(searchword); // search results
       console.log("검색 성공");
       navigate("/search");

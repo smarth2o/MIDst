@@ -41,7 +41,7 @@ const LoginPage = (): JSX.Element => {
       window.localStorage.setItem("accessToken", res.data.accessToken);
       window.localStorage.setItem("refreshToken", res.data.refreshToken);
       console.log("로그인 성공");
-      navigate("/"); // 뒤로가기
+      navigate("/");
     } catch (err) {
       console.log("로그인 실패");
       console.error(err);
@@ -75,9 +75,6 @@ const LoginPage = (): JSX.Element => {
           </PasswordButton>
           <Button type="submit">Sign In</Button>
           <BottomWrapper>
-            {/* <OtherButton to={ROUTES.USER.FIND_PW}>
-              Forgot your Password?
-            </OtherButton> */}
             <p>Don't have an account?</p>
             <OtherButton to={ROUTES.USER.REGISTER}>Sign Up</OtherButton>
           </BottomWrapper>

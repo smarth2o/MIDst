@@ -63,12 +63,6 @@ const WithdrawalPage = (): JSX.Element => {
                 Once it's closed, you won't be able to use this account or see
                 your past records. This action can't be undone.
               </Text>
-              {/* <Input
-                type="id"
-                placeholder="ID"
-                value={id}
-                onChange={handleChange}
-              ></Input> */}
               <Button>Continue</Button>
             </>
           )}
