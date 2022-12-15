@@ -25,7 +25,6 @@ const DiaryEmotionCard = (): JSX.Element => {
     const getDetailPost = async () => {
       try {
         const response = await Api.get(`diaries/${detail}`);
-        console.log(emotion);
         setDescription(response.data.data.description);
         setEmotion(response.data.data.emotion);
       } catch {

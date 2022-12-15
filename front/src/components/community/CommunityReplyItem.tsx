@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
 import { ReplyType } from "../../stores/ReplyAtom";
 import { CommunityCreateBtnAlignStyled } from "../../styles/community/CommunityCreate";
-import { CommunityPostBtn } from "../../styles/community/CommunityPost";
 import { ReplyLiStyled } from "../../styles/community/CommunityReplyItem";
 import * as Api from "../../api";
 import { useEffect, useState } from "react";

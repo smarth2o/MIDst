@@ -19,7 +19,7 @@ const DiaryCreate = (): JSX.Element => {
 
   const onSubmitDiary = async () => {
     try {
-      const diaryPost = await Api.post(`diaries`, {
+      const response = await Api.post(`diaries`, {
         date: date.format("YYYY-MM-DD"),
         title: title,
         description: description,
