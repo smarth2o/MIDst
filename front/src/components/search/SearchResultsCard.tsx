@@ -91,7 +91,7 @@ const SearchResultCard = ({ name, script }: any): JSX.Element => {
   );
 };
 
-const SearchResultsList = ({ title }: any): JSX.Element => {
+const SearchResultsList = ({ title, sort }: any): JSX.Element => {
   const viewResult = useRecoilValue(SearchResults);
   const titleRelated = viewResult.filter((result) => result.title === title);
 
@@ -103,13 +103,23 @@ const SearchResultsList = ({ title }: any): JSX.Element => {
       {!isNotRelated && (
         <>
           <p className="title">{title}</p>
-          {titleRelated.map((result) => (
-            <SearchResultCard
-              key={result.id}
-              name={result.name}
-              script={result.script}
-            ></SearchResultCard>
-          ))}
+          {sort
+            ? titleRelated.map((result: any) => (
+                <SearchResultCard
+                  key={result.id}
+                  name={result.name}
+                  script={result.script}
+                ></SearchResultCard>
+              ))
+            : titleRelated
+                .reverse()
+                .map((result: any) => (
+                  <SearchResultCard
+                    key={result.id}
+                    name={result.name}
+                    script={result.script}
+                  ></SearchResultCard>
+                ))}
         </>
       )}
     </>
@@ -118,11 +128,11 @@ const SearchResultsList = ({ title }: any): JSX.Element => {
 
 const SearchResultsCard = (): JSX.Element => {
   const searchword = useRecoilValue(Searchword);
-  const [sortAsc, setSortAsc] = useState<boolean>(false);
+  const [sortDesc, setSortDesc] = useState<boolean>(true);
 
   const handleSort = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    setSortAsc((prev) => !prev);
+    setSortDesc((prev) => !prev);
   };
 
   return (
@@ -131,11 +141,14 @@ const SearchResultsCard = (): JSX.Element => {
       <SearchResultSort>
         <span>정확도 순</span>
         <Button onClick={handleSort}>
-          {sortAsc ? <DownIcon /> : <UpIcon />}
+          {sortDesc ? <DownIcon /> : <UpIcon />}
         </Button>
       </SearchResultSort>
-      <SearchResultsList title="Friends"></SearchResultsList>
-      <SearchResultsList title="Harry Potter"></SearchResultsList>
+      <SearchResultsList title="Friends" sort={sortDesc}></SearchResultsList>
+      <SearchResultsList
+        title="Harry Potter"
+        sort={sortDesc}
+      ></SearchResultsList>
     </SearchResultBox>
   );
 };

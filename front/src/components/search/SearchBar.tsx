@@ -7,8 +7,9 @@ import {
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import * as Api from "../../api";
-import { useSetRecoilState, useResetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState, useResetRecoilState } from "recoil";
 import { Searchword, SearchResults } from "../../stores/SearchAtom";
+import { ShowState } from "../../stores/FilterAtom";
 
 const SearchBar = (): JSX.Element => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const SearchBar = (): JSX.Element => {
   const setSearchWord = useSetRecoilState(Searchword);
   const setResults = useSetRecoilState(SearchResults);
   const resetResults = useResetRecoilState(SearchResults);
+  const show = useRecoilValue(ShowState);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchword(event.target.value);
@@ -64,7 +66,7 @@ const SearchBar = (): JSX.Element => {
         script = String(script).slice(0, String(script).length - 5);
         script = script.trim();
 
-        if (titleList.includes(title) || nameList.includes(name)) {
+        if (titleList.includes(title) || nameList.includes(name) || !show) {
           setResults((prev) => [
             ...prev,
             {

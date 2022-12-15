@@ -9,6 +9,8 @@ import {
   FilterContentWrapper,
 } from "../../styles/search/Filter.styled";
 import { useState } from "react";
+import { ShowState } from "../../stores/FilterAtom";
+import { useRecoilState } from "recoil";
 
 interface ListProps {
   label?: string;
@@ -18,7 +20,7 @@ interface ListProps {
 }
 
 const FilterCard = (): JSX.Element => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useRecoilState(ShowState);
   // const [showEmotion, setShowEmotion] = useState(false);
 
   const List = ({ id, value }: ListProps): JSX.Element => {
