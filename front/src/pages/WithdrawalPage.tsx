@@ -5,27 +5,36 @@ import {
   Text,
   Logo,
   Title,
-  Input,
   Button,
 } from "../styles/Register.styled";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Api from "../api";
 
 const WithdrawalPage = (): JSX.Element => {
   const navigate = useNavigate();
   const [changed, setChanged] = useState<boolean>(false);
-  const [id, setId] = useState<string>("");
+  const [id, setId] = useState();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setId(event.target.value);
-  };
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      try {
+        const res = await Api.get("user/currentUser");
+        // console.log(res.data[0].userId);
+        // console.log(typeof res.data[0].userId);
+        setId(res.data[0].userId);
+      } catch (err) {
+        console.log("현재 유저 가져오기 실패");
+        console.log(err);
+      }
+    };
+    getCurrentUser();
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const res = await Api.put(`user/resetPassword/${id}`, { withdrawal: 1 });
-      console.log(res.data);
+      await Api.put(`user/withdrawal/${id}`, { withdrawal: 1 });
       console.log("회원탈퇴 성공");
       setChanged(true);
     } catch (err) {
@@ -54,13 +63,13 @@ const WithdrawalPage = (): JSX.Element => {
                 Once it's closed, you won't be able to use this account or see
                 your past records. This action can't be undone.
               </Text>
-              <Input
+              {/* <Input
                 type="id"
                 placeholder="ID"
                 value={id}
                 onChange={handleChange}
-              ></Input>
-              <Button type="submit">Continue</Button>
+              ></Input> */}
+              <Button>Continue</Button>
             </>
           )}
         </Form>

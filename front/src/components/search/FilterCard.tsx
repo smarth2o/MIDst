@@ -15,7 +15,7 @@ import { titleFilter, nameFilter } from "../../stores/FilterAtom";
 
 interface ListProps {
   value: string;
-  label: string;
+  id?: string;
   children?: React.ReactNode;
 }
 
@@ -36,10 +36,8 @@ const FilterCard = (): JSX.Element => {
   //   setShowEmotion((prev) => !prev);
   // };
 
-  const List = ({ value, label }: ListProps): JSX.Element => {
-    // const handleCheck = () => {
-
-    // }
+  const List = ({ id, value }: ListProps): JSX.Element => {
+    const handleCheck = () => {};
 
     const getCheckedValue = (event: any) => {
       // event.preventDefault();
@@ -60,28 +58,26 @@ const FilterCard = (): JSX.Element => {
         <label>
           <input
             type="checkbox"
+            id={id}
             name="name"
             value={value}
-            // onChange={handleCheck}
-            onClick={getCheckedValue}
+            onChange={handleCheck}
+            // onClick={getCheckedValue}
           />
-          {label}
+          {value}
         </label>
       </li>
     );
   };
 
-  const TitleList = ({ value, label, children }: ListProps): JSX.Element => {
-    const getCheckedValue = (event: any) => {
-      // if (event.target.checked) {
-      //   setTitleFilter((prev) => [...prev, event.target.value]);
-      // } else {
-      //   setTitleFilter((titleFilter) =>
-      //     titleFilter.filter((e) => e !== event.target.value)
-      //   );
-      // }
-      // console.log(titleFilter);
-    };
+  const TitleList = ({ value, children }: ListProps): JSX.Element => {
+    // const handleCheck = () => {
+    //   const checkboxes = document.getElementById(value);
+    //   checkboxes.forEach((checkbox) => {
+    //     checkbox.checked = TitleList.checked;
+    //   });
+
+    // };
     return (
       <li>
         <label>
@@ -89,20 +85,28 @@ const FilterCard = (): JSX.Element => {
             type="checkbox"
             name="title"
             value={value}
-            onClick={getCheckedValue}
+            // onChange={handleCheck}
+            checked
           />
-          {label}
+          {value}
         </label>
         {children}
       </li>
     );
   };
 
+  const handleReset = () => {
+    // const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    // checkboxes.forEach((checkbox) => {
+    //   checkbox.checked = false;
+    // });
+  };
+
   return (
     <FilterWrapper>
       <FilterTitleWrapper>
         <h2>Filters</h2>
-        <Button>
+        <Button onClick={handleReset}>
           <FilterIcon />
         </Button>
       </FilterTitleWrapper>
@@ -115,26 +119,26 @@ const FilterCard = (): JSX.Element => {
         </FilterTitleWrapper>
         {showMedia && (
           <FilterContentWrapper>
-            <TitleList label="Friends" value="Friends">
+            <TitleList value="Friends">
               {/* <Button>+</Button> */}
               <FilterContentWrapper>
-                <List label="Rachel" value="Rachel"></List>
-                <List label="Ross" value="Ross"></List>
-                <List label="Monica" value="Monica"></List>
-                <List label="Chandler" value="Chandler"></List>
-                <List label="Pheobe" value="Pheobe"></List>
-                <List label="Joey" value="Joey"></List>
+                <List id="Friends" value="Rachel"></List>
+                <List id="Friends" value="Ross"></List>
+                <List id="Friends" value="Monica"></List>
+                <List id="Friends" value="Chandler"></List>
+                <List id="Friends" value="Pheobe"></List>
+                <List id="Friends" value="Joey"></List>
               </FilterContentWrapper>
             </TitleList>
-            <TitleList label="Harry Potter" value="Harry Potter">
+            <TitleList value="Harry Potter">
               <FilterContentWrapper>
-                <List label="Harry" value="Harry"></List>
-                <List label="Hermione" value="Hermione"></List>
-                <List label="Ron" value="Ron"></List>
-                <List label="Dumbledore" value="Dumbledore"></List>
-                <List label="Voldemort" value="Voldemort"></List>
-                <List label="Snape" value="Snape"></List>
-                <List label="Dobby" value="Dobby"></List>
+                <List id="Harry Potter" value="Harry"></List>
+                <List id="Harry Potter" value="Hermione"></List>
+                <List id="Harry Potter" value="Ron"></List>
+                <List id="Harry Potter" value="Dumbledore"></List>
+                <List id="Harry Potter" value="Voldemort"></List>
+                <List id="Harry Potter" value="Snape"></List>
+                <List id="Harry Potter" value="Dobby"></List>
               </FilterContentWrapper>
             </TitleList>
           </FilterContentWrapper>

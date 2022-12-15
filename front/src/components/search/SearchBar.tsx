@@ -44,16 +44,6 @@ const SearchBar = (): JSX.Element => {
         script = String(script).slice(0, String(script).length - 5);
         script = script.trim();
 
-        const selectedName = document.querySelectorAll(
-          'input[name="name"]:checked'
-        );
-
-        selectedName.forEach((el) => {
-          console.log(el);
-          // if (el.value === name) {
-          // }
-        });
-
         // useEffect(() => {
         //   const titleresult = results.filter((result) =>
         //     titleFilter.includes(result.title)
