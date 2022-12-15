@@ -123,13 +123,15 @@ class userController {
     }
 
     //회원탈퇴
-    async updateWithdrawal(userId: string, updatewithdrawal: number) {
+    async updateWithdrawal(userId: string, updatewithdrawal: number, username:string) {
         const updateWithdrawal = await prisma.user.update({
             where: {
                 userId: userId,
             },
             data: {
+                name:username,
                 withdrawal: updatewithdrawal,
+
             },
         });
         return updateWithdrawal;

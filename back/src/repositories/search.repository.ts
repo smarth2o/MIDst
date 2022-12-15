@@ -4,7 +4,6 @@ const prisma = new PrismaClient();
 class mainController {
   //문장 저장
   async create(userId: string, searchword: string, searchSentence: string) {
-    console.log(userId);
     const userTosearch = await prisma.usertosearch.create({
       data: {
         userId: userId,

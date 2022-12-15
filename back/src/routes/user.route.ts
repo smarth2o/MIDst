@@ -154,8 +154,6 @@ userRouter.put(
             const withdrawal = req.body.withdrawal ?? null;
             const userId: any = req.headers["currentUserId"];
             const id = req.params.id;
-            console.log(id, "아이디다");
-
             const withdrawalStatus = await userService.userWithdrawal(
                 userId,
                 id,
