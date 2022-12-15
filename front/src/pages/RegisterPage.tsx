@@ -45,8 +45,21 @@ const RegisterPage = (): JSX.Element => {
   };
 
   const [verifi, setVerifi] = useState(false);
-  const [same, setSame] = useState(false);
   const [answer, setAnswer] = useState();
+
+  const handleValidID = async () => {
+    const name = form.name;
+    try {
+      const res = await Api.get(`user/register/${name}`);
+      if (!res.data) {
+        alert("이미 사용중인 이름입니다.");
+      } else {
+        alert("사용할 수 있는 이름입니다.");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const handleSendEmail = async () => {
     try {
@@ -56,14 +69,14 @@ const RegisterPage = (): JSX.Element => {
       alert("입력하신 이메일로 인증코드를 보냈습니다.");
     } catch (err) {
       alert("다시 입력해주세요.");
-      console.log("이메일 전송 에러");
+      // console.log("이메일 전송 에러");
       console.error(err);
     }
   };
 
   const handleValidCode = () => {
-    setVerifi(inputCode === String(answer));
-    if (verifi) {
+    if (inputCode === String(answer)) {
+      setVerifi(true);
       alert("Correct!");
     } else {
       alert("Wrong. Try again.");
@@ -77,8 +90,6 @@ const RegisterPage = (): JSX.Element => {
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    setSame(form.password === form.confirmpassword);
-
     event.preventDefault();
     if (!form.name) {
       alert("아이디를 입력해주세요.");
@@ -92,19 +103,23 @@ const RegisterPage = (): JSX.Element => {
       alert("비밀번호를 입력해주세요.");
     } else if (!form.confirmpassword) {
       alert("비밀번호 중복 확인을 입력해주세요.");
-    } else if (!same) {
+    } else if (form.password !== form.confirmpassword) {
       alert("비밀번호가 동일하지 않습니다.");
     } else if (!CheckPass(form.password)) {
       alert("비밀번호는 영문+숫자 8자를 조합하여 입력해주세요.");
     } else {
       try {
-        await Api.post("user/register", form);
-        console.log("회원가입 성공");
-        navigate("/login");
+        const res = await Api.post("user/register", form);
+        if (res.data) {
+          alert(res.data);
+        } else {
+          console.log("회원가입 성공");
+          navigate("/login");
+        }
       } catch (err) {
         alert("다시 시도해주세요.");
-        console.log("회원가입 실패");
-        console.error("에러 메세지:", err);
+        // console.log("회원가입 실패");
+        // console.error("에러 메세지:", err);
       }
     }
   };
@@ -123,7 +138,7 @@ const RegisterPage = (): JSX.Element => {
               value={form.name}
               onChange={handleChange}
             ></Input>
-            {/* <SmallButton onClick={handleValidID}>Check</SmallButton> */}
+            <SmallButton onClick={handleValidID}>Check</SmallButton>
           </SmallWrapper>
           <SmallWrapper>
             <Input

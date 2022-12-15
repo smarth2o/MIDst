@@ -24,7 +24,7 @@ const WithdrawalPage = (): JSX.Element => {
         // console.log(typeof res.data[0].userId);
         setId(res.data[0].userId);
       } catch (err) {
-        console.log("현재 유저 가져오기 실패");
+        // console.log("현재 유저 가져오기 실패");
         console.log(err);
       }
     };
@@ -35,10 +35,10 @@ const WithdrawalPage = (): JSX.Element => {
     event.preventDefault();
     try {
       await Api.put(`user/withdrawal/${id}`, { withdrawal: 1 });
-      console.log("회원탈퇴 성공");
+      // console.log("회원탈퇴 성공");
       setChanged(true);
     } catch (err) {
-      console.log("회원탈퇴 실패");
+      // console.log("회원탈퇴 실패");
       console.error(err);
     }
   };

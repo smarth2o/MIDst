@@ -19,10 +19,10 @@ function Header() {
     try {
       window.localStorage.removeItem("accessToken");
       window.localStorage.removeItem("refreshToken");
-      console.log("로그아웃 성공");
+      // console.log("로그아웃 성공");
       window.location.reload();
     } catch (err) {
-      console.log("로그아웃 실패");
+      // console.log("로그아웃 실패");
       console.error(err);
     }
   };
@@ -30,22 +30,17 @@ function Header() {
   useEffect(() => {
     const checkUser = async () => {
       try {
-        const res = await Api.get("user/currentUser");
-        // setUser({
-        //   name: res.data.name,
-        //   email: res.data.email,
-        //   password: res.data.password,
-        //   accessToken: res.data.refreshToken,
-        // });
+        await Api.get("user/currentUser");
         setIsLogin(true);
-        console.log("로그인 된 상태");
+        // console.log("로그인 된 상태");
       } catch (error) {
         setIsLogin(false);
-        console.log("로그인 안된 상태");
+        // console.log("로그인 안된 상태");
       }
     };
-
-    checkUser();
+    if (localStorage.getItem("accessToken")) {
+      checkUser();
+    }
   }, []);
 
   return (

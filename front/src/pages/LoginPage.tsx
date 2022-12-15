@@ -38,12 +38,15 @@ const LoginPage = (): JSX.Element => {
 
     try {
       const res = await Api.post("user/login", form);
-      window.localStorage.setItem("accessToken", res.data.accessToken);
-      window.localStorage.setItem("refreshToken", res.data.refreshToken);
-      console.log("로그인 성공");
-      navigate("/");
+      if (res.data) {
+        alert(res.data);
+      } else {
+        window.localStorage.setItem("accessToken", res.data.accessToken);
+        window.localStorage.setItem("refreshToken", res.data.refreshToken);
+        // console.log("로그인 성공");
+        navigate("/");
+      }
     } catch (err) {
-      console.log("로그인 실패");
       console.error(err);
     }
   };

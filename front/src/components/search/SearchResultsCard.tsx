@@ -37,23 +37,23 @@ const SearchResultCard = ({ name, script }: any): JSX.Element => {
             searchSentence: script,
           });
           // console.log(res.data);
-          console.log("저장 성공");
+          // console.log("저장 성공");
         } catch (err) {
-          console.log("저장 실패");
+          // console.log("저장 실패");
         }
       } else {
         try {
           console.log(searchId);
           await Api.delete(`main/deleteSearch/${searchId}`);
           // console.log(res);
-          console.log("삭제 성공");
+          // console.log("삭제 성공");
         } catch (err) {
-          console.log("삭제 실패");
+          // console.log("삭제 실패");
         }
       }
       setCloud(!cloud);
     } catch (err) {
-      console.log("가져오기 실패");
+      // console.log("가져오기 실패");
       if (
         window.confirm("로그인 후 사용하실 수 있습니다. 로그인 하시겠습니까?")
       )
@@ -69,8 +69,8 @@ const SearchResultCard = ({ name, script }: any): JSX.Element => {
         });
         setTranslate(res.data);
       } catch (err) {
-        console.log("번역 실패");
-        console.log(err);
+        // console.log("번역 실패");
+        // console.log(err);
       }
     } else {
       setTranslate("");

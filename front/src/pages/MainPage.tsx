@@ -60,7 +60,7 @@ const MainPage = (): JSX.Element => {
   useEffect(() => {
     const checkUser = async () => {
       try {
-        const res = await Api.get("user/currentUser");
+        await Api.get("user/currentUser");
         setIsLogin(true);
         console.log("로그인 된 상태");
       } catch (error) {
@@ -68,7 +68,9 @@ const MainPage = (): JSX.Element => {
         console.log("로그인 안된 상태");
       }
     };
-    checkUser();
+    if (localStorage.getItem("accessToken")) {
+      checkUser();
+    }
   }, []);
 
   return (

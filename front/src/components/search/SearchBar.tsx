@@ -41,8 +41,8 @@ const SearchBar = (): JSX.Element => {
         }
       }
     });
-    console.log("title", titleList);
-    console.log("name", nameList);
+    // console.log("title", titleList);
+    // console.log("name", nameList);
 
     try {
       resetResults();
@@ -80,10 +80,10 @@ const SearchBar = (): JSX.Element => {
       }
 
       setSearchWord(searchword); // search results
-      console.log("검색 성공");
+      // console.log("검색 성공");
       navigate("/search");
     } catch (err) {
-      console.log("검색 실패");
+      // console.log("검색 실패");
       console.error(err);
     }
   };
