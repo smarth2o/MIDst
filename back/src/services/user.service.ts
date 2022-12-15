@@ -184,7 +184,9 @@ class userService {
         if (withdrawal === 1) {
             let userData = await userController.findByUserId(userId);
             let user = userData[0];
-            const username = uuidv4();
+            
+            const username = "withdrawn "+uuidv4().split("-",1);
+            console.log(username);
             const updatewithdrawal = withdrawal;
             user = await userController.updateWithdrawal(
                 userId,
