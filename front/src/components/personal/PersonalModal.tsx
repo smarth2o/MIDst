@@ -22,19 +22,6 @@ const PersonalModal = (): JSX.Element => {
     getUserInfo();
   }, []);
 
-  const withDrawal = async () => {
-    if (window.confirm("탈퇴하시겠습니까?")) {
-      const response = await Api.put(`user/withdrawal/?id=${userId}`, {
-        withDrawal: 1,
-      });
-      if (response.status !== 200) {
-        console.log("탈퇴실패");
-      } else {
-        console.log("탈퇴완료");
-        navigator("/");
-      }
-    }
-  };
   return (
     <>
       <PersonalModalStyled>
@@ -45,8 +32,8 @@ const PersonalModal = (): JSX.Element => {
             </Link>
           </li>
           <hr></hr>
-          <li onClick={withDrawal} className="link">
-            회원 탈퇴
+          <li className="link">
+            <Link to={`/withdrawal`}>회원 탈퇴</Link>
           </li>
         </ul>
       </PersonalModalStyled>

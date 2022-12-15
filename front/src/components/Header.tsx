@@ -48,6 +48,10 @@ function Header() {
     checkUser();
   }, []);
 
+  const accessLink = () => {
+    alert(`로그인 후 접속가능합니다.`);
+  };
+
   return (
     <>
       <Wrapper>
@@ -64,8 +68,22 @@ function Header() {
         <Navbar>
           <NavLink to={ROUTES.SEARCH}>Search</NavLink>
           <NavLink to={ROUTES.COMMUNITY.ROOT}>Share</NavLink>
-          <NavLink to={ROUTES.DIARY.ROOT}>Diary</NavLink>
-          <NavLink to={ROUTES.PERSONAL}>My</NavLink>
+          {isLogin ? (
+            <>
+              <NavLink to={ROUTES.DIARY.ROOT}>Diary</NavLink>
+              <NavLink to={ROUTES.PERSONAL}>My</NavLink>
+            </>
+          ) : (
+            <>
+              <div onClick={accessLink}>
+                <NavLink to="#">Diary</NavLink>
+              </div>
+              <div onClick={accessLink}>
+                <NavLink to="#">My</NavLink>
+              </div>
+            </>
+          )}
+
           {isLogin ? (
             <SignOut to={ROUTES.MAIN} onClick={handleSignout}>
               Sign Out
