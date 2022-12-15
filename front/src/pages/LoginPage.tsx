@@ -14,8 +14,6 @@ import { ROUTES } from "../enum/routes";
 import * as Api from "../api";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import userState from "../stores/UserAtom";
 
 interface LoginData {
   email: string;
@@ -24,7 +22,6 @@ interface LoginData {
 
 const LoginPage = (): JSX.Element => {
   const navigate = useNavigate();
-  const setUser = useSetRecoilState(userState);
 
   const [form, setForm] = useState<LoginData>({
     email: "",
@@ -41,16 +38,10 @@ const LoginPage = (): JSX.Element => {
 
     try {
       const res = await Api.post("user/login", form);
-      // console.log(res.data);
-      setUser({
-        name: res.data.name,
-        email: res.data.email,
-        id: res.data.userId,
-      });
       window.localStorage.setItem("accessToken", res.data.accessToken);
       window.localStorage.setItem("refreshToken", res.data.refreshToken);
       console.log("로그인 성공");
-      navigate("/"); // 뒤로가기
+      navigate("/");
     } catch (err) {
       console.log("로그인 실패");
       console.error(err);
@@ -84,9 +75,6 @@ const LoginPage = (): JSX.Element => {
           </PasswordButton>
           <Button type="submit">Sign In</Button>
           <BottomWrapper>
-            {/* <OtherButton to={ROUTES.USER.FIND_PW}>
-              Forgot your Password?
-            </OtherButton> */}
             <p>Don't have an account?</p>
             <OtherButton to={ROUTES.USER.REGISTER}>Sign Up</OtherButton>
           </BottomWrapper>

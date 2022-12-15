@@ -31,6 +31,7 @@ const CommunityPost = ({
 }: CommunityPropsType): JSX.Element => {
   const postCreatedAt = dayjs(createdAt);
   const [isLike, setIsLike] = useState(like);
+  const [currentUser, setCurrentUser] = useState("");
   const { communityDetail } = useParams();
   const navigate = useNavigate();
 
@@ -61,12 +62,23 @@ const CommunityPost = ({
   useEffect(() => {
     const onViewHeart = async () => {
       const onLikeGet = await Api.get(`likes/${communityDetail}`);
+
       if (onLikeGet.status !== 200) {
         console.log(onLikeGet);
       } else {
         setIsLike(onLikeGet.data.data.count._count);
       }
     };
+    const onUserCheck = async () => {
+      try {
+        const res = await Api.get(`user/currentUser`);
+        setCurrentUser(res.data[0].name);
+        console.log(res.data[0].name);
+      } catch {
+        console.log("err");
+      }
+    };
+    onUserCheck();
     onViewHeart();
   }, [isLike]);
 
@@ -105,15 +117,18 @@ const CommunityPost = ({
             <h3 className="CPContent-title">{title}</h3>
           </li>
           <p>{description}</p>
+          {}
           <CommunityCreateBtnAlignStyled>
-            <CommunityPostBtn>
-              <button onClick={onCancel} className="delete">
-                삭제
-              </button>
-              <button type="submit" onClick={onEdit}>
-                수정
-              </button>
-            </CommunityPostBtn>
+            {currentUser === author ? (
+              <CommunityPostBtn>
+                <button onClick={onCancel} className="delete">
+                  삭제
+                </button>
+                <button type="submit" onClick={onEdit}>
+                  수정
+                </button>
+              </CommunityPostBtn>
+            ) : null}
           </CommunityCreateBtnAlignStyled>
         </CPContentStyled>
       </CommunityPostAlignStyled>

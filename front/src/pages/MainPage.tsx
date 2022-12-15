@@ -17,14 +17,11 @@ import { LogoIcon } from "../assets/index";
 import { useNavigate } from "react-router";
 import { ChatWrapper, ChatBox } from "../styles/Landing.styled";
 import { useState, useEffect } from "react";
-import { useResetRecoilState } from "recoil";
-import userState from "../stores/UserAtom";
 import * as Api from "../api";
 
 const MainPage = (): JSX.Element => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState<boolean>();
-  const userReset = useResetRecoilState(userState);
 
   useEffect(() => {
     const boxList = document.querySelectorAll(
@@ -50,7 +47,6 @@ const MainPage = (): JSX.Element => {
 
   const handleSignout = async () => {
     try {
-      userReset();
       window.localStorage.removeItem("accessToken");
       window.localStorage.removeItem("refreshToken");
       console.log("로그아웃 성공");
@@ -65,12 +61,6 @@ const MainPage = (): JSX.Element => {
     const checkUser = async () => {
       try {
         const res = await Api.get("user/currentUser");
-        // setUser({
-        //   name: res.data.name,
-        //   email: res.data.email,
-        //   password: res.data.password,
-        //   accessToken: res.data.refreshToken,
-        // });
         setIsLogin(true);
         console.log("로그인 된 상태");
       } catch (error) {

@@ -8,51 +8,26 @@ import {
   UpIcon,
   FilterContentWrapper,
 } from "../../styles/search/Filter.styled";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { ShowState } from "../../stores/FilterAtom";
 import { useRecoilState } from "recoil";
-import { SearchResults } from "../../stores/SearchAtom";
-import { titleFilter, nameFilter } from "../../stores/FilterAtom";
 
 interface ListProps {
+  label?: string;
   value: string;
-  label: string;
+  id?: string;
   children?: React.ReactNode;
 }
 
 const FilterCard = (): JSX.Element => {
-  const [results, setResults] = useRecoilState(SearchResults);
-  const [titleFilterList, setTitleFilter] = useRecoilState(titleFilter);
-  const [nameFilterList, setNameFilter] = useRecoilState(nameFilter);
-  const [showMedia, setShowMedia] = useState(false);
+  const [show, setShow] = useRecoilState(ShowState);
   // const [showEmotion, setShowEmotion] = useState(false);
 
-  // const handleMedia = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   // event.preventDefault();
-  //   setShowMedia((prev) => !prev);
-  // };
+  const List = ({ id, value }: ListProps): JSX.Element => {
+    const [checked, setChecked] = useState<boolean>(false);
 
-  // const handleEmotion = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   event.preventDefault();
-  //   setShowEmotion((prev) => !prev);
-  // };
-
-  const List = ({ value, label }: ListProps): JSX.Element => {
-    // const handleCheck = () => {
-
-    // }
-
-    const getCheckedValue = (event: any) => {
-      // event.preventDefault();
-      console.log(event.target.value, event.target.checked);
-
-      // if (event.target.checked) {
-      //   setNameFilter((prev) => [...prev, event.target.value]);
-      // } else {
-      //   setNameFilter((nameFilterList) =>
-      //     nameFilterList.filter((e) => e !== event.target.value)
-      //   );
-      // }
-      // console.log("nameFilter", nameFilterList);
+    const handleCheck = () => {
+      setChecked(!checked);
     };
 
     return (
@@ -60,28 +35,30 @@ const FilterCard = (): JSX.Element => {
         <label>
           <input
             type="checkbox"
+            id={id}
             name="name"
             value={value}
-            // onChange={handleCheck}
-            onClick={getCheckedValue}
+            onChange={handleCheck}
+            checked={checked}
           />
-          {label}
+          {value}
         </label>
       </li>
     );
   };
 
-  const TitleList = ({ value, label, children }: ListProps): JSX.Element => {
-    const getCheckedValue = (event: any) => {
-      // if (event.target.checked) {
-      //   setTitleFilter((prev) => [...prev, event.target.value]);
-      // } else {
-      //   setTitleFilter((titleFilter) =>
-      //     titleFilter.filter((e) => e !== event.target.value)
-      //   );
-      // }
-      // console.log(titleFilter);
+  const TitleList = ({ label, value, children }: ListProps): JSX.Element => {
+    const [checked, setChecked] = useState<boolean>(true);
+
+    const handleCheck = () => {
+      setChecked(!checked);
+      const checkboxes: NodeListOf<HTMLInputElement> =
+        document.querySelectorAll("#" + label);
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = !checked;
+      });
     };
+
     return (
       <li>
         <label>
@@ -89,76 +66,86 @@ const FilterCard = (): JSX.Element => {
             type="checkbox"
             name="title"
             value={value}
-            onClick={getCheckedValue}
+            onChange={handleCheck}
+            checked={checked}
           />
-          {label}
+          {value}
         </label>
         {children}
       </li>
     );
   };
 
+  const handleReset = () => {
+    const checkboxes: NodeListOf<HTMLInputElement> = document.querySelectorAll(
+      'input[type="checkbox"]'
+    );
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+  };
+
   return (
     <FilterWrapper>
       <FilterTitleWrapper>
         <h2>Filters</h2>
-        <Button>
+        <Button onClick={handleReset}>
           <FilterIcon />
         </Button>
       </FilterTitleWrapper>
       <FilterBox>
         <FilterTitleWrapper>
           <h3>Media</h3>
-          <Button onClick={() => setShowMedia((prev) => !prev)}>
-            {showMedia ? <UpIcon /> : <DownIcon />}
+          <Button onClick={() => setShow((prev) => !prev)}>
+            {show ? <UpIcon /> : <DownIcon />}
           </Button>
         </FilterTitleWrapper>
-        {showMedia && (
+        {show && (
           <FilterContentWrapper>
             <TitleList label="Friends" value="Friends">
               {/* <Button>+</Button> */}
               <FilterContentWrapper>
-                <List label="Rachel" value="Rachel"></List>
-                <List label="Ross" value="Ross"></List>
-                <List label="Monica" value="Monica"></List>
-                <List label="Chandler" value="Chandler"></List>
-                <List label="Pheobe" value="Pheobe"></List>
-                <List label="Joey" value="Joey"></List>
+                <List id="Friends" value="Rachel"></List>
+                <List id="Friends" value="Ross"></List>
+                <List id="Friends" value="Monica"></List>
+                <List id="Friends" value="Chandler"></List>
+                <List id="Friends" value="Pheobe"></List>
+                <List id="Friends" value="Joey"></List>
               </FilterContentWrapper>
             </TitleList>
-            <TitleList label="Harry Potter" value="Harry Potter">
+            <TitleList label="Harry" value="Harry Potter">
               <FilterContentWrapper>
-                <List label="Harry" value="Harry"></List>
-                <List label="Hermione" value="Hermione"></List>
-                <List label="Ron" value="Ron"></List>
-                <List label="Dumbledore" value="Dumbledore"></List>
-                <List label="Voldemort" value="Voldemort"></List>
-                <List label="Snape" value="Snape"></List>
-                <List label="Dobby" value="Dobby"></List>
+                <List id="Harry" value="Harry Potter"></List>
+                <List id="Harry" value="Hermione Granger"></List>
+                <List id="Harry" value="Ron Weasley"></List>
+                <List id="Harry" value="Albus Dumbledore"></List>
+                <List id="Harry" value="Voldemort"></List>
+                <List id="Harry" value="Severus Snape"></List>
+                <List id="Harry" value="Dobby"></List>
               </FilterContentWrapper>
             </TitleList>
           </FilterContentWrapper>
         )}
       </FilterBox>
       {/* <FilterBox>
-        <FilterTitleWrapper>
-          <h3>Emotion</h3>
-          <Button onClick={handleEmotion}>
-            {showEmotion ? <UpIcon /> : <DownIcon />}
-          </Button>
-        </FilterTitleWrapper>
-        {showEmotion && (
-          <FilterContentWrapper>
-            <List label="joy"></List>
-            <List label="sadnes"></List>
-            <List label="anger"></List>
-            <List label="surprise"></List>
-            <List label="fear"></List>
-            <List label="disgust"></List>
-            <List label="neutral"></List>
-          </FilterContentWrapper>
-        )}
-      </FilterBox> */}
+         <FilterTitleWrapper>
+           <h3>Emotion</h3>
+           <Button onClick={handleEmotion}>
+             {showEmotion ? <UpIcon /> : <DownIcon />}
+           </Button>
+         </FilterTitleWrapper>
+         {showEmotion && (
+           <FilterContentWrapper>
+             <List label="joy"></List>
+             <List label="sadnes"></List>
+             <List label="anger"></List>
+             <List label="surprise"></List>
+             <List label="fear"></List>
+             <List label="disgust"></List>
+             <List label="neutral"></List>
+           </FilterContentWrapper>
+         )}
+       </FilterBox> */}
       {/* <SearchButton>Search</SearchButton> */}
     </FilterWrapper>
   );
