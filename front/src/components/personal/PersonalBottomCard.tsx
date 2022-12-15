@@ -42,6 +42,7 @@ const PersonalBottomCard = (): JSX.Element => {
         console.log(response);
       } else {
         setItems(response.data);
+        console.log(items);
       }
     };
     const getId = async () => {

@@ -20,6 +20,7 @@ const DiaryDetail = (): JSX.Element => {
         console.log(response);
       } else {
         setDiarys(response.data.data);
+        console.log(diarys);
       }
     };
     getDiaryData();
