@@ -17,8 +17,6 @@ export interface DiaryPropsTypes {
   title: string;
   description: string;
   date: string;
-  diarys: DiaryTypes[];
-  setDiarys: SetterOrUpdater<DiaryTypes[]>;
 }
 
 export interface booleanProps {
@@ -27,7 +25,6 @@ export interface booleanProps {
 }
 
 type ClickHandler = (props: boolean) => (e: React.MouseEvent) => void;
-type ClickDelete = (props: boolean) => (e: React.MouseEvent) => void;
 
 const onSubmitDiary = () => {
   alert("제출이 완료되었습니다.");
@@ -37,8 +34,6 @@ const DiaryDetailCard = ({
   date,
   title,
   description,
-  diarys,
-  setDiarys,
 }: DiaryPropsTypes): JSX.Element => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [diaryDate, setDiaryDate] = useState(date);
@@ -52,14 +47,17 @@ const DiaryDetailCard = ({
     e.preventDefault();
     setIsEdit(!props);
     const DiaryDetailPost = async () => {
-      const response = await Api.put(`diaries/${detail}`, {
-        date: currentTime.format("YYYY-MM-DD"),
-        title: diaryTitle,
-        description: diaryDescription,
-      });
+      try {
+        const response = await Api.put(`diaries/${detail}`, {
+          date: currentTime.format("YYYY-MM-DD"),
+          title: diaryTitle,
+          description: diaryDescription,
+        });
+      } catch {}
     };
     DiaryDetailPost();
   };
+
   const clickDelete = async () => {
     if (window.confirm("삭제하시겠습니까?")) {
       const response = await Api.delete(`diaries/${detail}`);

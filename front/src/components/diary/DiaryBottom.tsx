@@ -1,20 +1,18 @@
 import { ArrowRightOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   DBCEmotionBtn,
-  DBCGrammarBtn,
   DiaryBottomCard,
   DiaryBottomOpenCard,
 } from "../../styles/diary/DiaryBottomCard";
-import DiaryEmotion from "./DiaryEmotion";
+
 import DiaryEmotionInfoModal from "./DiaryEmotionInfoModal";
-import DiaryGrammarCheckCard from "./DiaryGrammarCheckCard";
 import * as Api from "../../api";
 
 type ClickHandler = (props: boolean) => (e: React.MouseEvent) => void;
 
-const DiaryEmotionCard = (): JSX.Element => {
+const DiaryBottom = (): JSX.Element => {
   const [isToggle, isSetToggle] = useState(false);
   const [modal, setModal] = useState(false);
   const [emotion, setEmotion] = useState("");
@@ -90,17 +88,9 @@ const DiaryEmotionCard = (): JSX.Element => {
             <p>Close</p> <ArrowRightOutlined />
           </DBCEmotionBtn>
         </DiaryBottomOpenCard>
+        <br></br>
       </>
     );
   }
 };
-
-const DiaryBottom = (): JSX.Element => {
-  return (
-    <>
-      <DiaryEmotionCard />
-    </>
-  );
-};
-
 export default DiaryBottom;

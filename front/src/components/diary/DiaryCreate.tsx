@@ -10,38 +10,35 @@ import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../enum/routes";
 
+type onSubmitDiary = (e: React.MouseEvent) => void;
+
 const DiaryCreate = (): JSX.Element => {
-  const { communityDetail } = useParams();
+  const { detail } = useParams();
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
   const date = dayjs();
   const navigator = useNavigate();
 
-  const onSubmitDiary = async () => {
+  const onSubmitDiary: onSubmitDiary = async (e) => {
+    e.preventDefault();
     try {
       const response = await Api.post(`diaries`, {
         date: date.format("YYYY-MM-DD"),
         title: title,
         description: description,
       });
-      alert("제출이 완료되었습니다.");
-      navigator(`/diary`);
+      if (window.confirm("제출이 완료되었습니다.")) {
+        navigator(ROUTES.DIARY.ROOT);
+      }
     } catch {
       console.log("제출 실패");
     }
   };
 
-  const getDiaryData = async () => {
-    const response = await Api.get(`diaries`);
-  };
-  useEffect(() => {
-    getDiaryData();
-  }, [communityDetail]);
-
   return (
     <>
       <DiaryCreateAlign>
-        <DiaryForm action="Submit" onSubmit={onSubmitDiary}>
+        <DiaryForm action="Submit">
           <input
             maxLength={20}
             placeholder="Title"

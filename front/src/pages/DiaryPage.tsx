@@ -25,7 +25,6 @@ export interface DiaryValueType {
 
 const DiaryPage = (): JSX.Element => {
   const [diarys, setDiarys] = useRecoilState(diaryState);
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const getDiaryData = async () => {
@@ -34,15 +33,9 @@ const DiaryPage = (): JSX.Element => {
         console.log(response);
       } else {
         setDiarys(response.data.data);
-        setCount(response.data);
       }
     };
     getDiaryData();
-  }, []);
-
-  useEffect(() => {
-    // 가장 최근 일기의 id값을 구해서
-    // 'diary/id' 로 보내는 로직
   }, []);
 
   return (

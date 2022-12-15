@@ -9,7 +9,6 @@ type ClickHandler = (props: boolean) => (e: React.MouseEvent) => void;
 
 const DiaryGrammarCheckCard = (): JSX.Element => {
   const [isToggle, isSetToggle] = useState(false);
-  const [modal, setModal] = useState(false);
 
   const ClickHandler: ClickHandler = (props) => (e) => {
     e.preventDefault();

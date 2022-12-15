@@ -5,13 +5,10 @@ import {
   PBCardItemStyled,
   PBCardTabStyled,
   PBCardWordAlignStyled,
-  PBCWordItemStyled,
 } from "../../styles/personal/PersonalBottomCardStyled";
 import PBCardData, { PBCardDataType } from "./personalData";
 import { CloudEmp, CloudFull } from "../../assets/index";
 import * as Api from "../../api";
-import { BackBtnStyled } from "../../styles/common/CommonBtn";
-import { DiaryDetailBtn } from "../../styles/diary/DiaryDetailCard";
 import { useNavigate } from "react-router";
 
 export interface PBCardItemType {

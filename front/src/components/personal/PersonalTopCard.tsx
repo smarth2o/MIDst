@@ -98,9 +98,9 @@ export const PersonalTopCard = (): JSX.Element => {
               <h3>Search for {expressionsCount} expressions</h3>
               <li>
                 <button className="btn-go-search">
-                  <a href="/">
+                  <Link to={ROUTES.SEARCH}>
                     Saved Expressions <ArrowRightOutlined />
-                  </a>
+                  </Link>
                 </button>
               </li>
             </li>
@@ -108,9 +108,9 @@ export const PersonalTopCard = (): JSX.Element => {
               <h3>Search for {wordcount} words</h3>
               <li>
                 <button className="btn-go-search">
-                  <a href="/">
+                  <Link to={ROUTES.SEARCH}>
                     Save Words <ArrowRightOutlined />
-                  </a>
+                  </Link>
                 </button>
               </li>
             </li>
@@ -122,9 +122,9 @@ export const PersonalTopCard = (): JSX.Element => {
               <h3>Wrote {diaryCount} diaries</h3>
               <li>
                 <button className="btn-go-search">
-                  <a href="/diary">
-                    Saved Expressions <ArrowRightOutlined />
-                  </a>
+                  <Link to={ROUTES.DIARY.ROOT}>
+                    Write Diary <ArrowRightOutlined />
+                  </Link>
                 </button>
               </li>
             </li>
