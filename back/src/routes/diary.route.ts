@@ -104,26 +104,41 @@ diaryRouter.post(
 const responseFilter = (description: string, data) => {
     const errorList = data["response"]["errors"];
     errorList.forEach((error) => {
-        let start = description.lastIndexOf(".", error.offset);
+        let start1 = description.lastIndexOf(".", error.offset);
+
+        let start2 = description.lastIndexOf("?", error.offset);
+
+        let start3 = description.lastIndexOf("!", error.offset);
+
+        let start = Math.max(start1, start2, start3);
         if (start === -1) {
-            start = description.lastIndexOf("?", error.offset);
+            start = 0;
         }
-        if (start === -1) {
-            start = description.lastIndexOf("!", error.offset);
+
+        let end1 = description.indexOf(".", error.offset);
+        if (end1 === -1) {
+            end1 = 999;
         }
-        let end = description.indexOf(".", error.offset);
-        if (end === -1) {
-            end = description.indexOf("?", error.offset);
+
+        let end2 = description.indexOf("?", error.offset);
+        if (end2 === -1) {
+            end2 = 999;
         }
-        if (end === -1) {
-            end = description.indexOf("!", error.offset);
+
+        let end3 = description.indexOf("!", error.offset);
+        if (end3 === -1) {
+            end3 = 999;
         }
-        if (start === -1) {
-            error["before"] = description.slice(start + 1, end + 1);
+
+        const end = Math.min(end1, end2, end3);
+
+        if (start === 0) {
+            error["before"] = description.slice(start, end + 1);
         } else {
             error["before"] = description.slice(start + 2, end + 1);
         }
-        error["index"] = error.offset - start - 1;
+
+        error["index"] = error.offset - start;
 
         delete error.offset;
         delete error.id;
@@ -149,7 +164,7 @@ diaryRouter.post(
 );
 
 diaryRouter.post(
-    "/:id/grammerCheck",
+    "/:id/grammers",
     loginRequired,
     async (req: Request, res: Response, next: NextFunction) => {
         try {
