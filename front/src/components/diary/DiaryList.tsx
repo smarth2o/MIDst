@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { DiaryValueType } from "../../pages/DiaryPage";
 
 import { diaryState, DiaryTypes } from "../../stores/DiaryAtom";
@@ -11,6 +11,7 @@ import { useRecoilState } from "recoil";
 const DiaryList = (): JSX.Element => {
   const [diarys, setDiarys] = useRecoilState(diaryState);
   const diaryArray = [];
+  const { detail } = useParams();
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const DiaryList = (): JSX.Element => {
       }
     };
     getDiaryData();
-  }, []);
+  }, [detail]);
 
   let n = diarys[0]?.id;
 

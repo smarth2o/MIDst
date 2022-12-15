@@ -6,7 +6,7 @@ export const PersonalModalStyled = styled.div`
   left: 17vw;
   top: 15vh;
   width: 200px;
-  height: 140px;
+  height: 100px;
   background: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;

@@ -74,12 +74,8 @@ const CommunityList = (): JSX.Element => {
                 const { id, title, createdAt, author, description, _count } =
                   communityItem;
                 return (
-                  <div>
-                    <Link
-                      key={id}
-                      to={`/community/${id}`}
-                      className="community-link"
-                    >
+                  <div key={id}>
+                    <Link to={`/community/${id}`} className="community-link">
                       <CommunityItem
                         id={id}
                         author={author}

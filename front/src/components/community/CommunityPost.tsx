@@ -36,12 +36,13 @@ const CommunityPost = ({
 
   const onCancel = async () => {
     if (window.confirm("삭제 하시겠습니까?")) {
-      const onDelete = await Api.delete(`posts/${id}`);
-      if (onDelete.status !== 200) {
-        console.log(onDelete);
-      } else {
-        console.log(onDelete);
+      try {
+        const onDelete = await Api.delete(`posts/${communityDetail}`);
+        console.log(communityDetail);
         window.location.replace("/community");
+      } catch {
+        console.log(communityDetail);
+        console.log("삭제실패");
       }
     }
   };
