@@ -12,6 +12,7 @@ import { CloudEmp, CloudFull } from "../../assets/index";
 import * as Api from "../../api";
 import { BackBtnStyled } from "../../styles/common/CommonBtn";
 import { DiaryDetailBtn } from "../../styles/diary/DiaryDetailCard";
+import { useNavigate } from "react-router";
 
 export interface PBCardItemType {
   userId: number;
@@ -28,6 +29,7 @@ const PersonalBottomCard = (): JSX.Element => {
   const [id, setId] = useState("");
 
   const tabList = ["Expressions", "Words"];
+  const navigator = useNavigate();
 
   const tabClickHandler = (index: any) => {
     setActiveIndex(index);
@@ -40,6 +42,7 @@ const PersonalBottomCard = (): JSX.Element => {
         console.log(response);
       } else {
         setItems(response.data);
+        console.log(items);
       }
     };
     const getId = async () => {
@@ -65,7 +68,7 @@ const PersonalBottomCard = (): JSX.Element => {
           const res = await Api.delete(`main/deleteSearch/${props}`);
           console.log(res);
           console.log("삭제 성공");
-          window.location.replace(`/personal/`);
+          navigator(`/personal`);
         } catch (err) {
           console.log("삭제 실패");
         }

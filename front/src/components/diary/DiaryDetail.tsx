@@ -17,7 +17,6 @@ const DiaryDetail = (): JSX.Element => {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const { detail } = useParams();
-  const currentIndex = Number(detail ?? 1);
 
   useEffect(() => {
     const getDiaryData = async () => {
@@ -26,6 +25,7 @@ const DiaryDetail = (): JSX.Element => {
         console.log(response);
       } else {
         setDiarys(response.data.data);
+        console.log(diarys);
       }
     };
     getDiaryData();
@@ -40,7 +40,6 @@ const DiaryDetail = (): JSX.Element => {
         setTitle(response.data.data.title);
         setId(response.data.data.id);
         setDescription(response.data.data.description);
-        console.log("title", title);
       }
     };
     getDiaryDetail();

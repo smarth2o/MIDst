@@ -24,8 +24,10 @@ const CommunityDetail = (): JSX.Element => {
   const [reply, setReply] = useState(0);
   const [title, setTitle] = useState("");
 
+  const navigator = useNavigate();
+
   const backtohome = () => {
-    window.location.replace(`/community`);
+    navigator(`/community`);
   };
 
   useEffect(() => {
@@ -34,7 +36,6 @@ const CommunityDetail = (): JSX.Element => {
       if (currentCommunityGet.status !== 200) {
         console.log(currentCommunityGet);
       } else {
-        setCommunityItems(currentCommunityGet.data.data);
         setId(currentCommunityGet.data.data.id);
         setLike(currentCommunityGet.data.data._count.like);
         setAuthor(currentCommunityGet.data.data.author);
@@ -67,7 +68,6 @@ const CommunityDetail = (): JSX.Element => {
               reply={reply}
               like={like}
               communityItems={communityItems}
-              setCommunityItems={setCommunityItems}
             />
           </CommunityPostBoxStyled>
           <CommunityCommentStyled>

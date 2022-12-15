@@ -39,7 +39,7 @@ const CommunityPost = ({
       try {
         const onDelete = await Api.delete(`posts/${communityDetail}`);
         console.log(communityDetail);
-        window.location.replace("/community");
+        navigate("/community");
       } catch {
         console.log(communityDetail);
         console.log("삭제실패");

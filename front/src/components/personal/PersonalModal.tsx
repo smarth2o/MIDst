@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../enum/routes";
 import { PersonalModalStyled } from "../../styles/personal/PersonalModal";
 import * as Api from "../../api";
@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 
 const PersonalModal = (): JSX.Element => {
   const [userId, setUserId] = useState("");
+
+  const navigator = useNavigate();
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -29,7 +31,7 @@ const PersonalModal = (): JSX.Element => {
         console.log("탈퇴실패");
       } else {
         console.log("탈퇴완료");
-        window.location.replace("/");
+        navigator("/");
       }
     }
   };

@@ -61,7 +61,7 @@ const DiaryDetailCard = ({
         console.log(response.status);
       } else {
         console.log(response.data.data);
-        window.location.replace(`/diary/${detail}`);
+        navigator(`/diary/${detail}`);
       }
     };
     DiaryDetailPost();

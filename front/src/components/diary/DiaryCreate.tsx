@@ -6,7 +6,7 @@ import {
 import * as Api from "../../api";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../enum/routes";
 
@@ -15,6 +15,7 @@ const DiaryCreate = (): JSX.Element => {
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
   const date = dayjs();
+  const navigator = useNavigate();
 
   const onSubmitDiary = async () => {
     try {
@@ -23,9 +24,8 @@ const DiaryCreate = (): JSX.Element => {
         title: title,
         description: description,
       });
-      console.log(diaryPost.data.data);
       alert("제출이 완료되었습니다.");
-      window.location.replace(`/diary/`);
+      navigator(`/diary`);
     } catch {
       console.log("제출 실패");
     }
