@@ -9,20 +9,21 @@ import {
 import { ROUTES } from "../enum/routes";
 import { Outlet } from "react-router-dom";
 import { LogoIcon } from "../assets/index";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Api from "../api";
+import { userState } from "../stores/UserAtom";
+import { useRecoilState } from "recoil";
 
 function Header() {
-  const [isLogin, setIsLogin] = useState<boolean>();
   const navigate = useNavigate();
+  const [userLogin, setUserLogin] = useRecoilState(userState);
 
   const handleSignout = async () => {
     try {
       window.localStorage.removeItem("accessToken");
       window.localStorage.removeItem("refreshToken");
-      // console.log("로그아웃 성공");
-      // window.location.reload();
+      setUserLogin(false);
       navigate("/");
     } catch (err) {
       // console.log("로그아웃 실패");
@@ -34,17 +35,17 @@ function Header() {
     const checkUser = async () => {
       try {
         await Api.get("user/currentUser");
-        setIsLogin(true);
+        setUserLogin(true);
         // console.log("로그인 된 상태");
       } catch (error) {
-        setIsLogin(false);
+        setUserLogin(false);
         // console.log("로그인 안된 상태");
       }
     };
     if (localStorage.getItem("accessToken")) {
       checkUser();
     }
-  }, []);
+  }, [setUserLogin]);
 
   const accessLink = () => {
     alert(`로그인 후 접속가능합니다.`);
@@ -66,7 +67,7 @@ function Header() {
         <Navbar>
           <NavLink to={ROUTES.SEARCH}>Search</NavLink>
           <NavLink to={ROUTES.COMMUNITY.ROOT}>Share</NavLink>
-          {isLogin ? (
+          {userLogin ? (
             <>
               <NavLink to={ROUTES.DIARY.ROOT}>Diary</NavLink>
               <NavLink to={ROUTES.PERSONAL}>My</NavLink>
@@ -82,7 +83,7 @@ function Header() {
             </>
           )}
 
-          {isLogin ? (
+          {userLogin ? (
             <SignOut to={ROUTES.MAIN} onClick={handleSignout}>
               Sign Out
             </SignOut>

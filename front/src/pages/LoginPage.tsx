@@ -14,6 +14,8 @@ import { ROUTES } from "../enum/routes";
 import * as Api from "../api";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { userState } from "../stores/UserAtom";
+import { useSetRecoilState } from "recoil";
 
 interface LoginData {
   email: string;
@@ -22,6 +24,7 @@ interface LoginData {
 
 const LoginPage = (): JSX.Element => {
   const navigate = useNavigate();
+  const setUserLogin = useSetRecoilState(userState);
 
   const [form, setForm] = useState<LoginData>({
     email: "",
@@ -43,6 +46,7 @@ const LoginPage = (): JSX.Element => {
       } else {
         window.localStorage.setItem("accessToken", res.data.accessToken);
         window.localStorage.setItem("refreshToken", res.data.refreshToken);
+        setUserLogin(true);
         navigate("/");
       }
     } catch (err) {

@@ -10,11 +10,14 @@ import {
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Api from "../api";
+import { userState } from "../stores/UserAtom";
+import { useSetRecoilState } from "recoil";
 
 const WithdrawalPage = (): JSX.Element => {
   const navigate = useNavigate();
   const [changed, setChanged] = useState<boolean>(false);
   const [id, setId] = useState();
+  const setUserLogin = useSetRecoilState(userState);
 
   useEffect(() => {
     const getCurrentUser = async () => {
@@ -36,6 +39,7 @@ const WithdrawalPage = (): JSX.Element => {
       // console.log("회원탈퇴 성공");
       window.localStorage.removeItem("accessToken");
       window.localStorage.removeItem("refreshToken");
+      setUserLogin(false);
       setChanged(true);
     } catch (err) {
       // console.log("회원탈퇴 실패");

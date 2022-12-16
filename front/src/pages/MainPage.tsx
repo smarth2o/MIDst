@@ -16,12 +16,14 @@ import SearchBar from "../components/search/SearchBar";
 import { LogoIcon } from "../assets/index";
 import { useNavigate } from "react-router";
 import { ChatWrapper, ChatBox } from "../styles/Landing.styled";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import * as Api from "../api";
+import { userState } from "../stores/UserAtom";
+import { useRecoilState } from "recoil";
 
 const MainPage = (): JSX.Element => {
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState<boolean>();
+  const [userLogin, setUserLogin] = useRecoilState(userState);
 
   useEffect(() => {
     const boxList = document.querySelectorAll(
@@ -49,8 +51,9 @@ const MainPage = (): JSX.Element => {
     try {
       window.localStorage.removeItem("accessToken");
       window.localStorage.removeItem("refreshToken");
+      setUserLogin(false);
       // console.log("로그아웃 성공");
-      window.location.reload();
+      navigate("/");
     } catch (err) {
       // console.log("로그아웃 실패");
       console.error(err);
@@ -61,17 +64,17 @@ const MainPage = (): JSX.Element => {
     const checkUser = async () => {
       try {
         await Api.get("user/currentUser");
-        setIsLogin(true);
+        setUserLogin(true);
         // console.log("로그인 된 상태");
       } catch (error) {
-        setIsLogin(false);
+        setUserLogin(false);
         // console.log("로그인 안된 상태");
       }
     };
     if (localStorage.getItem("accessToken")) {
       checkUser();
     }
-  }, []);
+  }, [setUserLogin]);
 
   return (
     <>
@@ -87,7 +90,7 @@ const MainPage = (): JSX.Element => {
           </ul>
         </Logo>
         <Navbar>
-          {isLogin ? (
+          {userLogin ? (
             <SignOut to={ROUTES.MAIN} onClick={handleSignout}>
               Sign Out
             </SignOut>
@@ -97,7 +100,7 @@ const MainPage = (): JSX.Element => {
         </Navbar>
       </TransparentWrapper>
       <MainLayout>
-        {!isLogin && (
+        {!userLogin && (
           <ChatWrapper>
             <ChatBox className="left-chat-box">Learn English?</ChatBox>
             <ChatBox className="right-chat-box">
@@ -124,10 +127,13 @@ const MainPage = (): JSX.Element => {
             <Suggest onClick={() => navigate("/community")}>
               # Share your experience
             </Suggest>
-            <Suggest disabled={!isLogin} onClick={() => navigate("/diary")}>
+            <Suggest disabled={!userLogin} onClick={() => navigate("/diary")}>
               # Write a diary
             </Suggest>
-            <Suggest disabled={!isLogin} onClick={() => navigate("/personal")}>
+            <Suggest
+              disabled={!userLogin}
+              onClick={() => navigate("/personal")}
+            >
               # Check out your record
             </Suggest>
           </Suggestions>
