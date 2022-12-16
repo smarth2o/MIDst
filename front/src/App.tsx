@@ -21,6 +21,7 @@ import WithdrawalPage from "./pages/WithdrawalPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import CommunityDetail from "./components/community/CommunityDetail";
 // import Background from "./styles/common/BrainBackground.styled";
+import ScrollTop from "./components/ScrollTop";
 
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
@@ -29,6 +30,7 @@ const App = (): JSX.Element => {
   return (
     <>
       <Router>
+        <ScrollTop />
         <GlobalStyle />
         <Routes>
           <Route path={ROUTES.MAIN} element={<MainPage />} />

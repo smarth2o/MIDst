@@ -38,10 +38,11 @@ const ChangePasswordPage = (): JSX.Element => {
     try {
       await Api.put("user/updateuserPassword", password);
       // console.log(res.data);
-      console.log("비밀번호 변경 성공");
+      // console.log("비밀번호 변경 성공");
       setChanged(true);
     } catch (err) {
-      console.log("비밀번호 변경 실패");
+      // console.log("비밀번호 변경 실패");
+      alert("다시 시도해 주세요.");
       console.error(err);
     }
   };

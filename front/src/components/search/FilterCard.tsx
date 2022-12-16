@@ -13,9 +13,8 @@ import { ShowState } from "../../stores/FilterAtom";
 import { useRecoilState } from "recoil";
 
 interface ListProps {
-  label?: string;
   value: string;
-  id?: string;
+  id: string;
   children?: React.ReactNode;
 }
 
@@ -24,7 +23,7 @@ const FilterCard = (): JSX.Element => {
   // const [showEmotion, setShowEmotion] = useState(false);
 
   const List = ({ id, value }: ListProps): JSX.Element => {
-    const [checked, setChecked] = useState<boolean>(false);
+    const [checked, setChecked] = useState<boolean>(true);
 
     const handleCheck = () => {
       setChecked(!checked);
@@ -47,13 +46,13 @@ const FilterCard = (): JSX.Element => {
     );
   };
 
-  const TitleList = ({ label, value, children }: ListProps): JSX.Element => {
+  const TitleList = ({ id, value, children }: ListProps): JSX.Element => {
     const [checked, setChecked] = useState<boolean>(true);
 
     const handleCheck = () => {
       setChecked(!checked);
       const checkboxes: NodeListOf<HTMLInputElement> =
-        document.querySelectorAll("#" + label);
+        document.querySelectorAll("#" + id);
       checkboxes.forEach((checkbox) => {
         checkbox.checked = !checked;
       });
@@ -64,6 +63,7 @@ const FilterCard = (): JSX.Element => {
         <label>
           <input
             type="checkbox"
+            id={id}
             name="title"
             value={value}
             onChange={handleCheck}
@@ -102,18 +102,18 @@ const FilterCard = (): JSX.Element => {
         </FilterTitleWrapper>
         {show && (
           <FilterContentWrapper>
-            <TitleList label="Friends" value="Friends">
+            <TitleList id="Friends" value="Friends">
               {/* <Button>+</Button> */}
               <FilterContentWrapper>
                 <List id="Friends" value="Rachel"></List>
                 <List id="Friends" value="Ross"></List>
                 <List id="Friends" value="Monica"></List>
                 <List id="Friends" value="Chandler"></List>
-                <List id="Friends" value="Pheobe"></List>
+                <List id="Friends" value="Phoebe"></List>
                 <List id="Friends" value="Joey"></List>
               </FilterContentWrapper>
             </TitleList>
-            <TitleList label="Harry" value="Harry Potter">
+            <TitleList id="Harry" value="Harry Potter">
               <FilterContentWrapper>
                 <List id="Harry" value="Harry Potter"></List>
                 <List id="Harry" value="Hermione Granger"></List>

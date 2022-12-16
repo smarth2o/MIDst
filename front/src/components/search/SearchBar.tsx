@@ -24,25 +24,35 @@ const SearchBar = (): JSX.Element => {
   };
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    let titleList: any[] = [];
-    let nameList: any[] = [];
+    let friendsList: any[] = [];
+    let harryList: any[] = [];
+    let friends = false;
+    let harry = false;
+    const friendsNames: any[] = [];
+    const harryNames: any[] = [];
 
     const checkboxes: NodeListOf<HTMLInputElement> = document.querySelectorAll(
       "input[type=checkbox]"
     );
     checkboxes.forEach((checkbox) => {
       if (checkbox.checked) {
-        if (checkbox.name === "title") {
-          // console.log("title", checkbox.value);
-          titleList.push(checkbox.value);
-        } else {
-          // console.log("name", checkbox.value);
-          nameList.push(checkbox.value);
+        if (checkbox.name === "name" && checkbox.id === "Friends") {
+          friendsList.push(checkbox.value);
+          friendsNames.push(checkbox.value);
+        } else if (checkbox.name === "name" && checkbox.id === "Harry") {
+          harryList.push(checkbox.value);
+          harryNames.push(checkbox.value);
+        } else if (checkbox.name === "title" && checkbox.id === "Friends") {
+          friends = true;
+        } else if (checkbox.name === "title" && checkbox.id === "Harry") {
+          harry = true;
         }
+      } else if (checkbox.name === "name" && checkbox.id === "Friends") {
+        friendsNames.push(checkbox.value);
+      } else if (checkbox.name === "name" && checkbox.id === "Harry") {
+        harryNames.push(checkbox.value);
       }
     });
-    // console.log("title", titleList);
-    // console.log("name", nameList);
 
     try {
       resetResults();
@@ -53,7 +63,6 @@ const SearchBar = (): JSX.Element => {
 
       for (var result of results) {
         result = String(result);
-        // console.log(result);
 
         let id = result.split(")")[0];
         let title = result.split(")")[1];
@@ -66,7 +75,25 @@ const SearchBar = (): JSX.Element => {
         script = String(script).slice(0, String(script).length - 5);
         script = script.trim();
 
-        if (titleList.includes(title) || nameList.includes(name) || !show) {
+        if (
+          !show ||
+          (friendsList.length === 0 &&
+            harryList.length === 0 &&
+            !harry &&
+            !friends) ||
+          (friendsList.length === 6 &&
+            harryList.length === 7 &&
+            harry &&
+            friends) ||
+          (title === "Harry Potter" && !harry && harryList.includes(name)) ||
+          (title === "Friends" && !friends && friendsList.includes(name)) ||
+          (title === "Harry Potter" &&
+            harry &&
+            (harryList.includes(name) || !harryNames.includes(name))) ||
+          (title === "Friends" &&
+            friends &&
+            (friendsList.includes(name) || !friendsNames.includes(name)))
+        ) {
           setResults((prev) => [
             ...prev,
             {
