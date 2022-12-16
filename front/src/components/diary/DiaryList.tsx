@@ -10,35 +10,29 @@ import { useRecoilState } from "recoil";
 
 const DiaryList = (): JSX.Element => {
   const [diarys, setDiarys] = useRecoilState(diaryState);
-  const diaryArray = [];
   const { detail } = useParams();
-  const [count, setCount] = useState(0);
+
+  console.log("diary", diarys);
 
   useEffect(() => {
     const getDiaryData = async () => {
       const response = await Api.get(`diaries`);
+      console.log(response);
       if (response.status !== 200) {
       } else {
-        setDiarys(response.data.data);
-        setCount(response.data.count);
+        delete response.data.data.count;
+        const diaries = Object.values(response.data.data);
+        console.log(diaries);
+        setDiarys(diaries as DiaryTypes[]);
       }
     };
     getDiaryData();
-  }, [detail]);
-
-  let n = diarys[0]?.id;
-
-  const iter = diarys;
-
-  for (let i = 0; i < Object.keys(diarys).length - 1; i++) {
-    diaryArray[n] = iter[i];
-    n++;
-  }
+  }, [detail, setDiarys]);
 
   return (
     <>
       <DiaryListAlign>
-        {diaryArray.map((diary: DiaryTypes) => {
+        {diarys.map((diary: DiaryTypes) => {
           const { id, date, title, description } = diary;
           return (
             <Link key={id} to={`/diary/${id}`}>

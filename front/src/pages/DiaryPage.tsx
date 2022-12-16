@@ -33,11 +33,13 @@ const DiaryPage = (): JSX.Element => {
       if (response.status !== 200) {
         console.log(response);
       } else {
-        setDiarys(response.data.data);
+        delete response.data.data.count;
+        const diaries = Object.values(response.data.data);
+        setDiarys(diaries as DiaryTypes[]);
       }
     };
     getDiaryData();
-  }, []);
+  }, [setDiarys]);
 
   return (
     <AllBackGroundStyled>

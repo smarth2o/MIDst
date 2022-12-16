@@ -12,12 +12,14 @@ import { Searchword, SearchResults } from "../../stores/SearchAtom";
 import * as Api from "../../api";
 import { useNavigate } from "react-router";
 
+// 개별 결과
 const SearchResultCard = ({ name, script }: any): JSX.Element => {
   const navigate = useNavigate();
   const [cloud, setCloud] = useState(false);
   const [translate, setTranslate] = useState("");
   const searchword = useRecoilValue(Searchword);
 
+  // 저장된 표현은 표시, 저장 삭제 기능
   const handleSaveSearch = async () => {
     let searchId = "";
     try {
@@ -91,16 +93,18 @@ const SearchResultCard = ({ name, script }: any): JSX.Element => {
   );
 };
 
+// 미드별 결과 출력
 const SearchResultsList = ({ title, sort }: any): JSX.Element => {
   const viewResult = useRecoilValue(SearchResults);
+  // 관련 결과 필터링
   const titleRelated = viewResult.filter((result) => result.title === title);
-
-  const isNotRelated: boolean =
+  // 관련 결과가 없을 경우
+  const isEmpty: boolean =
     Array.isArray(titleRelated) && titleRelated.length === 0;
 
   return (
     <>
-      {!isNotRelated && (
+      {!isEmpty && (
         <>
           <p className="title">{title}</p>
           {sort
@@ -126,6 +130,7 @@ const SearchResultsList = ({ title, sort }: any): JSX.Element => {
   );
 };
 
+// 검색 결과 박스
 const SearchResultsCard = (): JSX.Element => {
   const searchword = useRecoilValue(Searchword);
   const [sortDesc, setSortDesc] = useState<boolean>(true);

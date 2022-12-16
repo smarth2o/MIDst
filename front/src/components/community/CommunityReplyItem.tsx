@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
-import { ReplyType } from "../../stores/ReplyAtom";
+import { useRecoilState } from "recoil";
+import { ReplyType, replyState } from "../../stores/ReplyAtom";
 import { CommunityCreateBtnAlignStyled } from "../../styles/community/CommunityCreate";
 import { ReplyLiStyled } from "../../styles/community/CommunityReplyItem";
 import * as Api from "../../api";
@@ -19,6 +20,7 @@ const CommunityReplyItem = ({
   const replyCreatedAt = dayjs(createdAt);
   const [currentUser, setCurrentUser] = useState("");
   const { communityDetail } = useParams();
+  const [replys, setReplys] = useRecoilState(replyState);
 
   const navigator = useNavigate();
 
@@ -27,7 +29,9 @@ const CommunityReplyItem = ({
     if (response.status !== 200) {
       console.log(response);
     } else {
-      navigator(`/community/${communityDetail}`);
+      const response = await Api.get(`replies/${communityDetail}/all`);
+      setReplys(response.data.data);
+      // navigator(`/community/${communityDetail}`);
     }
   };
 

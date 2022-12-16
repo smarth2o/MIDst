@@ -95,9 +95,9 @@ const RegisterPage = (): JSX.Element => {
     } else if (!form.email) {
       alert("이메일 주소를 입력해주세요.");
     } else if (!inputCode) {
-      alert("인증코드를 입력해주세요.");
+      alert("인증번호를 입력해주세요.");
     } else if (!verifi) {
-      alert("인증코드를 확인해주세요.");
+      alert("인증번호를 확인해주세요.");
     } else if (!form.password) {
       alert("비밀번호를 입력해주세요.");
     } else if (!form.confirmpassword) {

@@ -35,7 +35,7 @@ const CommunityCreate = (): JSX.Element => {
       if (currentUser.status !== 200) {
         console.log(currentUser);
       } else {
-        console.log(currentUser.data[0]);
+        // console.log(currentUser.data[0]);
         setNowAuthorId(currentUser.data[0].userId);
         setCurrentName(currentUser.data[0].name);
       }

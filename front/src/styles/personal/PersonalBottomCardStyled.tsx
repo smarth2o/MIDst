@@ -77,6 +77,9 @@ export const PBCardItemStyled = styled.div`
       border: none;
     }
   }
+  span {
+    cursor: pointer;
+  }
 `;
 export const DGCheckCardStyled = styled.div`
   margin: 5% 2%;

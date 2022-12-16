@@ -19,7 +19,7 @@ const CommunityReply = (): JSX.Element => {
     };
 
     sendRequest();
-  }, []);
+  }, [communityDetail, setReplys]);
 
   return (
     <>

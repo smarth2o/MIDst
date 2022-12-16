@@ -39,7 +39,6 @@ const CommunityPost = ({
     if (window.confirm("삭제 하시겠습니까?")) {
       try {
         const onDelete = await Api.delete(`posts/${communityDetail}`);
-
         navigate("/community");
       } catch {}
     }

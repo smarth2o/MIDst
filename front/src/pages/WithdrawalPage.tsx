@@ -54,9 +54,7 @@ const WithdrawalPage = (): JSX.Element => {
             <>
               <Title>Your account has been closed.</Title>
               <Text></Text>
-              <Button onClick={() => navigate("/login")}>
-                Go to Main Page
-              </Button>
+              <Button onClick={() => navigate("/")}>Go to Main Page</Button>
             </>
           ) : (
             <>

@@ -4,15 +4,18 @@ import {
   DiaryForm,
 } from "../../styles/diary/DiaryCreate";
 import * as Api from "../../api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import dayjs from "dayjs";
 import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../enum/routes";
+import { useSetRecoilState } from "recoil";
+import { diaryState, DiaryTypes } from "../../stores/DiaryAtom";
 
 type onSubmitDiary = (e: React.MouseEvent) => void;
 
 const DiaryCreate = (): JSX.Element => {
+  const setDiarys = useSetRecoilState(diaryState);
   const { detail } = useParams();
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
@@ -22,16 +25,21 @@ const DiaryCreate = (): JSX.Element => {
   const onSubmitDiary: onSubmitDiary = async (e) => {
     e.preventDefault();
     try {
-      const response = await Api.post(`diaries`, {
+      const res = await Api.post(`diaries`, {
         date: date.format("YYYY-MM-DD"),
         title: title,
         description: description,
       });
+      console.log(res);
+
+      setDiarys((prev) => prev.concat(res.data.data));
+
       if (window.confirm("제출이 완료되었습니다.")) {
         navigator(ROUTES.DIARY.ROOT);
       }
-    } catch {
+    } catch (err) {
       console.log("제출 실패");
+      console.log(err);
     }
   };
 

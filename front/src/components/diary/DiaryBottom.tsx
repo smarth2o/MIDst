@@ -1,6 +1,6 @@
 import { ArrowRightOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import {
   DBCEmotionBtn,
   DiaryBottomCard,
@@ -13,11 +13,16 @@ import * as Api from "../../api";
 type ClickHandler = (props: boolean) => (e: React.MouseEvent) => void;
 
 const DiaryBottom = (): JSX.Element => {
+  const location = useLocation();
   const [isToggle, isSetToggle] = useState(false);
   const [modal, setModal] = useState(false);
   const [emotion, setEmotion] = useState("");
   const { detail } = useParams();
   const [description, setDescription] = useState();
+
+  useEffect(() => {
+    isSetToggle(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const getDetailPost = async () => {
@@ -43,6 +48,7 @@ const DiaryBottom = (): JSX.Element => {
       const emotionsPost = await Api.post(`diaries/${detail}/emotions`, {
         description: description,
       });
+      setEmotion(emotionsPost.data.data.emotion);
     } catch {
       console.log("감정연결실패");
     }

@@ -4,7 +4,7 @@ import {
   InfoCircleOutlined,
 } from "@ant-design/icons";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useLocation } from "react-router";
 import {
   DBCGrammerBtn,
   DiaryBottomCard,
@@ -21,12 +21,17 @@ import { CloudEmp, CloudFull } from "../../assets";
 type ClickHandler = (props: boolean) => (e: React.MouseEvent) => void;
 
 const DiaryGrammerCheckCard = (): JSX.Element => {
+  const location = useLocation();
   const [isToggle, isSetToggle] = useState(false);
   const [before, setBefore] = useState([]);
   const [grammerBetter, setGrammerBetter] = useState("");
   const { detail } = useParams();
   const [description, setDescription] = useState();
   const [cloud, setCloud] = useState(false);
+
+  useEffect(() => {
+    isSetToggle(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const getDetailPost = async () => {
@@ -74,7 +79,7 @@ const DiaryGrammerCheckCard = (): JSX.Element => {
       <>
         <DiaryBottomOpenCard>
           <div className="DBOC-top">
-            <h3>Emotion Recognition</h3>
+            <h3>Grammar Check !</h3>
 
             {/* <InfoCircleOutlined
               onClick={() => {
