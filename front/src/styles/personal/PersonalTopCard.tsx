@@ -8,7 +8,7 @@ export const PTCardAlignStyled = styled.div`
   background-color: white;
   width: 100%;
   min-width: 300px;
-  height: 280px;
+  height: 290px;
   padding: 20px;
   margin: 30px;
 

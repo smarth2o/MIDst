@@ -57,7 +57,7 @@ const DiaryGrammerCheckCard = (): JSX.Element => {
         description: description,
       });
       setBefore(res.data);
-      console.log(res.data[0]);
+      console.log(res.data);
     } catch {
       console.log("문법연결실패");
     }
@@ -92,7 +92,6 @@ const DiaryGrammerCheckCard = (): JSX.Element => {
             {isToggle === true ? (
               <>
                 {before.map((b: any) => {
-                  console.log(b);
                   return (
                     <DGCheckCardStyled>
                       <ul className="grammer-result">
@@ -103,7 +102,13 @@ const DiaryGrammerCheckCard = (): JSX.Element => {
                         <li className="gt">
                           <ArrowRightOutlined />
                         </li>
-                        <li>{b.better}</li>
+                        {b.better.map((res:any)=>{
+                          return(
+<li className="b-better">{res}</li>
+                          )
+                                                  
+                        })}
+  
                       </ul>
                       <p>{b.description.en}</p>
                     </DGCheckCardStyled>

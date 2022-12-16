@@ -12,17 +12,15 @@ const DiaryList = (): JSX.Element => {
   const [diarys, setDiarys] = useRecoilState(diaryState);
   const { detail } = useParams();
 
-  console.log("diary", diarys);
-
   useEffect(() => {
     const getDiaryData = async () => {
       const response = await Api.get(`diaries`);
-      console.log(diarys.length);
+ 
       if (response.status !== 200) {
       } else {
         delete response.data.data.count;
         const diaries = Object.values(response.data.data);
-        console.log(diaries);
+  
         setDiarys(diaries as DiaryTypes[]);
       }
     };

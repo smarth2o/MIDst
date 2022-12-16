@@ -86,6 +86,9 @@ export const DGCheckCardStyled = styled.div`
   p {
     color: red;
   }
+  .b-better{
+    padding: auto 10px auto auto;
+  }
   .grammer-result {
     box-sizing: border-box;
     background: #ffffff;
