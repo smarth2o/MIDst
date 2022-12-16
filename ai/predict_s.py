@@ -37,28 +37,13 @@ def split_feeling(feeling):
     sent_df["Utterance"]=sent_df["Utterance"].str.lower()
     return sent_df
 
-def inference(model, test_loader, device):
-    model.to(device)
-    model.eval()
-    
-    test_predict = []
-    for input_ids, token_type_ids, attention_mask in test_loader:
-        input_id = input_ids.to(device)
-        mask = attention_mask.to(device)
-        y_pred = model(input_id, mask)
-        print(y_pred)
-        test_predict += y_pred.logits.argmax(1).detach().cpu().numpy().tolist()
-    print('Done.')
-    return test_predict
 def predict_s(feeling):
     predicted_label_list = []
     df=split_feeling(feeling["feeling"])
-    print("df",df)
   
     for text in df['Utterance']:
         # predict
         preds_list = text_classifier(text)[0]
-        print("preds_list",preds_list)
         predicted_label_list.append(preds_list["label"].split("_")[1]) # label
     result_pred= [feeling_dict.get(i) for i in predicted_label_list]
 

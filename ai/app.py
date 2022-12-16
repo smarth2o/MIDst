@@ -5,14 +5,12 @@ from Cosine_Search import function, df
 app = Flask(__name__)
 @app.route('/dd')
 def index():
-    print(new_model.summary())
-    return "과연"
+    return "접속"
 @app.route('/predict',methods=['POST'])
 def predict():
     if request.method=='POST':
         feeling = request.get_json()
         mode_predited=predict_s(feeling)
-        print(mode_predited)
         return jsonify({
             "emotion": mode_predited 
         })
