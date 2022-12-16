@@ -83,7 +83,7 @@ const DiaryDetailCard = ({
       <>
         <DiaryDetailCardAlignStyled>
           <DiaryDetailText>
-            <p>{diaryDate}</p>
+            <span>{diaryDate}</span>
             <h2>{diaryTitle}</h2>
             <p>{diaryDescription}</p>
           </DiaryDetailText>

@@ -20,6 +20,7 @@ export const DiaryDetailAlignStyled = styled.div`
   display: flex;
   flex-direction: row-reverse;
   padding-right: 10px;
+  padding-top: 50px;
   a {
     background-color: none;
     text-decoration: none;

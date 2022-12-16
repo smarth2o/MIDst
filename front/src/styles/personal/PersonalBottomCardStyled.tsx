@@ -100,7 +100,7 @@ export const DGCheckCardStyled = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 20px;
+    font-size: 18px;
   }
   .gt {
     font-size: 30px;

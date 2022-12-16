@@ -6,6 +6,7 @@ export const DiaryCreateAlign = styled.div`
   box-shadow: 3px 3px 3px 3px rgba(128, 128, 128, 0.252);
   background-color: white;
   padding: 20px;
+  padding-top: 30px;
   margin: 30px;
 `;
 
@@ -19,8 +20,9 @@ export const DiaryForm = styled.form`
     width: 90%;
     height: 20px;
     border-radius: 5px;
-    font-size: 25px;
+    font-size: 20px;
     border: solid rgba(128, 128, 128, 0.6) 1px;
+    outline: none;
   }
   textarea {
     padding: 2%;
@@ -28,6 +30,8 @@ export const DiaryForm = styled.form`
     height: 380px;
     border-radius: 5px;
     border: solid rgba(128, 128, 128, 0.6) 1px;
+    outline: none;
+    font-size: 16px;
   }
 `;
 export const DiaryBtn = styled.div`
@@ -36,7 +40,7 @@ export const DiaryBtn = styled.div`
     border-radius: 20px;
     border: none;
     background-color: #dfe1e4;
-    margin: 10px;
+    margin-top: 10px;
     color: gray;
   }
 `;
