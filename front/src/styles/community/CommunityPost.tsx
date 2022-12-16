@@ -11,6 +11,7 @@ export const CommunityPostAlignStyled = styled.div`
   }
   p {
     margin-top: 80px;
+    text-align: center;
   }
 `;
 

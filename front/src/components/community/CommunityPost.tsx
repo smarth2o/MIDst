@@ -114,7 +114,7 @@ const CommunityPost = ({
           <p>{description}</p>
           {}
           <CommunityCreateBtnAlignStyled>
-            {currentUser === author ? (
+            {currentUser === author && (
               <CommunityPostBtn>
                 <button onClick={onCancel} className="delete">
                   삭제
@@ -123,7 +123,7 @@ const CommunityPost = ({
                   수정
                 </button>
               </CommunityPostBtn>
-            ) : null}
+            )}
           </CommunityCreateBtnAlignStyled>
         </CPContentStyled>
       </CommunityPostAlignStyled>

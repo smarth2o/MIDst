@@ -23,12 +23,14 @@ export const CommunityCreateStyled = styled.div`
     outline: none;
     text-indent: 20px;
     font-size: 16px;
+    text-align: center;
   }
   textarea {
     outline: none;
     padding: 20px 0;
     text-indent: 20px;
     font-size: 16px;
+    text-align: center;
   }
   .community-create-title {
     margin-top: 2%;
