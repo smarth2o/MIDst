@@ -8,7 +8,7 @@ export const FilterWrapper = styled.div`
 `;
 
 export const FilterBox = styled.div`
-  min-width: 200px;
+  min-width: 15rem;
   width: fit-content;
   padding: 0.5em 1em;
   margin-bottom: 1.5em;

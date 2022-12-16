@@ -65,9 +65,9 @@ const RegisterPage = (): JSX.Element => {
     try {
       const res = await Api.post("user/register/email", { email: form.email });
       setAnswer(res.data);
-      alert("입력하신 이메일로 인증코드를 보냈습니다.");
+      alert("입력하신 이메일로 인증번호를 보냈습니다.");
     } catch (err) {
-      alert("다시 입력해주세요.");
+      alert("다시 입력해 주세요.");
       // console.log("이메일 전송 에러");
       console.error(err);
     }
@@ -76,9 +76,9 @@ const RegisterPage = (): JSX.Element => {
   const handleValidCode = () => {
     if (inputCode === String(answer)) {
       setVerifi(true);
-      alert("Correct!");
+      alert("올바른 인증번호입니다. 확인되었습니다.");
     } else {
-      alert("Wrong. Try again.");
+      alert("잘못된 인증번호입니다. 다시 시도해 주세요.");
     }
   };
 
