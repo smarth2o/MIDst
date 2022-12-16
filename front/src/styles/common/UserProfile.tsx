@@ -13,9 +13,7 @@ export const UserProfileStyled = styled.div`
     list-style: none;
   }
   .profile-align {
-    h3 {
-      width: 50px;
-    }
+
     display: flex;
     justify-content: space-between;
     align-items: center;

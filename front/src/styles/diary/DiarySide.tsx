@@ -7,8 +7,8 @@ export const CalendarAlign = styled.div`
   box-shadow: 3px 3px 3px 3px rgba(128, 128, 128, 0.252);
   background-color: white;
   width: 100%;
-  max-width: 30vmin;
-  height: 280px;
+  max-width: 50vmin;
+  height: 300px;
   padding: 20px;
   margin: 30px;
 `;
@@ -20,7 +20,7 @@ export const DiaryListAlign = styled.div`
   box-shadow: 3px 3px 3px 3px rgba(128, 128, 128, 0.252);
   background-color: white;
   width: 100%;
-  max-width: 30vmin;
+  max-width: 50vmin;
   height: 500px;
   padding: 20px;
   margin: 30px;

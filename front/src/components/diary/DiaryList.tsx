@@ -17,7 +17,7 @@ const DiaryList = (): JSX.Element => {
   useEffect(() => {
     const getDiaryData = async () => {
       const response = await Api.get(`diaries`);
-      console.log(response);
+      console.log(diarys.length);
       if (response.status !== 200) {
       } else {
         delete response.data.data.count;

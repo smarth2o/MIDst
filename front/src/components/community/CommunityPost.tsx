@@ -29,7 +29,7 @@ const CommunityPost = ({
   reply,
   like,
 }: CommunityPropsType): JSX.Element => {
-  const postCreatedAt = dayjs(createdAt);
+  const postCreatedAt = dayjs();
   const [isLike, setIsLike] = useState(like);
   const [currentUser, setCurrentUser] = useState("");
   const { communityDetail } = useParams();
@@ -89,7 +89,7 @@ const CommunityPost = ({
             <CPTopInfoAlign>
               <li className="postInfo">
                 <ClockCircleOutlined />
-                {postCreatedAt.format("YYYY-MM-DD H시간전")}
+                {postCreatedAt.diff(createdAt, "h")}시간 전
               </li>
               <li className="postInfo">
                 <HeartOutlined onClick={onClickHeart} />

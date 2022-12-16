@@ -16,7 +16,7 @@ export const DiaryMainStyled = styled.div`
   display: flex;
   width: 50vw;
   flex-direction: column;
-  margin-left: 5vw;
+  /* margin-left: 5vw; */
 `;
 export const DiaryAllAlign = styled.div`
   display: flex;

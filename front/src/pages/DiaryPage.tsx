@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router";
 import { SetterOrUpdater, useRecoilState } from "recoil";
 import DiaryBottom from "../components/diary/DiaryBottom";
@@ -27,15 +27,20 @@ export interface DiaryValueType {
 const DiaryPage = (): JSX.Element => {
   const [diarys, setDiarys] = useRecoilState(diaryState);
 
+  const [check, setCheck] = useState(-1)
+
   useEffect(() => {
     const getDiaryData = async () => {
       const response = await Api.get(`diaries`);
       if (response.status !== 200) {
-        console.log(response);
+
       } else {
         delete response.data.data.count;
         const diaries = Object.values(response.data.data);
         setDiarys(diaries as DiaryTypes[]);
+    
+        setCheck(response.data.data)
+      
       }
     };
     getDiaryData();

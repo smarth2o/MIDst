@@ -4,7 +4,7 @@ const backendPortNumber = "5000";
 const serverUrl =
   "http://" + window.location.hostname + ":" + backendPortNumber + "/";
 //axios.defaults.headers[`Access-Control-Allow-Origin`] = "*";
-// axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true;
 // axios.defaults.headers.get["Content-Type"] = "application/json";
 
 async function get(endpoint: string, params = "") {
