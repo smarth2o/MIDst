@@ -23,6 +23,7 @@ export const DiaryForm = styled.form`
     font-size: 20px;
     border: solid rgba(128, 128, 128, 0.6) 1px;
     outline: none;
+    text-align: center;
   }
   textarea {
     padding: 2%;

@@ -46,18 +46,20 @@ const DiaryPage = (): JSX.Element => {
 
   return (
     <AllBackGroundStyled>
-      <DiaryDetailAlignStyled>
-        <Link to="/diary/create">
-          <CreateDiaryBtn>+</CreateDiaryBtn>
-        </Link>
-      </DiaryDetailAlignStyled>
+      <DiaryDetailAlignStyled />
       <DiaryAllAlign>
         <div className="diary-align-styled">
           <DiaryAlignStyled>
             <div className="diary-content">
               <DiarySide />
               <DiaryMainStyled>
+                <CreateDiaryBtn>
+                  <Link to="/diary/create">
+                    <button>Write</button>
+                  </Link>
+                </CreateDiaryBtn>
                 <Outlet context={{ diarys, setDiarys }} />
+
                 <DiaryBottom />
                 <DiaryGrammerCheckCard />
               </DiaryMainStyled>

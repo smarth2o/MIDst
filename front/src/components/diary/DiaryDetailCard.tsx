@@ -60,7 +60,7 @@ const DiaryDetailCard = ({
 
   const clickDelete = async () => {
     if (window.confirm("삭제하시겠습니까?")) {
-      const response = await Api.delete(`diaries/${detail}`);
+      await Api.delete(`diaries/${detail}`);
     }
     navigator(ROUTES.DIARY.ROOT);
   };

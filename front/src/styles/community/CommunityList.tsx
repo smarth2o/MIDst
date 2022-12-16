@@ -47,7 +47,7 @@ export const CommunityWriteBtnStyled = styled.div`
   display: flex;
   justify-content: space-around;
   button {
-    width: 165px;
+    width: 120px;
     height: 42px;
     padding: 10px 15px;
     gap: 2px;
@@ -57,15 +57,18 @@ export const CommunityWriteBtnStyled = styled.div`
     border: none;
     cursor: pointer;
   }
+  position: absolute;
+  right: 260px;
+  top: 115px;
 `;
 
 export const CommunitySortBtnStyled = styled.div`
   padding-top: 2%;
-  display: grid;
-  grid-template-columns: 150px 150px 50px;
-  align-items: start;
+  // display: grid;
+  // grid-template-columns: 150px 150px 50px;
+  // align-items: start;
   button {
-    margin-left: 0%;
+    margin: 5px;
     width: 121px;
     height: 42px;
     align-items: center;
@@ -105,6 +108,7 @@ export const CommunityAllAlignStyled = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-top: 80px;
 `;
 
 export const CommunityListAlignStyled = styled.div`
