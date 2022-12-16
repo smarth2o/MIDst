@@ -27,7 +27,7 @@ export const DBCEmotionBtn = styled.button`
   width: 116px;
   height: 42px;
 `;
-export const DBCGrammarBtn = styled.button`
+export const DBCGrammerBtn = styled.button`
   background: #7ec9ca;
   border-radius: 6px;
   border: none;

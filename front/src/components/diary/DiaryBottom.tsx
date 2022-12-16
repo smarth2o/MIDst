@@ -36,9 +36,6 @@ const DiaryBottom = (): JSX.Element => {
     e.preventDefault();
     isSetToggle(!props);
     onPostEmotion();
-    // if (isEdit) {
-    // 백엔드로 연결하기
-    // }
   };
 
   const onPostEmotion = async () => {
@@ -69,12 +66,12 @@ const DiaryBottom = (): JSX.Element => {
           <div className="DBOC-top">
             <h3>Emotion Recognition</h3>
 
-            <InfoCircleOutlined
+            {/* <InfoCircleOutlined
               onClick={() => {
                 setModal(!modal);
               }}
-            />
-            {modal === true ? <DiaryEmotionInfoModal /> : null}
+            /> */}
+            {/* {modal === true ? <DiaryEmotionInfoModal /> : null} */}
           </div>
           <div className="DBOC-bottom">
             {isToggle === true ? (
@@ -88,7 +85,6 @@ const DiaryBottom = (): JSX.Element => {
             <p>Close</p> <ArrowRightOutlined />
           </DBCEmotionBtn>
         </DiaryBottomOpenCard>
-        <br></br>
       </>
     );
   }

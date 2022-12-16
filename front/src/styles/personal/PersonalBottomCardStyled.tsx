@@ -78,7 +78,24 @@ export const PBCardItemStyled = styled.div`
     }
   }
 `;
-
+export const DGCheckCardStyled = styled.div`
+  .grammer-result {
+    box-sizing: border-box;
+    background: #ffffff;
+    padding: 20px 60px;
+    border: 1px solid #999999;
+    border-radius: 10px;
+    padding-left: 10px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+  }
+  .gt {
+    font-size: 30px;
+  }
+`;
 export const PBCWordItemStyled = styled.div`
   display: flex;
   justify-content: space-between;

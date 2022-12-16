@@ -76,7 +76,7 @@ const DiaryDetailCard = ({
       }
     };
     diaryDetailGet();
-  }, [detail, isEdit]);
+  }, [detail]);
 
   if (!isEdit) {
     return (

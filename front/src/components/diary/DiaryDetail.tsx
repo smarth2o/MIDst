@@ -22,7 +22,7 @@ const DiaryDetail = (): JSX.Element => {
       }
     };
     getDiaryDetail();
-  }, []);
+  }, [description]);
 
   return (
     <>

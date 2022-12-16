@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Outlet } from "react-router";
 import { SetterOrUpdater, useRecoilState } from "recoil";
 import DiaryBottom from "../components/diary/DiaryBottom";
@@ -17,6 +17,7 @@ import {
   DiaryDetailAlignStyled,
 } from "../styles/diary/DiaryPage";
 import { Link } from "react-router-dom";
+import DiaryGrammerCheckCard from "../components/diary/DiaryGrammarCheckCard";
 
 export interface DiaryValueType {
   diarys: DiaryTypes[];
@@ -55,6 +56,7 @@ const DiaryPage = (): JSX.Element => {
                 <DiaryMainStyled>
                   <Outlet context={{ diarys, setDiarys }} />
                   <DiaryBottom />
+                  <DiaryGrammerCheckCard />
                 </DiaryMainStyled>
               </div>
             </DiaryAlignStyled>
