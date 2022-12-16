@@ -19,6 +19,7 @@ export const ReplyStyled = styled.div`
     border-radius: 10px;
     width: 100%;
     /* margin: 10px; */
+    padding-left: 10px;
     border: none;
     background: #ffffff;
     display: flex;

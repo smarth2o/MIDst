@@ -8,20 +8,30 @@ export const CommunityCreateAlign = styled.div`
 
 export const CommunityCreateStyled = styled.div`
   display: grid;
-  grid-template-rows: 70px 50vh 50px;
+  grid-template-rows: 70px 50vh 10px;
   justify-content: center;
-  background: #fffdfd;
+  background: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   width: 80vw;
-  max-height: 784px;
+  // max-height: 784px;
   height: 100%;
   padding: 30px;
+
   input {
     width: 80vw;
+    outline: none;
+    text-indent: 20px;
+    font-size: 16px;
+  }
+  textarea {
+    outline: none;
+    padding: 20px 0;
+    text-indent: 20px;
+    font-size: 16px;
   }
   .community-create-title {
-    margin-top: 3%;
+    margin-top: 2%;
     height: 40px;
     border-radius: 10px;
     border: 1px solid #999999;

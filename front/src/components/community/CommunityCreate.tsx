@@ -68,12 +68,12 @@ const CommunityCreate = (): JSX.Element => {
               value={communityTitle}
               onChange={(e) => setCommunityTitle(e.target.value)}
             ></input>
-            <input
+            <textarea
               className="community-create-main"
               placeholder="내용을 입력하세요."
               value={communityContent}
               onChange={(e) => setCommunityContent(e.target.value)}
-            ></input>
+            ></textarea>
             <CommunityCreateBtnAlignStyled>
               <button onClick={onCancel}>삭제</button>
               <button type="submit" value="Submit" onClick={onSubmit}>

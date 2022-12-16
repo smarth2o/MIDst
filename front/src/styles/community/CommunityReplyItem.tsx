@@ -18,4 +18,7 @@ export const ReplyLiStyled = styled.div`
       color: gray;
     }
   }
+  p {
+    margin-top: 5px;
+  }
 `;

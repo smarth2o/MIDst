@@ -59,13 +59,13 @@ const CommunityReplyItem = ({
       <>
         <ReplyLiStyled>
           <ul>
-            <li className="reply-user-info">
+            <div className="reply-user-info">
               <li className="userId">{author}</li>
               <li className="createdAt">
                 {replyCreatedAt.format("YYYY-MM-DD H시간전")}
               </li>
-            </li>
-            <li>{communityDescription}</li>
+            </div>
+            <p>{communityDescription}</p>
           </ul>
           <ul>
             {currentUser === author ? (

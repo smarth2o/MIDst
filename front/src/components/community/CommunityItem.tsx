@@ -25,34 +25,30 @@ const CommunityItem = ({
   const nowTime = dayjs();
 
   return (
-    <>
-      <CommunityCardAlignStyled>
-        <div>
-          <UserProfileStyled>
-            <li>
-              <h3>{title}</h3>
-            </li>
-            <li className="profile-align ">
-              <img src={Profile} />
-              <h4>{author}</h4>
-            </li>
-          </UserProfileStyled>
-          <CommunityInfo>
-            <ul>
-              <li>
-                <ClockCircleOutlined /> {nowTime.diff(writingTime, "h")}시간 전
-              </li>
-              <li>
-                <HeartOutlined /> {like}
-              </li>
-              <li>
-                <MessageOutlined /> {reply}
-              </li>
-            </ul>
-          </CommunityInfo>
-        </div>
-      </CommunityCardAlignStyled>
-    </>
+    <CommunityCardAlignStyled>
+      <UserProfileStyled>
+        <li>
+          <h3>{title}</h3>
+        </li>
+        <li className="profile-align ">
+          <img src={Profile} />
+          <h4>{author}</h4>
+        </li>
+      </UserProfileStyled>
+      <CommunityInfo>
+        <ul>
+          <li>
+            <ClockCircleOutlined /> {nowTime.diff(writingTime, "h")}시간 전
+          </li>
+          <li>
+            <HeartOutlined /> {like}
+          </li>
+          <li>
+            <MessageOutlined /> {reply}
+          </li>
+        </ul>
+      </CommunityInfo>
+    </CommunityCardAlignStyled>
   );
 };
 

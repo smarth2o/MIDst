@@ -10,17 +10,20 @@ import { ROUTES } from "../enum/routes";
 import { Outlet } from "react-router-dom";
 import { LogoIcon } from "../assets/index";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import * as Api from "../api";
 
 function Header() {
   const [isLogin, setIsLogin] = useState<boolean>();
+  const navigate = useNavigate();
 
   const handleSignout = async () => {
     try {
       window.localStorage.removeItem("accessToken");
       window.localStorage.removeItem("refreshToken");
       // console.log("로그아웃 성공");
-      window.location.reload();
+      // window.location.reload();
+      navigate("/");
     } catch (err) {
       // console.log("로그아웃 실패");
       console.error(err);

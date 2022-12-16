@@ -78,7 +78,7 @@ const CommunityEdit = (): JSX.Element => {
               value={editTitle}
               onChange={(e) => setEditTitle(e.target.value)}
             />
-            <input
+            <textarea
               className="community-create-main"
               placeholder="내용을 입력하세요."
               value={editDescription}
