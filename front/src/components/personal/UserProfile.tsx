@@ -49,10 +49,10 @@ const UserProfile = (): JSX.Element => {
       <>
         <UPTopAlignStyled>
           <UserProfileImgStyled>
-            <img src={profileImg} />
+            <img src={profileImg} alt="profileImg" />
           </UserProfileImgStyled>
           <SettingOutlined onClick={() => setIsToggle(!isToggle)} />
-          {isToggle === true ? <PersonalModal /> : null}
+          {isToggle && <PersonalModal />}
         </UPTopAlignStyled>
         <UPTopInfo>
           <h3 className="profile-info-item">{userName}</h3>
@@ -75,10 +75,10 @@ const UserProfile = (): JSX.Element => {
       <>
         <UPTopAlignStyled>
           <UserProfileImgStyled>
-            <img src={profileImg} />
+            <img src={profileImg} alt="profileImg" />
           </UserProfileImgStyled>
           <SettingOutlined onClick={() => setIsToggle(!isToggle)} />
-          {isToggle === true ? <PersonalModal /> : null}
+          {isToggle && <PersonalModal />}
         </UPTopAlignStyled>
         <UserProfileFormStyled>
           <form action="">
@@ -93,8 +93,9 @@ const UserProfile = (): JSX.Element => {
               className="profile-form-item"
             />
             <UPBottomAlignStyled>
-              <MailOutlined />
-              {userEmail}
+              <p className="profile-info-item">
+                <MailOutlined /> {userEmail}
+              </p>
               <UPBottomDetail>
                 <button
                   className="btn-go-search"

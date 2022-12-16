@@ -6,9 +6,8 @@ export const PTCardAlignStyled = styled.div`
   border-radius: 20px;
   box-shadow: 3px 3px 3px 3px rgba(128, 128, 128, 0.252);
   background-color: white;
-  width: 100%;
   min-width: 300px;
-  height: 290px;
+  height: 280px;
   padding: 20px;
   margin: 30px;
 
@@ -19,6 +18,11 @@ export const PTCardAlignStyled = styled.div`
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     padding-inline-start: 0px;
+    line-height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 210px;
   }
   .wrap-vertical::-webkit-scrollbar {
     display: none;
@@ -57,6 +61,7 @@ export const PTCardContainerStyled = styled.div`
   text-align: center;
   width: 100%;
   height: 100%;
+  margin-top: 20px;
 
   /* padding: 20px; */
   /* overflow: scroll; */
@@ -187,7 +192,7 @@ export const UserProfileImgStyled = styled.div`
   }
 `;
 export const UPBottomAlignStyled = styled.div`
-  margin-top: 20px;
+  margin-top: 18px;
 `;
 
 export const UPBottomDetail = styled.div`
@@ -204,18 +209,20 @@ export const UserProfileFormStyled = styled.div`
     margin-top: 20px;
   }
   button {
-    margin-top: 30px;
+    margin-top: 35px;
   }
   input {
     padding: 10px;
     border: solid 1px #999;
     border-radius: 20px;
+    outline: none;
   }
 `;
 
 export const UPTopInfo = styled.div`
+  margin-top: 20px;
+  margin-bottom: 30px;
   .profile-info-item {
-    padding: 10px;
-    margin-top: 20px;
+    padding: 5px;
   }
 `;

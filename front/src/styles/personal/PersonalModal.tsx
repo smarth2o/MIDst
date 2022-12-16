@@ -4,7 +4,7 @@ export const PersonalModalStyled = styled.div`
   z-index: 10000;
   position: absolute;
   left: 17vw;
-  top: 15vh;
+  top: 18vh;
   width: 200px;
   height: 100px;
   background: #ffffff;
@@ -16,10 +16,14 @@ export const PersonalModalStyled = styled.div`
   }
   li {
     text-align: start;
+    padding-left: 15px;
   }
   .link {
     color: black;
     text-decoration: none;
     cursor: pointer;
+  }
+  hr {
+    margin: 10px;
   }
 `;

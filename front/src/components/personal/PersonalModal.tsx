@@ -1,26 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ROUTES } from "../../enum/routes";
 import { PersonalModalStyled } from "../../styles/personal/PersonalModal";
-import * as Api from "../../api";
-import { useEffect, useState } from "react";
 
 const PersonalModal = (): JSX.Element => {
-  const [userId, setUserId] = useState("");
-
-  const navigator = useNavigate();
-
-  useEffect(() => {
-    const getUserInfo = async () => {
-      const res = await Api.get(`user/currentUser`);
-      if (res.status !== 200) {
-        console.log("탈퇴실패");
-      } else {
-        setUserId(res.data[0].userId);
-      }
-    };
-    getUserInfo();
-  }, []);
-
   return (
     <>
       <PersonalModalStyled>

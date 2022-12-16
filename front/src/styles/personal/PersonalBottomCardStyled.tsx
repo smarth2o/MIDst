@@ -3,12 +3,12 @@ import styled from "styled-components";
 export const PBCardAlignStyled = styled.div`
   border-radius: 20px;
   height: 100%;
-  margin-top: 10vmin;
   min-height: 30rem;
-  margin-bottom: 10%;
+  margin-top: 50px;
+  margin-bottom: 80px;
   box-shadow: 3px 3px 3px 3px rgba(128, 128, 128, 0.252);
   background-color: white;
-  padding: 20px;
+  padding: 5px 25px 20px 25px;
   width: 80%;
   ul {
     padding: 0;
@@ -86,7 +86,7 @@ export const DGCheckCardStyled = styled.div`
   p {
     color: red;
   }
-  .b-better{
+  .b-better {
     padding: auto 10px auto auto;
   }
   .grammer-result {
@@ -128,7 +128,7 @@ export const PBCWordItemStyled = styled.div`
 `;
 
 export const PBCardWordAlignStyled = styled.div`
-  margin: 2%;
+  margin-top: 15px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   @media (max-width: 1000px) {
