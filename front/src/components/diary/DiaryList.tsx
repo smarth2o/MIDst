@@ -27,7 +27,7 @@ const DiaryList = (): JSX.Element => {
       }
     };
     getDiaryData();
-  }, [detail, setDiarys]);
+  }, [diarys.length, setDiarys]);
 
   return (
     <>

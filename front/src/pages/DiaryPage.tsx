@@ -27,20 +27,18 @@ export interface DiaryValueType {
 const DiaryPage = (): JSX.Element => {
   const [diarys, setDiarys] = useRecoilState(diaryState);
 
-  const [check, setCheck] = useState(-1)
+  const [check, setCheck] = useState(-1);
 
   useEffect(() => {
     const getDiaryData = async () => {
       const response = await Api.get(`diaries`);
       if (response.status !== 200) {
-
       } else {
         delete response.data.data.count;
         const diaries = Object.values(response.data.data);
         setDiarys(diaries as DiaryTypes[]);
-    
-        setCheck(response.data.data)
-      
+
+        setCheck(response.data.data);
       }
     };
     getDiaryData();
@@ -54,20 +52,17 @@ const DiaryPage = (): JSX.Element => {
         </Link>
       </DiaryDetailAlignStyled>
       <DiaryAllAlign>
-        <div className="content-cover">
-          <div className="diary-align-styled">
-            <DiaryAlignStyled>
-              <div className="diary-content">
-                <DiarySide />
-
-                <DiaryMainStyled>
-                  <Outlet context={{ diarys, setDiarys }} />
-                  <DiaryBottom />
-                  <DiaryGrammerCheckCard />
-                </DiaryMainStyled>
-              </div>
-            </DiaryAlignStyled>
-          </div>
+        <div className="diary-align-styled">
+          <DiaryAlignStyled>
+            <div className="diary-content">
+              <DiarySide />
+              <DiaryMainStyled>
+                <Outlet context={{ diarys, setDiarys }} />
+                <DiaryBottom />
+                <DiaryGrammerCheckCard />
+              </DiaryMainStyled>
+            </div>
+          </DiaryAlignStyled>
         </div>
       </DiaryAllAlign>
     </AllBackGroundStyled>

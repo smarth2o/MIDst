@@ -6,7 +6,7 @@ export const DiaryBottomCard = styled.div`
   align-items: center;
   border-radius: 20px;
   height: 100%;
-  box-shadow: 3px 3px 3px 3px rgba(128, 128, 128, 0.252);
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
   background-color: white;
   padding: 20px;
   margin: 30px;

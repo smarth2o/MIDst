@@ -5,6 +5,18 @@ export const AllBackGroundStyled = styled.div`
   margin: 80px 0 0 0;
   padding-bottom: 5%;
 `;
+export const DiaryAllAlign = styled.div`
+  display: flex;
+  justify-content: space-around;
+  .diary-align-styled {
+    @media all and (min-width: 800px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 70vw;
+    }
+  }
+`;
 export const DiaryAlignStyled = styled.div`
   display: flex;
   justify-content: space-around;
@@ -17,20 +29,4 @@ export const DiaryMainStyled = styled.div`
   width: 50vw;
   flex-direction: column;
   /* margin-left: 5vw; */
-`;
-export const DiaryAllAlign = styled.div`
-  display: flex;
-  justify-content: space-around;
-  .content-cover {
-    display: flex;
-    justify-content: space-around;
-  }
-  .diary-align-styled {
-    @media all and (min-width: 800px) {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      width: 70vw;
-    }
-  }
 `;

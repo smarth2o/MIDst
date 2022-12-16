@@ -71,7 +71,6 @@ const DiaryBottom = (): JSX.Element => {
         <DiaryBottomOpenCard>
           <div className="DBOC-top">
             <h3>Emotion Recognition</h3>
-
             {/* <InfoCircleOutlined
               onClick={() => {
                 setModal(!modal);
@@ -79,14 +78,7 @@ const DiaryBottom = (): JSX.Element => {
             /> */}
             {/* {modal === true ? <DiaryEmotionInfoModal /> : null} */}
           </div>
-          <div className="DBOC-bottom">
-            {isToggle === true ? (
-              <>
-                <h1>{emotion}</h1>
-              </>
-            ) : null}
-          </div>
-
+          <div className="DBOC-bottom">{isToggle && <h2>{emotion}</h2>}</div>
           <DBCEmotionBtn onClick={ClickHandler(isToggle)}>
             <p>Close</p> <ArrowRightOutlined />
           </DBCEmotionBtn>
