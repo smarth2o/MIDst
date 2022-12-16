@@ -6,15 +6,15 @@ from sklearn.metrics.pairwise import cosine_similarity
 df = pd.read_pickle("df.pkl")
 
 def function(df, input2):
-    df.dropna(inplace=True)
-    cv = CountVectorizer(stop_words='english')
-    doc_term_matrix = cv.fit_transform(df['Lines'])
+    df.dropna(inplace = True)
+    cv = CountVectorizer()
+    doc_term_matrix = cv.fit_transform(df[ 'Lines' ])
     cv.get_feature_names_out()
     idfs = TfidfTransformer()
     idfs.fit(doc_term_matrix)
     idfs_df = pd.DataFrame(idfs.idf_, index=cv.get_feature_names_out(),
-                           columns=["idfs"])
-    idfs_df.sort_values(by=['idfs'], ascending=False)
+                           columns=[ "idfs" ])
+    idfs_df.sort_values(by=[ 'idfs' ], ascending = False)
     tf_idfs = idfs.transform(doc_term_matrix)
     query = str(input2)
     query_term_matrix = cv.transform([query])
