@@ -43,7 +43,6 @@ const LoginPage = (): JSX.Element => {
       } else {
         window.localStorage.setItem("accessToken", res.data.accessToken);
         window.localStorage.setItem("refreshToken", res.data.refreshToken);
-        // console.log("로그인 성공");
         navigate("/");
       }
     } catch (err) {

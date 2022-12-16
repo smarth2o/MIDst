@@ -25,7 +25,6 @@ const FindPasswordPage = (): JSX.Element => {
     event.preventDefault();
     try {
       await Api.post("user/resetPassword", { email: email });
-      // console.log(res.data);
       alert("입력하신 이메일로 인증번호를 보냈습니다.");
       setChanged(true);
     } catch (err) {

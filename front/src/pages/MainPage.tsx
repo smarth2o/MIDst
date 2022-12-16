@@ -49,10 +49,10 @@ const MainPage = (): JSX.Element => {
     try {
       window.localStorage.removeItem("accessToken");
       window.localStorage.removeItem("refreshToken");
-      console.log("로그아웃 성공");
+      // console.log("로그아웃 성공");
       window.location.reload();
     } catch (err) {
-      console.log("로그아웃 실패");
+      // console.log("로그아웃 실패");
       console.error(err);
     }
   };
@@ -62,10 +62,10 @@ const MainPage = (): JSX.Element => {
       try {
         await Api.get("user/currentUser");
         setIsLogin(true);
-        console.log("로그인 된 상태");
+        // console.log("로그인 된 상태");
       } catch (error) {
         setIsLogin(false);
-        console.log("로그인 안된 상태");
+        // console.log("로그인 안된 상태");
       }
     };
     if (localStorage.getItem("accessToken")) {

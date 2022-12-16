@@ -112,7 +112,7 @@ const RegisterPage = (): JSX.Element => {
         if (typeof res.data !== "object") {
           alert(res.data);
         } else {
-          console.log("회원가입 성공");
+          // console.log("회원가입 성공");
           navigate("/login");
         }
       } catch (err) {

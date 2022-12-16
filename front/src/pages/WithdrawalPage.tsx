@@ -20,8 +20,6 @@ const WithdrawalPage = (): JSX.Element => {
     const getCurrentUser = async () => {
       try {
         const res = await Api.get("user/currentUser");
-        // console.log(res.data[0].userId);
-        // console.log(typeof res.data[0].userId);
         setId(res.data[0].userId);
       } catch (err) {
         // console.log("현재 유저 가져오기 실패");
