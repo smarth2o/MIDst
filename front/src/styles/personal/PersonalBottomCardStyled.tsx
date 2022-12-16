@@ -79,6 +79,10 @@ export const PBCardItemStyled = styled.div`
   }
 `;
 export const DGCheckCardStyled = styled.div`
+  margin: 5% 2%;
+  p {
+    color: red;
+  }
   .grammer-result {
     box-sizing: border-box;
     background: #ffffff;

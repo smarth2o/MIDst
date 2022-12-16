@@ -22,7 +22,7 @@ type ClickHandler = (props: boolean) => (e: React.MouseEvent) => void;
 
 const DiaryGrammerCheckCard = (): JSX.Element => {
   const [isToggle, isSetToggle] = useState(false);
-  const [before, setBefore] = useState("");
+  const [before, setBefore] = useState([]);
   const [grammerBetter, setGrammerBetter] = useState("");
   const { detail } = useParams();
   const [description, setDescription] = useState();
@@ -51,8 +51,8 @@ const DiaryGrammerCheckCard = (): JSX.Element => {
       const res = await Api.post(`diaries/grammerCheck`, {
         description: description,
       });
-      setBefore(res.data[0].before);
-      setGrammerBetter(res.data[0].better);
+      setBefore(res.data);
+      console.log(res.data[0]);
     } catch {
       console.log("문법연결실패");
     }
@@ -86,18 +86,24 @@ const DiaryGrammerCheckCard = (): JSX.Element => {
           <div className="DBOC-bottom">
             {isToggle === true ? (
               <>
-                <DGCheckCardStyled>
-                  <ul className="grammer-result">
-                    <li>
-                      <CheckCircleOutlined />{" "}
-                    </li>
-                    <li>{before}</li>
-                    <li className="gt">
-                      <ArrowRightOutlined />
-                    </li>
-                    <li>{grammerBetter}</li>
-                  </ul>
-                </DGCheckCardStyled>
+                {before.map((b: any) => {
+                  console.log(b);
+                  return (
+                    <DGCheckCardStyled>
+                      <ul className="grammer-result">
+                        <li>
+                          <CheckCircleOutlined />{" "}
+                        </li>
+                        <li>{b.before}</li>
+                        <li className="gt">
+                          <ArrowRightOutlined />
+                        </li>
+                        <li>{b.better}</li>
+                      </ul>
+                      <p>{b.description.en}</p>
+                    </DGCheckCardStyled>
+                  );
+                })}
               </>
             ) : null}
           </div>
